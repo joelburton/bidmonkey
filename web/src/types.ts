@@ -12,7 +12,7 @@ export type Deal = Partial<Record<Seat, Hand>>
 
 export interface BidQuestion {
   id: string
-  type: 'multiple_choice' | 'enter_bid'
+  choiceType: 'multiple_choice' | 'enter_bid'
   prompt?: string
   answer: string
   options?: string[]

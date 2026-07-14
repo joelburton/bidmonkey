@@ -29,7 +29,7 @@ VALUES (
       { "call": "P" },
       { "question": {
           "id": "q1",
-          "type": "multiple_choice",
+          "choiceType": "multiple_choice",
           "prompt": "Partner opened 1H. What is your call?",
           "options": ["1S", "2H", "3H", "4H"],
           "answer": "3H",

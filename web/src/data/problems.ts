@@ -30,7 +30,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
-          type: 'multiple_choice',
+          choiceType: 'multiple_choice',
           prompt: 'Partner opened 1H and reversed into 2D. Your call?',
           options: ['2NT', '3D', '3H', '4H'],
           answer: '3H',
@@ -60,7 +60,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
-          type: 'multiple_choice',
+          choiceType: 'multiple_choice',
           prompt: 'Partner opened 1S. Your call?',
           options: ['2S', '3S', '4S', '2NT'],
           answer: '4S',
@@ -92,7 +92,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
-          type: 'multiple_choice',
+          choiceType: 'multiple_choice',
           prompt: 'Partner opened 1D. Your call?',
           options: ['1NT', '2NT', '3NT', '2C'],
           answer: '3NT',

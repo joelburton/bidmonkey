@@ -19,7 +19,7 @@
     "bid":     { "type": "string", "pattern": "^(?:[1-7](?:C|D|H|S|N|NT)|P|X|XX)$",
                  "description": "A call: a bid (level+strain, NT as N or NT), P, X, or XX." },
 
-    "card":    { "type": "string", "pattern": "^[SHDC](?:[AKQJT2-9])$",
+    "card":    { "type": "string", "pattern": "^[SHDC][AKQJT2-9]$",
                  "description": "Suit letter + rank; T = ten." },
 
     "holding": { "type": "string", "pattern": "^[AKQJT2-9]*$",
@@ -50,11 +50,11 @@
 
     "bidQuestion": {
       "type": "object",
-      "required": ["id", "type", "answer"],
+      "required": ["id", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
         "id":          { "type": "string", "minLength": 1 },
-        "type":        { "enum": ["multiple_choice", "enter_bid"] },
+        "choiceType":  { "enum": ["multiple_choice", "enter_bid"] },
         "prompt":      { "type": "string" },
         "answer":      { "$ref": "#/$defs/bid" },
         "options":     { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/bid" } },
@@ -63,20 +63,20 @@
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "properties": { "type": { "const": "multiple_choice" } } },
+        { "if":   { "properties": { "choiceType": { "const": "multiple_choice" } } },
           "then": { "required": ["options"] } },
-        { "if":   { "properties": { "type": { "const": "enter_bid" } } },
+        { "if":   { "properties": { "choiceType": { "const": "enter_bid" } } },
           "then": { "not": { "required": ["options"] } } }
       ]
     },
 
     "cardQuestion": {
       "type": "object",
-      "required": ["id", "type", "answer"],
+      "required": ["id", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
         "id":          { "type": "string", "minLength": 1 },
-        "type":        { "enum": ["multiple_choice", "enter_card"] },
+        "choiceType":  { "enum": ["multiple_choice", "enter_card"] },
         "prompt":      { "type": "string" },
         "answer":      { "$ref": "#/$defs/card" },
         "options":     { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" } },
@@ -84,9 +84,9 @@
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "properties": { "type": { "const": "multiple_choice" } } },
+        { "if":   { "properties": { "choiceType": { "const": "multiple_choice" } } },
           "then": { "required": ["options"] } },
-        { "if":   { "properties": { "type": { "const": "enter_card" } } },
+        { "if":   { "properties": { "choiceType": { "const": "enter_card" } } },
           "then": { "not": { "required": ["options"] } } }
       ]
     },
