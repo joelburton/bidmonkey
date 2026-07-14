@@ -52,41 +52,61 @@ export interface Cell {
 export interface AuctionModel {
   cols: Seat[]
   grid: (Cell | null)[][]
-  actingSeat: Seat | null
-  prior: SeatedCall[] // calls before the question, tagged with seat
+  actingSeat: Seat | null // seat with the "?", or null when the auction is done
+  prior: SeatedCall[] // calls before the current "?", tagged with seat
   priorCalls: string[]
-  question: BidQuestion | null
+  question: BidQuestion | null // the current question, or null when done
+  complete: boolean // every question has been answered
+  numQuestions: number
+}
+
+/** How many questions the whole auction poses to the player. */
+export function auctionQuestionCount(problem: Problem): number {
+  return (problem.auction ?? []).filter((e) => 'question' in e).length
 }
 
 /**
- * Turn a problem's auction into a grid of cells up to (and including) the first
- * question — the "?" the player must answer. Calls after the question (the
- * solution) are not included.
+ * Build the auction grid given the player's answers so far. Reveals every call
+ * up to (and including) the next unanswered question — the "?" — with earlier
+ * questions filled in by `answers`. Once all questions are answered, the whole
+ * auction (including trailing passes) is shown and `complete` is true.
  */
-export function buildAuction(problem: Problem): AuctionModel {
+export function buildAuction(problem: Problem, answers: string[]): AuctionModel {
   const cols = AUCTION_COLS
   const dealerIdx = cols.indexOf(problem.dealer)
   const auction = problem.auction ?? []
-  const qIndex = auction.findIndex((e) => 'question' in e)
-  const lastIndex = qIndex === -1 ? auction.length - 1 : qIndex
+  const numQuestions = auctionQuestionCount(problem)
+  const complete = answers.length >= numQuestions
 
   const cells: Cell[] = []
   const prior: SeatedCall[] = []
-  for (let k = 0; k <= lastIndex; k++) {
+  let qSeen = 0
+  let actingSeat: Seat | null = null
+  let question: BidQuestion | null = null
+
+  for (let k = 0; k < auction.length; k++) {
     const seat = cols[(dealerIdx + k) % 4]
     const e = auction[k]
     if ('question' in e) {
-      cells.push({ seat, question: true })
+      if (qSeen < answers.length) {
+        // already answered — show the answer as a made call
+        const call = answers[qSeen]
+        cells.push({ seat, call })
+        prior.push({ seat, call })
+      } else {
+        // the current question — the "?"
+        cells.push({ seat, question: true })
+        actingSeat = seat
+        question = e.question
+        qSeen++
+        break // hide everything after the current question
+      }
+      qSeen++
     } else {
       cells.push({ seat, call: e.call })
       prior.push({ seat, call: e.call })
     }
   }
-  const actingSeat = qIndex === -1 ? null : cols[(dealerIdx + qIndex) % 4]
-  const question =
-    qIndex === -1
-      ? null
-      : (auction[qIndex] as { question: BidQuestion }).question
 
   const total = dealerIdx + cells.length
   const nRows = Math.max(1, Math.ceil(total / 4))
@@ -105,7 +125,60 @@ export function buildAuction(problem: Problem): AuctionModel {
     prior,
     priorCalls: prior.map((p) => p.call),
     question,
+    complete,
+    numQuestions,
   }
+}
+
+export interface Contract {
+  level: number
+  strain: Strain
+  declarer: Seat
+  doubled: '' | 'X' | 'XX'
+}
+
+/**
+ * The final contract from a completed auction (questions replaced by `answers`).
+ * Declarer is the first of the winning side to have named the final strain.
+ * Returns null if the auction was passed out.
+ */
+export function finalContract(problem: Problem, answers: string[]): Contract | null {
+  const cols = AUCTION_COLS
+  const dealerIdx = cols.indexOf(problem.dealer)
+  const seated: SeatedCall[] = []
+  let qSeen = 0
+  for (let k = 0; k < problem.auction.length; k++) {
+    const e = problem.auction[k]
+    const seat = cols[(dealerIdx + k) % 4]
+    const call = 'question' in e ? answers[qSeen++] : e.call
+    if (call == null) return null
+    seated.push({ seat, call })
+  }
+
+  let last: { level: number; strain: Strain; seat: Seat } | null = null
+  for (const { seat, call } of seated) {
+    const b = parseBid(call)
+    if (b) last = { ...b, seat }
+  }
+  if (!last) return null
+
+  let declarer: Seat = last.seat
+  for (const { seat, call } of seated) {
+    const b = parseBid(call)
+    if (b && b.strain === last.strain && sameSide(seat, last.seat)) {
+      declarer = seat
+      break
+    }
+  }
+
+  let doubled: '' | 'X' | 'XX' = ''
+  for (const { call } of seated) {
+    if (parseBid(call)) doubled = ''
+    else if (call === 'X') doubled = 'X'
+    else if (call === 'XX') doubled = 'XX'
+  }
+
+  return { level: last.level, strain: last.strain, declarer, doubled }
 }
 
 function highestRank(calls: string[]): number {

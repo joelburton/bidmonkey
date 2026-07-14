@@ -21,6 +21,21 @@ export interface BidQuestion {
 }
 export type AuctionEntry = { call: string } | { question: BidQuestion }
 
+export interface CardQuestion {
+  id: string
+  choiceType: 'multiple_choice' | 'enter_card'
+  prompt?: string
+  answer: string // a card, e.g. "HQ"
+  options?: string[]
+  accept?: string[]
+  explanation?: string
+}
+/** One play by one seat: a recorded card, or a question posed to the hero. */
+export type PlayEntry = { seat: Seat; card: string } | { seat: Seat; question: CardQuestion }
+export interface Trick {
+  cards: PlayEntry[]
+}
+
 export interface Problem {
   id: number
   title?: string
@@ -32,7 +47,7 @@ export interface Problem {
   vulnerability: Vulnerability
   deal: Deal
   auction: AuctionEntry[]
-  play?: unknown
+  play?: Trick[]
   contract?: string
   commentary?: string
 }

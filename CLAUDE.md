@@ -40,35 +40,63 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 - **Phase 1 (done):** database design — `schema.sql`, `schema.v1.json`, `seed.sql`.
 - **Phase 2 (done):** problem list; portrait bridge table showing the 4 hands as
   playing-card faces.
-- **Phase 3 (done):** auction table + bid-entry pad + answer checking with an
-  explanation popup; mouse and keyboard entry.
-- **Out of scope so far:** card play, any backend/DB connection, revealing the
-  rest of the auction after a correct answer, multiple questions per problem,
-  per-question attempt tracking.
+- **Phase 3 (done):** auction (multi-question — the auction continues after each
+  correct bid, only stopping where the data poses a question), answer checking
+  with an explanation popup, mouse + keyboard entry.
+- **Phase 4 (done):** card play. After the auction: if not all four hands are
+  known, back to the list; otherwise play the hand — deal out the recorded play,
+  reveal the dummy after the opening lead, auto-play with pauses, stop at
+  questions for the hero, then reveal all hands for free study.
+- **Out of scope so far:** any backend/DB connection, per-question attempt
+  tracking / scoring, contract-result scoring.
 
 ## Frontend architecture
 
-- `App.tsx` — `selectedId` state; renders `ProblemList` or the detail view.
-- `types.ts` — mirrors `schema.v1.json` (Seat, Suit, Deal, Hand, Problem, …).
-- `data/problems.ts` — 3 sample problems. **Problem 1 "Limit raise or game?"** is
-  the fully worked one (a game-try auction `1♥ - 1♠; 2♦` with a real explanation).
+- `App.tsx` — `selectedId` state; renders `ProblemList` or `ProblemView`.
+- `types.ts` — mirrors `schema.v1.json` (Seat, Suit, Deal, Hand, Problem,
+  BidQuestion, CardQuestion, Trick, …).
+- `data/problems.ts` — 5 sample problems. #1 game-try (all 4 hands → play
+  sandbox), #4 opening-lead (no auction questions → click to play), #5 two
+  auction questions (South only → back to list).
 - `bidding.ts` — auction logic. Columns are **W→N→E→S** (a clockwise cycle, so
-  filling left-to-right from the dealer's column works for any dealer). Also bid
-  ranking, legality (`levelLegal`/`bidLegal`), and `doubleState`
-  (double vs redouble vs none).
+  filling left-to-right from the dealer's column works for any dealer). Bid
+  ranking, legality (`levelLegal`/`bidLegal`), `doubleState`, and:
+  - `buildAuction(problem, answers)` — reveals calls up to the next unanswered
+    question; `complete` once all are answered.
+  - `finalContract(problem, answers)` — level/strain/declarer/doubled.
+- `play.ts` — `nextSeat`/`partnerOf`, `trickWinner(cards, trump)`, `flattenPlay`,
+  `handRemaining` (deal minus played cards).
 - `components/`
-  - `BridgeTable.tsx` — the full-bleed portrait table (N/S top/bottom, E/W side
-    rails, center = auction/bid area).
-  - `Hand.tsx` — a hand as overlapping card faces. Horizontal fan for N/S;
-    rotated vertical rails for E/W (`west`/`east` orientations; East is a mirror
-    via `column-reverse` + opposite rotation).
-  - `Card.tsx` — one card face (rank + corner pip + center pip).
-  - `SuitGlyph.tsx` — the four **Wikimedia "Anglo-American card suits"** paths
-    (public domain) + an inline-SVG `SuitGlyph` for HTML (bid buttons, auction).
-  - `AuctionPanel.tsx` — center panel: header (problem id + vulnerability),
-    auction table with `?` at the seat to act, bid pad, and the answer popup.
+  - `ProblemView.tsx` — the per-problem phase machine (auction → play or exit).
+  - `BridgeTable.tsx` — layout shell: `top`/`bottom`/`left`/`right`/`center`
+    slots (N/S span top+bottom, E/W are the rails). Content chosen per phase.
+  - `AuctionPanel.tsx` — center during the auction. Controlled by `answers` +
+    `onAnswer`; correct bid advances, wrong bid shows the explanation popup;
+    when done, "Play the hand" or "Back to problems".
+  - `PlayView.tsx` — the play state machine (see below).
+  - `PlayCenter.tsx` — center during play: contract + current trick (placed to
+    match the hand positions) + the wrong-answer popup.
+  - `Hand.tsx` — overlapping card faces. Horizontal fan for N/S and the dummy;
+    rotated rails for E/W (`west`/`east`; East mirrors via `column-reverse`).
+    `onPlay` makes cards clickable.
+  - `Card.tsx` / `SuitGlyph.tsx` — a card face / the Wikimedia suit pips (public
+    domain) as an inline SVG for HTML.
+  - `suitText.tsx` — `withSuits(text)` colors suit symbols in explanations.
   - `ProblemList.tsx` — the clickable list.
 - `index.css` — all styling (no CSS framework). Global, plus component classes.
+
+### Play phase (`PlayView`)
+
+- Layout: South (us) is always the bottom fan; the **dummy** is always a
+  horizontal fan (top when it isn't us; otherwise North is on top and we're the
+  dummy at the bottom); the other two seats are the side rails (face down until
+  the end). The dummy is never a rotated rail — per design, shown like our hand.
+- Engine: a `useEffect` steps `moveIndex` through the flattened recorded moves —
+  auto-plays a card after a 1s pause, or stops at a question (`pending`; the hero
+  clicks a card, checked vs the answer, wrong → popup, retry). The dummy is
+  revealed once the first card is played. When a trick completes: if it had no
+  player input, pause for a click (`review`); else auto-clear. When the recorded
+  moves run out, `allRevealed` reveals every hand for free play.
 
 ## Conventions & non-obvious decisions
 

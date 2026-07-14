@@ -12,6 +12,7 @@ import {
   LEVELS,
 } from '../bidding'
 import { SuitGlyph } from './SuitGlyph'
+import { withSuits } from './suitText'
 
 /** Render a single call (bid / pass / double) with a suit pip. */
 function CallText({ call }: { call: string }) {
@@ -30,69 +31,57 @@ function CallText({ call }: { call: string }) {
 }
 
 const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
-
-// Keyboard → strain.
-const KEY_STRAIN: Record<string, Strain> = {
-  c: 'C',
-  d: 'D',
-  h: 'H',
-  s: 'S',
-  n: 'NT',
-}
-
-/** Render explanation text, coloring red suits (♥ ♦) red and black suits (♠ ♣)
- * light so both read on the dark popup. The ︎ forces text (non-emoji)
- * presentation so the color reliably applies. */
-function withSuits(text: string) {
-  const TEXT_PRESENTATION = '︎' // force non-emoji rendering so color applies
-  return text.split(/([♥♦♠♣])/).map((part, i) => {
-    if (part === '♥' || part === '♦')
-      return (
-        <span key={i} className="suit-red-text">
-          {part + TEXT_PRESENTATION}
-        </span>
-      )
-    if (part === '♠' || part === '♣')
-      return (
-        <span key={i} className="suit-black-text">
-          {part + TEXT_PRESENTATION}
-        </span>
-      )
-    return <span key={i}>{part}</span>
-  })
-}
+const KEY_STRAIN: Record<string, Strain> = { c: 'C', d: 'D', h: 'H', s: 'S', n: 'NT' }
 
 /**
- * The center panel: problem id + vulnerability, the auction table with a "?" at
- * the seat to act, and a bid-entry pad. Entering a bid checks it against the
- * answer; an explanation popup appears (over the panel, cards still visible).
+ * Center panel during the auction. Controlled by ProblemView: `answers` holds
+ * the correct bids given so far; a right bid calls `onAnswer` (advancing the
+ * auction), a wrong bid shows the explanation popup. When the auction is
+ * complete it offers "Play the hand" (if all four hands are known) or a way back.
  */
-export function AuctionPanel({ problem }: { problem: Problem }) {
-  const model = buildAuction(problem)
+export function AuctionPanel({
+  problem,
+  answers,
+  onAnswer,
+  onPlay,
+  onDone,
+  canPlay,
+}: {
+  problem: Problem
+  answers: string[]
+  onAnswer: (call: string) => void
+  onPlay: () => void
+  onDone: () => void
+  canPlay: boolean
+}) {
+  const model = buildAuction(problem, answers)
   const [level, setLevel] = useState<number | null>(null)
-  const [entered, setEntered] = useState<string | null>(null)
+  const [entered, setEntered] = useState<string | null>(null) // a wrong bid, shown in the "?"
   const [showResult, setShowResult] = useState(false)
   const [pressed, setPressed] = useState<string | null>(null)
 
   const q = model.question
   const dbl = doubleState(model.prior, model.actingSeat)
-  const isCorrect = !!(
-    entered &&
-    q &&
-    (entered === q.answer || q.accept?.includes(entered))
-  )
 
-  const commit = useCallback((call: string) => {
-    setEntered(call)
-    setLevel(null)
-    setShowResult(true)
-  }, [])
+  const submit = useCallback(
+    (call: string) => {
+      if (!q) return
+      const correct = call === q.answer || q.accept?.includes(call)
+      if (correct) {
+        onAnswer(call)
+      } else {
+        setEntered(call)
+        setShowResult(true)
+        setLevel(null)
+      }
+    },
+    [q, onAnswer],
+  )
   const pickStrain = (s: Strain) => {
     if (level == null || !bidLegal(level, s, model.priorCalls)) return
-    commit(`${level}${s}`)
+    submit(`${level}${s}`)
   }
 
-  // Briefly light up a button id, as if it were pressed.
   const pressTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const flash = useCallback((id: string) => {
     setPressed(id)
@@ -100,22 +89,20 @@ export function AuctionPanel({ problem }: { problem: Problem }) {
     pressTimer.current = setTimeout(() => setPressed(null), 150)
   }, [])
 
-  // Keyboard bidding. Latest state is read through a ref so the listener binds
-  // once. Keys: 1-7 (level), c/d/h/s/n (strain), p (pass), x (double/redouble).
-  const stateRef = useRef({ level, showResult, dbl, model })
-  stateRef.current = { level, showResult, dbl, model }
+  // Keyboard bidding. Latest values through a ref so the listener binds once.
+  const ref = useRef({ level, showResult, dbl, model, submit })
+  ref.current = { level, showResult, dbl, model, submit }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      const { level, showResult, dbl, model } = stateRef.current
+      const { level, showResult, dbl, model, submit } = ref.current
       if (!model.actingSeat) return
-      // Any keystroke dismisses the answer popup (and nothing else).
       if (showResult) {
         setShowResult(false)
+        setEntered(null)
         return
       }
       if (e.metaKey || e.ctrlKey || e.altKey) return
       const k = e.key.toLowerCase()
-
       if (k >= '1' && k <= '7') {
         const l = Number(k)
         if (levelLegal(l, model.priorCalls)) {
@@ -126,17 +113,17 @@ export function AuctionPanel({ problem }: { problem: Problem }) {
       } else if (k in KEY_STRAIN) {
         const s = KEY_STRAIN[k]
         if (level != null && bidLegal(level, s, model.priorCalls)) {
-          commit(`${level}${s}`)
+          submit(`${level}${s}`)
           flash(s === 'NT' ? 'NT' : `S${s}`)
         }
         e.preventDefault()
       } else if (k === 'p') {
-        commit('P')
+        submit('P')
         flash('PASS')
         e.preventDefault()
       } else if (k === 'x') {
         if (dbl) {
-          commit(dbl === 'redouble' ? 'XX' : 'X')
+          submit(dbl === 'redouble' ? 'XX' : 'X')
           flash('DBL')
         }
         e.preventDefault()
@@ -144,7 +131,12 @@ export function AuctionPanel({ problem }: { problem: Problem }) {
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
-  }, [commit, flash])
+  }, [flash])
+
+  const dismiss = () => {
+    setShowResult(false)
+    setEntered(null)
+  }
 
   return (
     <div className="auction-panel">
@@ -182,7 +174,7 @@ export function AuctionPanel({ problem }: { problem: Problem }) {
         </tbody>
       </table>
 
-      {model.actingSeat && (
+      {model.actingSeat ? (
         <div className="bidpad">
           <div className="bid-grid">
             {LEVELS.map((l) => (
@@ -215,32 +207,35 @@ export function AuctionPanel({ problem }: { problem: Problem }) {
               </button>
             ))}
           </div>
-
           <div className="bid-actions">
             <button
               className={`bid-btn ${pressed === 'DBL' ? 'pressed' : ''}`}
               disabled={!dbl}
-              onClick={() => dbl && commit(dbl === 'redouble' ? 'XX' : 'X')}
+              onClick={() => dbl && submit(dbl === 'redouble' ? 'XX' : 'X')}
             >
               {dbl === 'redouble' ? 'Redouble' : 'Double'}
             </button>
             <button
               className={`bid-btn ${pressed === 'PASS' ? 'pressed' : ''}`}
-              onClick={() => commit('P')}
+              onClick={() => submit('P')}
             >
               Pass
             </button>
           </div>
         </div>
+      ) : (
+        <div className="bidpad">
+          <button className="play-btn" onClick={canPlay ? onPlay : onDone}>
+            {canPlay ? 'Play the hand ▸' : 'Back to problems'}
+          </button>
+        </div>
       )}
 
       {showResult && q && (
         <>
-          <div className="explain-backdrop" onClick={() => setShowResult(false)} />
+          <div className="explain-backdrop" onClick={dismiss} />
           <div className="explain-popup" role="dialog" aria-label="Answer">
-            <div className={`explain-status ${isCorrect ? 'ok' : 'no'}`}>
-              {isCorrect ? 'Correct!' : 'Not quite'}
-            </div>
+            <div className="explain-status no">Not quite</div>
             {q.explanation && (
               <p className="explain-body">{withSuits(q.explanation)}</p>
             )}

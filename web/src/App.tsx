@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { problems } from './data/problems'
 import { ProblemList } from './components/ProblemList'
-import { BridgeTable } from './components/BridgeTable'
+import { ProblemView } from './components/ProblemView'
 
 export default function App() {
   const [selectedId, setSelectedId] = useState<number | null>(null)
@@ -21,7 +21,11 @@ export default function App() {
 
       <main className={`app-main ${selected ? 'detail' : 'list'}`}>
         {selected ? (
-          <BridgeTable problem={selected} />
+          <ProblemView
+            key={selected.id}
+            problem={selected}
+            onExit={() => setSelectedId(null)}
+          />
         ) : (
           <ProblemList problems={problems} onSelect={setSelectedId} />
         )}

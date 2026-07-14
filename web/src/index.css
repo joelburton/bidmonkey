@@ -544,6 +544,139 @@ body {
 
 /* ---- Responsive: phones ------------------------------------------------- */
 
+/* ---- Play / continue buttons ------------------------------------------- */
+
+.play-btn {
+  width: 100%;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 999px;
+  padding: 11px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.play-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ---- Play phase --------------------------------------------------------- */
+
+.play-panel {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #fff;
+}
+.contract-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.contract {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+.contract .suit-glyph {
+  width: 1.05em;
+  height: 1.05em;
+}
+.contract-by {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+/* Current trick: cards placed by the seat that played them. */
+.trick {
+  --card-w: 34px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    '.    tn   .'
+    'tw   .    te'
+    '.    ts   .';
+  justify-items: center;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
+}
+.trick-n {
+  grid-area: tn;
+}
+.trick-w {
+  grid-area: tw;
+}
+.trick-e {
+  grid-area: te;
+}
+.trick-s {
+  grid-area: ts;
+}
+.trick-slot {
+  min-width: var(--card-w);
+  min-height: calc(var(--card-w) * 1.4);
+}
+
+.play-msg {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffe08a;
+}
+
+/* Seat labels (play phase only). */
+.seat-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+}
+.seat-tag {
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+/* Clickable cards. */
+.slot.playable {
+  cursor: pointer;
+}
+.hand-h .slot.playable {
+  transition: transform 0.08s;
+}
+.hand-h .slot.playable:hover {
+  transform: translateY(-10px);
+  position: relative;
+  z-index: 5;
+}
+
+/* When all hands are revealed, pull the side rails in so more of them shows. */
+.table.revealed .rail-west {
+  margin-left: calc(var(--card-w) * -0.4);
+}
+.table.revealed .rail-east {
+  margin-right: calc(var(--card-w) * -0.4);
+}
+
+/* Transparent catcher: click to advance past a completed (all-auto) trick. */
+.review-catch {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  cursor: pointer;
+}
+
 /* The list keeps a little less padding on phones; the table is already
    full-bleed and viewport-sized at every width. */
 @media (max-width: 640px) {

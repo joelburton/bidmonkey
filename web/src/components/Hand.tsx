@@ -26,8 +26,12 @@ function toSlots(hand: HandType): Slot[] {
   return slots
 }
 
-function slotClass(i: number, suitStart: boolean): string {
-  return 'slot' + (i === 0 ? ' first' : suitStart ? ' suit-start' : '')
+function slotClass(i: number, suitStart: boolean, playable: boolean): string {
+  return (
+    'slot' +
+    (i === 0 ? ' first' : suitStart ? ' suit-start' : '') +
+    (playable ? ' playable' : '')
+  )
 }
 
 const HAND_CLASS: Record<Orientation, string> = {
@@ -37,20 +41,19 @@ const HAND_CLASS: Record<Orientation, string> = {
 }
 
 /**
- * A hand rendered as overlapping card faces.
- *  - horizontal (N/S): fans left→right to fill the width.
- *  - west: rotated rail, spades at top, index on the inner (right) edge.
- *  - east: mirrored rail, spades at the bottom, index on the inner (left) edge.
- * Pass no hand (or faceDown) to show a hidden hand as a fan of card backs.
+ * A hand as overlapping card faces. Horizontal fan (N/S, and the dummy); rotated
+ * rails for E/W. `onPlay` makes the cards clickable (returns e.g. "HQ").
  */
 export function Hand({
   hand,
   faceDown = false,
   orientation = 'horizontal',
+  onPlay,
 }: {
   hand?: HandType
   faceDown?: boolean
   orientation?: Orientation
+  onPlay?: (card: string) => void
 }) {
   const vertical = orientation !== 'horizontal'
   const cls = `hand ${HAND_CLASS[orientation]}`
@@ -61,7 +64,7 @@ export function Hand({
     return (
       <div className={cls} aria-label="hidden hand">
         {Array.from({ length: 13 }, (_, i) => (
-          <span className={slotClass(i, false)} key={i}>
+          <span className={slotClass(i, false, false)} key={i}>
             {wrap(<CardBack />)}
           </span>
         ))}
@@ -73,7 +76,11 @@ export function Hand({
   return (
     <div className={cls}>
       {slots.map((s, i) => (
-        <span className={slotClass(i, s.suitStart)} key={s.key}>
+        <span
+          className={slotClass(i, s.suitStart, !!onPlay)}
+          key={s.key}
+          onClick={onPlay ? () => onPlay(`${s.suit}${s.rank}`) : undefined}
+        >
           {wrap(<Card suit={s.suit} rank={s.rank} />)}
         </span>
       ))}

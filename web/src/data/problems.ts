@@ -38,6 +38,11 @@ export const problems: Problem[] = [
             'The bidding starts 1♥ - 1♠; 2♦. You are too strong to sign off and not strong enough to insist on game. You should make a game try, leaving the final decision to your partner. You have good support for both hearts and diamonds, but you should bid 3♥, showing your fit in the major. Eleven tricks is a tough target, so bidding game in a minor suit is something you should seek to avoid. Answer: (c) 3♥.',
         },
       },
+      { call: 'P' },
+      { call: '4H' },
+      { call: 'P' },
+      { call: 'P' },
+      { call: 'P' },
     ],
   },
 
@@ -101,5 +106,105 @@ export const problems: Problem[] = [
       },
     ],
     commentary: 'Two balanced powerhouses — how high can you go?',
+  },
+
+  {
+    id: 4,
+    title: 'Choose your opening lead',
+    source: 'seed',
+    difficulty: 2,
+    tags: ['opening-lead', 'defense', 'play'],
+    hero: 'S',
+    dealer: 'E',
+    vulnerability: 'none',
+    deal: {
+      N: { S: 'T6', H: '7632', D: 'QT9', C: 'AJT9' },
+      E: { S: 'AKQ84', H: 'A5', D: 'K72', C: 'K43' },
+      S: { S: '75', H: 'QJT9', D: 'J843', C: 'Q65' },
+      W: { S: 'J932', H: 'K84', D: 'A65', C: '872' },
+    },
+    // Full recorded auction, no questions — given to us; we click to play.
+    auction: [
+      { call: '1S' },
+      { call: 'P' },
+      { call: '3S' },
+      { call: 'P' },
+      { call: '4S' },
+      { call: 'P' },
+      { call: 'P' },
+      { call: 'P' },
+    ],
+    play: [
+      {
+        cards: [
+          {
+            seat: 'S',
+            question: {
+              id: 'p1',
+              choiceType: 'multiple_choice',
+              prompt: 'Choose your opening lead.',
+              answer: 'HQ',
+              options: ['HQ', 'S7', 'DJ', 'C5'],
+              explanation:
+                'Lead the top of your ♥ sequence (♥QJT) — safe and attacking against 4♠. Answer: ♥Q.',
+            },
+          },
+          { seat: 'W', card: 'H4' },
+          { seat: 'N', card: 'H2' },
+          { seat: 'E', card: 'HA' },
+        ],
+      },
+      {
+        cards: [
+          { seat: 'E', card: 'SA' },
+          { seat: 'S', card: 'S5' },
+          { seat: 'W', card: 'S2' },
+          { seat: 'N', card: 'S6' },
+        ],
+      },
+    ],
+  },
+
+  {
+    id: 5,
+    title: 'Two decisions',
+    source: 'seed',
+    difficulty: 2,
+    tags: ['responder', 'two-decisions'],
+    hero: 'S',
+    dealer: 'N',
+    vulnerability: 'ew',
+    // Bidding-only (only our hand): two questions, then back to the list.
+    deal: {
+      S: { S: 'AQT4', H: '53', D: 'KJ92', C: 'K84' },
+    },
+    auction: [
+      { call: '1H' },
+      { call: 'P' },
+      {
+        question: {
+          id: 'q1',
+          choiceType: 'multiple_choice',
+          prompt: 'Partner opened 1♥. Your response?',
+          options: ['1S', '1NT', '2D', '2H'],
+          answer: '1S',
+          explanation: 'Bid your four-card spade suit up the line. Answer: (a) 1♠.',
+        },
+      },
+      { call: 'P' },
+      { call: '2C' },
+      { call: 'P' },
+      {
+        question: {
+          id: 'q2',
+          choiceType: 'multiple_choice',
+          prompt: 'Partner rebid 2♣. Your call?',
+          options: ['2D', '2NT', '3C', '2H'],
+          answer: '2NT',
+          explanation:
+            'With a balanced hand and stoppers everywhere, describe an invitation. Answer: (b) 2NT.',
+        },
+      },
+    ],
   },
 ]
