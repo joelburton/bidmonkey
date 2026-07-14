@@ -2,47 +2,60 @@ import type { CardQuestion, Problem, Seat, Suit } from '../types'
 import { SEAT_NAME } from '../types'
 import type { Contract } from '../bidding'
 import { VUL_SHORT } from '../bidding'
-import { Card } from './Card'
+import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
 import { withSuits } from './suitText'
 
+const OPT_LETTERS = 'abcdef'
+
 function ContractText({ contract }: { contract: Contract }) {
   return (
-    <span className="contract">
+    <>
       {contract.level}
-      {contract.strain === 'NT' ? (
-        'NT'
-      ) : (
-        <SuitGlyph suit={contract.strain as Suit} />
-      )}
+      {contract.strain === 'NT' ? 'NT' : <SuitGlyph suit={contract.strain as Suit} />}
       {contract.doubled === 'X' ? '×' : contract.doubled === 'XX' ? '××' : ''}
       <span className="contract-by"> by {SEAT_NAME[contract.declarer]}</span>
-    </span>
+    </>
   )
 }
 
-/** Center during play: problem id + vulnerability, the contract, and the cards
- * currently on the table arranged by seat (N top, S bottom, W left, E right). */
+/** A card as suit pip + rank, e.g. ♥Q. */
+function CardText({ card }: { card: string }) {
+  return (
+    <>
+      <SuitGlyph suit={card[0] as Suit} />
+      {rankLabel(card[1])}
+    </>
+  )
+}
+
 type Pos = 'top' | 'bottom' | 'left' | 'right'
 const POS_AREA: Record<Pos, string> = { top: 'n', left: 'w', right: 'e', bottom: 's' }
 
+/** Center during play: contract (a button that opens the auction), the current
+ * trick, an optional prompt + option buttons, and the wrong-answer popup. */
 export function PlayCenter({
   problem,
   contract,
   trick,
-  message,
   seatPos,
-  wrong,
-  onDismissWrong,
+  message,
+  options,
+  onOption,
+  onContractClick,
+  result,
+  onDismissResult,
 }: {
   problem: Problem
   contract: Contract | null
   trick: { seat: Seat; card: string }[]
-  message?: string
-  // where each seat sits on the table, so the trick lines up with the hands
   seatPos: Record<Seat, Pos>
-  wrong?: CardQuestion | null
-  onDismissWrong?: () => void
+  message?: string
+  options?: string[]
+  onOption?: (card: string) => void
+  onContractClick: () => void
+  result?: { correct: boolean; question: CardQuestion } | null
+  onDismissResult?: () => void
 }) {
   const byPos: Partial<Record<Pos, string>> = {}
   for (const t of trick) byPos[seatPos[t.seat]] = t.card
@@ -63,23 +76,40 @@ export function PlayCenter({
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
       <div className="contract-line">
-        {contract ? <ContractText contract={contract} /> : 'Passed out'}
+        <button className="contract-btn" onClick={onContractClick}>
+          {contract ? <ContractText contract={contract} /> : 'Passed out'}
+        </button>
       </div>
+
       <div className="trick">
         {slot('top')}
         {slot('left')}
         {slot('right')}
         {slot('bottom')}
       </div>
+
       {message && <div className="play-msg">{message}</div>}
 
-      {wrong && (
+      {options && onOption && (
+        <div className="opt-grid center-opts">
+          {options.map((c, i) => (
+            <button key={c} className="opt-btn" onClick={() => onOption(c)}>
+              <span className="opt-letter">{OPT_LETTERS[i]}</span>
+              <CardText card={c} />
+            </button>
+          ))}
+        </div>
+      )}
+
+      {result && (
         <>
-          <div className="explain-backdrop" onClick={onDismissWrong} />
+          <div className="explain-backdrop" onClick={onDismissResult} />
           <div className="explain-popup" role="dialog" aria-label="Answer">
-            <div className="explain-status no">Not quite</div>
-            {wrong.explanation && (
-              <p className="explain-body">{withSuits(wrong.explanation)}</p>
+            <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
+              {result.correct ? 'Correct!' : 'Not quite'}
+            </div>
+            {result.question.explanation && (
+              <p className="explain-body">{withSuits(result.question.explanation)}</p>
             )}
           </div>
         </>

@@ -26,11 +26,17 @@ function toSlots(hand: HandType): Slot[] {
   return slots
 }
 
-function slotClass(i: number, suitStart: boolean, playable: boolean): string {
+function slotClass(
+  i: number,
+  suitStart: boolean,
+  playable: boolean,
+  selected: boolean,
+): string {
   return (
     'slot' +
     (i === 0 ? ' first' : suitStart ? ' suit-start' : '') +
-    (playable ? ' playable' : '')
+    (playable ? ' playable' : '') +
+    (selected ? ' selected' : '')
   )
 }
 
@@ -40,23 +46,30 @@ const HAND_CLASS: Record<Orientation, string> = {
   east: 'hand-v hand-v-east',
 }
 
+type Raise = 'up' | 'down' | 'left' | 'right'
+
 /**
  * A hand as overlapping card faces. Horizontal fan (N/S, and the dummy); rotated
  * rails for E/W. `onPlay` makes the cards clickable (returns e.g. "HQ").
+ * `selectedCard` raises + highlights that card (toward center, per `raise`).
  */
 export function Hand({
   hand,
   faceDown = false,
   orientation = 'horizontal',
   onPlay,
+  selectedCard,
+  raise,
 }: {
   hand?: HandType
   faceDown?: boolean
   orientation?: Orientation
   onPlay?: (card: string) => void
+  selectedCard?: string
+  raise?: Raise
 }) {
   const vertical = orientation !== 'horizontal'
-  const cls = `hand ${HAND_CLASS[orientation]}`
+  const cls = `hand ${HAND_CLASS[orientation]}${raise ? ` raise-${raise}` : ''}`
   const wrap = (node: React.ReactNode) =>
     vertical ? <span className="rot">{node}</span> : node
 
@@ -64,7 +77,7 @@ export function Hand({
     return (
       <div className={cls} aria-label="hidden hand">
         {Array.from({ length: 13 }, (_, i) => (
-          <span className={slotClass(i, false, false)} key={i}>
+          <span className={slotClass(i, false, false, false)} key={i}>
             {wrap(<CardBack />)}
           </span>
         ))}
@@ -75,15 +88,25 @@ export function Hand({
   const slots = toSlots(hand)
   return (
     <div className={cls}>
-      {slots.map((s, i) => (
-        <span
-          className={slotClass(i, s.suitStart, !!onPlay)}
-          key={s.key}
-          onClick={onPlay ? () => onPlay(`${s.suit}${s.rank}`) : undefined}
-        >
-          {wrap(<Card suit={s.suit} rank={s.rank} />)}
-        </span>
-      ))}
+      {slots.map((s, i) => {
+        const card = `${s.suit}${s.rank}`
+        return (
+          <span
+            className={slotClass(i, s.suitStart, !!onPlay, card === selectedCard)}
+            key={s.key}
+            onClick={
+              onPlay
+                ? (e) => {
+                    e.stopPropagation()
+                    onPlay(card)
+                  }
+                : undefined
+            }
+          >
+            {wrap(<Card suit={s.suit} rank={s.rank} />)}
+          </span>
+        )
+      })}
     </div>
   )
 }

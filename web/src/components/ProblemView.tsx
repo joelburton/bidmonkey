@@ -26,7 +26,11 @@ export function ProblemView({
 
   if (phase === 'play') {
     return (
-      <PlayView problem={problem} contract={finalContract(problem, answers)} />
+      <PlayView
+        problem={problem}
+        contract={finalContract(problem, answers)}
+        answers={answers}
+      />
     )
   }
 
