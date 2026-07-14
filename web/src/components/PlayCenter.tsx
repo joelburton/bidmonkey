@@ -29,16 +29,13 @@ function CardText({ card }: { card: string }) {
   )
 }
 
-type Pos = 'top' | 'bottom' | 'left' | 'right'
-const POS_AREA: Record<Pos, string> = { top: 'n', left: 'w', right: 'e', bottom: 's' }
-
 /** Center during play: contract (a button that opens the auction), the current
- * trick, an optional prompt + option buttons, and the wrong-answer popup. */
+ * trick (cards placed by compass seat), a prompt + option buttons, and the
+ * wrong-answer popup. */
 export function PlayCenter({
   problem,
   contract,
   trick,
-  seatPos,
   message,
   options,
   onOption,
@@ -49,7 +46,6 @@ export function PlayCenter({
   problem: Problem
   contract: Contract | null
   trick: { seat: Seat; card: string }[]
-  seatPos: Record<Seat, Pos>
   message?: string
   options?: string[]
   onOption?: (card: string) => void
@@ -57,13 +53,13 @@ export function PlayCenter({
   result?: { correct: boolean; question: CardQuestion } | null
   onDismissResult?: () => void
 }) {
-  const byPos: Partial<Record<Pos, string>> = {}
-  for (const t of trick) byPos[seatPos[t.seat]] = t.card
+  const bySeat: Partial<Record<Seat, string>> = {}
+  for (const t of trick) bySeat[t.seat] = t.card
 
-  const slot = (pos: Pos) => {
-    const c = byPos[pos]
+  const slot = (seat: Seat) => {
+    const c = bySeat[seat]
     return (
-      <div className={`trick-slot trick-${POS_AREA[pos]}`}>
+      <div className={`trick-slot trick-${seat.toLowerCase()}`}>
         {c ? <Card suit={c[0] as Suit} rank={c[1]} /> : null}
       </div>
     )
@@ -82,10 +78,10 @@ export function PlayCenter({
       </div>
 
       <div className="trick">
-        {slot('top')}
-        {slot('left')}
-        {slot('right')}
-        {slot('bottom')}
+        {slot('N')}
+        {slot('W')}
+        {slot('E')}
+        {slot('S')}
       </div>
 
       {message && <div className="play-msg">{message}</div>}

@@ -132,12 +132,6 @@ export function PlayView({
   const others = ALL_SEATS.filter((s) => s !== 'S' && s !== topSeat)
   const [leftSeat, rightSeat] = others
 
-  const seatPos = {} as Record<Seat, 'top' | 'bottom' | 'left' | 'right'>
-  seatPos.S = 'bottom'
-  seatPos[topSeat] = 'top'
-  seatPos[leftSeat] = 'left'
-  seatPos[rightSeat] = 'right'
-
   const hand = (seat: Seat) => handRemaining(problem.deal[seat] ?? {}, playedBy(seat))
   const sel = (seat: Seat) => (selected?.seat === seat ? selected.card : undefined)
 
@@ -204,7 +198,6 @@ export function PlayView({
             problem={problem}
             contract={contract}
             trick={tableTrick}
-            seatPos={seatPos}
             message={message}
             options={playResult ? undefined : pendingMC}
             onOption={(c) => answerPlay(c)}
