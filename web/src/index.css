@@ -1,0 +1,553 @@
+:root {
+  --bg: #eef1f5;
+  --surface: #ffffff;
+  --ink: #1c2430;
+  --ink-soft: #5b6675;
+  --border: #d6dce4;
+  --accent: #1f7a4d;
+  --accent-soft: #e3f2ea;
+  --red: #d21f3c;
+  --black: #1a2230;
+  --felt: #14532d;
+
+  /* Card width drives all hand geometry; set per seat (see .rail-* below).
+     This is only a fallback. */
+  --card-w: 48px;
+
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Roboto', system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ---- App shell ---------------------------------------------------------- */
+
+.app {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+/* List can scroll if there are many problems. */
+.app.list {
+  min-height: 100dvh;
+}
+/* Detail is a fixed-height, non-scrolling table that fits the viewport. */
+.app.detail {
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.01em;
+}
+
+.back {
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.app-main {
+  flex: 1;
+  min-height: 0;
+}
+.app-main.list {
+  padding: 16px;
+}
+/* Detail view is a full-bleed table — no padding, cards run to the edges,
+   and it never scrolls (rails clip instead). */
+.app-main.detail {
+  display: flex;
+  overflow: hidden;
+}
+
+/* ---- Problem list ------------------------------------------------------- */
+
+.problem-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.problem-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.12s, transform 0.06s;
+}
+.problem-row:hover {
+  border-color: var(--accent);
+}
+.problem-row:active {
+  transform: scale(0.995);
+}
+
+.problem-row-main {
+  flex: 1;
+  min-width: 0;
+}
+.problem-title {
+  font-weight: 650;
+  font-size: 1.05rem;
+}
+.problem-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+.chip {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+.chip-diff {
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+.chip-diff-off {
+  color: var(--border);
+}
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.tag {
+  font-size: 0.72rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.problem-chevron {
+  color: var(--ink-soft);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+/* ---- Bridge table (full-bleed portrait) --------------------------------- */
+
+.table {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  /* minmax(0, …) lets the middle row shrink below its content so tall rails
+     clip instead of pushing the page taller and causing a scroll. */
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--felt);
+  background-image: radial-gradient(
+    circle at 50% 42%,
+    color-mix(in srgb, var(--felt) 82%, white) 0%,
+    var(--felt) 75%
+  );
+  overflow: hidden;
+}
+
+.rail {
+  overflow: hidden;
+}
+
+/* North & South: edge-to-edge horizontal fans. South (hero) is largest —
+   it's the hand that gets tapped, so maximize it. */
+/* Card width trades off against the visible sliver: with 13 cards spanning the
+   full width, sliver = (fullWidth − cardW) / 12. These sizes keep the sliver
+   wide enough (~26px) that the rank + suit index — including "10" — stays clean
+   and tappable, while the cards are as large as that allows. */
+.rail-north {
+  --card-w: min(17vw, 12vh, 78px);
+  align-self: start;
+}
+.rail-south {
+  --card-w: min(20vw, 15vh, 92px);
+  align-self: end;
+}
+
+/* Middle band: side rails on the edges, empty center reserved for the auction. */
+.middle {
+  position: relative;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.center {
+  flex: 1;
+  align-self: stretch;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Breathing room so the panel isn't jammed against the N hand and E/W rails. */
+  padding: 22px 16px 12px;
+}
+
+/* East & West: rotated rails pushed mostly off-screen; only an inner sliver
+   shows, keeping the center clear. */
+.rail-west,
+.rail-east {
+  /* Capped by viewport height (a vertical rail is ~7·cardW tall) and an
+     absolute max, so on wide/desktop screens it can't blow up and force a
+     scroll. */
+  --card-w: min(15vw, 8vh, 66px);
+  flex: none;
+  display: flex;
+  align-items: center;
+}
+/* Shift each rail outward so only an inner sliver shows. The rotated card is
+   1.4·cardW wide, so a shift of ~0.72·cardW leaves ~0.68·cardW visible — enough
+   for the rank AND the suit below it. */
+.rail-west {
+  margin-left: calc(var(--card-w) * -0.72);
+}
+.rail-east {
+  margin-right: calc(var(--card-w) * -0.72);
+}
+
+/* ---- Hand + cards ------------------------------------------------------- */
+
+.hand {
+  display: flex;
+}
+
+/* Horizontal fan (N/S): all 13 cards distributed to exactly fill the parent
+   width, whatever --card-w is. Percentage margins resolve against parent width,
+   so margin = (fullWidth − 13·cardW) / 12 spreads or overlaps them to fit. */
+.hand-h {
+  width: 100%;
+  align-items: flex-end;
+}
+.hand-h .slot {
+  flex: none;
+  margin-left: calc((100% - 13 * var(--card-w)) / 12);
+}
+.hand-h .slot.first {
+  margin-left: 0;
+}
+
+/* Vertical fan (E/W): each card rotated 90°, stacked top→bottom. The .slot
+   reserves the rotated footprint (long side wide, short side tall); the inner
+   .rot holds the natural-size card and spins it into place. */
+.hand-v {
+  flex-direction: column;
+  align-items: center;
+}
+.hand-v .slot {
+  position: relative;
+  width: calc(var(--card-w) * 1.4);
+  height: var(--card-w);
+  margin-top: calc(var(--card-w) * -0.5);
+}
+.hand-v .slot.first {
+  margin-top: 0;
+}
+.hand-v .rot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+/* West: spades at top, cards rotated so the index lands on the inner (right)
+   edge; stack reveals each card's top strip. */
+.hand-v-west .rot {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* East: mirror of West — column-reverse puts spades at the bottom, and the
+   opposite rotation lands the index/suit/pip on the inner (left) edge, with the
+   stack revealing each card's bottom strip. */
+.hand-v-east {
+  flex-direction: column-reverse;
+}
+/* In a column-reverse stack the overlap comes from the bottom margin (the
+   leading edge), so each card slides up onto the one below it and reveals its
+   bottom strip — where the rotated index sits. */
+.hand-v-east .slot {
+  margin-top: 0;
+  margin-bottom: calc(var(--card-w) * -0.5);
+}
+.hand-v-east .slot.first {
+  margin-bottom: 0;
+}
+.hand-v-east .rot {
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.card {
+  display: block;
+  width: var(--card-w);
+  height: auto;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.28));
+}
+.card-bg {
+  fill: #fff;
+  stroke: #c4ccd6;
+  stroke-width: 1.5;
+}
+.card-idx,
+.card-idx-suit,
+.card-pip {
+  font-family: 'Roboto Flex', 'Roboto', sans-serif;
+  font-weight: 400;
+  font-stretch: 75%;
+}
+.card-idx {
+  font-size: 30px;
+}
+.card-idx-suit {
+  font-size: 27px;
+}
+.card-pip {
+  font-size: 58px;
+  text-anchor: middle;
+}
+.red {
+  fill: var(--red);
+}
+.black {
+  fill: var(--black);
+}
+.card-back-fill {
+  fill: #2b4a7a;
+  stroke: #6f8fc0;
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+}
+
+/* ---- Auction panel + bid entry ------------------------------------------ */
+
+.auction-panel {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  color: #fff;
+}
+
+.auction-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0 2px;
+}
+
+.auction-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: center;
+}
+.auction-table th {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 1px 0 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
+}
+.auction-table td {
+  height: 1.9em;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+.auction-table .ask {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+/* Slightly smaller pips in the auction, with a hair of space after the level. */
+.auction-table .suit-glyph {
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: 0.12em;
+}
+
+/* Suit pips (auction cells + bid buttons). The white outline separates the
+   fill from the dark baize, so black suits can stay truly black. */
+.suit-red {
+  color: #e11d38;
+}
+.suit-black {
+  color: #10161d;
+}
+.suit-glyph {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.14em;
+  fill: currentColor;
+  overflow: visible; /* let the outline stroke extend past the tight viewBox */
+}
+.suit-glyph path {
+  stroke: #fff;
+  stroke-width: 34;
+  paint-order: stroke;
+  stroke-linejoin: round;
+}
+
+.bidpad {
+  /* Pinned to the bottom (just above South), leaving the space above for the
+     auction table to grow into. */
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.bid-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.bid-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.bid-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  border: 2px solid rgba(255, 255, 255, 0.92);
+  background: transparent;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0 6px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+}
+.bid-btn:disabled {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.33);
+  cursor: default;
+}
+.bid-btn:disabled .suit-glyph {
+  opacity: 0.35;
+}
+
+/* ---- Explanation popup -------------------------------------------------- */
+
+/* Transparent full-screen catcher: click anywhere outside the popup to close,
+   while the cards stay visible through it. */
+.explain-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+}
+/* Covers the auction/bid-entry area only (the center column). */
+.explain-popup {
+  position: absolute;
+  inset: 0;
+  z-index: 41;
+  overflow-y: auto;
+  padding: 14px 14px 16px;
+  border-radius: 12px;
+  background: #0c3b22;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
+  color: #fff;
+}
+.explain-status {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.explain-status.ok {
+  color: #7ee0a3;
+}
+.explain-status.no {
+  color: #ff8a97;
+}
+.explain-body {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.suit-red-text {
+  color: #ff5d6c;
+}
+.suit-black-text {
+  color: #eef2f7;
+}
+/* Strain-button pips: sized to keep the button the same height as the others. */
+.bid-btn .suit-glyph {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+.bid-btn.sel {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--felt);
+}
+/* Pushed look — for mouse (:active) and keyboard (.pressed) entry. */
+.bid-btn:active:not(:disabled),
+.bid-btn.pressed {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--felt);
+  transform: scale(0.95);
+}
+
+/* ---- Responsive: phones ------------------------------------------------- */
+
+/* The list keeps a little less padding on phones; the table is already
+   full-bleed and viewport-sized at every width. */
+@media (max-width: 640px) {
+  .app-main.list {
+    padding: 12px;
+  }
+}
