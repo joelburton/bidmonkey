@@ -87,11 +87,13 @@ export function AuctionPanel({
     const onKey = (e: KeyboardEvent) => {
       const st = ref.current
       if (!st.model.actingSeat) return
+      // Leave browser shortcuts alone — Cmd+C on the explanation text must not
+      // dismiss the popup (checked before the dismiss branch on purpose).
+      if (e.metaKey || e.ctrlKey || e.altKey) return
       if (st.result) {
         dismiss()
         return
       }
-      if (e.metaKey || e.ctrlKey || e.altKey) return
       const k = e.key.toLowerCase()
       if (st.isMC) {
         const opts = st.model.question?.options ?? []

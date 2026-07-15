@@ -117,11 +117,6 @@ export function flattenPlay(play: { cards: { seat: Seat; card?: string; question
   return out
 }
 
-/** Whether the given trick (of the recorded play) contains a question for the hero. */
-export function trickHasQuestion(moves: Move[], trickIndex: number): boolean {
-  return moves.some((m) => m.trickIndex === trickIndex && m.question != null)
-}
-
 /** A hand with the played cards removed, ready to render. */
 export function handRemaining(hand: Hand, playedCards: string[]): Hand {
   const played = new Set(playedCards)

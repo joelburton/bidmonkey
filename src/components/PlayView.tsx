@@ -19,6 +19,10 @@ import { Hand } from './Hand'
 import { PlayCenter } from './PlayCenter'
 import { AuctionTable } from './AuctionTable'
 
+// Hotkeys for the multiple-choice option buttons (matches their labels and the
+// auction's a–d keys).
+const OPT_LETTERS = 'abcdef'
+
 type Orientation = 'horizontal' | 'west' | 'east'
 type Raise = 'up' | 'down' | 'left' | 'right'
 const POS_ORIENT: Record<Pos, Orientation> = {
@@ -139,18 +143,32 @@ export function PlayView({
     }
   }
 
+  const pendingMC =
+    pending && pending.question.choiceType === 'multiple_choice'
+      ? pending.question.options
+      : undefined
+
   // A keypress does the same as the click we're waiting for: dismiss the answer
-  // popup, or advance past a completed trick.
+  // popup, advance past a completed trick, or (a–d, as in the auction) pick a
+  // multiple-choice option.
   useEffect(() => {
-    if (!playResult && !review) return
-    const onKey = () => {
+    if (!playResult && !review && !pendingMC) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return // leave browser shortcuts alone
       if (playResult) dismissPlayResult()
       else if (review) proceed(review)
+      else if (pendingMC) {
+        const idx = OPT_LETTERS.indexOf(e.key.toLowerCase())
+        if (idx >= 0 && idx < pendingMC.length) {
+          answerPlay(pendingMC[idx])
+          e.preventDefault()
+        }
+      }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playResult, review])
+  }, [playResult, review, pendingMC])
 
   // The seat on turn during free play: clockwise from the trick's leader. Only
   // its hand is clickable, so free play can't jump seats or play out of order.
@@ -211,10 +229,6 @@ export function PlayView({
     )
   }
 
-  const pendingMC =
-    pending && pending.question.choiceType === 'multiple_choice'
-      ? pending.question.options
-      : undefined
   const message = playResult
     ? undefined
     : pending

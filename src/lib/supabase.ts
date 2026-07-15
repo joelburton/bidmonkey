@@ -23,7 +23,12 @@ function ensureConfigured() {
 /** GET rows from a PostgREST endpoint, e.g. `sbSelect('sources?select=slug,title')`. */
 export async function sbSelect<T>(query: string): Promise<T> {
   ensureConfigured()
-  const res = await fetch(`${URL}/rest/v1/${query}`, { headers: authHeaders() })
+  // The timeout turns a hung connection into the error/retry screen instead of
+  // an indefinite "Loading…".
+  const res = await fetch(`${URL}/rest/v1/${query}`, {
+    headers: authHeaders(),
+    signal: AbortSignal.timeout(10_000),
+  })
   if (!res.ok) throw new Error(`Supabase GET ${query} → ${res.status}: ${await res.text()}`)
   return (await res.json()) as T
 }
