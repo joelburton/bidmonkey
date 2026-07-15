@@ -82,25 +82,28 @@ export function PlayCenter({
         </button>
       </div>
 
-      <div className="trick">
-        {slot('top')}
-        {slot('left')}
-        {slot('right')}
-        {slot('bottom')}
+      <div className="trick-area">
+        <div className="trick">
+          {slot('top')}
+          {slot('left')}
+          {slot('right')}
+          {slot('bottom')}
+        </div>
       </div>
 
-      {message && <div className="play-msg">{message}</div>}
-
-      {options && onOption && (
-        <div className="opt-grid center-opts">
-          {options.map((c, i) => (
-            <button key={c} className="opt-btn" onClick={() => onOption(c)}>
-              <span className="opt-letter">{OPT_LETTERS[i]}</span>
-              <CardText card={c} />
-            </button>
-          ))}
-        </div>
-      )}
+      <div className="play-bottom">
+        {message && <div className="play-msg">{message}</div>}
+        {options && onOption && (
+          <div className="opt-grid center-opts">
+            {options.map((c, i) => (
+              <button key={c} className="opt-btn" onClick={() => onOption(c)}>
+                <span className="opt-letter">{OPT_LETTERS[i]}</span>
+                <CardText card={c} />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
       {result && (
         <>

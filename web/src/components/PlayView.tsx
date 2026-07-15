@@ -138,7 +138,12 @@ export function PlayView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playResult, review])
 
-  const clickable = (seat: Seat) => allRevealed || pending?.seat === seat
+  // A hand is clickable when freely playing (all revealed) or when it's the seat
+  // to act on an *enter_card* question. Multiple-choice questions are answered
+  // with the option buttons, not by free card clicks.
+  const clickable = (seat: Seat) =>
+    allRevealed ||
+    (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')
   const faceUp = (seat: Seat) =>
     seat === hero || allRevealed || (seat === dummy && dummyRevealed)
   const commitCard = (seat: Seat, card: string) => {

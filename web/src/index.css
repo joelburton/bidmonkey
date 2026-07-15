@@ -605,9 +605,28 @@ body {
   margin-left: 5px;
 }
 
+/* The trick fills the space between the contract and the (bottom-pinned) prompt
+   + options, centered — so the options are always visible even on short screens
+   where the empty trick would otherwise push them off. */
+.trick-area {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.play-bottom {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 /* Current trick: cards placed by the seat that played them. */
 .trick {
   --card-w: 70px;
+  width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
@@ -617,7 +636,6 @@ body {
   justify-items: center;
   align-items: center;
   gap: 3px;
-  margin-top: 4px;
 }
 .trick-t {
   grid-area: t;

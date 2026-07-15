@@ -29,6 +29,7 @@ npm install
 npm run dev       # vite dev server (usually http://localhost:5174)
 npm run build     # tsc -b && vite build  — run this to typecheck
 npm test          # vitest run (unit + component tests)
+npm run e2e       # playwright (starts the dev server itself; run `npx playwright install chromium` once)
 npm run lint      # oxlint
 ```
 
@@ -139,13 +140,17 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   - The popup covers only the center (cards stay visible), is scrollable, and
     dismisses on any click outside (transparent full-screen catcher).
 
-## Verifying visual changes
+## Tests
 
-There are no automated tests. To check UI work I drive the running dev server
-with **Playwright** (Chromium), screenshotting at iPhone (390×844) and desktop
-widths. Playwright is not a project dependency — install it ad-hoc under `web/`
-(`npm i -D playwright`) and uninstall when done. This caught real bugs (clipped
-hands, cramped "10", the emoji-colored ♠ in the popup).
+- **Unit / component** (`npm test`, Vitest + Testing Library): `*.test.ts(x)`
+  next to the source — bidding/play logic and the auction/play components.
+- **E2E** (`npm run e2e`, Playwright, in `e2e/`): full flows in a browser. The
+  config auto-starts the dev server and runs at a **short 390×680 viewport** on
+  purpose — that's the size where the play options were pushed off-screen; the
+  test asserts they stay on-screen, so the regression can't come back.
+- For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
+  script and screenshot; **always screenshot at a short height (~680), not just
+  844** — the 844 height hid the off-screen-options bug.
 
 ## Preferences
 
