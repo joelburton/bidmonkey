@@ -11,7 +11,7 @@ the table view is designed portrait-first.
 
 ```
 /                     ← database (Postgres, hosted on Supabase)
-  schema.sql          Postgres DDL: sources, problems (jsonb deal/auction/play), quizzes, quizzes_problems, attempts, RLS
+  schema.sql          Postgres DDL: sources, problems (jsonb deal/auction/play), quizzes, quizzes_problems, RLS
   schema.v1.json      JSON Schema (draft 2020-12) validating the deal/auction/play JSON shapes
   seed.sql            generated one-time seed (do not hand-edit — see db/gen-seed.mjs)
   db/gen-seed.mjs     emits the initial seed from the frontend fixtures
@@ -19,17 +19,16 @@ web/                  ← the Vite + React + TS frontend (this is where the app 
 ```
 
 The frontend is a **static site that talks straight to Supabase** (no custom
-server): content is read via the PostgREST REST API, attempts are written back.
-The anon key is public; **RLS** on the server is the real access control.
+server): content is read via the PostgREST REST API. The anon key is public;
+**RLS** on the server is the real access control.
 
 ### Database (Postgres / Supabase)
 
 Content (`sources`, `problems`, `quizzes`, `quizzes_problems`) is authored in the
-DB and read by the app; `attempts` (pass/fail per problem) is written back.
-`quizzes_problems` is the m2m with a 1-based `ordinal` (a problem may be in
-several quizzes). **RLS:** `anon` may only `SELECT` content (you author it via
-psql / the SQL editor, which bypasses RLS) and may `INSERT`/`SELECT` `attempts`
-but never update/delete them — so a leaked key can't wipe anything. First-time
+DB and read by the app. `quizzes_problems` is the m2m with a 1-based `ordinal` (a
+problem may be in several quizzes). **RLS:** `anon` may only `SELECT` (you author
+content via psql / the SQL editor, which bypasses RLS), so a leaked key can only
+read. First-time
 setup against a Supabase project:
 
 ```
@@ -80,10 +79,9 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   run in order. Quiz nav (Home `‹` / Next `›`) lives in the app header, available
   in every phase; header center is the non-link `QuizTitle #ordinal`.
 - **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
-  catalogue on load (async, with loading/error/retry); `attempts` table + client
-  seam exist but recording is not wired yet.
-- **Out of scope so far:** recording/reviewing attempts (table + `data/attempts.ts`
-  seam exist, not yet called), per-question scoring, contract-result scoring.
+  catalogue on load (async, with loading/error/retry).
+- **Out of scope so far:** any backend beyond Supabase reads, per-question attempt
+  tracking / scoring, contract-result scoring.
 
 ## Frontend architecture
 
@@ -93,12 +91,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   The quiz header holds Home (`‹`, → sources), the `QuizTitle #ordinal` label, and
   Next (`›`, → next problem; disabled on the last). Nav is header-only so it works
   during the auction, play, and free study alike.
-- `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`/`sbInsert`),
-  no SDK; config from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
+- `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`), no SDK;
+  config from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
 - `data/repo.ts` — `fetchCatalog()`: reads sources/problems/quizzes and maps the
   PostgREST rows → app types. **The app's only runtime data source.**
-- `data/attempts.ts` — `recordAttempt` / `fetchFailedProblemIds` (Supabase). The
-  seam for the future "review my failures" feature; not called yet.
 - `types.ts` — mirrors `schema.v1.json` / tables (Seat, Suit, Deal, Hand, Problem,
   Source, Quiz, BidQuestion, CardQuestion, Trick, …).
 - `data/problems.ts` + `data/catalog.ts` — the **initial seed + test fixtures**
@@ -212,9 +208,9 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   were pushed off-screen; the test asserts they stay on-screen.
 - **E2E never touches real Supabase.** `e2e/fixtures.ts` `stubSupabase(page)`
   intercepts the PostgREST GETs and serves the `data/*` fixtures — call it before
-  `page.goto`. So tests are hermetic and can't pollute the attempts table. Use a
-  local Supabase stack (separate `project_id` + ports in `config.toml`) for real
-  read/write/RLS integration checks instead.
+  `page.goto`. So tests are hermetic and never hit a real project. Use a local
+  Supabase stack (separate `project_id` + ports in `config.toml`) for real
+  read/RLS integration checks instead.
 - For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
   script and screenshot; **always screenshot at a short height (~680), not just
   844** — the 844 height hid the off-screen-options bug.
