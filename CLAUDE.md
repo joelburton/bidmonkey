@@ -10,16 +10,38 @@ the table view is designed portrait-first.
 ## Repo layout
 
 ```
-/                     ← database design (Postgres) — no server yet
-  schema.sql          Postgres DDL: one `problems` row per problem; JSONB for deal/auction/play
-  schema.v1.json      JSON Schema (draft 2020-12) validating the deal/auction/play JSONB shapes
-  seed.sql            one sample INSERT
+/                     ← database design (SQLite) — no server yet
+  schema.sql          SQLite DDL: sources, problems (JSON text for deal/auction/play), quizzes, quizzes_problems
+  schema.v1.json      JSON Schema (draft 2020-12) validating the deal/auction/play JSON shapes
+  seed.sql            generated seed (do not hand-edit — see db/gen-seed.mjs)
+  bidmonkey.db        built SQLite file (gitignored; reproducible from schema.sql + seed.sql)
+  db/gen-seed.mjs     generates seed.sql from the frontend data (keeps DB ⇄ app in sync)
 web/                  ← the Vite + React + TS frontend (this is where the app lives)
 ```
 
 There is **no backend**. The frontend reads sample data from
-`web/src/data/problems.ts`, whose objects match the `schema.v1.json` shapes — so
-it can later be swapped for a `fetch` against a real API/DB.
+`web/src/data/` (`problems.ts` + `catalog.ts`), whose objects match the
+`schema.v1.json` / table shapes — so it can later be swapped for a `fetch`
+against a real API/DB.
+
+### Database (SQLite)
+
+Moved from Postgres. Enums → `CHECK` constraints; arrays/JSONB → JSON **text**
+(validated with `json_valid`/`json_type`); `now()` triggers → SQLite triggers.
+Tables: `sources` (slug PK, title), `problems` (`source` FK → sources), `quizzes`
+(slug PK, title, optional `source` FK), and `quizzes_problems` (m2m with a
+1-based `ordinal` = the problem's position in that quiz; a problem may be in
+several quizzes). Build/rebuild:
+
+```
+sqlite3 bidmonkey.db < schema.sql      # (rm -f bidmonkey.db first to rebuild)
+node db/gen-seed.mjs > seed.sql        # regenerate seed from web/src/data
+sqlite3 bidmonkey.db < seed.sql
+```
+
+`db/gen-seed.mjs` imports `web/src/data/{problems,catalog}.ts` **directly**
+(Node's built-in TS stripping — the data files are plain literals with type-only
+imports), so the seed can never drift from what the app shows.
 
 ## Running
 
@@ -34,8 +56,8 @@ npm run lint      # oxlint
 ```
 
 Stack: **Vite 8, React 19, TypeScript 6**. No react-router, no Next (deliberate —
-routing is a single `useState` in `App.tsx` toggling list ⇄ detail). Fonts come
-from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
+routing is a single `Nav` union in `App.tsx`: `sources` → `quizzes` → `quiz`).
+Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
 ## Status / phases
 
@@ -46,35 +68,50 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   correct bid, only stopping where the data poses a question), answer checking
   with an explanation popup, mouse + keyboard entry.
 - **Phase 4 (done):** card play. After the auction: if not all four hands are
-  known, back to the list; otherwise play the hand — deal out the recorded play,
+  known, the problem is bidding-only; otherwise play the hand — deal out the recorded play,
   reveal the dummy after the opening lead, auto-play with pauses, stop at
   questions for the hero, then reveal all hands for free study.
+- **Phase 5 (done):** SQLite (from Postgres) + sources/quizzes. Navigation is now
+  sources → quizzes → a quiz run in order. Quiz nav (Home `‹` / Next `›`) lives in
+  the app header, available in every phase; header center is the non-link
+  `QuizTitle #ordinal`.
 - **Out of scope so far:** any backend/DB connection, per-question attempt
   tracking / scoring, contract-result scoring.
 
 ## Frontend architecture
 
-- `App.tsx` — `selectedId` state; renders `ProblemList` or `ProblemView`.
-- `types.ts` — mirrors `schema.v1.json` (Seat, Suit, Deal, Hand, Problem,
-  BidQuestion, CardQuestion, Trick, …).
-- `data/problems.ts` — 5 sample problems. #1 game-try (all 4 hands → play
-  sandbox), #4 opening-lead (no auction questions → click to play), #5 two
-  auction questions (South only → back to list).
+- `App.tsx` — `Nav` union (`sources` | `quizzes` | `quiz`). Renders `SourceList`,
+  `QuizList`, or the quiz runner (header + `ProblemView` for the current problem).
+  The quiz header holds Home (`‹`, → sources), the `QuizTitle #ordinal` label, and
+  Next (`›`, → next problem; disabled on the last). Nav is header-only so it works
+  during the auction, play, and free study alike.
+- `types.ts` — mirrors `schema.v1.json` / tables (Seat, Suit, Deal, Hand, Problem,
+  Source, Quiz, BidQuestion, CardQuestion, Trick, …).
+- `data/problems.ts` — 5 sample problems (each `source: 'fakebook'`). #1 game-try
+  (all 4 hands → play sandbox), #4 opening-lead (no auction questions → click to
+  play), #5 two auction questions (South only → bidding-only).
+- `data/catalog.ts` — the `sources` + `quizzes` arrays (mirrors the DB seed; a
+  `Quiz.problemIds` array is the quiz order, index+1 = the `ordinal`).
+- `components/SourceList.tsx` / `QuizList.tsx` — the two list levels.
 - `bidding.ts` — auction logic. Columns are **W→N→E→S** (a clockwise cycle, so
   filling left-to-right from the dealer's column works for any dealer). Bid
   ranking, legality (`levelLegal`/`bidLegal`), `doubleState`, and:
   - `buildAuction(problem, answers)` — reveals calls up to the next unanswered
     question; `complete` once all are answered.
   - `finalContract(problem, answers)` — level/strain/declarer/doubled.
-- `play.ts` — `nextSeat`/`partnerOf`, `trickWinner(cards, trump)`, `flattenPlay`,
-  `handRemaining` (deal minus played cards).
+- `libs/play.ts` — pure bridge rules (no React/layout): `nextSeat`/`partnerOf`,
+  `trickWinner(cards, trump)`, `flattenPlay`, `handRemaining`, and legal-play
+  (`ledSuit`, `legalCards`/`isLegalPlay`, `seatToAct`). `play.ts` re-exports these
+  and adds the hero-relative `seatLayout`.
 - `components/`
-  - `ProblemView.tsx` — the per-problem phase machine (auction → play or exit).
+  - `ProblemView.tsx` — the per-problem phase machine (auction → play). Quiz nav
+    is in the app header, not here.
   - `BridgeTable.tsx` — layout shell: `top`/`bottom`/`left`/`right`/`center`
     slots (N/S span top+bottom, E/W are the rails). Content chosen per phase.
   - `AuctionPanel.tsx` — center during the auction. Controlled by `answers` +
     `onAnswer`; correct bid advances, wrong bid shows the explanation popup;
-    when done, "Play the hand" or "Back to problems".
+    when done, "Play the hand ▸" (playable) or a "Bidding complete." note
+    (bidding-only; nav is the header's Home/Next).
   - `PlayView.tsx` — the play state machine (see below).
   - `PlayCenter.tsx` — center during play: contract + current trick (placed to
     match the hand positions) + the wrong-answer popup.
@@ -84,7 +121,8 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   - `Card.tsx` / `SuitGlyph.tsx` — a card face / the Wikimedia suit pips (public
     domain) as an inline SVG for HTML.
   - `suitText.tsx` — `withSuits(text)` colors suit symbols in explanations.
-  - `ProblemList.tsx` — the clickable list.
+  - `SourceList.tsx` / `QuizList.tsx` — the sources and quizzes list levels
+    (both reuse the `.problem-list` / `.problem-row` styling).
 - `index.css` — all styling (no CSS framework). Global, plus component classes.
 
 ### Play phase (`PlayView`)

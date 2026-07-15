@@ -94,6 +94,14 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* Quiz label in the header: the quiz title + this problem's ordinal, shown as
+   plain (non-link) text next to the ‹ home link. */
+.quiz-title {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+
 .back {
   border: 0;
   background: none;
@@ -102,6 +110,15 @@ body {
   font-weight: 600;
   padding: 4px 0;
   cursor: pointer;
+}
+.back:disabled {
+  color: var(--border);
+  cursor: default;
+}
+
+/* Quiz header: ‹ home + "QuizTitle #n" grouped left, Next › pushed to the right. */
+.quiz-header .next {
+  margin-left: auto;
 }
 
 .app-main {
@@ -595,6 +612,31 @@ body {
 }
 .play-btn:hover {
   background: rgba(255, 255, 255, 0.22);
+}
+.play-btn:disabled {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.4);
+  background: transparent;
+  cursor: default;
+}
+
+/* "Play the hand ▸" and "Next ▸" side by side on a playable problem. */
+.play-actions {
+  display: flex;
+  gap: 8px;
+}
+.play-actions .play-btn {
+  flex: 1;
+}
+
+/* Auction finished on a bidding-only problem: no play, no next action here —
+   quiz nav is in the header. Just a quiet note under the completed auction. */
+.auction-done {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.8;
+  padding: 6px 0;
 }
 
 /* ---- Play phase --------------------------------------------------------- */

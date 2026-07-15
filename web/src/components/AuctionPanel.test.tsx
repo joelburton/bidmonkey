@@ -36,7 +36,8 @@ describe('AuctionPanel multiple-choice', () => {
         answers={[]}
         onAnswer={onAnswer}
         onPlay={() => {}}
-        onDone={() => {}}
+        onNext={() => {}}
+        hasNext={false}
         canPlay={false}
       />,
     )
@@ -58,5 +59,29 @@ describe('AuctionPanel multiple-choice', () => {
 
     await user.keyboard('{Escape}')
     expect(onAnswer).toHaveBeenCalledWith('3H')
+  })
+
+  it('a key that dismisses the popup does not reopen it (answer buttons never hold focus)', async () => {
+    const { container } = render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={vi.fn()}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+    const opts = container.querySelectorAll('.opt-btn')
+
+    await user.click(opts[0]) // wrong (2H) via mouse
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+    // The button must not have taken focus, or Enter/Space would re-click it.
+    expect(document.activeElement).not.toBe(opts[0])
+
+    await user.keyboard('{Enter}') // dismiss — must not re-trigger the answer
+    expect(screen.queryByText('Not quite')).toBeNull()
   })
 })

@@ -9,15 +9,19 @@ import { PlayView } from './PlayView'
 const ALL_SEATS: Seat[] = ['N', 'E', 'S', 'W']
 
 /**
- * Drives one problem: the auction (with answers accumulating), then either back
- * to the list (if not all four hands are known) or the play phase.
+ * Drives one problem: the auction (with answers accumulating), then the play
+ * phase (if all four hands are known). Quiz navigation (Home / Next) lives in
+ * the app header; `onNext`/`hasNext` are also passed to the auction panel so a
+ * "Next ▸" sits beside "Play the hand ▸" on a playable problem.
  */
 export function ProblemView({
   problem,
-  onExit,
+  onNext,
+  hasNext,
 }: {
   problem: Problem
-  onExit: () => void
+  onNext: () => void
+  hasNext: boolean
 }) {
   const [answers, setAnswers] = useState<string[]>([])
   const [phase, setPhase] = useState<'auction' | 'play'>('auction')
@@ -48,7 +52,8 @@ export function ProblemView({
           answers={answers}
           onAnswer={(c) => setAnswers((a) => [...a, c])}
           onPlay={() => setPhase('play')}
-          onDone={onExit}
+          onNext={onNext}
+          hasNext={hasNext}
           canPlay={canPlay}
         />
       }

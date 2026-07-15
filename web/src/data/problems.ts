@@ -8,7 +8,7 @@ export const problems: Problem[] = [
   {
     id: 1,
     title: 'Limit raise or game?',
-    source: 'seed',
+    source: 'fakebook',
     difficulty: 2,
     tags: ['game-try', 'major-suit-raise', 'responder'],
     hero: 'S',
@@ -49,7 +49,7 @@ export const problems: Problem[] = [
   {
     id: 2,
     title: 'Your call as responder',
-    source: 'seed',
+    source: 'fakebook',
     difficulty: 1,
     tags: ['responder', 'one-level-response'],
     hero: 'S',
@@ -79,7 +79,7 @@ export const problems: Problem[] = [
   {
     id: 3,
     title: 'Partnership slam try',
-    source: 'seed',
+    source: 'fakebook',
     difficulty: 3,
     tags: ['slam', 'partnership'],
     hero: 'S',
@@ -111,7 +111,7 @@ export const problems: Problem[] = [
   {
     id: 4,
     title: 'Choose your opening lead',
-    source: 'seed',
+    source: 'fakebook',
     difficulty: 2,
     tags: ['opening-lead', 'defense', 'play'],
     hero: 'S',
@@ -168,7 +168,7 @@ export const problems: Problem[] = [
   {
     id: 5,
     title: 'Two decisions',
-    source: 'seed',
+    source: 'fakebook',
     difficulty: 2,
     tags: ['responder', 'two-decisions'],
     hero: 'S',

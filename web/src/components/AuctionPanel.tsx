@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState, type MouseEvent } from 'react'
 import type { Problem, Suit } from '../types'
 import type { Strain } from '../bidding'
 import {
@@ -17,6 +17,11 @@ const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
 const KEY_STRAIN: Record<string, Strain> = { c: 'C', d: 'D', h: 'H', s: 'S', n: 'NT' }
 const OPT_LETTERS = 'abcdef'
 
+// Answer buttons must not take focus: otherwise a key pressed to dismiss the
+// explanation popup also activates the still-focused button (Space/Enter) and
+// reopens the popup. Preventing mousedown's default keeps focus off them.
+const preventFocus = (e: MouseEvent) => e.preventDefault()
+
 /**
  * Center during the auction. Controlled by ProblemView via `answers`/`onAnswer`.
  * Multiple-choice questions show a button per option; free (enter_bid) questions
@@ -28,14 +33,16 @@ export function AuctionPanel({
   answers,
   onAnswer,
   onPlay,
-  onDone,
+  onNext,
+  hasNext,
   canPlay,
 }: {
   problem: Problem
   answers: string[]
   onAnswer: (call: string) => void
   onPlay: () => void
-  onDone: () => void
+  onNext: () => void
+  hasNext: boolean
   canPlay: boolean
 }) {
   const model = buildAuction(problem, answers)
@@ -128,7 +135,7 @@ export function AuctionPanel({
   return (
     <div className="auction-panel">
       <div className="auction-head">
-        <span>Problem {problem.id}</span>
+        <span>#{problem.id}</span>
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
 
@@ -136,15 +143,29 @@ export function AuctionPanel({
 
       {!model.actingSeat ? (
         <div className="bidpad">
-          <button className="play-btn" onClick={canPlay ? onPlay : onDone}>
-            {canPlay ? 'Play the hand ▸' : 'Back to problems'}
-          </button>
+          {canPlay ? (
+            <div className="play-actions">
+              <button className="play-btn" onClick={onPlay}>
+                Play the hand ▸
+              </button>
+              <button className="play-btn" onClick={onNext} disabled={!hasNext}>
+                Next ▸
+              </button>
+            </div>
+          ) : (
+            <div className="auction-done">Bidding complete.</div>
+          )}
         </div>
       ) : isMC ? (
         <div className="bidpad">
           <div className="opt-grid">
             {q!.options!.map((opt, i) => (
-              <button key={opt} className="opt-btn" onClick={() => doSubmit(opt)}>
+              <button
+                key={opt}
+                className="opt-btn"
+                onMouseDown={preventFocus}
+                onClick={() => doSubmit(opt)}
+              >
                 <span className="opt-letter">{OPT_LETTERS[i]}</span>
                 <CallText call={opt} />
               </button>
@@ -161,6 +182,7 @@ export function AuctionPanel({
                   pressed === `L${l}` ? 'pressed' : ''
                 }`}
                 disabled={!levelLegal(l, model.priorCalls)}
+                onMouseDown={preventFocus}
                 onClick={() => setLevel(l)}
               >
                 {l}
@@ -169,6 +191,7 @@ export function AuctionPanel({
             <button
               className={`bid-btn ${pressed === 'NT' ? 'pressed' : ''}`}
               disabled={level != null && !bidLegal(level, 'NT', model.priorCalls)}
+              onMouseDown={preventFocus}
               onClick={() => pickStrain('NT')}
             >
               NT
@@ -178,6 +201,7 @@ export function AuctionPanel({
                 key={s}
                 className={`bid-btn ${pressed === `S${s}` ? 'pressed' : ''}`}
                 disabled={level != null && !bidLegal(level, s, model.priorCalls)}
+                onMouseDown={preventFocus}
                 onClick={() => pickStrain(s)}
               >
                 <SuitGlyph suit={s as Suit} />
@@ -188,12 +212,14 @@ export function AuctionPanel({
             <button
               className={`bid-btn ${pressed === 'DBL' ? 'pressed' : ''}`}
               disabled={!dbl}
+              onMouseDown={preventFocus}
               onClick={() => dbl && doSubmit(dbl === 'redouble' ? 'XX' : 'X')}
             >
               {dbl === 'redouble' ? 'Redouble' : 'Double'}
             </button>
             <button
               className={`bid-btn ${pressed === 'PASS' ? 'pressed' : ''}`}
+              onMouseDown={preventFocus}
               onClick={() => doSubmit('P')}
             >
               Pass

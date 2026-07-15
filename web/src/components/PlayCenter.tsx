@@ -73,7 +73,7 @@ export function PlayCenter({
   return (
     <div className="play-panel">
       <div className="auction-head">
-        <span>Problem {problem.id}</span>
+        <span>#{problem.id}</span>
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
       <div className="contract-line">
@@ -96,7 +96,12 @@ export function PlayCenter({
         {options && onOption && (
           <div className="opt-grid center-opts">
             {options.map((c, i) => (
-              <button key={c} className="opt-btn" onClick={() => onOption(c)}>
+              <button
+                key={c}
+                className="opt-btn"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={() => onOption(c)}
+              >
                 <span className="opt-letter">{OPT_LETTERS[i]}</span>
                 <CardText card={c} />
               </button>

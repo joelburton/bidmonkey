@@ -5,7 +5,10 @@ test.describe('play phase', () => {
     page,
   }) => {
     await page.goto('/')
-    await page.getByText('Choose your opening lead').click()
+    // Sources → quizzes → QuizB #2 is "Choose your opening lead".
+    await page.getByText('FakeBook').click()
+    await page.getByText('QuizB').click()
+    await page.getByRole('button', { name: 'Next problem' }).click()
     await page.getByRole('button', { name: /Play the hand/ }).click()
 
     // The lead is a multiple-choice question: options in the center, not free

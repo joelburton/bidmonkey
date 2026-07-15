@@ -1,11 +1,21 @@
 import { test, expect } from '@playwright/test'
+import type { Page } from '@playwright/test'
+
+// "Two decisions" is QuizB #3 (FakeBook → QuizB, then Next twice).
+async function gotoTwoDecisions(page: Page) {
+  await page.goto('/')
+  await page.getByText('FakeBook').click()
+  await page.getByText('QuizB').click()
+  await page.getByRole('button', { name: 'Next problem' }).click()
+  await page.getByRole('button', { name: 'Next problem' }).click()
+  await expect(page.locator('.quiz-title')).toHaveText('QuizB #3')
+}
 
 test.describe('auction', () => {
   test('multiple-choice: wrong then correct, then continues to the next question', async ({
     page,
   }) => {
-    await page.goto('/')
-    await page.getByText('Two decisions').click()
+    await gotoTwoDecisions(page)
 
     // First question: options a-d; the auction table shows one round so far.
     await expect(page.locator('.opt-btn')).toHaveCount(4)
@@ -25,9 +35,10 @@ test.describe('auction', () => {
     await expect(page.locator('.ask')).toBeVisible()
   })
 
-  test('back to the list when there are not four hands', async ({ page }) => {
-    await page.goto('/')
-    await page.getByText('Two decisions').click()
+  test('bidding-only problem: no play offered when there are not four hands', async ({
+    page,
+  }) => {
+    await gotoTwoDecisions(page)
 
     await page.locator('.opt-btn').first().click() // q1: 1S
     await page.keyboard.press('Escape')
@@ -35,6 +46,11 @@ test.describe('auction', () => {
 
     await page.locator('.opt-btn').nth(1).click() // q2: 2NT
     await page.keyboard.press('Escape')
-    await expect(page.getByRole('button', { name: /Back to problems/ })).toBeVisible()
+
+    // Auction complete, no fourth hand → no "Play the hand"; nav is in the header.
+    await expect(page.getByText('Bidding complete.')).toBeVisible()
+    await expect(page.getByRole('button', { name: /Play the hand/ })).toHaveCount(0)
+    // Last problem of the quiz → Next is disabled, Home (‹) still available.
+    await expect(page.getByRole('button', { name: 'Next problem' })).toBeDisabled()
   })
 })

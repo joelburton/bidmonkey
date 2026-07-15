@@ -6,7 +6,10 @@ test.use({ viewport: { width: 1280, height: 800 } })
 
 test('desktop keeps a centered portrait layout that fits', async ({ page }) => {
   await page.goto('/')
-  await page.getByText('Choose your opening lead').click()
+  // Sources → quizzes → QuizB #2 is "Choose your opening lead".
+  await page.getByText('FakeBook').click()
+  await page.getByText('QuizB').click()
+  await page.getByRole('button', { name: 'Next problem' }).click()
   await page.getByRole('button', { name: /Play the hand/ }).click()
   await expect(page.locator('.center-opts .opt-btn')).toHaveCount(4)
 
