@@ -12,9 +12,24 @@
 
   /* Card width drives all hand geometry; set per seat (see .rail-* below).
      This is only a fallback. */
-  --card-w: 48px;
+  --card-w: 3rem;
 
   color-scheme: light;
+  font-size: 16px;
+}
+/* On bigger screens scale everything up via a larger root rem, so the portrait
+   table looks like the phone — just larger. Everything below is in rem, so it
+   all follows. (Stepped px, gated on height too, so a short window stays
+   compact — and no viewport units in font-size, which trip up Safari.) */
+@media (min-width: 700px) and (min-height: 800px) {
+  :root {
+    font-size: 20px;
+  }
+}
+@media (min-width: 900px) and (min-height: 1000px) {
+  :root {
+    font-size: 24px;
+  }
 }
 
 * {
@@ -38,10 +53,17 @@ body {
 /* ---- App shell ---------------------------------------------------------- */
 
 .app {
-  max-width: 900px;
+  /* Portrait, phone-shaped, centered — on desktop it's a narrow column with the
+     page background around it. */
+  max-width: 30rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+@media (min-width: 640px) {
+  .app {
+    box-shadow: 0 0 2rem rgba(0, 0, 0, 0.18);
+  }
 }
 /* List can scroll if there are many problems. */
 .app.list {
@@ -185,6 +207,12 @@ body {
   /* minmax(0, …) lets the middle row shrink below its content so tall rails
      clip instead of pushing the page taller and causing a scroll. */
   grid-template-rows: auto minmax(0, 1fr) auto;
+  /* The column must be pinned too, not left implicit ('auto'): real Safari
+     sizes an auto column from the fans' intrinsic width — 13 UN-overlapped
+     cards (% overlap margins count as 0 in intrinsic sizing) ≈ 2× the app —
+     which blows the whole table out sideways. Chrome resolves the same cycle
+     at the app width, so it never showed there. */
+  grid-template-columns: minmax(0, 1fr);
   background: var(--felt);
   background-image: radial-gradient(
     circle at 50% 42%,
@@ -216,11 +244,11 @@ body {
    wide enough (~26px) that the rank + suit index — including "10" — stays clean
    and tappable, while the cards are as large as that allows. */
 .rail-north {
-  --card-w: min(17vw, 12vh, 78px);
+  --card-w: 4rem;
   align-self: start;
 }
 .rail-south {
-  --card-w: min(20vw, 15vh, 92px);
+  --card-w: 5rem;
   align-self: end;
 }
 
@@ -249,10 +277,7 @@ body {
    shows, keeping the center clear. */
 .rail-west,
 .rail-east {
-  /* Capped by viewport height (a vertical rail is ~7·cardW tall) and an
-     absolute max, so on wide/desktop screens it can't blow up and force a
-     scroll. */
-  --card-w: min(15vw, 8vh, 66px);
+  --card-w: 3.5rem;
   flex: none;
   display: flex;
   align-items: center;
@@ -625,7 +650,7 @@ body {
 
 /* Current trick: cards placed by the seat that played them. */
 .trick {
-  --card-w: 70px;
+  --card-w: 4.25rem;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -698,16 +723,16 @@ body {
   stroke-width: 4;
 }
 .raise-up .slot.selected {
-  transform: translateY(-18px);
+  transform: translateY(-1.1rem);
 }
 .raise-down .slot.selected {
-  transform: translateY(18px);
+  transform: translateY(1.1rem);
 }
 .raise-left .slot.selected {
-  transform: translateX(-18px);
+  transform: translateX(-1.1rem);
 }
 .raise-right .slot.selected {
-  transform: translateX(18px);
+  transform: translateX(1.1rem);
 }
 
 /* Option buttons (multiple-choice bidding & play). */

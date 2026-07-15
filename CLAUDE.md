@@ -115,6 +115,17 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   instead of pushing the page. N/S fans are edge-to-edge and auto-fill their width
   via a percentage-margin formula, so card size (`--card-w`, set per rail) is the
   only knob. E/W rails are pushed mostly off-screen, showing only an inner sliver.
+- **Scaling (desktop = phone, larger):** everything is sized in **rem**; the root
+  font-size steps 16→20→24px via `(min-width) and (min-height)` media queries, and
+  `.app { max-width: 30rem }` keeps a centered portrait column on desktop.
+- **Pin grid tracks that hold the fans.** `.table` sets
+  `grid-template-columns: minmax(0, 1fr)` — leave the column implicit (`auto`) and
+  **real Safari** sizes the track from the fans' *intrinsic* width (the %-margin
+  overlap counts as 0 in intrinsic sizing → 13 un-overlapped cards ≈ 2× the app),
+  blowing the whole table out sideways and clipping it on the right. Chrome
+  resolves the same cyclic percentage at the app width, so it hides the bug. Rule:
+  the percentage-overlap fan must never sit in a container whose size content can
+  dictate.
 - **Card size vs. legibility:** with 13 cards across the width, each visible sliver
   = `(width − cardW)/12`. Bigger cards ⇒ thinner slivers. `--card-w` on
   `.rail-south`/`.rail-north` is tuned so the "10" index stays readable.
@@ -151,6 +162,10 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 - For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
   script and screenshot; **always screenshot at a short height (~680), not just
   844** — the 844 height hid the off-screen-options bug.
+- **Playwright WebKit is NOT real Safari.** The Safari track-sizing bug above
+  rendered byte-identically to Chromium in Playwright's WebKit. After layout
+  changes, have a human sanity-check actual macOS Safari — screenshots and
+  console probes from there are the only reliable signal.
 
 ## Preferences
 
