@@ -9,15 +9,20 @@ the table view is designed portrait-first.
 
 ## Repo layout
 
+Everything is at the repo root (Vite + React + TS app + Supabase), like the
+sibling `codenames` project — no `web/` subdir.
+
 ```
-/                     ← database (Postgres, on Supabase; managed by the CLI)
-  supabase/config.toml       local stack config — bidmonkey is the SECOND stack
-                             (custom 5433x/8383 ports so it coexists with another)
-  supabase/migrations/*.sql  the schema (source of truth; `db reset`/`db push`)
-  supabase/seed.sql          generated seed (do not hand-edit — see db/gen-seed.mjs)
-  schema.v1.json             JSON Schema validating the deal/auction/play shapes
-  db/gen-seed.mjs            emits supabase/seed.sql from the frontend fixtures
-web/                  ← the Vite + React + TS frontend (this is where the app lives)
+src/                       the app (App.tsx, components/, libs/, data/, …)
+e2e/                       Playwright specs + global-setup
+public/  index.html  vite.config.ts  tsconfig*.json  playwright.config.ts
+supabase/config.toml       local stack config — bidmonkey is the SECOND stack
+                           (custom 5433x/8383 ports so it coexists with another)
+supabase/migrations/*.sql  the schema (source of truth; `db reset`/`db push`)
+supabase/seed.sql          generated seed (do not hand-edit — see db/gen-seed.mjs)
+schema.v1.json             JSON Schema validating the deal/auction/play shapes
+db/gen-seed.mjs            emits supabase/seed.sql from the frontend fixtures
+netlify.toml               deploy config (env vars set in the Netlify UI)
 ```
 
 The frontend is a **static site that talks straight to Supabase** (no custom
@@ -44,13 +49,12 @@ npm run psql                          # psql into the local db (port 54332)
 Remote (first time): `supabase link --project-ref <ref>` then `supabase db push`
 (applies migrations); seed it once with `psql "$REMOTE_DB_URL" -f supabase/seed.sql`.
 After that, **new problems are authored directly in the DB** (`insert into
-problems …` — no redeploy); `web/src/data/*` is only the initial seed + test
+problems …` — no redeploy); `src/data/*` is only the initial seed + test
 fixtures, not read at runtime.
 
 ## Running
 
 ```
-cd web            # IMPORTANT: repo root has no package.json; everything is under web/
 cp .env.example .env   # then fill in VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
 npm install
 npm run dev       # vite dev server (usually http://localhost:5174) — needs .env

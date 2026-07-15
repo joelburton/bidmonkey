@@ -1,13 +1,29 @@
-# OS
+# OS / editors
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.vscode/*
+!.vscode/extensions.json
 
-# Built SQLite database (reproducible: sqlite3 bidmonkey.db < schema.sql < seed.sql)
-*.db
+# Dependencies / build output
+node_modules
+dist
+dist-ssr
 
-# Dependencies / build output (also covered by web/.gitignore)
-node_modules/
-dist/
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Local env (real Supabase keys) — commit .env.example instead
+.env
+*.local
 
 # Playwright
 test-results/

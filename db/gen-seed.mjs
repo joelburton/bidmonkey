@@ -8,8 +8,8 @@
 // Runs on Node's built-in TypeScript stripping — the data modules are plain
 // object literals with type-only imports, so no build step is needed.
 
-import { problems } from '../web/src/data/problems.ts'
-import { sources, quizzes } from '../web/src/data/catalog.ts'
+import { problems } from '../src/data/problems.ts'
+import { sources, quizzes } from '../src/data/catalog.ts'
 
 // SQL literal for a string, or NULL. Doubles single quotes (Postgres escaping).
 const s = (v) => (v == null ? 'NULL' : `'${String(v).replace(/'/g, "''")}'`)

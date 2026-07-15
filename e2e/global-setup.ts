@@ -6,7 +6,7 @@ import { resolve } from 'node:path'
 // root). Runs against the real local PostgREST — no stubbing — so the queries,
 // row mapping, and RLS are actually exercised.
 export default function globalSetup() {
-  const root = resolve(import.meta.dirname, '..', '..')
+  const root = resolve(import.meta.dirname, '..')
   try {
     execSync('supabase db reset', { cwd: root, stdio: 'inherit' })
   } catch {
