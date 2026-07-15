@@ -53,11 +53,14 @@ type Raise = 'up' | 'down' | 'left' | 'right'
  * rails for E/W. `onPlay` makes the cards clickable (returns e.g. "HQ").
  * `canPlay`, when given, further restricts which cards are clickable (e.g. only
  * legal follows) — cards it rejects render but don't respond. `selectedCard`
- * raises + highlights that card (toward center, per `raise`).
+ * raises + highlights that card (toward center, per `raise`). A face-down hand
+ * shows `count` backs (default 13) — concealed hands shrink as cards are played,
+ * so the remaining count stays readable, as at a real table.
  */
 export function Hand({
   hand,
   faceDown = false,
+  count = 13,
   orientation = 'horizontal',
   onPlay,
   canPlay,
@@ -66,6 +69,7 @@ export function Hand({
 }: {
   hand?: HandType
   faceDown?: boolean
+  count?: number
   orientation?: Orientation
   onPlay?: (card: string) => void
   canPlay?: (card: string) => boolean
@@ -80,7 +84,7 @@ export function Hand({
   if (!hand || faceDown) {
     return (
       <div className={cls} aria-label="hidden hand">
-        {Array.from({ length: 13 }, (_, i) => (
+        {Array.from({ length: count }, (_, i) => (
           <span className={slotClass(i, false, false, false)} key={i}>
             {wrap(<CardBack />)}
           </span>

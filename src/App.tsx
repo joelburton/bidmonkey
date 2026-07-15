@@ -78,8 +78,25 @@ export default function App() {
 
   // Running a quiz: one problem at a time, in order, with Home + Next.
   if (nav.view === 'quiz') {
-    const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)!
-    const problem = catalog.problems.find((p) => p.slug === quiz.problemSlugs[nav.index])!
+    const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)
+    const problem =
+      quiz && catalog.problems.find((p) => p.slug === quiz.problemSlugs[nav.index])
+    // A quiz can exist with no problems linked yet (content is authored by hand
+    // in the DB) — show a note instead of crashing on the missing problem.
+    if (!quiz || !problem) {
+      return (
+        <div className="app list">
+          <header className="app-header">
+            <button className="back" onClick={goHome}>
+              ‹ Sources
+            </button>
+          </header>
+          <main className="app-main list">
+            <div className="screen-msg">This quiz has no problems yet.</div>
+          </main>
+        </div>
+      )
+    }
     const hasNext = nav.index < quiz.problemSlugs.length - 1
     const hasPrev = nav.index > 0
     const goNext = () =>

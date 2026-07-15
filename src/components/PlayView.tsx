@@ -7,6 +7,7 @@ import { seatLayout } from '../play'
 import {
   flattenPlay,
   handRemaining,
+  handToCards,
   isLegalPlay,
   nextSeat,
   partnerOf,
@@ -189,7 +190,14 @@ export function PlayView({
 
   const slot = (pos: Pos) => {
     const seat = seatAt[pos]
-    if (!faceUp(seat)) return <Hand faceDown orientation={POS_ORIENT[pos]} />
+    if (!faceUp(seat))
+      return (
+        <Hand
+          faceDown
+          count={handToCards(hand(seat)).length}
+          orientation={POS_ORIENT[pos]}
+        />
+      )
     const playable = clickable(seat)
     return (
       <Hand
