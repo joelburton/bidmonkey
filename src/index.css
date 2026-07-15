@@ -4,6 +4,9 @@
   --ink: #1c2430;
   --ink-soft: #5b6675;
   --border: #d6dce4;
+  /* Control/affordance borders (buttons etc.) must be clearly visible — a dark
+     grey, never a faint near-background grey. See the no-subtle-grey rule. */
+  --control-border: #4b5563;
   --accent: #1f7a4d;
   --accent-soft: #e3f2ea;
   --red: #d21f3c;
@@ -99,16 +102,7 @@ body {
   letter-spacing: -0.01em;
 }
 
-/* Quiz label in the header: the quiz title + this problem's ordinal, shown as
-   plain (non-link) text next to the ‹ home link. */
-.quiz-title {
-  font-weight: 700;
-  font-size: 1.05rem;
-  letter-spacing: -0.01em;
-}
-
-/* Nav buttons are mostly bare ‹/› glyphs — sized up, with real padding, so they
-   make a decent thumb target on a phone. */
+/* Bare back link used by the list views ("‹ Sources") and the retry button. */
 .back {
   border: 0;
   background: none;
@@ -123,10 +117,56 @@ body {
   cursor: default;
 }
 
-/* Quiz header: ‹ home + "QuizTitle #n" grouped left, the ‹ prev / Next › pair
-   pushed to the right (margin-left:auto on the first of the pair). */
-.quiz-header .prev {
+/* Quiz header: three thin-bordered buttons — a home button showing the quiz +
+   problem on the left, and a prev/next chevron pair on the right. Tighter
+   vertical padding than the list header. */
+.quiz-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  /* Half the list header's side padding, so the buttons sit closer to the edges. */
+  padding-left: 8px;
+  padding-right: 8px;
+}
+/* Each button is inline-flex + align-items:center, so the chevron sits on the
+   text's vertical center regardless of the glyph being larger than the label. */
+.qbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--control-border);
+  border-radius: 8px;
+  background: none;
+  padding: 4px 12px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink);
+}
+.qbtn:disabled {
+  cursor: default;
+}
+.qbtn .chev {
+  font-size: 1.4rem;
+  color: var(--accent);
+  /* The glyph sits low (near the text baseline); nudge it up to look centered. */
+  position: relative;
+  top: -0.08em;
+}
+.qbtn:disabled .chev {
+  color: var(--ink-soft);
+}
+.qbtn-label {
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+}
+/* The prev/next pair, pushed to the right edge. */
+.qnav {
   margin-left: auto;
+  display: inline-flex;
+  gap: 8px;
+}
+.qbtn-nav {
+  padding: 3px 16px;
 }
 
 .app-main {
@@ -259,18 +299,15 @@ body {
   z-index: 2;
 }
 
-/* North & South: edge-to-edge horizontal fans. South (hero) is largest —
-   it's the hand that gets tapped, so maximize it. */
-/* Card width trades off against the visible sliver: with 13 cards spanning the
-   full width, sliver = (fullWidth − cardW) / 12. These sizes keep the sliver
-   wide enough (~26px) that the rank + suit index — including "10" — stays clean
-   and tappable, while the cards are as large as that allows. */
+/* North & South: edge-to-edge horizontal fans, same card size — the condensed
+   Roboto Flex keeps even "10" readable in the sliver, so the hero hand needn't
+   be bigger. Sliver = (fullWidth − cardW) / 12. */
 .rail-north {
   --card-w: 4rem;
   align-self: start;
 }
 .rail-south {
-  --card-w: 5rem;
+  --card-w: 4rem;
   align-self: end;
 }
 
@@ -291,15 +328,16 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* Breathing room so the panel isn't jammed against the N hand and E/W rails. */
-  padding: 22px 16px 12px;
+  /* A little breathing room from the N hand; kept small to avoid dead space. */
+  padding: 8px 12px;
 }
 
-/* East & West: rotated rails pushed mostly off-screen; only an inner sliver
-   shows, keeping the center clear. */
+/* East & West: rotated rails, an inner sliver showing, kept small enough that
+   the whole 13-card fan fits the middle band vertically (no clipping) — it's
+   centered there via .middle's align-items:center. */
 .rail-west,
 .rail-east {
-  --card-w: 3.5rem;
+  --card-w: 3rem;
   flex: none;
   display: flex;
   align-items: center;
@@ -326,6 +364,9 @@ body {
 .hand-h {
   width: 100%;
   align-items: flex-end;
+  /* Center the fan once fewer than 13 cards remain (full hand already fills the
+     width, so this is a no-op then). */
+  justify-content: center;
 }
 .hand-h .slot {
   flex: none;
@@ -654,9 +695,15 @@ body {
 .contract-line {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
+  gap: 12px;
   font-size: 1.2rem;
   font-weight: 700;
+}
+.vul-tag {
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.85;
 }
 .contract-by {
   font-size: 0.9rem;
@@ -682,19 +729,22 @@ body {
   gap: 8px;
 }
 
-/* Current trick: cards placed by the seat that played them. */
+/* Current trick: cards placed by the seat that played them. Compact tracks
+   (narrower than a card) so the four cards sit close together in a tight
+   diamond; the grid is centered and only as wide as its tracks. */
 .trick {
-  --card-w: 4.25rem;
-  width: 100%;
+  --card-w: 4rem;
+  width: fit-content;
+  margin-inline: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, calc(var(--card-w) * 0.62));
+  grid-template-rows: repeat(3, calc(var(--card-w) * 0.72));
   grid-template-areas:
     '.   t   .'
     'l   .   r'
     '.   b   .';
   justify-items: center;
   align-items: center;
-  gap: 3px;
 }
 .trick-t {
   grid-area: t;
@@ -716,14 +766,6 @@ body {
   justify-content: center;
 }
 
-/* Reserved cue slot below the trick: same height whether it holds the turn
-   arrow, a message, or nothing — so its content never nudges the cards. */
-.play-cue {
-  min-height: 1.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .play-msg {
   margin: 0;
   text-align: center;
@@ -731,25 +773,58 @@ body {
   font-weight: 600;
   color: #ffe08a;
 }
-.turn-arrow {
-  width: 1.5rem;
-  height: 1.5rem;
+/* Turn indicator: an arrow beside a hand, pointing at it, shown when that seat
+   is expected to play (an enter-card question or its turn in free play). Lives
+   inside the position:relative rail; the svg is rotated per position, the pulse
+   is on the span so it doesn't fight the rotation. */
+.play-arrow {
+  position: absolute;
+  z-index: 6;
+  width: 1.6rem;
+  height: 1.6rem;
   color: #ffe08a;
-  overflow: visible;
-  animation: turn-bounce 1s ease-in-out infinite;
+  pointer-events: none;
+  animation: arrow-pulse 1s ease-in-out infinite;
 }
-@keyframes turn-bounce {
+.play-arrow svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+.play-arrow-bottom {
+  left: calc(50% - 0.8rem);
+  bottom: 100%;
+  margin-bottom: 4px;
+}
+.play-arrow-top {
+  left: calc(50% - 0.8rem);
+  top: 100%;
+  margin-top: 4px;
+}
+.play-arrow-left {
+  top: calc(50% - 0.8rem);
+  left: 100%;
+  margin-left: 4px;
+}
+.play-arrow-right {
+  top: calc(50% - 0.8rem);
+  right: 100%;
+  margin-right: 4px;
+}
+@keyframes arrow-pulse {
   0%,
   100% {
-    transform: translateY(0);
+    opacity: 0.5;
   }
   50% {
-    transform: translateY(3px);
+    opacity: 1;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .turn-arrow {
+  .play-arrow {
     animation: none;
+    opacity: 0.9;
   }
 }
 

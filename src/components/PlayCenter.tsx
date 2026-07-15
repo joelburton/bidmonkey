@@ -33,23 +33,6 @@ function CardText({ card }: { card: string }) {
 
 const POS_CLASS: Record<Pos, string> = { top: 't', left: 'l', right: 'r', bottom: 'b' }
 
-/** A small downward arrow shown when it's the hero's turn to play a card — it
- * points at the hero's hand along the bottom of the screen. */
-function TurnArrow() {
-  return (
-    <svg className="turn-arrow" viewBox="0 0 24 24" role="img" aria-label="Your turn to play">
-      <path
-        d="M12 4 L12 17 M6 12 L12 18 L18 12"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
 /** Center during play: contract (a button that opens the auction), the current
  * trick (cards placed by the same seat→position map as the hands), a prompt +
  * option buttons, and the wrong-answer popup. */
@@ -59,7 +42,6 @@ export function PlayCenter({
   trick,
   seatPos,
   message,
-  arrow,
   options,
   onOption,
   onContractClick,
@@ -71,7 +53,6 @@ export function PlayCenter({
   trick: { seat: Seat; card: string }[]
   seatPos: Record<Seat, Pos>
   message?: string
-  arrow?: boolean
   options?: string[]
   onOption?: (card: string) => void
   onContractClick: () => void
@@ -96,14 +77,11 @@ export function PlayCenter({
 
   return (
     <div className="play-panel">
-      <div className="auction-head">
-        <span>#{problem.slug}</span>
-        <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
-      </div>
       <div className="contract-line">
         <button className="contract-btn" onClick={onContractClick}>
           {contract ? <ContractText contract={contract} /> : 'Passed out'}
         </button>
+        <span className="vul-tag">Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
 
       <div className="trick-area">
@@ -116,11 +94,7 @@ export function PlayCenter({
       </div>
 
       <div className="play-bottom">
-        {/* Fixed-height cue slot: holds the turn arrow, a text message, or
-            nothing — always the same height, so it never shifts the cards. */}
-        <div className="play-cue">
-          {arrow ? <TurnArrow /> : message ? <div className="play-msg">{message}</div> : null}
-        </div>
+        {message && <div className="play-msg">{message}</div>}
         {options && onOption && (
           <div className="opt-grid center-opts">
             {options.map((c, i) => (

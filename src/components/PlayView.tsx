@@ -38,6 +38,33 @@ const POS_RAISE: Record<Pos, Raise> = {
   right: 'left',
 }
 
+// Rotate the base down-arrow so it points outward at the hand in each position.
+const ARROW_ROT: Record<Pos, number> = { bottom: 0, top: 180, left: 90, right: -90 }
+
+/** An arrow next to a hand, pointing at it, shown when that seat is expected to
+ * play a card (an enter-card question, or its turn in free play). */
+function PlayArrow({ pos }: { pos: Pos }) {
+  return (
+    <span className={`play-arrow play-arrow-${pos}`}>
+      <svg
+        viewBox="0 0 24 24"
+        role="img"
+        aria-label="play from this hand"
+        style={{ transform: `rotate(${ARROW_ROT[pos]}deg)` }}
+      >
+        <path
+          d="M12 4 L12 17 M6 12 L12 18 L18 12"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  )
+}
+
 /**
  * Play phase, oriented to the hero. Steps through the recorded play: auto-plays
  * cards (1s pause each), stops at questions for the hero, reveals the dummy
@@ -225,36 +252,30 @@ export function PlayView({
       )
     const playable = clickable(seat)
     return (
-      <Hand
-        hand={hand(seat)}
-        orientation={POS_ORIENT[pos]}
-        onPlay={playable ? handleCard(seat) : undefined}
-        canPlay={playable ? canPlay(seat) : undefined}
-        selectedCard={sel(seat)}
-        raise={POS_RAISE[pos]}
-      />
+      <>
+        <Hand
+          hand={hand(seat)}
+          orientation={POS_ORIENT[pos]}
+          onPlay={playable ? handleCard(seat) : undefined}
+          canPlay={playable ? canPlay(seat) : undefined}
+          selectedCard={sel(seat)}
+          raise={POS_RAISE[pos]}
+        />
+        {playable && <PlayArrow pos={pos} />}
+      </>
     )
   }
 
-  // When the hero must play a card from hand (an enter-card question with no
-  // authored prompt), show a downward arrow cue pointing at the hero instead of
-  // text. Authored prompts and the other states keep their text. Either way the
-  // cue lives in a fixed-height slot (see .play-cue) so it never shifts the cards.
-  const heroToPlay =
-    !playResult &&
-    !!pending &&
-    pending.question.choiceType === 'enter_card' &&
-    !pending.question.prompt
+  // Whose turn it is to play is shown by an arrow at that hand (see PlayArrow,
+  // driven by `clickable`), not by center text. A question's authored prompt
+  // still shows (a multiple-choice question falls back to "Your turn"); the
+  // "tap to continue" / "all hands shown" statuses are gone — needless, and they
+  // reserved vertical space.
   const message =
-    playResult || heroToPlay
-      ? undefined
-      : pending
-        ? (pending.question.prompt ?? 'Your turn')
-        : review
-          ? 'Tap to continue'
-          : allRevealed
-            ? 'All hands shown — play freely'
-            : undefined
+    !playResult && pending
+      ? (pending.question.prompt ??
+        (pending.question.choiceType === 'multiple_choice' ? 'Your turn' : undefined))
+      : undefined
 
   const am = buildAuction(problem, answers)
 
@@ -273,7 +294,6 @@ export function PlayView({
             trick={tableTrick}
             seatPos={layout}
             message={message}
-            arrow={heroToPlay}
             options={playResult ? undefined : pendingMC}
             onOption={(c) => answerPlay(c)}
             onContractClick={() => setShowAuction(true)}

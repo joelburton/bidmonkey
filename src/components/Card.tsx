@@ -18,9 +18,9 @@ export function rankLabel(rank: string): string {
 }
 
 /**
- * A single readable card face. Rank + suit sit in the top-left corner (the part
- * that stays visible when cards overlap); a large center pip reads alone. Pips
- * are the Wikimedia suit shapes, dropped in as nested SVGs (auto-centered).
+ * A single readable card face. Rank + suit sit in the top-left corner — the part
+ * that stays visible when cards overlap. No large center pip (it only added
+ * clutter). Pips are the Wikimedia suit shapes, dropped in as a nested SVG.
  */
 export function Card({ suit, rank }: { suit: Suit; rank: string }) {
   const shape = SUIT_SHAPE[suit]
@@ -34,14 +34,6 @@ export function Card({ suit, rank }: { suit: Suit; rank: string }) {
       <svg
         className={color}
         x="3" y="39" width="25" height="26"
-        viewBox={shape.box}
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <path d={shape.d} />
-      </svg>
-      <svg
-        className={color}
-        x="25" y="70" width="50" height="56"
         viewBox={shape.box}
         preserveAspectRatio="xMidYMid meet"
       >

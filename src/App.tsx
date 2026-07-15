@@ -107,28 +107,30 @@ export default function App() {
     return (
       <div className="app detail">
         <header className="app-header quiz-header">
-          <button className="back" onClick={goHome} aria-label="Home">
-            ‹
+          <button className="qbtn qbtn-home" onClick={goHome} aria-label="Home">
+            <span className="chev">‹</span>
+            <span className="qbtn-label">
+              {quiz.title} #{nav.index + 1}
+            </span>
           </button>
-          <span className="quiz-title">
-            {quiz.title} #{nav.index + 1}
-          </span>
-          <button
-            className="back prev"
-            onClick={goPrev}
-            disabled={!hasPrev}
-            aria-label="Previous problem"
-          >
-            ‹
-          </button>
-          <button
-            className="back next"
-            onClick={goNext}
-            disabled={!hasNext}
-            aria-label="Next problem"
-          >
-            Next ›
-          </button>
+          <div className="qnav">
+            <button
+              className="qbtn qbtn-nav"
+              onClick={goPrev}
+              disabled={!hasPrev}
+              aria-label="Previous problem"
+            >
+              <span className="chev">‹</span>
+            </button>
+            <button
+              className="qbtn qbtn-nav"
+              onClick={goNext}
+              disabled={!hasNext}
+              aria-label="Next problem"
+            >
+              <span className="chev">›</span>
+            </button>
+          </div>
         </header>
         <main className="app-main detail">
           <ProblemView

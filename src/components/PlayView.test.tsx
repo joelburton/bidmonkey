@@ -29,7 +29,9 @@ async function playCard(user: ReturnType<typeof userEvent.setup>, label: string)
 describe('a played card lands in the trick slot under the hand that played it', () => {
   it('hero South: South → bottom, West → left, North → top, East → right', async () => {
     render(<PlayView problem={problem('S')} contract={contract} answers={[]}/>)
-    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
+    )
     const user = userEvent.setup()
 
     await playCard(user, 'queen of clubs') // South (hero) leads — bottom
@@ -48,7 +50,9 @@ describe('a played card lands in the trick slot under the hand that played it', 
 
   it('hero West: South → right (orientation follows the hero)', async () => {
     render(<PlayView problem={problem('W')} contract={contract} answers={[]}/>)
-    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
+    )
     const user = userEvent.setup()
 
     await playCard(user, 'queen of clubs') // South (opening leader) → right for hero West
@@ -62,7 +66,9 @@ describe('a played card lands in the trick slot under the hand that played it', 
 describe('free play enforces legal turn order and following suit', () => {
   it('only the seat on lead can be clicked first (out-of-turn hands are inert)', async () => {
     render(<PlayView problem={problem('S')} contract={contract} answers={[]}/>)
-    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
+    )
     const user = userEvent.setup()
 
     // It is South's lead. West's 2♣ must not respond yet: clicking it twice
@@ -80,7 +86,9 @@ describe('free play enforces legal turn order and following suit', () => {
 
   it('a card that breaks suit while able to follow is inert', async () => {
     render(<PlayView problem={problem('S')} contract={contract} answers={[]}/>)
-    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    await waitFor(() =>
+      expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
+    )
     const user = userEvent.setup()
 
     await playCard(user, 'queen of clubs') // South leads clubs
