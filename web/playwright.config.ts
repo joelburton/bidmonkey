@@ -4,6 +4,9 @@ import { defineConfig, devices } from '@playwright/test'
 // Browsers: `npx playwright install chromium` once (cached afterwards).
 export default defineConfig({
   testDir: './e2e',
+  // Reset the local Supabase DB to a known seed before the run (real backend, no
+  // stubbing). Needs `supabase start` running — see e2e/global-setup.ts.
+  globalSetup: './e2e/global-setup.ts',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,

@@ -1,10 +1,8 @@
 import { test, expect } from '@playwright/test'
 import type { Page } from '@playwright/test'
-import { stubSupabase } from './fixtures'
 
 // "Two decisions" is QuizB #3 (FakeBook → QuizB, then Next twice).
 async function gotoTwoDecisions(page: Page) {
-  await stubSupabase(page)
   await page.goto('/')
   await page.getByText('FakeBook').click()
   await page.getByText('QuizB').click()

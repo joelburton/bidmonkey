@@ -10,38 +10,42 @@ the table view is designed portrait-first.
 ## Repo layout
 
 ```
-/                     ← database (Postgres, hosted on Supabase)
-  schema.sql          Postgres DDL: sources, problems (jsonb deal/auction/play), quizzes, quizzes_problems, RLS
-  schema.v1.json      JSON Schema (draft 2020-12) validating the deal/auction/play JSON shapes
-  seed.sql            generated one-time seed (do not hand-edit — see db/gen-seed.mjs)
-  db/gen-seed.mjs     emits the initial seed from the frontend fixtures
+/                     ← database (Postgres, on Supabase; managed by the CLI)
+  supabase/config.toml       local stack config — bidmonkey is the SECOND stack
+                             (custom 5433x/8383 ports so it coexists with another)
+  supabase/migrations/*.sql  the schema (source of truth; `db reset`/`db push`)
+  supabase/seed.sql          generated seed (do not hand-edit — see db/gen-seed.mjs)
+  schema.v1.json             JSON Schema validating the deal/auction/play shapes
+  db/gen-seed.mjs            emits supabase/seed.sql from the frontend fixtures
 web/                  ← the Vite + React + TS frontend (this is where the app lives)
 ```
 
 The frontend is a **static site that talks straight to Supabase** (no custom
-server): content is read via the PostgREST REST API. The anon key is public;
-**RLS** on the server is the real access control.
+server): content is read via the PostgREST REST API. The anon/publishable key is
+public; **RLS** on the server is the real access control.
 
-### Database (Postgres / Supabase)
+### Database (Postgres / Supabase, via the CLI)
 
 Content (`sources`, `problems`, `quizzes`, `quizzes_problems`) is authored in the
 DB and read by the app. `quizzes_problems` is the m2m with a 1-based `ordinal` (a
-problem may be in several quizzes). **RLS:** `anon` may only `SELECT` (you author
-content via psql / the SQL editor, which bypasses RLS), so a leaked key can only
-read. First-time
-setup against a Supabase project:
+problem may be in several quizzes). Use the **Supabase CLI, not the web GUI** —
+schema changes are migrations. `anon` gets `SELECT`-only, enforced by **RLS +
+table grants** — note both are required: an RLS `select` policy is useless
+without `grant select … to anon` (the GUI adds the grant implicitly; a migration
+must be explicit, or reads 401/"permission denied"). Local:
 
 ```
-# 1. run schema.sql in the Supabase SQL editor (or psql)
-# 2. generate + run the initial seed:
-node db/gen-seed.mjs > seed.sql        # reads web/src/data/{problems,catalog}.ts
-#    then run seed.sql in the SQL editor
+supabase start                        # brings up the local stack (applies migrations + seed)
+node db/gen-seed.mjs > supabase/seed.sql   # regenerate the seed if the fixtures change
+supabase db reset                     # re-apply migrations + seed to a clean local DB
+npm run psql                          # psql into the local db (port 54332)
 ```
 
+Remote (first time): `supabase link --project-ref <ref>` then `supabase db push`
+(applies migrations); seed it once with `psql "$REMOTE_DB_URL" -f supabase/seed.sql`.
 After that, **new problems are authored directly in the DB** (`insert into
-problems …` via psql — no redeploy); `web/src/data/*` is only the initial seed
-and the test fixtures, not read at runtime. Validate schema/seed changes locally
-against the cached `supabase/postgres` Docker image before running them remotely.
+problems …` — no redeploy); `web/src/data/*` is only the initial seed + test
+fixtures, not read at runtime.
 
 ## Running
 
@@ -52,12 +56,12 @@ npm install
 npm run dev       # vite dev server (usually http://localhost:5174) — needs .env
 npm run build     # tsc -b && vite build  — run this to typecheck
 npm test          # vitest run (unit + component tests)
-npm run e2e       # playwright (stubs Supabase; run `npx playwright install chromium` once)
+npm run e2e       # playwright — needs the local Supabase stack up (`supabase start`)
 npm run lint      # oxlint
 ```
 
-Without `.env` filled in, the app shows a "Couldn't load problems" error (it
-can't reach Supabase) — that's expected, not a crash.
+Without `.env` filled in (or Supabase unreachable), the app shows a "Couldn't
+load problems" error — that's expected, not a crash.
 
 Stack: **Vite 8, React 19, TypeScript 6**. No react-router, no Next (deliberate —
 routing is a single `Nav` union in `App.tsx`: `sources` → `quizzes` → `quiz`).
@@ -65,7 +69,8 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
 ## Status / phases
 
-- **Phase 1 (done):** database design — `schema.sql`, `schema.v1.json`, `seed.sql`.
+- **Phase 1 (done):** database design — the Postgres schema + `schema.v1.json`
+  (now `supabase/migrations/` + `supabase/seed.sql`).
 - **Phase 2 (done):** problem list; portrait bridge table showing the 4 hands as
   playing-card faces.
 - **Phase 3 (done):** auction (multi-question — the auction continues after each
@@ -201,16 +206,16 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
 - **Unit / component** (`npm test`, Vitest + Testing Library): `*.test.ts(x)`
   next to the source — bidding/play logic and the auction/play components.
-- **E2E** (`npm run e2e`, Playwright, in `e2e/`): full flows in a browser. The
-  config auto-starts the dev server in **test mode** (`npm run dev:test`, which
-  loads `.env.test` — Supabase URL points at the app's own origin) and runs at a
-  **short 390×680 viewport** on purpose — that's the size where the play options
-  were pushed off-screen; the test asserts they stay on-screen.
-- **E2E never touches real Supabase.** `e2e/fixtures.ts` `stubSupabase(page)`
-  intercepts the PostgREST GETs and serves the `data/*` fixtures — call it before
-  `page.goto`. So tests are hermetic and never hit a real project. Use a local
-  Supabase stack (separate `project_id` + ports in `config.toml`) for real
-  read/RLS integration checks instead.
+- **E2E** (`npm run e2e`, Playwright, in `e2e/`): full flows in a browser against
+  **the real local Supabase stack** — no stubbing, so the PostgREST queries, row
+  mapping, and RLS/grants are actually exercised (this is what caught the missing
+  anon grant). The dev server runs in **test mode** (`npm run dev:test` → loads
+  `.env.test`, which points at the local stack) at a **short 390×680 viewport** on
+  purpose — that's the size where the play options were pushed off-screen.
+- **E2E needs the local stack up** (`supabase start`, repo root). `e2e/global-setup.ts`
+  runs `supabase db reset` before the suite so tests see a known seed; a run resets
+  the local DB, so don't keep local-only data you care about. The app is read-only,
+  so tests never mutate anything. (No test-CI — e2e is run locally.)
 - For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
   script and screenshot; **always screenshot at a short height (~680), not just
   844** — the 844 height hid the off-screen-options bug.

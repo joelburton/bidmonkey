@@ -1,11 +1,7 @@
--- bidmonkey — bridge bidding/play quiz. Postgres schema (for Supabase).
---
--- Content (sources/problems/quizzes) is authored here and read by the frontend
--- via PostgREST. One row per problem, jsonb for the authored deal/auction/play,
--- light relational structure for what you filter/sort/organise on. Run this in
--- the Supabase SQL editor (or psql).
---
--- After this, load the sample data:  node db/gen-seed.mjs  →  run seed.sql.
+-- bidmonkey — initial schema. Applied by `supabase db reset` (local) and
+-- `supabase db push` (remote). Content (sources/problems/quizzes) is read by the
+-- frontend via PostgREST; one row per problem, jsonb for the authored
+-- deal/auction/play, light relational structure for what you filter/sort on.
 
 -- ---------------------------------------------------------------------------
 -- Enums
@@ -104,3 +100,9 @@ create policy "anon read sources"          on sources          for select to ano
 create policy "anon read problems"         on problems         for select to anon using (true);
 create policy "anon read quizzes"          on quizzes          for select to anon using (true);
 create policy "anon read quizzes_problems" on quizzes_problems for select to anon using (true);
+
+-- Table grants are required *in addition* to the RLS policies: the policies say
+-- which rows anon may see, but without SELECT granted anon can't touch the table
+-- at all (Supabase's SQL editor adds these implicitly; a migration must not).
+grant usage on schema public to anon;
+grant select on sources, problems, quizzes, quizzes_problems to anon;

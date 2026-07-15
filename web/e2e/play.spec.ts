@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test'
-import { stubSupabase } from './fixtures'
 
 test.describe('play phase', () => {
   test('opening lead: shows multiple-choice options and plays through the trick', async ({
     page,
   }) => {
-    await stubSupabase(page)
     await page.goto('/')
     // Sources → quizzes → QuizB #2 is "Choose your opening lead".
     await page.getByText('FakeBook').click()
