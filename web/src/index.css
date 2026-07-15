@@ -197,10 +197,13 @@ body {
 .rail {
   overflow: hidden;
 }
-/* N/S fans don't need clipping — and letting them overflow means a selected
-   (raised) card isn't cut off at the top/bottom. z-index keeps it above center. */
+/* Let every fan overflow so a selected (raised) card isn't cut off. The off-
+   screen sliver of the E/W rails is still clipped by the outer .middle/.table;
+   z-index keeps a raised card above the center. */
 .rail-north,
-.rail-south {
+.rail-south,
+.rail-west,
+.rail-east {
   overflow: visible;
   position: relative;
   z-index: 2;
@@ -608,25 +611,25 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
-    '.    tn   .'
-    'tw   .    te'
-    '.    ts   .';
+    '.   t   .'
+    'l   .   r'
+    '.   b   .';
   justify-items: center;
   align-items: center;
   gap: 3px;
   margin-top: 4px;
 }
-.trick-n {
-  grid-area: tn;
+.trick-t {
+  grid-area: t;
 }
-.trick-w {
-  grid-area: tw;
+.trick-l {
+  grid-area: l;
 }
-.trick-e {
-  grid-area: te;
+.trick-r {
+  grid-area: r;
 }
-.trick-s {
-  grid-area: ts;
+.trick-b {
+  grid-area: b;
 }
 .trick-slot {
   min-width: var(--card-w);

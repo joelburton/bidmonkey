@@ -2,20 +2,33 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import type { CardQuestion, Problem, Seat } from '../types'
 import type { Contract } from '../bidding'
 import { buildAuction } from '../bidding'
-import { flattenPlay, handRemaining, partnerOf, trickWinner } from '../play'
+import type { Pos } from '../play'
+import { flattenPlay, handRemaining, partnerOf, seatLayout, trickWinner } from '../play'
 import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { PlayCenter } from './PlayCenter'
 import { AuctionTable } from './AuctionTable'
 
-const ALL_SEATS: Seat[] = ['N', 'E', 'S', 'W']
+type Orientation = 'horizontal' | 'west' | 'east'
 type Raise = 'up' | 'down' | 'left' | 'right'
+const POS_ORIENT: Record<Pos, Orientation> = {
+  bottom: 'horizontal',
+  top: 'horizontal',
+  left: 'west',
+  right: 'east',
+}
+const POS_RAISE: Record<Pos, Raise> = {
+  bottom: 'up',
+  top: 'down',
+  left: 'right',
+  right: 'left',
+}
 
 /**
- * Play phase. Steps through the recorded play: auto-plays cards (1s pause each),
- * stops at questions for the hero, reveals the dummy after the opening lead, and
- * pauses for a click after any trick the hero didn't finish. When the recorded
- * play runs out it reveals every hand for free study/play.
+ * Play phase, oriented to the hero. Steps through the recorded play: auto-plays
+ * cards (1s pause each), stops at questions for the hero, reveals the dummy
+ * after the opening lead, and pauses for a click after any trick the hero didn't
+ * play the last card to. When the recorded play runs out it reveals every hand.
  */
 export function PlayView({
   problem,
@@ -26,9 +39,10 @@ export function PlayView({
   contract: Contract | null
   answers: string[]
 }) {
+  const hero = problem.hero
   const moves = useMemo(() => flattenPlay(problem.play ?? []), [problem])
   const trump = contract?.strain ?? 'NT'
-  const declarer = contract?.declarer ?? 'N'
+  const declarer = contract?.declarer ?? hero
   const dummy = partnerOf(declarer)
 
   const [plays, setPlays] = useState<{ seat: Seat; card: string }[]>([])
@@ -37,13 +51,13 @@ export function PlayView({
   const [dummyRevealed, setDummyRevealed] = useState(false)
   const [allRevealed, setAllRevealed] = useState(false)
   const [pending, setPending] = useState<{ seat: Seat; question: CardQuestion } | null>(null)
-  const [review, setReview] = useState<Seat | null>(null) // winner awaiting a click
+  const [review, setReview] = useState<Seat | null>(null)
   const [selected, setSelected] = useState<{ seat: Seat; card: string } | null>(null)
   const [playResult, setPlayResult] = useState<
     { correct: boolean; question: CardQuestion; card: string; seat: Seat } | null
   >(null)
   const [showAuction, setShowAuction] = useState(false)
-  const lastHuman = useRef(false) // did a human play the most recent card?
+  const lastHuman = useRef(false)
 
   const playedBy = (seat: Seat) =>
     plays.filter((p) => p.seat === seat).map((p) => p.card)
@@ -56,14 +70,14 @@ export function PlayView({
   const proceed = (winner: Seat) => {
     setTableTrick([])
     setReview(null)
-    void winner // winner leads next; free play doesn't enforce turn order
+    void winner
   }
 
   useEffect(() => {
     if (plays.length >= 1) setDummyRevealed(true)
   }, [plays.length])
 
-  // A completed trick: pause for a click unless the hero played the last card.
+  // Completed trick: pause for a click unless the hero played the last card.
   useEffect(() => {
     if (tableTrick.length !== 4) return
     const winner = trickWinner(tableTrick, trump)
@@ -74,7 +88,7 @@ export function PlayView({
     setReview(winner)
   }, [tableTrick, trump])
 
-  // Recorded-play engine: auto-play cards, stop at questions, then reveal all.
+  // Recorded-play engine.
   useEffect(() => {
     if (allRevealed || review || pending || playResult) return
     if (tableTrick.length >= 4) return
@@ -112,6 +126,8 @@ export function PlayView({
   }
 
   const clickable = (seat: Seat) => allRevealed || pending?.seat === seat
+  const faceUp = (seat: Seat) =>
+    seat === hero || allRevealed || (seat === dummy && dummyRevealed)
   const commitCard = (seat: Seat, card: string) => {
     if (allRevealed) playCard(seat, card, true)
     else if (pending?.seat === seat) answerPlay(card)
@@ -125,34 +141,31 @@ export function PlayView({
     }
   }
 
-  // Layout: South at the bottom; the dummy is always horizontal (top unless it's
-  // us, in which case North is on top); the other two seats are the rails.
-  const topSeat = dummy !== 'S' ? dummy : partnerOf('S')
-  const topFaceUp = allRevealed || (topSeat === dummy && dummyRevealed)
-  const others = ALL_SEATS.filter((s) => s !== 'S' && s !== topSeat)
-  const [leftSeat, rightSeat] = others
+  const layout = seatLayout(hero) // seat -> position
+  const seatAt = {} as Record<Pos, Seat>
+  for (const s of Object.keys(layout) as Seat[]) seatAt[layout[s]] = s
 
   const hand = (seat: Seat) => handRemaining(problem.deal[seat] ?? {}, playedBy(seat))
   const sel = (seat: Seat) => (selected?.seat === seat ? selected.card : undefined)
 
-  const railHand = (seat: Seat, orientation: 'west' | 'east', raise: Raise) =>
-    allRevealed ? (
+  const slot = (pos: Pos) => {
+    const seat = seatAt[pos]
+    if (!faceUp(seat)) return <Hand faceDown orientation={POS_ORIENT[pos]} />
+    return (
       <Hand
         hand={hand(seat)}
-        orientation={orientation}
-        onPlay={handleCard(seat)}
+        orientation={POS_ORIENT[pos]}
+        onPlay={clickable(seat) ? handleCard(seat) : undefined}
         selectedCard={sel(seat)}
-        raise={raise}
+        raise={POS_RAISE[pos]}
       />
-    ) : (
-      <Hand faceDown orientation={orientation} />
     )
+  }
 
   const pendingMC =
     pending && pending.question.choiceType === 'multiple_choice'
       ? pending.question.options
       : undefined
-
   const message = playResult
     ? undefined
     : pending
@@ -169,35 +182,16 @@ export function PlayView({
     <div className="play-root" onClick={() => setSelected(null)}>
       <BridgeTable
         className={allRevealed ? 'revealed' : ''}
-        top={
-          topFaceUp ? (
-            <Hand
-              hand={hand(topSeat)}
-              orientation="horizontal"
-              onPlay={clickable(topSeat) ? handleCard(topSeat) : undefined}
-              selectedCard={sel(topSeat)}
-              raise="down"
-            />
-          ) : (
-            <Hand faceDown orientation="horizontal" />
-          )
-        }
-        left={railHand(leftSeat, 'west', 'right')}
-        right={railHand(rightSeat, 'east', 'left')}
-        bottom={
-          <Hand
-            hand={hand('S')}
-            orientation="horizontal"
-            onPlay={clickable('S') ? handleCard('S') : undefined}
-            selectedCard={sel('S')}
-            raise="up"
-          />
-        }
+        top={slot('top')}
+        left={slot('left')}
+        right={slot('right')}
+        bottom={slot('bottom')}
         center={
           <PlayCenter
             problem={problem}
             contract={contract}
             trick={tableTrick}
+            seatPos={layout}
             message={message}
             options={playResult ? undefined : pendingMC}
             onOption={(c) => answerPlay(c)}

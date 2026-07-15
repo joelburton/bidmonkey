@@ -28,6 +28,7 @@ cd web            # IMPORTANT: repo root has no package.json; everything is unde
 npm install
 npm run dev       # vite dev server (usually http://localhost:5174)
 npm run build     # tsc -b && vite build  — run this to typecheck
+npm test          # vitest run (unit + component tests)
 npm run lint      # oxlint
 ```
 
@@ -87,10 +88,13 @@ from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
 ### Play phase (`PlayView`)
 
-- Layout: South (us) is always the bottom fan; the **dummy** is always a
-  horizontal fan (top when it isn't us; otherwise North is on top and we're the
-  dummy at the bottom); the other two seats are the side rails (face down until
-  the end). The dummy is never a rotated rail — per design, shown like our hand.
+- **Layout is hero-relative** (`seatLayout(hero)` in `play.ts`): the hero is at
+  the bottom, partner across (top), LHO on the left rail, RHO on the right —
+  works for any hero/declarer/dummy. **Hands and the trick use the same mapping**
+  so a played card lands under the hand that played it (don't split them, or you
+  get the W/E swap `PlayView.test.tsx` guards against). Consequence: when the
+  hero is a defender the **dummy shows as a rotated side rail**, not a horizontal
+  top fan — the two can't both hold (dummy is adjacent to a defender, not across).
 - Engine: a `useEffect` steps `moveIndex` through the flattened recorded moves —
   auto-plays a card after a 1s pause, or stops at a question (`pending`; the hero
   clicks a card, checked vs the answer, wrong → popup, retry). The dummy is

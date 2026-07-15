@@ -34,13 +34,13 @@ export function ProblemView({
     )
   }
 
-  // Auction: only the hero's hand is shown; the rest are face down.
+  // Auction: only the hero's hand is shown (at the bottom); the rest are face down.
   return (
     <BridgeTable
       top={<Hand faceDown orientation="horizontal" />}
       left={<Hand faceDown orientation="west" />}
       right={<Hand faceDown orientation="east" />}
-      bottom={<Hand hand={problem.deal.S} orientation="horizontal" />}
+      bottom={<Hand hand={problem.deal[problem.hero]} orientation="horizontal" />}
       center={
         <AuctionPanel
           key={answers.length}
