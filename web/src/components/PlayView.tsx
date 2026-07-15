@@ -125,6 +125,19 @@ export function PlayView({
     }
   }
 
+  // A keypress does the same as the click we're waiting for: dismiss the answer
+  // popup, or advance past a completed trick.
+  useEffect(() => {
+    if (!playResult && !review) return
+    const onKey = () => {
+      if (playResult) dismissPlayResult()
+      else if (review) proceed(review)
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playResult, review])
+
   const clickable = (seat: Seat) => allRevealed || pending?.seat === seat
   const faceUp = (seat: Seat) =>
     seat === hero || allRevealed || (seat === dummy && dummyRevealed)
