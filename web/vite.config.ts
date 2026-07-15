@@ -9,5 +9,8 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/test/setup.ts'],
+    // Unit/component tests live next to the source; the e2e/ Playwright specs
+    // run under `npm run e2e`, not here (Vitest can't load Playwright's test()).
+    include: ['src/**/*.{test,spec}.{ts,tsx}'],
   },
 })

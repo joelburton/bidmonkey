@@ -3,7 +3,16 @@ import type { CardQuestion, Problem, Seat } from '../types'
 import type { Contract } from '../bidding'
 import { buildAuction } from '../bidding'
 import type { Pos } from '../play'
-import { flattenPlay, handRemaining, partnerOf, seatLayout, trickWinner } from '../play'
+import { seatLayout } from '../play'
+import {
+  flattenPlay,
+  handRemaining,
+  isLegalPlay,
+  nextSeat,
+  partnerOf,
+  seatToAct,
+  trickWinner,
+} from '../libs/play'
 import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { PlayCenter } from './PlayCenter'
@@ -48,6 +57,10 @@ export function PlayView({
   const [plays, setPlays] = useState<{ seat: Seat; card: string }[]>([])
   const [moveIndex, setMoveIndex] = useState(0)
   const [tableTrick, setTableTrick] = useState<{ seat: Seat; card: string }[]>([])
+  // Who leads the current trick: the opening leader (declarer's LHO) to start,
+  // then the winner of each completed trick. With the cards already down this
+  // gives whose turn it is, so free play can only proceed clockwise, in order.
+  const [leader, setLeader] = useState<Seat>(nextSeat(declarer))
   const [dummyRevealed, setDummyRevealed] = useState(false)
   const [allRevealed, setAllRevealed] = useState(false)
   const [pending, setPending] = useState<{ seat: Seat; question: CardQuestion } | null>(null)
@@ -70,7 +83,7 @@ export function PlayView({
   const proceed = (winner: Seat) => {
     setTableTrick([])
     setReview(null)
-    void winner
+    setLeader(winner) // the trick winner leads the next one
   }
 
   useEffect(() => {
@@ -138,11 +151,15 @@ export function PlayView({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playResult, review])
 
-  // A hand is clickable when freely playing (all revealed) or when it's the seat
-  // to act on an *enter_card* question. Multiple-choice questions are answered
-  // with the option buttons, not by free card clicks.
+  // The seat on turn during free play: clockwise from the trick's leader. Only
+  // its hand is clickable, so free play can't jump seats or play out of order.
+  const toAct = seatToAct(leader, tableTrick)
+
+  // A hand is clickable when it's that seat's turn in free play (and the trick
+  // isn't already full), or when it's the seat to act on an *enter_card*
+  // question. Multiple-choice questions are answered with the option buttons.
   const clickable = (seat: Seat) =>
-    allRevealed ||
+    (allRevealed && tableTrick.length < 4 && seat === toAct) ||
     (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')
   const faceUp = (seat: Seat) =>
     seat === hero || allRevealed || (seat === dummy && dummyRevealed)
@@ -165,15 +182,21 @@ export function PlayView({
 
   const hand = (seat: Seat) => handRemaining(problem.deal[seat] ?? {}, playedBy(seat))
   const sel = (seat: Seat) => (selected?.seat === seat ? selected.card : undefined)
+  // Follow-suit rule: of the clickable hand, only cards legal against the
+  // current trick respond. Applies to free play and enter-card questions alike.
+  const canPlay = (seat: Seat) => (card: string) =>
+    isLegalPlay(hand(seat), tableTrick, card)
 
   const slot = (pos: Pos) => {
     const seat = seatAt[pos]
     if (!faceUp(seat)) return <Hand faceDown orientation={POS_ORIENT[pos]} />
+    const playable = clickable(seat)
     return (
       <Hand
         hand={hand(seat)}
         orientation={POS_ORIENT[pos]}
-        onPlay={clickable(seat) ? handleCard(seat) : undefined}
+        onPlay={playable ? handleCard(seat) : undefined}
+        canPlay={playable ? canPlay(seat) : undefined}
         selectedCard={sel(seat)}
         raise={POS_RAISE[pos]}
       />

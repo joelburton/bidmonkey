@@ -51,13 +51,16 @@ type Raise = 'up' | 'down' | 'left' | 'right'
 /**
  * A hand as overlapping card faces. Horizontal fan (N/S, and the dummy); rotated
  * rails for E/W. `onPlay` makes the cards clickable (returns e.g. "HQ").
- * `selectedCard` raises + highlights that card (toward center, per `raise`).
+ * `canPlay`, when given, further restricts which cards are clickable (e.g. only
+ * legal follows) — cards it rejects render but don't respond. `selectedCard`
+ * raises + highlights that card (toward center, per `raise`).
  */
 export function Hand({
   hand,
   faceDown = false,
   orientation = 'horizontal',
   onPlay,
+  canPlay,
   selectedCard,
   raise,
 }: {
@@ -65,6 +68,7 @@ export function Hand({
   faceDown?: boolean
   orientation?: Orientation
   onPlay?: (card: string) => void
+  canPlay?: (card: string) => boolean
   selectedCard?: string
   raise?: Raise
 }) {
@@ -90,15 +94,16 @@ export function Hand({
     <div className={cls}>
       {slots.map((s, i) => {
         const card = `${s.suit}${s.rank}`
+        const playable = !!onPlay && (!canPlay || canPlay(card))
         return (
           <span
-            className={slotClass(i, s.suitStart, !!onPlay, card === selectedCard)}
+            className={slotClass(i, s.suitStart, playable, card === selectedCard)}
             key={s.key}
             onClick={
-              onPlay
+              playable
                 ? (e) => {
                     e.stopPropagation()
-                    onPlay(card)
+                    onPlay!(card)
                   }
                 : undefined
             }

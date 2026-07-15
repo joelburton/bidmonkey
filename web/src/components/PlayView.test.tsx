@@ -24,30 +24,71 @@ async function playCard(user: ReturnType<typeof userEvent.setup>, label: string)
   await user.click(screen.getByLabelText(label))
 }
 
+// Declarer East → opening leader is South (declarer's LHO), so a legal free-play
+// trick goes South → West → North → East (clockwise), each following clubs.
 describe('a played card lands in the trick slot under the hand that played it', () => {
-  it('hero South: West → left, East → right, South → bottom', async () => {
+  it('hero South: South → bottom, West → left, North → top, East → right', async () => {
     render(<PlayView problem={problem('S')} contract={contract} answers={[]} />)
     await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
     const user = userEvent.setup()
 
-    await playCard(user, '2 of clubs') // West's card
+    await playCard(user, 'queen of clubs') // South (hero) leads — bottom
+    expect(screen.getByLabelText('queen of clubs').closest('.trick-b')).not.toBeNull()
+
+    await playCard(user, '2 of clubs') // West follows — left
     expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).not.toBeNull()
     expect(screen.getByLabelText('2 of clubs').closest('.trick-r')).toBeNull()
 
-    await playCard(user, 'king of clubs') // East's card
-    expect(screen.getByLabelText('king of clubs').closest('.trick-r')).not.toBeNull()
+    await playCard(user, 'ace of clubs') // North follows — top
+    expect(screen.getByLabelText('ace of clubs').closest('.trick-t')).not.toBeNull()
 
-    await playCard(user, 'queen of clubs') // South (hero) — bottom
-    expect(screen.getByLabelText('queen of clubs').closest('.trick-b')).not.toBeNull()
+    await playCard(user, 'king of clubs') // East follows — right
+    expect(screen.getByLabelText('king of clubs').closest('.trick-r')).not.toBeNull()
   })
 
-  it('hero West: South → right, North → left (orientation follows the hero)', async () => {
+  it('hero West: South → right (orientation follows the hero)', async () => {
     render(<PlayView problem={problem('W')} contract={contract} answers={[]} />)
     await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
     const user = userEvent.setup()
 
-    await playCard(user, 'queen of clubs') // South's card → right for hero West
+    await playCard(user, 'queen of clubs') // South (opening leader) → right for hero West
     expect(screen.getByLabelText('queen of clubs').closest('.trick-r')).not.toBeNull()
     expect(screen.getByLabelText('queen of clubs').closest('.trick-l')).toBeNull()
+  })
+})
+
+// The rules themselves let us assert what free play now forbids: you can't play
+// out of turn, and you can't break suit while you can follow.
+describe('free play enforces legal turn order and following suit', () => {
+  it('only the seat on lead can be clicked first (out-of-turn hands are inert)', async () => {
+    render(<PlayView problem={problem('S')} contract={contract} answers={[]} />)
+    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    const user = userEvent.setup()
+
+    // It is South's lead. West's 2♣ must not respond yet: clicking it twice
+    // neither selects nor plays it (it stays in West's hand, out of the trick).
+    await playCard(user, '2 of clubs')
+    expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).toBeNull()
+    expect(screen.getByLabelText('2 of clubs').closest('.slot.selected')).toBeNull()
+
+    // South can lead, and then it becomes West's turn to follow.
+    await playCard(user, 'queen of clubs')
+    expect(screen.getByLabelText('queen of clubs').closest('.trick-b')).not.toBeNull()
+    await playCard(user, '2 of clubs')
+    expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).not.toBeNull()
+  })
+
+  it('a card that breaks suit while able to follow is inert', async () => {
+    render(<PlayView problem={problem('S')} contract={contract} answers={[]} />)
+    await waitFor(() => expect(screen.getByText(/play freely/i)).toBeInTheDocument())
+    const user = userEvent.setup()
+
+    await playCard(user, 'queen of clubs') // South leads clubs
+    // West holds clubs (872), so its spade must not respond.
+    await playCard(user, 'jack of spades') // West's ♠J — off suit, illegal
+    expect(screen.getByLabelText('jack of spades').closest('.trick-l')).toBeNull()
+    // The legal follow does respond.
+    await playCard(user, '2 of clubs')
+    expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).not.toBeNull()
   })
 })
