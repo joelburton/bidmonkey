@@ -78,7 +78,12 @@ body {
 .app-header {
   position: sticky;
   top: 0;
-  z-index: 5;
+  /* Above the full-screen click catchers (.review-catch z-30, .explain-backdrop
+     z-40, .auction-overlay z-50) so Home/Prev/Next stay tappable while a popup
+     is open or a trick-review pause is active. Safe because the header doesn't
+     dismiss anything (popups dismiss on their own tap) and Home/Next remount
+     ProblemView, discarding any popup/pending state. */
+  z-index: 60;
   display: flex;
   align-items: center;
   gap: 12px;
