@@ -1,10 +1,10 @@
-// App-facing play module: the pure bridge rules live in ./libs/play (re-exported
+// App-facing play module: the pure bridge rules live in ./lib/play (re-exported
 // here so existing imports keep working); this file adds the hero-relative screen
 // layout, which is presentation, not bridge logic.
 import type { Seat } from './types'
-import { nextSeat, prevSeat, partnerOf } from './libs/play'
+import { nextSeat, prevSeat, partnerOf } from './lib/play'
 
-export * from './libs/play'
+export * from './lib/play'
 
 export type Pos = 'top' | 'bottom' | 'left' | 'right'
 

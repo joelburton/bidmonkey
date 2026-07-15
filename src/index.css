@@ -282,11 +282,11 @@ body {
      at the app width, so it never showed there. */
   grid-template-columns: minmax(0, 1fr);
   background: var(--felt);
-  background-image: radial-gradient(
-    circle at 50% 42%,
-    color-mix(in srgb, var(--felt) 82%, white) 0%,
-    var(--felt) 75%
-  );
+  /*background-image: radial-gradient(*/
+  /*  circle at 50% 42%,*/
+  /*  color-mix(in srgb, var(--felt) 82%, white) 0%,*/
+  /*  var(--felt) 75%*/
+  /*);*/
   overflow: hidden;
 }
 
@@ -700,16 +700,14 @@ body {
   justify-content: center;
   align-items: baseline;
   gap: 12px;
-  font-size: 1.2rem;
+  /* One size for the whole line (contract + vulnerability), baseline-aligned. */
+  font-size: 1.1rem;
   font-weight: 700;
 }
 .vul-tag {
-  font-size: 0.9rem;
-  font-weight: 600;
-  opacity: 0.85;
+  font-weight: 600; /* white (inherits #fff) — no opacity dimming */
 }
 .contract-by {
-  font-size: 0.9rem;
   font-weight: 600;
   margin-left: 5px;
 }
@@ -915,7 +913,7 @@ body {
   border-radius: 8px;
   background: transparent;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: inherit; /* match the contract-line (same size as "Vul: …") */
   font-weight: 700;
   cursor: pointer;
 }
@@ -925,8 +923,8 @@ body {
   }
 }
 .contract-btn .suit-glyph {
-  width: 1.05em;
-  height: 1.05em;
+  width: 0.85em;
+  height: 0.85em;
 }
 
 /* The auction, shown over the play table on demand. */

@@ -13,7 +13,7 @@ import {
   partnerOf,
   seatToAct,
   trickWinner,
-} from '../libs/play'
+} from '../lib/play'
 import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { PlayCenter } from './PlayCenter'

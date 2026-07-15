@@ -13,7 +13,7 @@ Everything is at the repo root (Vite + React + TS app + Supabase), like the
 sibling `codenames` project — no `web/` subdir.
 
 ```
-src/                       the app (App.tsx, components/, libs/, data/, …)
+src/                       the app (App.tsx, components/, lib/, data/, …)
 e2e/                       Playwright specs + global-setup
 public/  index.html  vite.config.ts  tsconfig*.json  playwright.config.ts
 supabase/config.toml       local stack config — bidmonkey is the SECOND stack
@@ -124,7 +124,7 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   - `buildAuction(problem, answers)` — reveals calls up to the next unanswered
     question; `complete` once all are answered.
   - `finalContract(problem, answers)` — level/strain/declarer/doubled.
-- `libs/play.ts` — pure bridge rules (no React/layout): `nextSeat`/`partnerOf`,
+- `lib/play.ts` — pure bridge rules (no React/layout): `nextSeat`/`partnerOf`,
   `trickWinner(cards, trump)`, `flattenPlay`, `handRemaining`, and legal-play
   (`ledSuit`, `legalCards`/`isLegalPlay`, `seatToAct`). `play.ts` re-exports these
   and adds the hero-relative `seatLayout`.
