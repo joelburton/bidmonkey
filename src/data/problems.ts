@@ -6,7 +6,7 @@ import type { Problem } from '../types'
 
 export const problems: Problem[] = [
   {
-    id: 1,
+    slug: 'limit-raise-or-game',
     title: 'Limit raise or game?',
     source: 'fakebook',
     difficulty: 2,
@@ -47,7 +47,7 @@ export const problems: Problem[] = [
   },
 
   {
-    id: 2,
+    slug: 'your-call-as-responder',
     title: 'Your call as responder',
     source: 'fakebook',
     difficulty: 1,
@@ -77,7 +77,7 @@ export const problems: Problem[] = [
   },
 
   {
-    id: 3,
+    slug: 'partnership-slam-try',
     title: 'Partnership slam try',
     source: 'fakebook',
     difficulty: 3,
@@ -109,7 +109,7 @@ export const problems: Problem[] = [
   },
 
   {
-    id: 4,
+    slug: 'choose-your-opening-lead',
     title: 'Choose your opening lead',
     source: 'fakebook',
     difficulty: 2,
@@ -166,7 +166,7 @@ export const problems: Problem[] = [
   },
 
   {
-    id: 5,
+    slug: 'two-decisions',
     title: 'Two decisions',
     source: 'fakebook',
     difficulty: 2,

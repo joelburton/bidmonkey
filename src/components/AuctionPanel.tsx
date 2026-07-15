@@ -135,7 +135,7 @@ export function AuctionPanel({
   return (
     <div className="auction-panel">
       <div className="auction-head">
-        <span>#{problem.id}</span>
+        <span>#{problem.slug}</span>
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
 

@@ -33,8 +33,8 @@ lines.push('\n-- problems')
 for (const p of problems) {
   lines.push(
     'insert into problems\n' +
-      '  (id, title, source, difficulty, tags, hero, dealer, vulnerability, deal, auction, play, contract, commentary)\n' +
-      `values (${n(p.id)}, ${s(p.title)}, ${s(p.source)}, ${n(p.difficulty)}, ${arr(p.tags)}, ` +
+      '  (slug, title, source, difficulty, tags, hero, dealer, vulnerability, deal, auction, play, contract, commentary)\n' +
+      `values (${s(p.slug)}, ${s(p.title)}, ${s(p.source)}, ${n(p.difficulty)}, ${arr(p.tags)}, ` +
       `${s(p.hero)}, ${s(p.dealer)}, ${s(p.vulnerability)}, ${j(p.deal)}, ${j(p.auction ?? [])}, ` +
       `${j(p.play)}, ${s(p.contract)}, ${s(p.commentary)});`,
   )
@@ -47,15 +47,13 @@ for (const q of quizzes) {
 
 lines.push('\n-- quizzes_problems (ordinal = 1-based position within the quiz)')
 for (const q of quizzes) {
-  q.problemIds.forEach((pid, i) => {
+  q.problemSlugs.forEach((pslug, i) => {
     lines.push(
-      `insert into quizzes_problems (quiz_slug, problem_id, ordinal) values (${s(q.slug)}, ${n(pid)}, ${n(i + 1)});`,
+      `insert into quizzes_problems (quiz_slug, problem_slug, ordinal) values (${s(q.slug)}, ${s(pslug)}, ${n(i + 1)});`,
     )
   })
 }
 
-lines.push('\n-- Bump the identity sequence past the explicit ids just inserted.')
-lines.push("select setval(pg_get_serial_sequence('problems', 'id'), (select max(id) from problems));")
 lines.push('commit;')
 
 process.stdout.write(lines.join('\n') + '\n')

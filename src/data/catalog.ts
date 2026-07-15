@@ -9,7 +9,17 @@ export const sources: Source[] = [
 ]
 
 export const quizzes: Quiz[] = [
-  // QuizA and QuizB both draw from FakeBook; problem 3 is in both.
-  { slug: 'quiz-a', title: 'QuizA', source: 'fakebook', problemIds: [1, 2, 3] },
-  { slug: 'quiz-b', title: 'QuizB', source: 'fakebook', problemIds: [3, 4, 5] },
+  // QuizA and QuizB both draw from FakeBook; partnership-slam-try is in both.
+  {
+    slug: 'quiz-a',
+    title: 'QuizA',
+    source: 'fakebook',
+    problemSlugs: ['limit-raise-or-game', 'your-call-as-responder', 'partnership-slam-try'],
+  },
+  {
+    slug: 'quiz-b',
+    title: 'QuizB',
+    source: 'fakebook',
+    problemSlugs: ['partnership-slam-try', 'choose-your-opening-lead', 'two-decisions'],
+  },
 ]

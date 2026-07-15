@@ -13,7 +13,7 @@ const deal = {
   W: { S: 'J932', H: 'K84', D: 'A65', C: '872' }, // 2 of clubs is West's only
 }
 function problem(hero: Seat): Problem {
-  return { id: 1, tags: [], hero, dealer: 'E', vulnerability: 'none', deal, auction: [], play: [] }
+  return { slug: 'test-problem', tags: [], hero, dealer: 'E', vulnerability: 'none', deal, auction: [], play: [] }
 }
 // declarer East → dummy West; with no recorded play the table reveals immediately.
 const contract: Contract = { level: 4, strain: 'S', declarer: 'E', doubled: '' }

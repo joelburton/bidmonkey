@@ -37,7 +37,7 @@ export interface Trick {
 }
 
 export interface Problem {
-  id: number
+  slug: string
   title?: string
   source?: string // FK → Source.slug
   difficulty?: number
@@ -60,7 +60,7 @@ export interface Source {
 
 /**
  * A quiz is an ordered collection of problems (optionally from one source). The
- * order of `problemIds` is the quiz order; a problem may appear in several
+ * order of `problemSlugs` is the quiz order; a problem may appear in several
  * quizzes. Mirrors the `quizzes` + `quizzes_problems` tables (the array index
  * is the stored `ordinal`, 1-based).
  */
@@ -68,7 +68,7 @@ export interface Quiz {
   slug: string
   title: string
   source?: string // FK → Source.slug
-  problemIds: number[]
+  problemSlugs: string[]
 }
 
 export const SEAT_NAME: Record<Seat, string> = {

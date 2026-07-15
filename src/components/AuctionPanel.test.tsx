@@ -5,7 +5,7 @@ import type { Problem } from '../types'
 import { AuctionPanel } from './AuctionPanel'
 
 const problem: Problem = {
-  id: 1,
+  slug: 'test-problem',
   tags: [],
   hero: 'S',
   dealer: 'N',

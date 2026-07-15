@@ -54,7 +54,7 @@ describe('doubleState', () => {
 })
 
 const twoQ: Problem = {
-  id: 1,
+  slug: 'p1',
   tags: [],
   hero: 'S',
   dealer: 'N',
@@ -96,7 +96,7 @@ describe('buildAuction (multi-question)', () => {
 
 describe('finalContract', () => {
   const p4: Problem = {
-    id: 4,
+    slug: 'p4',
     tags: [],
     hero: 'S',
     dealer: 'E',

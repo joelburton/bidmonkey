@@ -73,7 +73,7 @@ export function PlayCenter({
   return (
     <div className="play-panel">
       <div className="auction-head">
-        <span>#{problem.id}</span>
+        <span>#{problem.slug}</span>
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
       <div className="contract-line">

@@ -17,7 +17,7 @@ export function QuizList({
               <span className="problem-title">{q.title}</span>
               <div className="problem-meta">
                 <span className="chip">
-                  {q.problemIds.length} problem{q.problemIds.length === 1 ? '' : 's'}
+                  {q.problemSlugs.length} problem{q.problemSlugs.length === 1 ? '' : 's'}
                 </span>
               </div>
             </div>

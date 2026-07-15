@@ -67,8 +67,8 @@ export default function App() {
   // Running a quiz: one problem at a time, in order, with Home + Next.
   if (nav.view === 'quiz') {
     const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)!
-    const problem = catalog.problems.find((p) => p.id === quiz.problemIds[nav.index])!
-    const hasNext = nav.index < quiz.problemIds.length - 1
+    const problem = catalog.problems.find((p) => p.slug === quiz.problemSlugs[nav.index])!
+    const hasNext = nav.index < quiz.problemSlugs.length - 1
     const goNext = () =>
       hasNext && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index + 1 })
 
