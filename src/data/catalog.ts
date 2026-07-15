@@ -20,6 +20,6 @@ export const quizzes: Quiz[] = [
     slug: 'quiz-b',
     title: 'QuizB',
     source: 'fakebook',
-    problemSlugs: ['partnership-slam-try', 'choose-your-opening-lead', 'two-decisions'],
+    problemSlugs: ['partnership-slam-try', 'choose-your-opening-lead', 'two-decisions', 'defend-four-spades'],
   },
 ]

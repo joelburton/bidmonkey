@@ -166,6 +166,72 @@ export const problems: Problem[] = [
   },
 
   {
+    slug: 'defend-four-spades',
+    title: 'Defend 4♠ (card-entry demo)',
+    source: 'fakebook',
+    difficulty: 2,
+    tags: ['defense', 'play', 'card-entry'],
+    hero: 'S',
+    dealer: 'E',
+    vulnerability: 'none',
+    deal: {
+      N: { S: 'T6', H: '7632', D: 'QT9', C: 'AJT9' },
+      E: { S: 'AKQ84', H: 'A5', D: 'K72', C: 'K43' },
+      S: { S: '75', H: 'QJT9', D: 'J843', C: 'Q65' },
+      W: { S: 'J932', H: 'K84', D: 'A65', C: '872' },
+    },
+    auction: [
+      { call: '1S' },
+      { call: 'P' },
+      { call: '3S' },
+      { call: 'P' },
+      { call: '4S' },
+      { call: 'P' },
+      { call: 'P' },
+      { call: 'P' },
+    ],
+    // enter_card questions with NO prompt → the turn arrow points at your hand.
+    play: [
+      {
+        cards: [
+          {
+            seat: 'S',
+            question: {
+              id: 'p1',
+              choiceType: 'enter_card',
+              answer: 'HQ',
+              accept: ['HJ'], // ♥J is accepted, but the canonical ♥Q is what lands
+              explanation:
+                'Lead the top of your ♥ sequence (♥QJT) against 4♠. ♥J is graded correct too — but ♥Q is the card that actually goes on the table.',
+            },
+          },
+          { seat: 'W', card: 'H4' },
+          { seat: 'N', card: 'H2' },
+          { seat: 'E', card: 'HA' },
+        ],
+      },
+      {
+        cards: [
+          { seat: 'E', card: 'SA' },
+          {
+            seat: 'S',
+            question: {
+              id: 'p2',
+              choiceType: 'enter_card',
+              answer: 'S5',
+              explanation: 'Follow suit — nothing to gain by splitting. Answer: ♠5.',
+            },
+          },
+          { seat: 'W', card: 'S2' },
+          { seat: 'N', card: 'S6' },
+        ],
+      },
+    ],
+    commentary:
+      'Card-entry demo: when it is your turn to play, an arrow points at your hand. On the lead, ♥J is accepted but ♥Q is what lands.',
+  },
+
+  {
     slug: 'two-decisions',
     title: 'Two decisions',
     source: 'fakebook',
