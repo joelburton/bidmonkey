@@ -30,6 +30,18 @@ export default function App() {
     }
   }, [reloadKey])
 
+  // This app is driven by clicks + its own key handling (a-d to answer, any key
+  // to dismiss a popup); no button should be Space/Enter-activatable. Preventing
+  // mousedown's default keeps focus off buttons, so a stray key can't re-fire the
+  // last one clicked.
+  useEffect(() => {
+    const onMouseDown = (e: MouseEvent) => {
+      if ((e.target as HTMLElement).closest('button')) e.preventDefault()
+    }
+    document.addEventListener('mousedown', onMouseDown)
+    return () => document.removeEventListener('mousedown', onMouseDown)
+  }, [])
+
   if (error) {
     return (
       <div className="app list">
@@ -69,8 +81,11 @@ export default function App() {
     const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)!
     const problem = catalog.problems.find((p) => p.slug === quiz.problemSlugs[nav.index])!
     const hasNext = nav.index < quiz.problemSlugs.length - 1
+    const hasPrev = nav.index > 0
     const goNext = () =>
       hasNext && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index + 1 })
+    const goPrev = () =>
+      hasPrev && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index - 1 })
 
     return (
       <div className="app detail">
@@ -81,6 +96,14 @@ export default function App() {
           <span className="quiz-title">
             {quiz.title} #{nav.index + 1}
           </span>
+          <button
+            className="back prev"
+            onClick={goPrev}
+            disabled={!hasPrev}
+            aria-label="Previous problem"
+          >
+            ‹
+          </button>
           <button
             className="back next"
             onClick={goNext}

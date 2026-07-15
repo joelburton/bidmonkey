@@ -116,8 +116,9 @@ body {
   cursor: default;
 }
 
-/* Quiz header: ‹ home + "QuizTitle #n" grouped left, Next › pushed to the right. */
-.quiz-header .next {
+/* Quiz header: ‹ home + "QuizTitle #n" grouped left, the ‹ prev / Next › pair
+   pushed to the right (margin-left:auto on the first of the pair). */
+.quiz-header .prev {
   margin-left: auto;
 }
 
