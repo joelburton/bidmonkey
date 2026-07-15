@@ -12,7 +12,7 @@ const ALL_SEATS: Seat[] = ['N', 'E', 'S', 'W']
  * Drives one problem: the auction (with answers accumulating), then the play
  * phase (if all four hands are known). Quiz navigation (Home / Next) lives in
  * the app header; `onNext`/`hasNext` are also passed to the auction panel so a
- * "Next ▸" sits beside "Play the hand ▸" on a playable problem.
+ * "Next ▸" sits beside "Play" on a playable problem.
  */
 export function ProblemView({
   problem,

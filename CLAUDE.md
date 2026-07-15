@@ -10,50 +10,55 @@ the table view is designed portrait-first.
 ## Repo layout
 
 ```
-/                     ← database design (SQLite) — no server yet
-  schema.sql          SQLite DDL: sources, problems (JSON text for deal/auction/play), quizzes, quizzes_problems
+/                     ← database (Postgres, hosted on Supabase)
+  schema.sql          Postgres DDL: sources, problems (jsonb deal/auction/play), quizzes, quizzes_problems, attempts, RLS
   schema.v1.json      JSON Schema (draft 2020-12) validating the deal/auction/play JSON shapes
-  seed.sql            generated seed (do not hand-edit — see db/gen-seed.mjs)
-  bidmonkey.db        built SQLite file (gitignored; reproducible from schema.sql + seed.sql)
-  db/gen-seed.mjs     generates seed.sql from the frontend data (keeps DB ⇄ app in sync)
+  seed.sql            generated one-time seed (do not hand-edit — see db/gen-seed.mjs)
+  db/gen-seed.mjs     emits the initial seed from the frontend fixtures
 web/                  ← the Vite + React + TS frontend (this is where the app lives)
 ```
 
-There is **no backend**. The frontend reads sample data from
-`web/src/data/` (`problems.ts` + `catalog.ts`), whose objects match the
-`schema.v1.json` / table shapes — so it can later be swapped for a `fetch`
-against a real API/DB.
+The frontend is a **static site that talks straight to Supabase** (no custom
+server): content is read via the PostgREST REST API, attempts are written back.
+The anon key is public; **RLS** on the server is the real access control.
 
-### Database (SQLite)
+### Database (Postgres / Supabase)
 
-Moved from Postgres. Enums → `CHECK` constraints; arrays/JSONB → JSON **text**
-(validated with `json_valid`/`json_type`); `now()` triggers → SQLite triggers.
-Tables: `sources` (slug PK, title), `problems` (`source` FK → sources), `quizzes`
-(slug PK, title, optional `source` FK), and `quizzes_problems` (m2m with a
-1-based `ordinal` = the problem's position in that quiz; a problem may be in
-several quizzes). Build/rebuild:
+Content (`sources`, `problems`, `quizzes`, `quizzes_problems`) is authored in the
+DB and read by the app; `attempts` (pass/fail per problem) is written back.
+`quizzes_problems` is the m2m with a 1-based `ordinal` (a problem may be in
+several quizzes). **RLS:** `anon` may only `SELECT` content (you author it via
+psql / the SQL editor, which bypasses RLS) and may `INSERT`/`SELECT` `attempts`
+but never update/delete them — so a leaked key can't wipe anything. First-time
+setup against a Supabase project:
 
 ```
-sqlite3 bidmonkey.db < schema.sql      # (rm -f bidmonkey.db first to rebuild)
-node db/gen-seed.mjs > seed.sql        # regenerate seed from web/src/data
-sqlite3 bidmonkey.db < seed.sql
+# 1. run schema.sql in the Supabase SQL editor (or psql)
+# 2. generate + run the initial seed:
+node db/gen-seed.mjs > seed.sql        # reads web/src/data/{problems,catalog}.ts
+#    then run seed.sql in the SQL editor
 ```
 
-`db/gen-seed.mjs` imports `web/src/data/{problems,catalog}.ts` **directly**
-(Node's built-in TS stripping — the data files are plain literals with type-only
-imports), so the seed can never drift from what the app shows.
+After that, **new problems are authored directly in the DB** (`insert into
+problems …` via psql — no redeploy); `web/src/data/*` is only the initial seed
+and the test fixtures, not read at runtime. Validate schema/seed changes locally
+against the cached `supabase/postgres` Docker image before running them remotely.
 
 ## Running
 
 ```
 cd web            # IMPORTANT: repo root has no package.json; everything is under web/
+cp .env.example .env   # then fill in VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
 npm install
-npm run dev       # vite dev server (usually http://localhost:5174)
+npm run dev       # vite dev server (usually http://localhost:5174) — needs .env
 npm run build     # tsc -b && vite build  — run this to typecheck
 npm test          # vitest run (unit + component tests)
-npm run e2e       # playwright (starts the dev server itself; run `npx playwright install chromium` once)
+npm run e2e       # playwright (stubs Supabase; run `npx playwright install chromium` once)
 npm run lint      # oxlint
 ```
+
+Without `.env` filled in, the app shows a "Couldn't load problems" error (it
+can't reach Supabase) — that's expected, not a crash.
 
 Stack: **Vite 8, React 19, TypeScript 6**. No react-router, no Next (deliberate —
 routing is a single `Nav` union in `App.tsx`: `sources` → `quizzes` → `quiz`).
@@ -71,27 +76,34 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   known, the problem is bidding-only; otherwise play the hand — deal out the recorded play,
   reveal the dummy after the opening lead, auto-play with pauses, stop at
   questions for the hero, then reveal all hands for free study.
-- **Phase 5 (done):** SQLite (from Postgres) + sources/quizzes. Navigation is now
-  sources → quizzes → a quiz run in order. Quiz nav (Home `‹` / Next `›`) lives in
-  the app header, available in every phase; header center is the non-link
-  `QuizTitle #ordinal`.
-- **Out of scope so far:** any backend/DB connection, per-question attempt
-  tracking / scoring, contract-result scoring.
+- **Phase 5 (done):** sources/quizzes + navigation. sources → quizzes → a quiz
+  run in order. Quiz nav (Home `‹` / Next `›`) lives in the app header, available
+  in every phase; header center is the non-link `QuizTitle #ordinal`.
+- **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
+  catalogue on load (async, with loading/error/retry); `attempts` table + client
+  seam exist but recording is not wired yet.
+- **Out of scope so far:** recording/reviewing attempts (table + `data/attempts.ts`
+  seam exist, not yet called), per-question scoring, contract-result scoring.
 
 ## Frontend architecture
 
-- `App.tsx` — `Nav` union (`sources` | `quizzes` | `quiz`). Renders `SourceList`,
-  `QuizList`, or the quiz runner (header + `ProblemView` for the current problem).
+- `App.tsx` — fetches the catalogue from Supabase on mount (`fetchCatalog`), with
+  loading / error+retry screens, then drives a `Nav` union (`sources` | `quizzes`
+  | `quiz`): `SourceList`, `QuizList`, or the quiz runner (header + `ProblemView`).
   The quiz header holds Home (`‹`, → sources), the `QuizTitle #ordinal` label, and
   Next (`›`, → next problem; disabled on the last). Nav is header-only so it works
   during the auction, play, and free study alike.
+- `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`/`sbInsert`),
+  no SDK; config from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
+- `data/repo.ts` — `fetchCatalog()`: reads sources/problems/quizzes and maps the
+  PostgREST rows → app types. **The app's only runtime data source.**
+- `data/attempts.ts` — `recordAttempt` / `fetchFailedProblemIds` (Supabase). The
+  seam for the future "review my failures" feature; not called yet.
 - `types.ts` — mirrors `schema.v1.json` / tables (Seat, Suit, Deal, Hand, Problem,
   Source, Quiz, BidQuestion, CardQuestion, Trick, …).
-- `data/problems.ts` — 5 sample problems (each `source: 'fakebook'`). #1 game-try
-  (all 4 hands → play sandbox), #4 opening-lead (no auction questions → click to
-  play), #5 two auction questions (South only → bidding-only).
-- `data/catalog.ts` — the `sources` + `quizzes` arrays (mirrors the DB seed; a
-  `Quiz.problemIds` array is the quiz order, index+1 = the `ordinal`).
+- `data/problems.ts` + `data/catalog.ts` — the **initial seed + test fixtures**
+  only (not read at runtime): 5 sample problems and the FakeBook / QuizA / QuizB
+  catalogue. `db/gen-seed.mjs` and the e2e stubs consume them.
 - `components/SourceList.tsx` / `QuizList.tsx` — the two list levels.
 - `bidding.ts` — auction logic. Columns are **W→N→E→S** (a clockwise cycle, so
   filling left-to-right from the dealer's column works for any dealer). Bid
@@ -194,9 +206,15 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 - **Unit / component** (`npm test`, Vitest + Testing Library): `*.test.ts(x)`
   next to the source — bidding/play logic and the auction/play components.
 - **E2E** (`npm run e2e`, Playwright, in `e2e/`): full flows in a browser. The
-  config auto-starts the dev server and runs at a **short 390×680 viewport** on
-  purpose — that's the size where the play options were pushed off-screen; the
-  test asserts they stay on-screen, so the regression can't come back.
+  config auto-starts the dev server in **test mode** (`npm run dev:test`, which
+  loads `.env.test` — Supabase URL points at the app's own origin) and runs at a
+  **short 390×680 viewport** on purpose — that's the size where the play options
+  were pushed off-screen; the test asserts they stay on-screen.
+- **E2E never touches real Supabase.** `e2e/fixtures.ts` `stubSupabase(page)`
+  intercepts the PostgREST GETs and serves the `data/*` fixtures — call it before
+  `page.goto`. So tests are hermetic and can't pollute the attempts table. Use a
+  local Supabase stack (separate `project_id` + ports in `config.toml`) for real
+  read/write/RLS integration checks instead.
 - For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
   script and screenshot; **always screenshot at a short height (~680), not just
   844** — the 844 height hid the off-screen-options bug.

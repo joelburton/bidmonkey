@@ -25,7 +25,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run dev -- --port 4173 --strictPort',
+    // Test mode: loads .env.test, which points Supabase at this origin so the
+    // PostgREST requests are same-origin and e2e/fixtures.ts can stub them.
+    command: 'npm run dev:test -- --port 4173 --strictPort',
     port: 4173,
     reuseExistingServer: !process.env.CI,
   },

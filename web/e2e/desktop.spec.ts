@@ -1,16 +1,18 @@
 import { test, expect } from '@playwright/test'
+import { stubSupabase } from './fixtures'
 
 // A wide desktop window: the app must stay a centered portrait column, with the
 // options and both side rails inside it (they used to overflow off the right).
 test.use({ viewport: { width: 1280, height: 800 } })
 
 test('desktop keeps a centered portrait layout that fits', async ({ page }) => {
+  await stubSupabase(page)
   await page.goto('/')
   // Sources → quizzes → QuizB #2 is "Choose your opening lead".
   await page.getByText('FakeBook').click()
   await page.getByText('QuizB').click()
   await page.getByRole('button', { name: 'Next problem' }).click()
-  await page.getByRole('button', { name: /Play the hand/ }).click()
+  await page.getByRole('button', { name: 'Play', exact: true }).click()
   await expect(page.locator('.center-opts .opt-btn')).toHaveCount(4)
 
   const vw = page.viewportSize()!.width

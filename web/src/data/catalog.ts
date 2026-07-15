@@ -1,9 +1,8 @@
 import type { Source, Quiz } from '../types'
 
-// The catalogue: sources (books, etc.) and the quizzes drawn from them. Mirrors
-// the `sources`, `quizzes`, and `quizzes_problems` tables — the same data the
-// seed generator (db/gen-seed.mjs) writes into SQLite, so the two stay in sync.
-// Swap these arrays for a fetch once a backend exists.
+// Initial catalogue: the sources and quizzes for the one-time seed. This is the
+// input to db/gen-seed.mjs (and a test fixture) — NOT read by the app at runtime,
+// which loads everything from Supabase. New quizzes are authored in the DB.
 
 export const sources: Source[] = [
   { slug: 'fakebook', title: 'FakeBook' },
@@ -14,6 +13,3 @@ export const quizzes: Quiz[] = [
   { slug: 'quiz-a', title: 'QuizA', source: 'fakebook', problemIds: [1, 2, 3] },
   { slug: 'quiz-b', title: 'QuizB', source: 'fakebook', problemIds: [3, 4, 5] },
 ]
-
-export const quizzesForSource = (sourceSlug: string): Quiz[] =>
-  quizzes.filter((q) => q.source === sourceSlug)

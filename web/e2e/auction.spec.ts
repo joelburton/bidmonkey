@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test'
 import type { Page } from '@playwright/test'
+import { stubSupabase } from './fixtures'
 
 // "Two decisions" is QuizB #3 (FakeBook → QuizB, then Next twice).
 async function gotoTwoDecisions(page: Page) {
+  await stubSupabase(page)
   await page.goto('/')
   await page.getByText('FakeBook').click()
   await page.getByText('QuizB').click()
@@ -47,9 +49,9 @@ test.describe('auction', () => {
     await page.locator('.opt-btn').nth(1).click() // q2: 2NT
     await page.keyboard.press('Escape')
 
-    // Auction complete, no fourth hand → no "Play the hand"; nav is in the header.
+    // Auction complete, no fourth hand → no "Play" button; nav is in the header.
     await expect(page.getByText('Bidding complete.')).toBeVisible()
-    await expect(page.getByRole('button', { name: /Play the hand/ })).toHaveCount(0)
+    await expect(page.getByRole('button', { name: 'Play', exact: true })).toHaveCount(0)
     // Last problem of the quiz → Next is disabled, Home (‹) still available.
     await expect(page.getByRole('button', { name: 'Next problem' })).toBeDisabled()
   })

@@ -135,6 +135,25 @@ body {
   overflow: hidden;
 }
 
+/* ---- Loading / error screens (content is fetched from Supabase) --------- */
+
+.screen-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+  color: var(--ink-soft);
+  padding: 15vh 24px;
+  font-size: 1.05rem;
+}
+.screen-msg-detail {
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+  word-break: break-word;
+  max-width: 32rem;
+}
+
 /* ---- Problem list ------------------------------------------------------- */
 
 .problem-list {
@@ -620,7 +639,7 @@ body {
   cursor: default;
 }
 
-/* "Play the hand ▸" and "Next ▸" side by side on a playable problem. */
+/* "Play" and "Next ▸" side by side on a playable problem. */
 .play-actions {
   display: flex;
   gap: 8px;

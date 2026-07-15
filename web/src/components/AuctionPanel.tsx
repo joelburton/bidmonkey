@@ -146,7 +146,7 @@ export function AuctionPanel({
           {canPlay ? (
             <div className="play-actions">
               <button className="play-btn" onClick={onPlay}>
-                Play the hand ▸
+                Play
               </button>
               <button className="play-btn" onClick={onNext} disabled={!hasNext}>
                 Next ▸

@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { problems } from './data/problems'
-import { sources, quizzes, quizzesForSource } from './data/catalog'
+import { useEffect, useState } from 'react'
+import type { Catalog } from './data/repo'
+import { fetchCatalog } from './data/repo'
 import { SourceList } from './components/SourceList'
 import { QuizList } from './components/QuizList'
 import { ProblemView } from './components/ProblemView'
@@ -12,13 +12,62 @@ type Nav =
   | { view: 'quiz'; quiz: string; index: number }
 
 export default function App() {
+  const [catalog, setCatalog] = useState<Catalog | null>(null)
+  const [error, setError] = useState<string | null>(null)
+  const [reloadKey, setReloadKey] = useState(0)
   const [nav, setNav] = useState<Nav>({ view: 'sources' })
+
+  // Content lives in Supabase; load it on mount and on each retry.
+  useEffect(() => {
+    let alive = true
+    setError(null)
+    setCatalog(null)
+    fetchCatalog()
+      .then((c) => alive && setCatalog(c))
+      .catch((e) => alive && setError(e instanceof Error ? e.message : String(e)))
+    return () => {
+      alive = false
+    }
+  }, [reloadKey])
+
+  if (error) {
+    return (
+      <div className="app list">
+        <header className="app-header">
+          <span className="brand">🐵 bidmonkey</span>
+        </header>
+        <main className="app-main list">
+          <div className="screen-msg">
+            <p>Couldn’t load problems.</p>
+            <p className="screen-msg-detail">{error}</p>
+            <button className="back" onClick={() => setReloadKey((k) => k + 1)}>
+              Retry
+            </button>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
+  if (!catalog) {
+    return (
+      <div className="app list">
+        <header className="app-header">
+          <span className="brand">🐵 bidmonkey</span>
+        </header>
+        <main className="app-main list">
+          <div className="screen-msg">Loading…</div>
+        </main>
+      </div>
+    )
+  }
+
   const goHome = () => setNav({ view: 'sources' })
 
   // Running a quiz: one problem at a time, in order, with Home + Next.
   if (nav.view === 'quiz') {
-    const quiz = quizzes.find((q) => q.slug === nav.quiz)!
-    const problem = problems.find((p) => p.id === quiz.problemIds[nav.index])!
+    const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)!
+    const problem = catalog.problems.find((p) => p.id === quiz.problemIds[nav.index])!
     const hasNext = nav.index < quiz.problemIds.length - 1
     const goNext = () =>
       hasNext && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index + 1 })
@@ -68,12 +117,12 @@ export default function App() {
       <main className="app-main list">
         {nav.view === 'sources' ? (
           <SourceList
-            sources={sources}
+            sources={catalog.sources}
             onSelect={(source) => setNav({ view: 'quizzes', source })}
           />
         ) : (
           <QuizList
-            quizzes={quizzesForSource(nav.source)}
+            quizzes={catalog.quizzes.filter((q) => q.source === nav.source)}
             onSelect={(quiz) => setNav({ view: 'quiz', quiz, index: 0 })}
           />
         )}

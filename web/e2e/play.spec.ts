@@ -1,15 +1,17 @@
 import { test, expect } from '@playwright/test'
+import { stubSupabase } from './fixtures'
 
 test.describe('play phase', () => {
   test('opening lead: shows multiple-choice options and plays through the trick', async ({
     page,
   }) => {
+    await stubSupabase(page)
     await page.goto('/')
     // Sources → quizzes → QuizB #2 is "Choose your opening lead".
     await page.getByText('FakeBook').click()
     await page.getByText('QuizB').click()
     await page.getByRole('button', { name: 'Next problem' }).click()
-    await page.getByRole('button', { name: /Play the hand/ }).click()
+    await page.getByRole('button', { name: 'Play', exact: true }).click()
 
     // The lead is a multiple-choice question: options in the center, not free
     // choice — the hero's hand is shown but not clickable.
