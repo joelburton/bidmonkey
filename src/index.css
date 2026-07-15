@@ -102,13 +102,15 @@ body {
   letter-spacing: -0.01em;
 }
 
+/* Nav buttons are mostly bare ‹/› glyphs — sized up, with real padding, so they
+   make a decent thumb target on a phone. */
 .back {
   border: 0;
   background: none;
   color: var(--accent);
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 600;
-  padding: 4px 0;
+  padding: 6px 10px;
   cursor: pointer;
 }
 .back:disabled {
@@ -179,8 +181,12 @@ body {
   cursor: pointer;
   transition: border-color 0.12s, transform 0.06s;
 }
-.problem-row:hover {
-  border-color: var(--accent);
+/* Hover feedback only on devices that hover — on touch, :hover sticks after
+   the tap and rows/buttons stay lit. */
+@media (hover: hover) {
+  .problem-row:hover {
+    border-color: var(--accent);
+  }
 }
 .problem-row:active {
   transform: scale(0.995);
@@ -191,7 +197,7 @@ body {
   min-width: 0;
 }
 .problem-title {
-  font-weight: 650;
+  font-weight: 600;
   font-size: 1.05rem;
 }
 .problem-meta {
@@ -208,26 +214,6 @@ body {
   border-radius: 999px;
   padding: 2px 8px;
   white-space: nowrap;
-}
-.chip-diff {
-  letter-spacing: 1px;
-  color: var(--accent);
-}
-.chip-diff-off {
-  color: var(--border);
-}
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-.tag {
-  font-size: 0.72rem;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border-radius: 6px;
-  padding: 2px 7px;
 }
 .problem-chevron {
   color: var(--ink-soft);
@@ -259,16 +245,10 @@ body {
   overflow: hidden;
 }
 
-.rail {
-  overflow: hidden;
-}
 /* Let every fan overflow so a selected (raised) card isn't cut off. The off-
    screen sliver of the E/W rails is still clipped by the outer .middle/.table;
    z-index keeps a raised card above the center. */
-.rail-north,
-.rail-south,
-.rail-west,
-.rail-east {
+.rail {
   overflow: visible;
   position: relative;
   z-index: 2;
@@ -409,22 +389,11 @@ body {
   stroke: #c4ccd6;
   stroke-width: 1.5;
 }
-.card-idx,
-.card-idx-suit,
-.card-pip {
+.card-idx {
   font-family: 'Roboto Flex', 'Roboto', sans-serif;
   font-weight: 400;
   font-stretch: 75%;
-}
-.card-idx {
   font-size: 30px;
-}
-.card-idx-suit {
-  font-size: 27px;
-}
-.card-pip {
-  font-size: 58px;
-  text-anchor: middle;
 }
 .red {
   fill: var(--red);
@@ -457,6 +426,13 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   padding: 0 2px;
+}
+
+/* A long (competitive) auction scrolls here instead of pushing the bottom-
+   pinned bid pad out of the clipped center. */
+.auction-scroll {
+  min-height: 0;
+  overflow-y: auto;
 }
 
 .auction-table {
@@ -517,12 +493,12 @@ body {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 .bid-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 12px 8px;
 }
 .bid-actions {
   display: grid;
@@ -534,7 +510,7 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 2rem;
+  height: 2.25rem;
   border: 2px solid rgba(255, 255, 255, 0.92);
   background: transparent;
   color: #fff;
@@ -615,8 +591,6 @@ body {
   transform: scale(0.95);
 }
 
-/* ---- Responsive: phones ------------------------------------------------- */
-
 /* ---- Play / continue buttons ------------------------------------------- */
 
 .play-btn {
@@ -630,8 +604,10 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
-.play-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
+@media (hover: hover) {
+  .play-btn:hover {
+    background: rgba(255, 255, 255, 0.22);
+  }
 }
 .play-btn:disabled {
   border-color: rgba(255, 255, 255, 0.25);
@@ -676,15 +652,6 @@ body {
   align-items: center;
   font-size: 1.2rem;
   font-weight: 700;
-}
-.contract {
-  display: inline-flex;
-  align-items: center;
-  gap: 1px;
-}
-.contract .suit-glyph {
-  width: 1.05em;
-  height: 1.05em;
 }
 .contract-by {
   font-size: 0.9rem;
@@ -752,21 +719,6 @@ body {
   color: #ffe08a;
 }
 
-/* Seat labels (play phase only). */
-.seat-slot {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  width: 100%;
-}
-.seat-tag {
-  color: #fff;
-  font-size: 0.7rem;
-  font-weight: 600;
-  opacity: 0.85;
-}
-
 /* Clickable cards + two-tap selection: first tap raises + highlights (toward
    center, per the hand's `raise` direction), second tap plays. */
 .slot.playable {
@@ -826,8 +778,10 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
-.opt-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+@media (hover: hover) {
+  .opt-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
 }
 .opt-btn .suit-glyph {
   width: 1.2rem;
@@ -853,8 +807,10 @@ body {
   font-weight: 700;
   cursor: pointer;
 }
-.contract-btn:hover {
-  background: rgba(255, 255, 255, 0.14);
+@media (hover: hover) {
+  .contract-btn:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
 }
 .contract-btn .suit-glyph {
   width: 1.05em;
@@ -899,5 +855,28 @@ body {
 @media (max-width: 640px) {
   .app-main.list {
     padding: 12px;
+  }
+}
+
+/* Landscape phones: the never-scrolling portrait table can't fit a ~400px-tall
+   viewport, so swap it for a rotate prompt (the header nav stays usable; the
+   list views scroll and don't need this). */
+.rotate-note {
+  display: none;
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  .app-main.detail {
+    display: none;
+  }
+  .rotate-note {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    font-weight: 600;
   }
 }

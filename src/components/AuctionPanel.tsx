@@ -139,7 +139,9 @@ export function AuctionPanel({
         <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
       </div>
 
-      <AuctionTable cols={model.cols} grid={model.grid} entered={result?.call} />
+      <div className="auction-scroll">
+        <AuctionTable cols={model.cols} grid={model.grid} entered={result?.call} />
+      </div>
 
       {!model.actingSeat ? (
         <div className="bidpad">

@@ -138,6 +138,9 @@ export default function App() {
             hasNext={hasNext}
           />
         </main>
+        {/* Shown (via CSS) instead of the table on landscape phones, where the
+            fixed-height portrait table can't fit. */}
+        <div className="rotate-note">Rotate your phone — bidmonkey plays in portrait.</div>
       </div>
     )
   }
