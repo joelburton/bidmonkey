@@ -138,7 +138,14 @@ export function PlayView({
     setSelected(null)
     if (r?.correct) {
       setPending(null)
-      playCard(r.seat, r.card, true)
+      // Always continue with the canonical answer, even if the user picked an
+      // accepted alternative (q.accept): the recorded continuation was authored
+      // around `answer`, so playing the clicked card instead would desync the
+      // rest of the hand (trick winner, whose turn, cards remaining). The click
+      // was still graded correct (r.correct) — a future scoring/attempts feature
+      // keys off that boolean, not off which card landed, so the player is not
+      // dinged for choosing an alternative.
+      playCard(r.seat, r.question.answer, true)
       setMoveIndex((i) => i + 1)
     }
   }
@@ -229,15 +236,25 @@ export function PlayView({
     )
   }
 
-  const message = playResult
-    ? undefined
-    : pending
-      ? (pending.question.prompt ?? 'Your turn')
-      : review
-        ? 'Tap to continue'
-        : allRevealed
-          ? 'All hands shown — play freely'
-          : undefined
+  // When the hero must play a card from hand (an enter-card question with no
+  // authored prompt), show a downward arrow cue pointing at the hero instead of
+  // text. Authored prompts and the other states keep their text. Either way the
+  // cue lives in a fixed-height slot (see .play-cue) so it never shifts the cards.
+  const heroToPlay =
+    !playResult &&
+    !!pending &&
+    pending.question.choiceType === 'enter_card' &&
+    !pending.question.prompt
+  const message =
+    playResult || heroToPlay
+      ? undefined
+      : pending
+        ? (pending.question.prompt ?? 'Your turn')
+        : review
+          ? 'Tap to continue'
+          : allRevealed
+            ? 'All hands shown — play freely'
+            : undefined
 
   const am = buildAuction(problem, answers)
 
@@ -256,6 +273,7 @@ export function PlayView({
             trick={tableTrick}
             seatPos={layout}
             message={message}
+            arrow={heroToPlay}
             options={playResult ? undefined : pendingMC}
             onOption={(c) => answerPlay(c)}
             onContractClick={() => setShowAuction(true)}

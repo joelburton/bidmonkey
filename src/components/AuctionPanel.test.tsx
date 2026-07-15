@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Problem } from '../types'
 import { AuctionPanel } from './AuctionPanel'
@@ -83,5 +83,86 @@ describe('AuctionPanel multiple-choice', () => {
 
     await user.keyboard('{Enter}') // dismiss — must not re-trigger the answer
     expect(screen.queryByText('Not quite')).toBeNull()
+  })
+})
+
+describe('AuctionPanel accepted alternative answers', () => {
+  // Same question, but 4H is also accepted (option c). Picking it is graded
+  // correct, yet the auction must advance with the canonical answer (3H) — not
+  // the clicked call — since buildAuction replays the authored continuation
+  // assuming `answer` was bid.
+  const withAccept: Problem = {
+    ...problem,
+    auction: [
+      { call: '1H' },
+      { call: 'P' },
+      {
+        question: {
+          id: 'q1',
+          choiceType: 'multiple_choice',
+          prompt: 'Your call?',
+          answer: '3H', // option b
+          accept: ['4H'], // option c, also correct
+          options: ['2H', '3H', '4H'],
+          explanation: 'A limit raise (game is fine too).',
+        },
+      },
+    ],
+  }
+
+  it('grades the accepted alternative correct but advances with the canonical answer', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={withAccept}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+
+    // Answer with the accepted alternative 4H (option c).
+    await user.keyboard('c')
+    expect(screen.getByText('Correct!')).toBeInTheDocument()
+    expect(onAnswer).not.toHaveBeenCalled() // only on dismiss
+
+    await user.keyboard('{Escape}')
+    // Advances with the canonical 3H, NOT the clicked 4H.
+    expect(onAnswer).toHaveBeenCalledWith('3H')
+  })
+})
+
+describe('AuctionPanel answer popup dismissal', () => {
+  it('a tap on the popup dismisses it; a drag (scroll) does not', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+    await user.keyboard('b') // correct (3H)
+    const popup = screen.getByRole('dialog', { name: 'Answer' })
+
+    // A drag on the popup (scrolling the explanation) must NOT dismiss.
+    fireEvent.pointerDown(popup, { clientX: 100, clientY: 100 })
+    fireEvent.pointerUp(popup, { clientX: 100, clientY: 170 })
+    expect(onAnswer).not.toHaveBeenCalled()
+    expect(screen.getByText('Correct!')).toBeInTheDocument()
+
+    // A tap on the popup (negligible movement) dismisses and advances.
+    fireEvent.pointerDown(popup, { clientX: 100, clientY: 100 })
+    fireEvent.pointerUp(popup, { clientX: 101, clientY: 103 })
+    expect(onAnswer).toHaveBeenCalledWith('3H')
   })
 })

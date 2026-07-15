@@ -6,6 +6,7 @@ import type { Pos } from '../play'
 import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
 import { withSuits } from './suitText'
+import { useTapDismiss } from '../tapDismiss'
 
 const OPT_LETTERS = 'abcdef'
 
@@ -32,6 +33,23 @@ function CardText({ card }: { card: string }) {
 
 const POS_CLASS: Record<Pos, string> = { top: 't', left: 'l', right: 'r', bottom: 'b' }
 
+/** A small downward arrow shown when it's the hero's turn to play a card — it
+ * points at the hero's hand along the bottom of the screen. */
+function TurnArrow() {
+  return (
+    <svg className="turn-arrow" viewBox="0 0 24 24" role="img" aria-label="Your turn to play">
+      <path
+        d="M12 4 L12 17 M6 12 L12 18 L18 12"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 /** Center during play: contract (a button that opens the auction), the current
  * trick (cards placed by the same seat→position map as the hands), a prompt +
  * option buttons, and the wrong-answer popup. */
@@ -41,6 +59,7 @@ export function PlayCenter({
   trick,
   seatPos,
   message,
+  arrow,
   options,
   onOption,
   onContractClick,
@@ -52,6 +71,7 @@ export function PlayCenter({
   trick: { seat: Seat; card: string }[]
   seatPos: Record<Seat, Pos>
   message?: string
+  arrow?: boolean
   options?: string[]
   onOption?: (card: string) => void
   onContractClick: () => void
@@ -60,6 +80,10 @@ export function PlayCenter({
 }) {
   const byPos: Partial<Record<Pos, string>> = {}
   for (const t of trick) byPos[seatPos[t.seat]] = t.card
+
+  // Tap anywhere on the popup or the backdrop dismisses it; a drag to scroll the
+  // explanation does not (see useTapDismiss).
+  const tapDismiss = useTapDismiss(() => onDismissResult?.())
 
   const slot = (pos: Pos) => {
     const c = byPos[pos]
@@ -92,7 +116,11 @@ export function PlayCenter({
       </div>
 
       <div className="play-bottom">
-        {message && <div className="play-msg">{message}</div>}
+        {/* Fixed-height cue slot: holds the turn arrow, a text message, or
+            nothing — always the same height, so it never shifts the cards. */}
+        <div className="play-cue">
+          {arrow ? <TurnArrow /> : message ? <div className="play-msg">{message}</div> : null}
+        </div>
         {options && onOption && (
           <div className="opt-grid center-opts">
             {options.map((c, i) => (
@@ -112,8 +140,8 @@ export function PlayCenter({
 
       {result && (
         <>
-          <div className="explain-backdrop" onClick={onDismissResult} />
-          <div className="explain-popup" role="dialog" aria-label="Answer">
+          <div className="explain-backdrop" {...tapDismiss} />
+          <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
             <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
               {result.correct ? 'Correct!' : 'Not quite'}
             </div>

@@ -711,12 +711,41 @@ body {
   justify-content: center;
 }
 
+/* Reserved cue slot below the trick: same height whether it holds the turn
+   arrow, a message, or nothing — so its content never nudges the cards. */
+.play-cue {
+  min-height: 1.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .play-msg {
-  margin-top: 6px;
+  margin: 0;
   text-align: center;
   font-size: 0.85rem;
   font-weight: 600;
   color: #ffe08a;
+}
+.turn-arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #ffe08a;
+  overflow: visible;
+  animation: turn-bounce 1s ease-in-out infinite;
+}
+@keyframes turn-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .turn-arrow {
+    animation: none;
+  }
 }
 
 /* Clickable cards + two-tap selection: first tap raises + highlights (toward

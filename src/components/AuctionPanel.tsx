@@ -12,6 +12,7 @@ import {
 import { SuitGlyph } from './SuitGlyph'
 import { AuctionTable, CallText } from './AuctionTable'
 import { withSuits } from './suitText'
+import { useTapDismiss } from '../tapDismiss'
 
 const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
 const KEY_STRAIN: Record<string, Strain> = { c: 'C', d: 'D', h: 'H', s: 'S', n: 'NT' }
@@ -51,22 +52,28 @@ export function AuctionPanel({
   const dbl = doubleState(model.prior, model.actingSeat)
 
   const [level, setLevel] = useState<number | null>(null)
-  const [result, setResult] = useState<{ correct: boolean; call: string } | null>(null)
+  const [result, setResult] = useState<{ correct: boolean; call: string; answer: string } | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
 
   const doSubmit = useCallback((call: string) => {
     const cur = ref.current.model.question
     if (!cur) return
     const correct = call === cur.answer || (cur.accept?.includes(call) ?? false)
-    setResult({ correct, call })
+    setResult({ correct, call, answer: cur.answer })
     setLevel(null)
   }, [])
   const dismiss = useCallback(() => {
     const r = ref.current.result
     if (!r) return
-    if (r.correct) ref.current.onAnswer(r.call)
+    // Advance the auction with the canonical answer, even when the user picked
+    // an accepted alternative (cur.accept): buildAuction replays the authored
+    // continuation from `answers`, which assumes `answer` was bid. The click was
+    // still graded correct (r.correct) — see PlayView for the same rule.
+    if (r.correct) ref.current.onAnswer(r.answer)
     else setResult(null)
   }, [])
+  // Tap anywhere on the popup or backdrop dismisses; a drag to scroll does not.
+  const tapDismiss = useTapDismiss(dismiss)
   const pickStrain = (s: Strain) => {
     if (level == null || !bidLegal(level, s, model.priorCalls)) return
     doSubmit(`${level}${s}`)
@@ -234,8 +241,8 @@ export function AuctionPanel({
 
       {result && q && (
         <>
-          <div className="explain-backdrop" onClick={dismiss} />
-          <div className="explain-popup" role="dialog" aria-label="Answer">
+          <div className="explain-backdrop" {...tapDismiss} />
+          <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
             <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
               {result.correct ? 'Correct!' : 'Not quite'}
             </div>

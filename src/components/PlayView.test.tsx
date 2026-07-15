@@ -92,3 +92,41 @@ describe('free play enforces legal turn order and following suit', () => {
     expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).not.toBeNull()
   })
 })
+
+// An accepted alternative (q.accept) is graded correct, but the recorded play
+// must continue with the canonical q.answer — not the card the user clicked —
+// or a non-equivalent alternative would desync the rest of the hand.
+describe('accepted alternative answers continue with the canonical card', () => {
+  it('grades the clicked alternative correct but plays q.answer onto the table', async () => {
+    // South (hero) is on lead and asked to lead a club. Canonical answer is ♣Q;
+    // ♣5 is an accepted alternative, deliberately NOT touching ♣Q.
+    const p: Problem = {
+      ...problem('S'),
+      play: [
+        {
+          cards: [
+            {
+              seat: 'S',
+              question: { id: 'q1', choiceType: 'enter_card', prompt: 'Your lead', answer: 'CQ', accept: ['C5'] },
+            },
+          ],
+        },
+      ],
+    }
+    render(<PlayView problem={p} contract={contract} answers={[]} />)
+    const user = userEvent.setup()
+    await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
+
+    // Answer with the accepted alternative ♣5 — graded correct.
+    await playCard(user, '5 of clubs')
+    await waitFor(() => expect(screen.getByText('Correct!')).toBeInTheDocument())
+    await user.keyboard('{Enter}') // any key dismisses the popup
+
+    // The canonical ♣Q is what actually lands in South's (bottom) trick slot.
+    await waitFor(() =>
+      expect(screen.getByLabelText('queen of clubs').closest('.trick-b')).not.toBeNull(),
+    )
+    // ♣5 was never played: still in South's hand, not in any trick slot.
+    expect(screen.getByLabelText('5 of clubs').closest('.trick-slot')).toBeNull()
+  })
+})
