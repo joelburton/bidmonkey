@@ -332,12 +332,15 @@ body {
   padding: 8px 12px;
 }
 
-/* East & West: rotated rails, an inner sliver showing, kept small enough that
-   the whole 13-card fan fits the middle band vertically (no clipping) — it's
-   centered there via .middle's align-items:center. */
+/* East & West: rotated rails, an inner sliver showing. The 13-card vertical fan
+   is 7·cardW tall, so size cardW to the available middle band — grow with a
+   taller viewport up to the N/S card size, shrink to fit a short phone (with
+   Safari chrome) so it never clips. The 15rem subtracts the header + the N & S
+   fans (~14rem) plus a safety margin; 100dvh tracks the live viewport so the
+   cards re-fit as mobile chrome shows/hides. */
 .rail-west,
 .rail-east {
-  --card-w: 3rem;
+  --card-w: min(4rem, calc((100dvh - 15rem) / 7));
   flex: none;
   display: flex;
   align-items: center;
