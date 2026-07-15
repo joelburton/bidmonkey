@@ -55,14 +55,22 @@ fixtures, not read at runtime.
 ## Running
 
 ```
-cp .env.example .env   # then fill in VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
 npm install
-npm run dev       # vite dev server (usually http://localhost:5174) — needs .env
-npm run build     # tsc -b && vite build  — run this to typecheck
+supabase start    # bring up the local Supabase stack (dev + e2e run against it)
+npm run dev       # vite dev server — hits LOCAL Supabase (see env files below)
+npm run build     # tsc -b && vite build  — hits REMOTE (typecheck + prod build)
 npm test          # vitest run (unit + component tests)
-npm run e2e       # playwright — needs the local Supabase stack up (`supabase start`)
+npm run e2e       # playwright — needs the local stack up; resets it to the seed
 npm run lint      # oxlint
 ```
+
+**Env files** (Vite loads by mode; all gitignored except `.env.example`, and keys
+never go in git). `npm run dev` (development) → `.env.local` = the **local** stack
+(`supabase status`). `npm run build` (production) → `.env.production.local` =
+**remote** (Netlify sets these itself for real deploys). `npm run dev:test`/e2e →
+`.env.test` = local (committed; the local publishable key isn't secret). So dev
+and prod point at different databases on purpose — don't put remote keys in
+`.env`, or plain `dev` will hit prod.
 
 Without `.env` filled in (or Supabase unreachable), the app shows a "Couldn't
 load problems" error — that's expected, not a crash.
