@@ -16,8 +16,8 @@
   "$defs": {
     "seat":    { "type": "string", "enum": ["N", "E", "S", "W"] },
 
-    "bid":     { "type": "string", "pattern": "^(?:[1-7](?:C|D|H|S|N|NT)|P|X|XX)$",
-                 "description": "A call: a bid (level+strain, NT as N or NT), P, X, or XX." },
+    "bid":     { "type": "string", "pattern": "^(?:[1-7](?:C|D|H|S|N|NT)|P|X|XX)\\*?$",
+                 "description": "A call: a bid (level+strain, NT as N or NT), P, X, or XX. A trailing * marks an alertable call (display-only; ignored by ranking/matching)." },
 
     "card":    { "type": "string", "pattern": "^[SHDC][AKQJT2-9]$",
                  "description": "Suit letter + rank; T = ten." },

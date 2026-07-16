@@ -4,8 +4,7 @@ import type { Cell } from '../bidding'
 import { parseBid } from '../bidding'
 import { SuitGlyph } from './SuitGlyph'
 
-/** Render a single call (bid / pass / double) with a suit pip. */
-export function CallText({ call }: { call: string }) {
+function CallBody({ call }: { call: string }) {
   if (call === 'P') return <>Pass</>
   if (call === 'X') return <>X</>
   if (call === 'XX') return <>XX</>
@@ -16,6 +15,19 @@ export function CallText({ call }: { call: string }) {
     <>
       {b.level}
       <SuitGlyph suit={b.strain as Suit} />
+    </>
+  )
+}
+
+/** Render a single call (bid / pass / double) with a suit pip. A trailing "*"
+ * (an alertable call) becomes an accent-yellow superscript star. */
+export function CallText({ call }: { call: string }) {
+  const alerted = call.endsWith('*')
+  const core = alerted ? call.slice(0, -1) : call
+  return (
+    <>
+      <CallBody call={core} />
+      {alerted && <sup className="alert-star">*</sup>}
     </>
   )
 }

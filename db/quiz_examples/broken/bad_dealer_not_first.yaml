@@ -1,0 +1,10 @@
+# Dealer is N, but the first call shown is South's. The dealer must make the
+# first call (if the dealer passed, write the pass out — it isn't auto-filled).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: N
+  auction:
+  - s: 1NT

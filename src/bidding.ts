@@ -24,8 +24,13 @@ export const VUL_SHORT: Record<Vulnerability, string> = {
   both: 'Both',
 }
 
+/** Strip the trailing alert marker (`*`); it's display-only. */
+export function stripAlert(call: string): string {
+  return call.endsWith('*') ? call.slice(0, -1) : call
+}
+
 export function parseBid(call: string): { level: number; strain: Strain } | null {
-  const m = /^([1-7])(NT|N|C|D|H|S)$/.exec(call)
+  const m = /^([1-7])(NT|N|C|D|H|S)$/.exec(stripAlert(call))
   if (!m) return null
   const strain = (m[2] === 'N' ? 'NT' : m[2]) as Strain
   return { level: Number(m[1]), strain }
@@ -173,9 +178,10 @@ export function finalContract(problem: Problem, answers: string[]): Contract | n
 
   let doubled: '' | 'X' | 'XX' = ''
   for (const { call } of seated) {
-    if (parseBid(call)) doubled = ''
-    else if (call === 'X') doubled = 'X'
-    else if (call === 'XX') doubled = 'XX'
+    const c = stripAlert(call)
+    if (parseBid(c)) doubled = ''
+    else if (c === 'X') doubled = 'X'
+    else if (c === 'XX') doubled = 'XX'
   }
 
   return { level: last.level, strain: last.strain, declarer, doubled }
@@ -222,10 +228,11 @@ export function doubleState(
   if (!acting) return null
   for (let i = prior.length - 1; i >= 0; i--) {
     const { seat, call } = prior[i]
-    if (call === 'P') continue
+    const c = stripAlert(call)
+    if (c === 'P') continue
     const opponent = !sameSide(seat, acting)
-    if (parseBid(call)) return opponent ? 'double' : null // double an opponent's bid
-    if (call === 'X') return opponent ? 'redouble' : null // redouble their double
+    if (parseBid(c)) return opponent ? 'double' : null // double an opponent's bid
+    if (c === 'X') return opponent ? 'redouble' : null // redouble their double
     return null // already XX, etc.
   }
   return null

@@ -6,6 +6,7 @@ import {
   doubleState,
   levelLegal,
   bidLegal,
+  stripAlert,
   VUL_SHORT,
   LEVELS,
 } from '../bidding'
@@ -58,7 +59,12 @@ export function AuctionPanel({
   const doSubmit = useCallback((call: string) => {
     const cur = ref.current.model.question
     if (!cur) return
-    const correct = call === cur.answer || (cur.accept?.includes(call) ?? false)
+    // The player enters a plain bid; the answer may be alertable (e.g. "2D*").
+    // Match on the call ignoring the alert marker.
+    const entered = stripAlert(call)
+    const correct =
+      entered === stripAlert(cur.answer) ||
+      (cur.accept?.some((a) => stripAlert(a) === entered) ?? false)
     setResult({ correct, call, answer: cur.answer })
     setLevel(null)
   }, [])

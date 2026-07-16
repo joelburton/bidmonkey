@@ -117,6 +117,7 @@ BROKEN = [
     ("broken/bad_dup_across_hands.yaml", "is in both"),
     ("broken/bad_suit_order.yaml", "in order"),
     ("broken/bad_question_seat.yaml", "player's seat"),
+    ("broken/bad_dealer_not_first.yaml", "start with the dealer"),
     ("broken/bad_partial_extra_plays.yaml", "only the lead"),
     ("broken/bad_answer_not_in_choices.yaml", "not one of the choices"),
     ("broken/bad_accept_not_in_choices.yaml", "not among the choices"),
@@ -159,10 +160,19 @@ def test_parse_hand_void():
 
 @pytest.mark.parametrize("tok,want", [
     ("1nt", "1NT"), ("1N", "1NT"), ("Pass", "P"), ("p", "P"),
-    ("x", "X"), ("XX", "XX"), ("1♠", "1S"), ("1NT*", "1NT"), ("3h", "3H"),
+    ("x", "X"), ("XX", "XX"), ("1♠", "1S"), ("1NT*", "1NT*"), ("2d*", "2D*"), ("3h", "3H"),
 ])
 def test_parse_call(tok, want):
     assert nq.parse_call(tok, "x") == want
+
+
+def test_alert_is_ignored_by_bid_logic():
+    # the * is display-only: ranking, parsing, and the final contract ignore it
+    assert nq.parse_bid("2D*") == (2, "D")
+    assert nq.call_core("2D*") == "2D"
+    seated = [("N", "1NT"), ("E", "P"), ("S", "2D*"), ("W", "P"), ("N", "2H"),
+              ("E", "P"), ("S", "P"), ("W", "P")]
+    assert nq.compute_final_contract(seated) == (2, "H", "N", "")
 
 
 @pytest.mark.parametrize("tok,want", [

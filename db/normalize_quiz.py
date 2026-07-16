@@ -102,18 +102,22 @@ def parse_hand(text, where):
 
 
 def parse_call(tok, where):
-    t = tok.strip().rstrip("*")             # trailing * = alert, informational
+    raw = tok.strip()
+    alert = "*" if raw.endswith("*") else ""   # trailing * = alertable call, kept for display
+    t = raw[:-1].strip() if alert else raw
     low = t.lower()
     if low in ("p", "pass"):
-        return "P"
-    if low in ("x", "double", "dbl"):
-        return "X"
-    if low in ("xx", "redouble", "redbl"):
-        return "XX"
-    m = re.match(r"^([1-7])(nt|n|[cdhs♣♦♥♠])$", low)
-    if not m:
-        raise ProblemError(f"{where}: {tok!r} is not a legal call")
-    return f"{m.group(1)}{STRAIN_OF[m.group(2)]}"
+        core = "P"
+    elif low in ("x", "double", "dbl"):
+        core = "X"
+    elif low in ("xx", "redouble", "redbl"):
+        core = "XX"
+    else:
+        m = re.match(r"^([1-7])(nt|n|[cdhs♣♦♥♠])$", low)
+        if not m:
+            raise ProblemError(f"{where}: {tok!r} is not a legal call")
+        core = f"{m.group(1)}{STRAIN_OF[m.group(2)]}"
+    return core + alert
 
 
 def parse_card(tok, where):
@@ -165,9 +169,15 @@ def normalize_contract(value, where):
 STRAINS = ["C", "D", "H", "S", "NT"]
 
 
+def call_core(call):
+    """Strip the trailing alert marker (`*`) — it's display-only, ignored by
+    ranking, legality, and matching."""
+    return call.rstrip("*")
+
+
 def parse_bid(call):
     """A made bid -> (level, strain); calls that aren't bids (P/X/XX) -> None."""
-    m = re.match(r"^([1-7])(NT|C|D|H|S)$", call)
+    m = re.match(r"^([1-7])(NT|C|D|H|S)$", call_core(call))
     return (int(m.group(1)), m.group(2)) if m else None
 
 
@@ -182,7 +192,7 @@ def same_side(a, b):
 def last_nonpass(seated):
     """The most recent (seat, call) that isn't a pass, or None."""
     for seat, call in reversed(seated):
-        if call != "P":
+        if call_core(call) != "P":
             return seat, call
     return None
 
@@ -211,8 +221,8 @@ def compute_final_contract(seated):
     for _, call in seated:
         if parse_bid(call):
             doubled = ""
-        elif call in ("X", "XX"):
-            doubled = call
+        elif call_core(call) in ("X", "XX"):
+            doubled = call_core(call)
     return level, strain, declarer, doubled
 
 
@@ -249,9 +259,10 @@ def build_question(step, where, qid, parse, free_type):
         options = [parse(c, f"{where} choice") for c in step["choices"]]
         if len(options) < 2:
             raise ProblemError(f"{where}: multiple choice needs at least 2 choices")
-        if answer not in options:
+        cores = [call_core(o) for o in options]   # match ignoring the alert marker
+        if call_core(answer) not in cores:
             raise ProblemError(f"{where}: answer {answer} is not one of the choices {options}")
-        bad = [a for a in accept if a not in options]
+        bad = [a for a in accept if call_core(a) not in cores]
         if bad:
             raise ProblemError(f"{where}: accept {bad} not among the choices {options}")
         q["choiceType"] = "multiple_choice"
@@ -291,28 +302,29 @@ def process_auction(steps, dealer, player, close=False):
         echo.append(f"{seat}:{echo_txt}")
 
     def auction_complete():
-        has_bid = any(c != "P" for _, c in seated)
+        has_bid = any(call_core(c) != "P" for _, c in seated)
         trailing = 0
         for _, c in reversed(seated):
-            if c == "P":
+            if call_core(c) == "P":
                 trailing += 1
             else:
                 break
         return (has_bid and trailing >= 3) or (not has_bid and len(seated) >= 4)
 
     def check_legal(call, seat, where):
-        b = parse_bid(call)
+        core = call_core(call)
+        b = parse_bid(core)
         if b:
             highest = max([bid_rank(*parse_bid(c)) for _, c in seated if parse_bid(c)] + [-1])
             if bid_rank(*b) <= highest:
                 raise ProblemError(f"{where}: {call} does not outrank the auction so far")
-        elif call == "X":
+        elif core == "X":
             tgt = last_nonpass(seated)
             if not tgt or not parse_bid(tgt[1]) or same_side(tgt[0], seat):
                 raise ProblemError(f"{where}: X (double) is not available here")
-        elif call == "XX":
+        elif core == "XX":
             tgt = last_nonpass(seated)
-            if not tgt or tgt[1] != "X" or same_side(tgt[0], seat):
+            if not tgt or call_core(tgt[1]) != "X" or same_side(tgt[0], seat):
                 raise ProblemError(f"{where}: XX (redouble) is not available here")
 
     for si, step in enumerate(steps):
@@ -320,13 +332,18 @@ def process_auction(steps, dealer, player, close=False):
         seat, value = seat_key_of(step, where, allow_all=True)
 
         if seat == "ALL":
-            if parse_call(value, where) != "P":
+            if call_core(parse_call(value, where)) != "P":
                 raise ProblemError(f"{where}: `all` may only be pass")
             while not auction_complete():
                 emit(CLOCKWISE[idx % 4], {"call": "P"}, "P", "P")
                 idx += 1
             break
 
+        # The dealer makes the first call (never auto-filled): if the dealer
+        # passes, that pass must be written out.
+        if not seated and seat != dealer:
+            raise ProblemError(f"{where}: the auction must start with the dealer "
+                               f"({dealer}), but the first call is {seat}")
         # fill any skipped seats with Pass (seats between shown calls stayed silent)
         while CLOCKWISE[idx % 4] != seat:
             emit(CLOCKWISE[idx % 4], {"call": "P"}, "P", "P")
