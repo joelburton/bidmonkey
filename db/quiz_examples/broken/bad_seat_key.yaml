@@ -1,0 +1,8 @@
+# 'x' is not a seat in a hands-map (schema check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hands:
+    x: sa65 hkq2 d53 caqj97
+  dealer: S

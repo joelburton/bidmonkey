@@ -1,0 +1,10 @@
+# A '?' step with no `answer` (normalizer check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  auction:
+  - s: "?"
+    explain: what do you bid?

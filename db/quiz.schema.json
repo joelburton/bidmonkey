@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bidmonkey/schema/quiz-authoring/v1",
+  "title": "bidmonkey quiz authoring YAML (v1)",
+  "description": "Validates a hand-authored quiz YAML file (one source + one quiz + its problems) BEFORE normalization. This is deliberately a THIN structural layer — shape, required keys, enums, and token regexes — so an editor can flag typos live. All domain rules that JSON Schema cannot express live in the Python normalizer/validator, and are listed under `x-deferred-checks` below.\n\nThe authoring format is shorthand: case-insensitive, unicode suit symbols allowed, hands written suit-then-ranks (`caqj97`), single cards in `plays` written rank-then-suit (`3C`). The normalizer folds all of this into the canonical stored shape (see schema.v1.json).",
+
+  "x-deferred-checks": [
+    "hand integrity: 4 suits in SHDC order, valid ranks, exactly 13 cards, no duplicate card within a hand",
+    "cross-hand: no card appears in two hands; `hands` seats unique after case-folding",
+    "single `hand` is assigned to `player` (default S)",
+    "auction: starts at dealer and proceeds clockwise, at most one skipped seat between shown calls; bids strictly ascending; X only over an opponent's live suit/NT bid; XX only over an opponent's X",
+    "auction: `answer`/`accept` are legal calls at that point in the auction",
+    "every `?` step's seat equals `player` (auctions and plays)",
+    "each auction/play step has exactly one seat key",
+    "a `?` step requires `answer`",
+    "vuln normalized to absolute NS/EW using `player`; `us`/`them` resolved via the player's side",
+    "contract asserted against the auction's computed final contract and declarer",
+    "plays: opening leader is LHO of declarer; each card is in that seat's hand; follow-suit legal (when all four hands are present); no card played twice; trick winner leads next",
+    "`all: p` expanded; skipped seats filled with P; full auction echoed back for review"
+  ],
+
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source", "quiz", "titles", "problems"],
+  "properties": {
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Source as `Title [slug]`; created if it doesn't exist."
+    },
+    "quiz": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Quiz as `Title [slug]`; created if it doesn't exist."
+    },
+    "titles": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Template for per-problem titles; `#` is replaced with `#` + the 1-based ordinal (e.g. `SAYC No Trump #` -> `SAYC No Trump #3`)."
+    },
+    "problems": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/problem" }
+    }
+  },
+
+  "$defs": {
+    "direction": {
+      "type": "string",
+      "pattern": "^[NnEeSsWw]$",
+      "description": "A seat: N, E, S, or W (any case)."
+    },
+
+    "handString": {
+      "type": "string",
+      "pattern": "^[SHDCshdc♠♥♦♣](?:-|(?:10|[AKQJTakqjt2-9])+)(?:\\s+[SHDCshdc♠♥♦♣](?:-|(?:10|[AKQJTakqjt2-9])+)){0,3}$",
+      "description": "A whole hand as space-separated suit tokens, suit-then-ranks, e.g. `sa65 hkq2 d53 caqj97`. Suit = S/H/D/C or a unicode pip. Ranks use A K Q J, 10 or T for ten, 2-9. A void suit is the suit letter + `-` (e.g. `s-`). Suit order (SHDC) and the 13-card total are checked by the normalizer, not here."
+    },
+
+    "handOrOmitted": {
+      "anyOf": [
+        { "$ref": "#/$defs/handString" },
+        { "const": "-", "description": "Seat intentionally omitted." }
+      ]
+    },
+
+    "call": {
+      "type": "string",
+      "pattern": "^(?:[1-7](?:[Nn][Tt]|[Nn]|[CcDdHhSs]|[♣♦♥♠])|[Pp](?:[Aa][Ss][Ss])?|[Xx]{1,2})\\*?$",
+      "description": "A call: level 1-7 + strain (C/D/H/S, N or NT, or a unicode pip); P/pass; X (double); XX (redouble). A trailing `*` marks an alert and is ignored."
+    },
+
+    "callOrQuestion": {
+      "anyOf": [
+        { "$ref": "#/$defs/call" },
+        { "const": "?", "description": "A question posed to the player at this call." }
+      ]
+    },
+
+    "card": {
+      "type": "string",
+      "pattern": "^(?:10|[AaKkQqJjTt2-9])[CcDdHhSs♣♦♥♠]$",
+      "description": "A single card, rank-then-suit, e.g. `3C`, `AC`, `10D` (note: the reverse of the suit-then-ranks order used in hands)."
+    },
+
+    "cardOrQuestion": {
+      "anyOf": [
+        { "$ref": "#/$defs/card" },
+        { "const": "?", "description": "A question posed to the player at this play." }
+      ]
+    },
+
+    "vuln": {
+      "type": "string",
+      "pattern": "^(?:[Nn][Oo][Nn][Ee]|-|[Ll][Oo][Vv][Ee]|[Uu][Ss]|[Tt][Hh][Ee][Mm]|[Bb][Oo][Tt][Hh]|[Aa][Ll][Ll]|[Nn][Ss]|[Ee][Ww])$",
+      "description": "Vulnerability. Player-relative: `none`/`-`/`love`, `us`, `them`, `both`/`all`. Seat-absolute: `ns`, `ew`. Normalized to absolute NS/EW using `player`. Absent => null."
+    },
+
+    "contract": {
+      "type": "string",
+      "pattern": "^[1-7](?:[Nn][Tt]|[Nn]|[CcDdHhSs]|[♣♦♥♠])(?:[Xx]{1,2})?\\s+[NnEeSsWw]$",
+      "description": "Final contract as level+strain (+optional X/XX) + declarer seat, e.g. `3NT W`. Checked against the auction by the normalizer."
+    },
+
+    "bidStep": {
+      "type": "object",
+      "description": "One auction step: exactly one seat key (N/E/S/W, or `all` for `all: p`) whose value is a call or `?`. A `?` step also carries `explain`/`answer`, plus optional `choices` (a list => multiple choice; omitted => free bid entry) and `accept`. (Exactly-one-seat, answer-required-for-?, and answer/accept ⊆ choices are enforced by the normalizer.)",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "patternProperties": {
+        "^(?:[NnEeSsWw]|[Aa][Ll][Ll])$": { "$ref": "#/$defs/callOrQuestion" }
+      },
+      "properties": {
+        "explain": { "type": "string" },
+        "answer": { "$ref": "#/$defs/call" },
+        "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/call" },
+                     "description": "Multiple-choice options (in display order). Omit for free entry." },
+        "accept": { "type": "array", "items": { "$ref": "#/$defs/call" } }
+      }
+    },
+
+    "cardStep": {
+      "type": "object",
+      "description": "One play: exactly one seat key (N/E/S/W) whose value is a card or `?`. A `?` step also carries `explain`/`answer`, plus optional `choices` (a list => multiple choice; omitted => free card entry) and `accept` (answers/choices are cards).",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "patternProperties": {
+        "^[NnEeSsWw]$": { "$ref": "#/$defs/cardOrQuestion" }
+      },
+      "properties": {
+        "explain": { "type": "string" },
+        "answer": { "$ref": "#/$defs/card" },
+        "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" },
+                     "description": "Multiple-choice options (in display order). Omit for free entry." },
+        "accept": { "type": "array", "items": { "$ref": "#/$defs/card" } }
+      }
+    },
+
+    "problem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["dealer"],
+      "oneOf": [
+        { "required": ["hand"], "not": { "required": ["hands"] } },
+        { "required": ["hands"], "not": { "required": ["hand"] } }
+      ],
+      "properties": {
+        "hand": {
+          "$ref": "#/$defs/handString",
+          "description": "A single hand (the player's), when only one hand is shown."
+        },
+        "hands": {
+          "type": "object",
+          "description": "Multiple hands, keyed by seat (a map, so seats can't repeat). A value of `-` marks a seat intentionally omitted.",
+          "additionalProperties": false,
+          "minProperties": 1,
+          "patternProperties": {
+            "^[NnEeSsWw]$": { "$ref": "#/$defs/handOrOmitted" }
+          }
+        },
+        "dealer": { "$ref": "#/$defs/direction" },
+        "player": {
+          "$ref": "#/$defs/direction",
+          "description": "The hero/quiz-taker. Defaults to S."
+        },
+        "vuln": { "$ref": "#/$defs/vuln" },
+        "auction": {
+          "type": "array",
+          "description": "Ordered calls from the dealer, clockwise. Defaults to empty.",
+          "items": { "$ref": "#/$defs/bidStep" }
+        },
+        "contract": { "$ref": "#/$defs/contract" },
+        "plays": {
+          "type": "array",
+          "description": "Ordered plays from the opening leader (LHO of declarer). No play may be skipped.",
+          "items": { "$ref": "#/$defs/cardStep" }
+        }
+      }
+    }
+  }
+}

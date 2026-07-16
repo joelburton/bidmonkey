@@ -1,0 +1,9 @@
+# '1Z' is not a legal call (schema check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  auction:
+  - s: 1Z

@@ -1,0 +1,9 @@
+# The A of spades is in both N and E (cross-hand check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hands:
+    n: sakq hakq dakq cakqj
+    e: saqj hqj9 dqj9 cqj98
+  dealer: N

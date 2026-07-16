@@ -1,0 +1,10 @@
+# W redoubles, but there was no double to redouble.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  auction:
+  - s: 1H
+  - w: XX

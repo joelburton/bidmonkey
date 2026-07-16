@@ -1,0 +1,62 @@
+@source: Bidding Quizbook (bidding-quizbook)
+@quiz: BQ Opening Bid (bq-1-open)
+
+1. ♠ A 2 ♥ J 9 8 6 2 ♦ A Q J 7 3 ♣ 10
+(a) Pass    (b) 1♦    (c) 1♥
+With 12 HCP and two five-card suits, there is no temptation whatsoever to pass. Should you open 1♥ or 1♦? The diamonds are much stronger but remember the rule that you should open the higher-ranking of two five-card suits. When you choose a trump suit, it is often important to choose the suit where you have the greatest combined length. Suppose you have eight or nine hearts between you. That will make a fine trump suit even if you are missing, say, the ♥A and ♥K. Also, it is important to seek a fit in a major suit rather than a minor suit. That’s because you will need only ten tricks to make game in a major. Answer: (c) 1♥.
+
+2. ♠ 9 8 5 ♥ K 10 7 6 ♦ A 3 ♣ A K 7 4
+(a) 1♣    (b) 1♥    (c) 1NT
+Your hand is balanced and you therefore want to show this by bidding notrump as soon as possible. Should you open 1NT? No, because you don’t hold 15-17 HCP. You should therefore plan to open one of a suit and to bid notrump at your next turn. You cannot open 1♥ because that would promise at least a five-card suit. Here you are happy to open in clubs. Answer: (a) 1♣.
+
+3. ♠ A Q J 8 ♥ 10 8 3 ♦ K Q 7 ♣ A 9 5
+(a) 1♣    (b) 1♠    (c) 1NT
+Your hand is balanced and you hold 15-17 HCP. End of discussion! You will open 1NT, giving an excellent description of your hand. When your hand is balanced, aim to bid notrump as soon as possible. Answer: (c) 1NT.
+
+4. ♠ 10 9 7 3 ♥ A J 4 ♦ 7 5 ♣ A Q 9 4
+(a) Pass    (b) 1♣    (c) 1♠
+Once again you hold a balanced hand. It is nowhere near strong enough to open 1NT. Should you open 1♣? No, because you have only 11 HCP and you are not worth opening the bidding at all. Some 11-point hands are worth an opening bid but only when they are shapely and contain a good suit or two. Answer: (a) Pass
+
+5. ♠ 4 3 2 ♥ 3 2 ♦ Q J 9 2 ♣ A K Q 3
+(a) 1♣   (b) 1♦
+Open 1♦. If partner responds 1♥, you can now rebid 2♣. If you were to choose your ‘better minor’ instead (a common myth in the world of social players) and open 1♣, then you would be stuck for a rebid over 1♥. Bidding 2♣ at this point would promise more than four of them, and you cannot bid 1NT without a spade stopper. Bidding 2♦ would promise a very different hand (see p. 34). Answer: (b) 1♦.
+
+6. ♠ 2 ♥ A K 9 3 ♦ Q J 7 6 3 ♣ K 8 4
+(a) Pass    (b) 1♦    (c) 1♥
+You will nearly always open when you hold only 12 HCP, so of course you are happy to open here with 13 HCP. Will you open 1♥ or 1♦? There are two good reasons not to open 1♥. Firstly, such an opening bid would promise at least a five-card suit. Secondly, when you hold five cards in one suit and four in another, you open in the five-card suit. Answer: (b) 1♦.
+
+7. ♠ A Q 5 ♥ K 7 ♦ A K 10 6 ♣ Q 9 8 2
+(a) 1♣    (b) 1♦    (c) 1NT    (d) 2NT
+Since you hold a balanced hand, you should aim to bid notrump as soon as possible. Should you open 1NT? No, because that would show 15-17 HCP and you hold 18 HCP. How about 2NT? No, that would show 20-21 points, so you are not strong enough. You should open one of a suit, intending to rebid 2NT if partner responds at the one-level. With four cards in each minor, you start with 1♦. Answer: (b) 1♦.
+
+8. ♠ A J 8 6 ♥ K 10 8 3 ♦ 7 2 ♣ A J 4
+(a) 1♣    (b) 1♥    (c) 1♠ (   d) 1NT
+Once again you hold a balanced hand but cannot open 1NT because you do not have 15-17 HCP. Nor can you open 1♠ or 1♥ because these bids promise a five-card suit. You will have to open a three-card minor instead. Answer: (a) 1♣.
+
+9. ♠ 4 2 ♥ A K J 9 3 ♦ 9 ♣ K 10 7 4 2
+(a) Pass    (b) 1♣    (c) 1♥
+Always consider your distribution on unbalanced hands. Not only do you have a splendid five-card heart suit, you also have a second five-card suit. Shapely hands like these will provide plenty of tricks if you end as declarer. When you open the bidding on this type of hand do not think: ‘I’m being a bit bold, opening on just 11 points’. You have an excellent hand and it would be a big mistake not to open the bidding. With two five-card suits you will open the higher one, as usual. Answer: (c) 1♥.
+
+10. ♠ K ♥ J 8 7 5 4 ♦ A 10 5 3 2 ♣ Q J
+(a) Pass    (b) 1♦    (c) 1♥
+You have 11 HCP and some shape but there are two reasons why you should choose to pass on this hand. Firstly, you would have to open 1♥ and your hearts are weak. You would not want partner to lead a heart if the opponents played in a spade contract. Secondly, if the opponents hold the ace and king, your bare ♣QJ will be worth almost nothing. The same applies to the ♠K. High cards are at their most valuable when they are in your long suits. Answer: (a) Pass.
+
+11. ♠ K J 8 ♥ A Q ♦ A Q 10 8 3 ♣ K Q 9
+(a) 1♦    (b) 1NT    (c) 2♣    (d) 2NT
+You have a balanced hand of 21 HCP. All balanced hands containing 20 or 21 points are opened 2NT, giving an excellent description of your hand immediately. Answer: (d) 2NT.
+
+12. ♠ Q 9 8 5 4 ♥ A J 10 7 6 3 ♦ A 10 ♣ —
+(a) Pass    (b) 1♥    (c) 1♠
+Only 11 HCP but remember that to assess the strength of a hand you must look at both the HCP and the shape. With two long major suits and the consequent shortness in the minors, this hand has excellent ‘playing strength’. What does that mean? It means that if you end up playing the hand, particularly if partner has a fit for one of your suits, you can expect to make plenty of tricks. As always, you will open in your longer suit, bidding 1♥ rather than 1♠. Answer: (b) 1♥.
+
+13. ♠ 8 ♥ A K J 9 8 2 ♦ A K Q 7 ♣ A 5
+(a) 1♥    (b) 2♣    (c) 2♥
+Suppose you open 1♥ on this hand and this is followed by three passes. What would your reaction be? You would surely be worried that you had missed a game in hearts! If partner holds as little as three low hearts and no HCP at all, you would have a great chance of scoring at least ten tricks. On hands like these, where you fear missing a game if partner passes a one-bid, you should choose bridge’s strongest opening bid: 2♣. Partner will then have to bid, even if he has no points at all. An opening bid of 2♥ would be no good. We will see in a later chapter that this is a weak opening bid, showing a six-card suit and 6-10 points. Answer: (b) 2♣.
+
+14. ♠ 10 7 ♥ A J 5 4 2 ♦ A Q 7 ♣ A J 8
+(a) 1♥    (b) 1NT
+It seems here that you have two satisfactory opening bids: 1♥ and 1NT. Suppose you open 1♥, though, and partner responds 1♠. What will you bid next? It’s a problem. You cannot rebid 1NT, showing 12-14 points. Nor should you rebid 2♥. That would suggest a minimum hand with 13-15 points only, and you have a bit more than that. Simply open 1NT, even though you hold a five-card major. Answer: (b) 1NT.
+
+15. ♠ A J 7 6 ♥ A K 5 4 ♦ A Q ♣ 10 7 6
+(a) 1♣    (b) 1♥    (c) 1♠    (d) 1NT
+Opening 1♥ or 1♠ promises at least five cards in your suit, so you cannot do that. 1NT shows 15-17 points and you are too strong for that. You must open 1♣, intending to bid strongly thereafter. If partner responds 1♦, you will jump to 2NT. If partner responds 1♥ or 1♠, you will raise him to the three-level. Answer: (a) 1♣.

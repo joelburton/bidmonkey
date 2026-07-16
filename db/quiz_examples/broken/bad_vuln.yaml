@@ -1,0 +1,8 @@
+# 'v/-' is a slash form we deliberately reject (schema check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  vuln: v/-

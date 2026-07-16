@@ -1,0 +1,46 @@
+source: Std Bidding with SAYC [sayc]
+quiz: No Trump Openings [sayc-nt]
+titles: "SAYC No Trump #"
+problems:
+
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      Don’t let those poor diamonds stop you from opening 1NT. If partner has the count for game, wouldn’t you rather play in notrump, where you need only nine tricks, than in a minor suit where you need eleven?
+    answer: 1NT
+
+- hand: sak5 hq9832 dj2 caqj
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      Open 1NT. The heart suit is weak and the hand is at the top of the range. If you open 1♥ and partner responds 1♠ you are stuck. Partner will not expect such a strong hand if you rebid 1NT, and a jump to 2NT is a slight overbid.
+    answer: 1NT
+
+- hand: sa5 hakq86 dq108 c1074
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      Many experts, including Bill Root, would vote for 1♥. You are at the bottom of the range and the heart suit is your main feature. Those in the Bergen camp are merrily bidding 1NT. We suggest that you experiment a little and see what works best for you.
+    answer: 1NT
+    accept: [1H]
+
+- hand: sa65 hk8 dq32 caj763
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      The current trend of adding distributional points for length rather than shortness — an approach we heartily approve of — has created an interesting situation. Some now take a 14 HCP hand, add a point when holding a five-card suit, and happily open 1NT. We recommend that you take only HCP holdings into account when opening notrump. We would open 1♣ here.
+    answer: 1NT
+
+- hand: sa10 haq9 d1098 cak1092
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      The flip side of the issue, however, is not a problem, but rather a matter of style and judgment. This example hand is very rich in controls — aces and kings. If you choose to consider this hand as too strong for a 1NT opening call, then by all means select 1♣. Nobody ever said you have to open 1NT with a balanced 17. Typically a 17-HCP hand with a meaty five-card minor is worthy of a 1♣ or 1♦ opener. You can plan to jump to 2NT over partner’s response.
+    answer: 1C
+    accept: [1NT]

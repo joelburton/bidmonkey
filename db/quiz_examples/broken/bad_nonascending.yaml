@@ -1,0 +1,10 @@
+# 1C after 1NT does not outrank the auction (normalizer check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: S
+  auction:
+  - s: 1NT
+  - w: 1C

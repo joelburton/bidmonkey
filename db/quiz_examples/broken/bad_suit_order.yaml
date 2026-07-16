@@ -1,0 +1,8 @@
+# Suits given S, D, H, C — not S H D C order (normalizer check). Still 13 cards,
+# so only the order check trips.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 dkq2 h53 caqj97
+  dealer: S

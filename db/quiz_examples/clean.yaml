@@ -1,0 +1,52 @@
+# A valid file exercising the happy paths: single hand + free entry, multiple
+# choice, a hands-map with omitted seats + all-pass + contract + a lead question,
+# a one-seat skip, ten in both `t` and `10` forms, and us/them/none vuln.
+source: Example Source [ex]
+quiz: Example Quiz [ex-q]
+titles: "Example #"
+problems:
+
+# 1: single hand -> player (S); free entry; `t` ten; accept list.
+- hand: sa65 hkq2 dt53 caqj9
+  dealer: S
+  auction:
+  - s: "?"
+    explain: Open 1NT.
+    answer: 1NT
+    accept: [1C]
+
+# 2: multiple choice; `10` two-char ten; them -> ew (player S).
+- hand: sak5 hq983 d1092 cqj8
+  dealer: S
+  vuln: them
+  auction:
+  - s: "?"
+    explain: Balanced 12 — 1NT is out of range, open your suit.
+    choices: [1H, 1NT, 2NT]
+    answer: 1NT
+
+# 3: hands-map with omitted seats; all-pass; contract; opening-lead question; us -> ns.
+- hands:
+    s: sak2 hq54 dkqj9 c876
+    n: "-"
+    e: "-"
+    w: "-"
+  dealer: E
+  vuln: us
+  auction:
+  - e: 1NT
+  - all: p
+  contract: 1NT E
+  plays:
+  - s: "?"
+    explain: Lead the diamond king.
+    answer: KD
+
+# 4: one skipped seat (opponent silent) is allowed; question after partner's bid.
+- hand: sa65 hkq2 dt53 caqj9
+  dealer: N
+  auction:
+  - n: 1C
+  - s: "?"
+    explain: Respond 1H.
+    answer: 1H

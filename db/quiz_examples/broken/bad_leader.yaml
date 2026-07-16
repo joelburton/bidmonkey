@@ -1,0 +1,14 @@
+# Declarer is E, so the opening leader must be S (LHO). Here W leads instead
+# (normalizer check).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 d53 caqj97
+  dealer: E
+  auction:
+  - e: 1NT
+  - all: p
+  contract: 1NT E
+  plays:
+  - w: 2D

@@ -1,0 +1,14 @@
+# S leads the K of spades, but S's spades are only A 6 5.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa65 hkq2 dkqj9 c876
+  dealer: E
+  auction:
+  - e: 1NT
+  - all: p
+  contract: 1NT E
+  plays:
+  - s: "?"
+    answer: KS

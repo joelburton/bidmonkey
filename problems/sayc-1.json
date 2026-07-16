@@ -1,0 +1,159 @@
+{
+  "source": {
+    "slug": "sayc",
+    "title": "Std Bidding with SAYC"
+  },
+  "quiz": {
+    "slug": "sayc-nt",
+    "title": "No Trump Openings",
+    "source": "sayc"
+  },
+  "problems": [
+    {
+      "slug": "sayc-nt.1",
+      "title": "SAYC No Trump #1",
+      "ordinal": 1,
+      "hero": "S",
+      "dealer": "S",
+      "vulnerability": "none",
+      "deal": {
+        "S": {
+          "S": "A65",
+          "H": "KQ2",
+          "D": "53",
+          "C": "AQJ97"
+        }
+      },
+      "auction": [
+        {
+          "question": {
+            "id": "b1",
+            "choiceType": "enter_bid",
+            "answer": "1NT",
+            "explanation": "Don’t let those poor diamonds stop you from opening 1NT. If partner has the count for game, wouldn’t you rather play in notrump, where you need only nine tricks, than in a minor suit where you need eleven?"
+          }
+        }
+      ],
+      "play": null,
+      "contract": null
+    },
+    {
+      "slug": "sayc-nt.2",
+      "title": "SAYC No Trump #2",
+      "ordinal": 2,
+      "hero": "S",
+      "dealer": "S",
+      "vulnerability": "none",
+      "deal": {
+        "S": {
+          "S": "AK5",
+          "H": "Q9832",
+          "D": "J2",
+          "C": "AQJ"
+        }
+      },
+      "auction": [
+        {
+          "question": {
+            "id": "b1",
+            "choiceType": "enter_bid",
+            "answer": "1NT",
+            "explanation": "Open 1NT. The heart suit is weak and the hand is at the top of the range. If you open 1♥ and partner responds 1♠ you are stuck. Partner will not expect such a strong hand if you rebid 1NT, and a jump to 2NT is a slight overbid."
+          }
+        }
+      ],
+      "play": null,
+      "contract": null
+    },
+    {
+      "slug": "sayc-nt.3",
+      "title": "SAYC No Trump #3",
+      "ordinal": 3,
+      "hero": "S",
+      "dealer": "S",
+      "vulnerability": "none",
+      "deal": {
+        "S": {
+          "S": "A5",
+          "H": "AKQ86",
+          "D": "QT8",
+          "C": "T74"
+        }
+      },
+      "auction": [
+        {
+          "question": {
+            "id": "b1",
+            "choiceType": "enter_bid",
+            "answer": "1NT",
+            "accept": [
+              "1H"
+            ],
+            "explanation": "Many experts, including Bill Root, would vote for 1♥. You are at the bottom of the range and the heart suit is your main feature. Those in the Bergen camp are merrily bidding 1NT. We suggest that you experiment a little and see what works best for you."
+          }
+        }
+      ],
+      "play": null,
+      "contract": null
+    },
+    {
+      "slug": "sayc-nt.4",
+      "title": "SAYC No Trump #4",
+      "ordinal": 4,
+      "hero": "S",
+      "dealer": "S",
+      "vulnerability": "none",
+      "deal": {
+        "S": {
+          "S": "A65",
+          "H": "K8",
+          "D": "Q32",
+          "C": "AJ763"
+        }
+      },
+      "auction": [
+        {
+          "question": {
+            "id": "b1",
+            "choiceType": "enter_bid",
+            "answer": "1NT",
+            "explanation": "The current trend of adding distributional points for length rather than shortness — an approach we heartily approve of — has created an interesting situation. Some now take a 14 HCP hand, add a point when holding a five-card suit, and happily open 1NT. We recommend that you take only HCP holdings into account when opening notrump. We would open 1♣ here."
+          }
+        }
+      ],
+      "play": null,
+      "contract": null
+    },
+    {
+      "slug": "sayc-nt.5",
+      "title": "SAYC No Trump #5",
+      "ordinal": 5,
+      "hero": "S",
+      "dealer": "S",
+      "vulnerability": "none",
+      "deal": {
+        "S": {
+          "S": "AT",
+          "H": "AQ9",
+          "D": "T98",
+          "C": "AKT92"
+        }
+      },
+      "auction": [
+        {
+          "question": {
+            "id": "b1",
+            "choiceType": "enter_bid",
+            "answer": "1C",
+            "accept": [
+              "1NT"
+            ],
+            "explanation": "The flip side of the issue, however, is not a problem, but rather a matter of style and judgment. This example hand is very rich in controls — aces and kings. If you choose to consider this hand as too strong for a 1NT opening call, then by all means select 1♣. Nobody ever said you have to open 1NT with a balanced 17. Typically a 17-HCP hand with a meaty five-card minor is worthy of a 1♣ or 1♦ opener. You can plan to jump to 2NT over partner’s response."
+          }
+        }
+      ],
+      "play": null,
+      "contract": null
+    }
+  ]
+}

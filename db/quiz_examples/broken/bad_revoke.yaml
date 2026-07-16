@@ -1,0 +1,14 @@
+# E leads a heart; S has hearts (Q 5 4) but discards a club — a revoke.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sak2 hq54 dkqj9 c876
+  dealer: N
+  auction:
+  - n: 1NT
+  - all: p
+  contract: 1NT N
+  plays:
+  - e: 3H
+  - s: 6C
