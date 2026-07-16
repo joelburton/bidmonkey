@@ -85,6 +85,11 @@ export function PlayView({
   const trump = contract?.strain ?? 'NT'
   const declarer = contract?.declarer ?? hero
   const dummy = partnerOf(declarer)
+  // Are all four hands known? A "what's your lead" / "win this trick" problem
+  // gives only the hero's hand (plus the specific cards authored in the play), so
+  // once the record runs out we simply stop — no dummy reveal, no free play, no
+  // revealing hands we don't have.
+  const fullDeal = (['N', 'E', 'S', 'W'] as Seat[]).every((s) => problem.deal[s] != null)
 
   const [plays, setPlays] = useState<{ seat: Seat; card: string }[]>([])
   const [moveIndex, setMoveIndex] = useState(0)
@@ -138,7 +143,9 @@ export function PlayView({
     if (allRevealed || review || pending || playResult) return
     if (tableTrick.length >= 4) return
     if (moveIndex >= moves.length) {
-      setAllRevealed(true)
+      // With every hand known, reveal them all for free study; otherwise the
+      // record is all we have, so just stop where it ends.
+      if (fullDeal) setAllRevealed(true)
       return
     }
     const move = moves[moveIndex]
@@ -151,7 +158,7 @@ export function PlayView({
       setMoveIndex((i) => i + 1)
     }, 1000)
     return () => clearTimeout(t)
-  }, [moveIndex, allRevealed, review, pending, playResult, tableTrick.length, moves])
+  }, [moveIndex, allRevealed, review, pending, playResult, tableTrick.length, moves, fullDeal])
 
   const answerPlay = (card: string) => {
     if (!pending) return
@@ -215,7 +222,9 @@ export function PlayView({
     (allRevealed && tableTrick.length < 4 && seat === toAct) ||
     (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')
   const faceUp = (seat: Seat) =>
-    seat === hero || allRevealed || (seat === dummy && dummyRevealed)
+    seat === hero ||
+    allRevealed ||
+    (seat === dummy && dummyRevealed && problem.deal[dummy] != null)
   const commitCard = (seat: Seat, card: string) => {
     if (allRevealed) playCard(seat, card, true)
     else if (pending?.seat === seat) answerPlay(card)
@@ -234,6 +243,11 @@ export function PlayView({
   for (const s of Object.keys(layout) as Seat[]) seatAt[layout[s]] = s
 
   const hand = (seat: Seat) => handRemaining(problem.deal[seat] ?? {}, playedBy(seat))
+  // Backs to show for a concealed hand: the real remaining count when we know the
+  // hand, else 13 minus whatever that seat has played (so an unknown opponent
+  // still shows a plausible fan rather than nothing).
+  const faceDownCount = (seat: Seat) =>
+    problem.deal[seat] != null ? handToCards(hand(seat)).length : 13 - playedBy(seat).length
   const sel = (seat: Seat) => (selected?.seat === seat ? selected.card : undefined)
   // Follow-suit rule: of the clickable hand, only cards legal against the
   // current trick respond. Applies to free play and enter-card questions alike.
@@ -244,11 +258,7 @@ export function PlayView({
     const seat = seatAt[pos]
     if (!faceUp(seat))
       return (
-        <Hand
-          faceDown
-          count={handToCards(hand(seat)).length}
-          orientation={POS_ORIENT[pos]}
-        />
+        <Hand faceDown count={faceDownCount(seat)} orientation={POS_ORIENT[pos]} />
       )
     const playable = clickable(seat)
     return (

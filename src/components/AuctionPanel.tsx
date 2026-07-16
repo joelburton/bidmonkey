@@ -145,7 +145,7 @@ export function AuctionPanel({
     <div className="auction-panel">
       <div className="auction-head">
         <span>#{problem.slug}</span>
-        <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>
+        {problem.vulnerability && <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>}
       </div>
 
       <div className="auction-scroll">
@@ -249,6 +249,22 @@ export function AuctionPanel({
             {q.explanation && (
               <p className="explain-body">{withSuits(q.explanation)}</p>
             )}
+            <p className="explain-answer">
+              Answer: <CallText call={q.answer} />
+              {!!q.accept?.length && (
+                <>
+                  {' '}
+                  (accepted:{' '}
+                  {q.accept.map((a, i) => (
+                    <span key={a}>
+                      {i > 0 ? ', ' : ''}
+                      <CallText call={a} />
+                    </span>
+                  ))}
+                  )
+                </>
+              )}
+            </p>
           </div>
         </>
       )}

@@ -44,7 +44,9 @@ export interface Problem {
   tags: string[]
   hero: Seat
   dealer: Seat
-  vulnerability: Vulnerability
+  // null = the problem didn't state a vulnerability (its solution applies to
+  // any); distinct from 'none' (explicitly neither side vulnerable).
+  vulnerability: Vulnerability | null
   deal: Deal
   auction: AuctionEntry[]
   play?: Trick[]

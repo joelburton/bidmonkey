@@ -126,7 +126,7 @@ def parse_card(tok, where):
 
 def normalize_vuln(value, player):
     if value is None:
-        return "none"
+        return None          # unspecified — the DB stores NULL, distinct from 'none'
     v = str(value).strip().lower()
     ours = "ns" if player in ("N", "S") else "ew"
     theirs = "ew" if ours == "ns" else "ns"

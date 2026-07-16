@@ -617,6 +617,20 @@ body {
   font-size: 0.95rem;
   line-height: 1.5;
 }
+/* The explicit answer line under the explanation (some problems don't state it
+ * clearly in prose). Separated by a hairline so it reads as a distinct footer. */
+.explain-answer {
+  margin: 10px 0 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.explain-answer .suit-glyph {
+  width: 0.9em;
+  height: 0.9em;
+  vertical-align: -0.1em;
+}
 .suit-red-text {
   color: #ff5d6c;
 }

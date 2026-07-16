@@ -28,7 +28,7 @@ interface ProblemRow {
   tags: string[] | null
   hero: Seat
   dealer: Seat
-  vulnerability: Vulnerability
+  vulnerability: Vulnerability | null
   deal: Deal
   auction: AuctionEntry[] | null
   play: Trick[] | null
@@ -51,7 +51,7 @@ const mapProblem = (r: ProblemRow): Problem => ({
   tags: r.tags ?? [],
   hero: r.hero,
   dealer: r.dealer,
-  vulnerability: r.vulnerability,
+  vulnerability: r.vulnerability ?? null,
   deal: r.deal,
   auction: r.auction ?? [],
   play: r.play ?? undefined,

@@ -50,7 +50,7 @@ def test_clean_p1_free_entry_and_ten():
     assert q["answer"] == "1NT"
     assert q["accept"] == ["1C"]
     assert "options" not in q
-    assert p["vulnerability"] == "none"     # omitted -> none
+    assert p["vulnerability"] is None       # omitted -> null (unspecified)
     assert p["play"] is None
 
 
@@ -154,7 +154,7 @@ def test_parse_card(tok, want):
 
 @pytest.mark.parametrize("val,player,want", [
     ("us", "S", "ns"), ("us", "E", "ew"), ("them", "S", "ew"), ("them", "W", "ns"),
-    ("all", "S", "both"), ("both", "S", "both"), (None, "S", "none"),
+    ("all", "S", "both"), ("both", "S", "both"), (None, "S", None),
     ("-", "S", "none"), ("ns", "E", "ns"), ("ew", "S", "ew"),
 ])
 def test_normalize_vuln(val, player, want):

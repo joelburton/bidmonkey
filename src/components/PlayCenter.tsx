@@ -81,7 +81,9 @@ export function PlayCenter({
         <button className="contract-btn" onClick={onContractClick}>
           {contract ? <ContractText contract={contract} /> : 'Passed out'}
         </button>
-        <span className="vul-tag">Vul: {VUL_SHORT[problem.vulnerability]}</span>
+        {problem.vulnerability && (
+          <span className="vul-tag">Vul: {VUL_SHORT[problem.vulnerability]}</span>
+        )}
       </div>
 
       <div className="trick-area">
@@ -122,6 +124,22 @@ export function PlayCenter({
             {result.question.explanation && (
               <p className="explain-body">{withSuits(result.question.explanation)}</p>
             )}
+            <p className="explain-answer">
+              Answer: <CardText card={result.question.answer} />
+              {!!result.question.accept?.length && (
+                <>
+                  {' '}
+                  (accepted:{' '}
+                  {result.question.accept.map((a, i) => (
+                    <span key={a}>
+                      {i > 0 ? ', ' : ''}
+                      <CardText card={a} />
+                    </span>
+                  ))}
+                  )
+                </>
+              )}
+            </p>
           </div>
         </>
       )}
