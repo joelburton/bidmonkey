@@ -1,0 +1,157 @@
+source: Std Bidding with SAYC [sayc]
+quiz: Responding to 1NT [sayc-nt-r]
+titles: "SAYC Responding to 1NT #"
+problems:
+
+- hand: skj10742 hj98 d9 ck74
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      While you have only 8 HCP, you know you will be playing in spades and a holding like this is much too powerful to be treated as invitational. Get your partnership to game.
+    answer: 2H
+
+- hand: sq93 hk65 dj843 cq87
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Your shape is flat and your points are scattered. In the long run, in spite of your 8 HCP, you do best to pass.
+    answer: P
+
+- hand: sq732 hk65 daj72 c109
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      If partner rebids 2♦, bid 3NT. If he rebids 2♠, raise to 4♠. If he rebids 2♥, bid 3NT. Since you guarantee at least one four-card major, he will know that it must be spades. If he also holds four spades, he will remove 3NT to 4♠.
+    answer: 2c
+
+- hand: sqj32 hj652 daj7 c102
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      If partner rebids 2♦, bid 2NT. If he rebids 2♠, raise to 3♠. If he rebids 2♥, raise to 3♥. Take note that whenever responder makes an invitational bid, captaincy changes. In each of the indicated auctions, responder — who will normally hold at least 8 HCP — limits his holding to 8-9 HCP and turns the decision-making process over to opener. Such is the nature of bridge — just as the value of our hands change throughout an auction, so too does captaincy change.
+    answer: 2c
+
+- hand: sk65 hq732 daj72 c109
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      If partner rebids 2♦, bid 3NT. If he rebids 2♥, bid 4♥. If he rebids 2♠, bid 3NT.
+    answer: 2c
+
+- hand: sq10732 hk652 daj c109
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      If partner rebids 2♦, bid 3♠. The jump forces partner to game and shows five spades and four hearts. With three-card spade support partner will raise to 4♠. Without it, partner will bid 3NT. If partner rebids 2♥, forget the spade suit and raise to 4♥. If partner rebids 2♠, nirvana has been achieved and you certainly don’t need us to tell you what to do now.
+    answer: 2c
+
+- hand: sj1073 hqj652 da c832
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      If opener rebids 2♦, bid 2♥. Opener now has five choices:
+      - With a minimum 1NT and three hearts, he will pass.
+      - With a minimum and two hearts, he will bid 2NT.
+      - With an invitational 1NT hand — a good 15 to 16 and three hearts — he will bid 3♥. Given the distributional nature of this holding, if opener responds with a 3♥ bid, you are well advised to upgrade your hand and bid game.
+      - With a maximum 1NT opener and three hearts, he will bid 4♥.
+      - With a maximum 1NT and two hearts he will bid 3NT.
+    answer: 2c
+
+- hand: sk1073 hqj652 da7 c82
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Similar to Hand 6. If partner rebids 2♦, bid 3♥. The jump forces partner to game and shows five hearts and four spades. With three-card heart support partner will raise to 4♥. Without it, partner will bid 3NT.
+    answer: 2c
+
+- hand: s8732 h7652 d8753 c9
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Garbage Stayman.
+    answer: 2c
+
+
+- hand: sq732 h652 dj8742 c2
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Garbage Stayman.
+    answer: 2c
+
+
+- hand: sj65 hq732 d109672 c8
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Garbage Stayman.
+    answer: 2c
+
+# 12
+- hand: sq65 hq108432 d10 cj83
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      In the old days, when partner opened 1NT in a Standard American auction, responder signed off in 2♥ and became the declarer. Playing Jacoby Transfers, responder instead bids 2♦*. This is a conventional bid that says absolutely nothing about diamonds. Instead, it shows the suit directly above — hearts. Opener will almost always bid 2♥ — see p. 12 for the exception — and responder will pass. The identical contract has been reached, but opener has become the declarer.
+    answer: 2d
+
+# 13
+- hand: skq765 h10843 d7 c983
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      It would be nice if you could find out if partner holds four hearts and still stop at the two-level. Unfortunately, with a weak 5-4 you cannot afford to go through Stayman. Instead, bid 2♥*, transferring partner to the five-card major, and pass.
+    answer: 2h
+
+# 14
+- hand: s97652 hk10843 d8 c83
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      You wish you knew which major suit partner is long in, but you don’t have time to find out. Transfer to your better major, hearts, and then pass.
+    answer: 2d
+
+#15
+- hand: s65 hj32 dq106532 cj9
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Jacoby Transfers are used only when responding to notrump and holding at least five or more cards in a major suit. A 2♦* bid transfers the opener to 2♥ and a 2♥* bid transfers the opener to 2♠. Obviously, we have just given up any chance of reaching a natural contract of 2♦ — just as we gave up the 2♣ contract when we adopted Stayman. Thus, we can no longer sign off in 2♦ — partner would take this bid as a transfer to 2♥. Instead, we must pass, or get the partnership to 3♦. We will show you how to do this a bit later in this chapter.
+    answer: p
+    accept: [2s]
+
+
+
+
+
+

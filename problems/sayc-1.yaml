@@ -34,7 +34,8 @@ problems:
   - s: "?"
     explain: |
       The current trend of adding distributional points for length rather than shortness — an approach we heartily approve of — has created an interesting situation. Some now take a 14 HCP hand, add a point when holding a five-card suit, and happily open 1NT. We recommend that you take only HCP holdings into account when opening notrump. We would open 1♣ here.
-    answer: 1NT
+    answer: 1C
+    accept: [1NT]
 
 - hand: sa10 haq9 d1098 cak1092
   dealer: S
