@@ -332,7 +332,11 @@ export function PlayView({
         <>
           <div className="explain-backdrop" onClick={() => setShowAuction(false)} />
           <div className="auction-overlay">
-            <AuctionTable cols={am.cols} grid={am.grid} />
+            {problem.auction.length ? (
+              <AuctionTable cols={am.cols} grid={am.grid} />
+            ) : (
+              <div className="no-auction">No auction supplied</div>
+            )}
           </div>
         </>
       )}

@@ -472,24 +472,30 @@ def normalize_problem(p, ordinal, titles_tmpl, quiz_slug):
                     raise ProblemError(f"{where}: {card} is in both {all_cards[card]} and {seat}")
                 all_cards[card] = seat
 
+    has_auction = bool(p.get("auction"))
     auction, echo, final = process_auction(
-        p.get("auction", []), dealer, player, close=bool(p.get("contract")))
+        p.get("auction", []), dealer, player, close=has_auction and bool(p.get("contract")))
 
     contract_txt, declarer, trump = None, None, None
     if p.get("contract"):
         contract_txt, c_level, c_strain, c_doubled, declarer = normalize_contract(p["contract"], where)
         trump = c_strain
-        if final is None:
-            raise ProblemError(f"{where}: contract {contract_txt} given, but the auction is passed out")
-        if (c_level, c_strain, declarer, c_doubled) != final:
-            f_txt = f"{final[0]}{final[1]}{final[3]} {final[2]}"
-            raise ProblemError(f"{where}: contract {contract_txt} does not match the "
-                               f"auction's final contract {f_txt}")
+        if has_auction:
+            # With an auction, the contract must be its final contract.
+            if final is None:
+                raise ProblemError(f"{where}: contract {contract_txt} given, but the auction is passed out")
+            if (c_level, c_strain, declarer, c_doubled) != final:
+                f_txt = f"{final[0]}{final[1]}{final[3]} {final[2]}"
+                raise ProblemError(f"{where}: contract {contract_txt} does not match the "
+                                   f"auction's final contract {f_txt}")
+        # else: no auction supplied — the contract stands on its own.
     elif final is not None:
         declarer, trump = final[2], final[1]   # derive for the leader / trick-winner checks
 
     play = process_play(p.get("plays", []), player)
     if play:
+        if declarer is None:
+            raise ProblemError(f"{where}: a play needs a contract, or an auction that reaches one")
         validate_play(play, deal, trump, declarer, where)
 
     title = (titles_tmpl.replace("#", f"#{ordinal}")

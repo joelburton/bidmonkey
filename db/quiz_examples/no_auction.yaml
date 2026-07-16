@@ -1,0 +1,13 @@
+# A problem given as contract + lead only, with no auction recorded.
+source: Example Source [ex]
+quiz: Example Quiz [ex-q]
+titles: "Example #"
+problems:
+- hand: s743 hkqj9 d952 cq83
+  dealer: E
+  vuln: ns
+  contract: 4S E
+  plays:
+  - s: "?"
+    explain: Lead the heart king, top of a strong sequence.
+    answer: KH

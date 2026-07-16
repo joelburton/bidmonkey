@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Problem, Seat } from '../types'
-import { finalContract } from '../bidding'
+import { finalContract, parseContract } from '../bidding'
 import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { AuctionPanel } from './AuctionPanel'
@@ -24,7 +24,6 @@ export function ProblemView({
   hasNext: boolean
 }) {
   const [answers, setAnswers] = useState<string[]>([])
-  const [phase, setPhase] = useState<'auction' | 'play'>('auction')
 
   // Playable in exactly two cases: every hand is known (full play / free study),
   // or it's an opening-lead problem — only the hero's hand, and the play is the
@@ -36,11 +35,18 @@ export function ProblemView({
     play.length === 1 && play[0].cards.length === 1 && 'question' in play[0].cards[0]
   const canPlay = allHandsKnown || isLeadOnly
 
+  // A problem given as contract + play with no auction opens straight on the
+  // play page; its contract is the stored one (there's no auction to derive it).
+  const noAuction = problem.auction.length === 0
+  const [phase, setPhase] = useState<'auction' | 'play'>(
+    noAuction && canPlay ? 'play' : 'auction',
+  )
+
   if (phase === 'play') {
     return (
       <PlayView
         problem={problem}
-        contract={finalContract(problem, answers)}
+        contract={noAuction ? parseContract(problem.contract ?? '') : finalContract(problem, answers)}
         answers={answers}
         onNext={onNext}
         hasNext={hasNext}

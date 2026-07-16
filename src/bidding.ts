@@ -181,6 +181,20 @@ export function finalContract(problem: Problem, answers: string[]): Contract | n
   return { level: last.level, strain: last.strain, declarer, doubled }
 }
 
+/** Parse a stored contract string ("3NT E", "4SX W") into a Contract, or null.
+ * Used for problems given as a contract + play with no auction to derive one. */
+export function parseContract(text: string): Contract | null {
+  const m = /^([1-7])(NT|N|C|D|H|S)(XX|X)?\s+([NESW])$/.exec(text.trim())
+  if (!m) return null
+  const strain = (m[2] === 'N' ? 'NT' : m[2]) as Strain
+  return {
+    level: Number(m[1]),
+    strain,
+    declarer: m[4] as Seat,
+    doubled: (m[3] ?? '') as '' | 'X' | 'XX',
+  }
+}
+
 function highestRank(calls: string[]): number {
   let max = -1
   for (const c of calls) max = Math.max(max, callRank(c))

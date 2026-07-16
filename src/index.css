@@ -957,6 +957,12 @@ body {
   box-shadow: 0 8px 28px rgba(0, 0, 0, 0.55);
   color: #fff;
 }
+/* Shown in place of the auction table when a problem gives only contract + play. */
+.no-auction {
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
 
 /* When all hands are revealed, pull the side rails in so more of them shows. */
 .table.revealed .rail-west {

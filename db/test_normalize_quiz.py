@@ -90,6 +90,16 @@ def test_clean_p4_one_skip_allowed():
     assert echoes[3][1] == "N:1C E:P S:?(=1H)"
 
 
+def test_no_auction_contract_only():
+    # Contract + lead, no auction: imports with an empty auction and the stated contract.
+    out, errors, _ = run("no_auction.yaml")
+    assert errors == []
+    p = out["problems"][0]
+    assert p["auction"] == []
+    assert p["contract"] == "4S E"
+    assert p["play"][0]["cards"][0]["question"]["answer"] == "HK"
+
+
 def test_contract_appends_closing_passes():
     # Auction written to the last bid; a stated contract closes it with passes.
     out, errors, echoes = run("contract_closes.yaml")
@@ -119,6 +129,7 @@ BROKEN = [
     ("broken/bad_card_not_in_hand.yaml", "has no"),
     ("broken/bad_revoke.yaml", "follow suit"),
     ("broken/bad_next_leader.yaml", "led by"),
+    ("broken/bad_play_no_contract.yaml", "needs a contract"),
     ("broken/bad_call.yaml", "1Z"),
     ("broken/bad_seat_key.yaml", "x"),
     ("broken/bad_vuln.yaml", "v/-"),
