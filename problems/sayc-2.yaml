@@ -150,8 +150,452 @@ problems:
     answer: p
     accept: [2s]
 
+#16
+- hand: skj865 hk32 d532 cj9
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Start with a transfer to 2♠ and rebid 2NT. Partner now has a choice of four contracts: 2NT, 3♠, 3NT and 4♠. Very convenient!
+    answer: 2h
+
+#17
+- hand: sqj765 hkj832 d32 c9
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      All hands containing 5-5 or better in the majors employ transfers. Most SAYC notes in this regard are either inconsistent or unclear. With invitational values, the best of several options seems to be that responder transfer to 2♥ and then bid 2♠. In the event that partner likes spades, he can pass, invite or raise to game. Preferring hearts, he can correct to 3♥ or bid the heart game.
+    answer: 2d*
+
+
+#18
+- hand: s65 hkj9832 dq2 cj97
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Transfer partner to hearts.
+    answer: 2d
+  - n: 2H
+  - s: "?"
+    explain: |
+      Transfer partner to hearts and then raise to the three-level. Invitational with a six-card major.
+    answer: 3h
 
 
 
+#19
+- hand: skj865 hk32 d532 ca9
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Transfer to spades.
+    answer: 2h
+  - n: 2S
+  - s: "?"
+    explain: |
+      When partner bids 2♠, bid 3NT, offering a choice of game contracts. With a spade fit, partner will now bid 4♠. This is a typical transfer auction with game-forcing values and a five-card major.
+    answer: 3nt
 
 
+
+#20
+- hand: sq10765 hkj832 d32 ca
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      This time you will transfer to the higher-ranking suit, spades.
+    answer: 2h
+  - n: 2s
+  - s: "?"
+    explain: |
+      This time you will transfer to the higher-ranking suit, spades, then rebid in hearts. If you have no interest in slam, rebid 4♥. Partner either passes or corrects to 4♠. With slam interest, bid 3♥. This is forcing. Partner can now show strong support for spades with a 3♠ preference — allowing room for control-bidding below game — or show support for hearts. Note the difference between this auction and the 5-5 invitational auction presented earlier. The game-forcing auction returns the bidding to opener at the three-level. The invitational auction returns the bidding to opener at the two-level.
+    answer: 3h
+
+
+#21
+- hand: sj76 hkj9832 da2 c97
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Transfer to hearts.
+    answer: 2d*
+  - n: 2H
+  - s: "?"
+    explain: |
+      You have no interest in any contract other than the heart game. Bid 2♦* then raise to 4♥. While not strictly part of SAYC, you will find many players who like to use Texas transfers with this kind of hand: 1NT-4♦* transfers to hearts, and 1NT-4♥* transfers to spades. After Texas, a 4NT rebid is ace-asking (i.e. 1NT-4♦*, 4♥-4NT). Contrast this sequence with 1NT-2♦*, 2♥*-4NT which is quantitative, inviting to slam in either hearts (showing a 5-card suit) or notrump. If you use Texas transfers, you can also play 1NT-2♦*, 2♥-4♥ as a mild slam try.
+    answer: 4h
+    accept: [4d*]
+
+#22
+- hand: skj1076 h2 daq982 c97
+  dealer: N
+  auction:
+  - n: 1nt
+  - s: "?"
+    explain: |
+      Transfer partner to spades.
+    answer: 2h
+  - n: 2s
+  - s: "?"
+    explain: |
+      Transfer partner to spades and then bid 3♦. The new suit is natural and forcing.
+    answer: 3d
+
+#22b
+- hand: sj865 haq94 daq5 ca9
+  dealer: S
+  auction:
+  - s: 1nt
+  - n: 2d*
+  - s: "?"
+    explain: |
+      You open 1NT. Responder bids 2♦*, intending to pass when you bid 2♥. You, however, hold a very special hand — a maximum for the original bid combined with four-card support for partner’s heart suit. Instead of a simple 2♥ call, you can now bid 3♥. Responder reconsiders and raises to game. This is a very common method for showing a maximum range 1NT and at least four trumps.
+    answer: 3h
+  - n: 4h
+
+#23
+- hand: s543 h75 d2 cj1098765
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2s*
+    explain: Transfer to clubs.
+  - n: 3c
+  - s: "?"
+    explain: |
+      Weak.
+    answer: p
+
+#24
+- hand: s543 h75 dq1087542 c5
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2s*
+    explain: Transfer to clubs.
+  - n: 3c
+  - s: "?"
+    explain: |
+      Weak, this is a signoff and partner must pass.
+    answer: 3d
+
+
+#25
+- hand: sj43 h75 daj4 cq10987
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2nt
+    explain: Invitational.
+
+#26
+- hand: sa5 hj32 dkj95 c10732
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2nt
+    explain: Invitational.
+
+
+#27
+- hand: sq52 ha86 dq1087 c952
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: p
+    explain: |
+      When holding a flat (4333) hand opposite a notrump opener, we recommend deducting 1 point and then deciding what bid would be appropriate. In this case, pass.
+
+
+#28
+- hand: s43 h75 d984 caq10942
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 3c*
+    explain: |
+      Note the lack of a side entry to these hands. If you had one, you would simply bid 3NT directly and take your chances.
+
+#29
+- hand: s542 h86 dkq98752 c8
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 3d*
+    explain: |
+      Note the lack of a side entry to these hands. If you had one, you would simply bid 3NT directly and take your chances.
+
+
+#30
+- hand: s542 h86 dak98752 c8
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 3nt
+    explain: |
+      When holding a seven-card suit headed by the AK combination, we recommend a jump to 3NT. After all, the combined hands have at least nine cards in the diamond suit and partner needs very little to roll the required number of tricks.
+
+#31
+- hand: skqj743 ha2 dj85 ck7
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 3s
+    explain: |
+      A bid of 3♥ or 3♠ shows a six-card suit, or longer, and interest in slam.
+
+#32
+- hand: sa108 hkq10652 d5 ckq9
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 3h
+    explain: |
+      A bid of 3♥ or 3♠ shows a six-card suit, or longer, and interest in slam.
+
+
+#33
+- hand: sj8 hk52 dk2 cak8743
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2c*
+    explain: |
+      The key is to begin with a response of 2♣, which the opening 1NT bidder assumes to be Stayman.
+  - n: 2h
+  - s: "?"
+    answer: 3c*
+    explain: |
+      He will bid 2♥ and you now rebid 3♣, showing the actual hand.
+
+#34
+- hand: s76 hkq2 dkj10976 ca3
+  dealer: n
+  auction:
+  - n: 1nt
+  - s: "?"
+    answer: 2c*
+    explain: |
+      The key is to begin with a response of 2♣, which the opening 1NT bidder assumes to be Stayman.
+  - n: 2h
+  - s: "?"
+    answer: 3d*
+    explain: |
+      Rebid 3♦ when partner responds 2♥. Any rational auction from this point forward should get the partnership to 6♦ or 6NT.
+
+#35
+- hand: s543 h5 d632 c987654
+  dealer: n
+  auction:
+  - n: 1nt
+  - e: x
+  - s: "?"
+    answer: xx
+    explain: |
+      We don’t want partner playing in 1NT under any circumstances, and 1NT doubled would be that much worse. Redouble. Partner bids 2♣ and you will pass. Without the double you would have been forced to go through 2♠*, getting your side to 3♣. Their double has actually improved your chances of finding a contract you can make.
+
+#36
+- hand: s32 h86 d1075432 c982
+  dealer: n
+  auction:
+  - n: 1nt
+  - e: x
+  - s: "?"
+    answer: xx
+    explain: |
+      Partner opens 1NT and RHO doubles. Redouble. Partner bids 2♣ and you will correct to 2♦.
+
+
+
+#37
+- hand: skq43 hj5 dkj87 caq10
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: x
+  - s: "?"
+    answer: 2s
+    explain: |
+      Your bid is 2♠, the same thing you would have done without the intervening double.
+
+#38
+- hand: sa62 hq8 dak108 ck1082
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: x
+  - s: "?"
+    answer: pass
+    explain: |
+      Pass with four clubs and await developments.
+
+#39
+- hand: s862 hq8 dak10 cak1082
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: x
+  - s: "?"
+    answer: xx
+    explain: |
+      Redouble with five clubs (or four good ones).
+
+
+
+#40
+- hand: skq43 hj5 dkj8 caq109
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: 2h
+  - s: "?"
+    answer: 2s
+    explain: |
+      Bid a four-card major at the two-level.
+
+#41
+- hand: s62 haq108 dak108 ck108
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: 2h
+  - s: "?"
+    answer: x
+    explain: |
+      This time you will double for what you expect to be a substantial penalty.
+
+#42
+- hand: sa62 hq83 dak108 ck108
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2c
+  - e: 2h
+  - s: "?"
+    answer: p
+    explain: |
+      This time you simply pass, denying a four-card major. Following the pass, responder may:
+      - Double (for penalty).
+      - Pass.
+      - Make a normal bid.
+
+#43
+- hand: s43 hak987 dkj8 caq10
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2h*
+  - e: x
+  - s: "?"
+    answer: xx
+    explain: |
+      Redouble (showing a strong holding in the doubled suit).
+
+#44
+- hand: sq62 ha108 dak108 ck87
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2h*
+  - e: x
+  - s: "?"
+    answer: 2s
+    explain: |
+      Complete the transfer (showing three-plus trumps).
+
+
+#45
+- hand: sq1076 h87 dakj10 cak10
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2h*
+  - e: x
+  - s: "?"
+    answer: 3s
+    explain: |
+      Accept the transfer at the three-level (showing four trumps and a maximum).
+
+#46
+- hand: s62 ha108 dak108 ckj87
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2h*
+  - e: x
+  - s: "?"
+    answer: p
+    explain: |
+      You have nothing to show and should indicate that with a pass. Responder may now:
+      - Pass, to play.
+      - Redouble, to play.
+      - Make a normal bid.
+      - Signoff by bidding his major at the two-level.
+
+#47
+- hand: sa2 hq86 dkj87 caq109
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2d*
+  - e: 2s
+  - s: "?"
+    answer: 3h
+    explain: |
+      Bid three of the major (with a good supporting hand).
+
+
+#48
+- hand: saq107 h86 dak108 ck108
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2d*
+  - e: 2s
+  - s: "?"
+    answer: x
+    explain: |
+      Double (for penalty).
+
+#48
+- hand: sa32 hq8 dak108 ck1082
+  dealer: s
+  auction:
+  - s: 1nt
+  - n: 2d*
+  - e: 2s
+  - s: "?"
+    answer: p
+    explain: |
+      This time you must pass and see what happens next, if anything. Assuming LHO passes, partner may now:
+      - Re-transfer (rebid the original denomination).
+      - Make a normal bid.
+      - Double (to show strength).
+      - Pass.
