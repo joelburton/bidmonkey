@@ -4,6 +4,7 @@ import { fetchCatalog } from './data/repo'
 import { SourceList } from './components/SourceList'
 import { QuizList } from './components/QuizList'
 import { ProblemView } from './components/ProblemView'
+import { downloadQuizPdf } from './lib/quizPdf'
 
 // Navigation: sources → quizzes (of a source) → quiz. `order` is the sequence of
 // problem slugs to present — the quiz's ordinal order, or a shuffle (random mode);
@@ -90,6 +91,10 @@ export default function App() {
   const startQuiz = (slug: string, mode: 'order' | 'random') => {
     const slugs = catalog.quizzes.find((q) => q.slug === slug)?.problemSlugs ?? []
     setNav({ view: 'quiz', quiz: slug, index: 0, order: mode === 'random' ? shuffle(slugs) : slugs })
+  }
+  const exportPdf = (slug: string) => {
+    const quiz = catalog.quizzes.find((q) => q.slug === slug)
+    if (quiz) downloadQuizPdf(quiz, catalog.problems)
   }
 
   // Running a quiz: one problem at a time, in `order`, with Home + Prev/Next.
@@ -183,6 +188,7 @@ export default function App() {
           <QuizList
             quizzes={catalog.quizzes.filter((q) => q.source === nav.source)}
             onStart={startQuiz}
+            onPdf={exportPdf}
           />
         )}
       </main>
