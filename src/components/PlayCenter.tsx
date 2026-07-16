@@ -5,7 +5,7 @@ import { VUL_SHORT } from '../bidding'
 import type { Pos } from '../play'
 import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
-import { withSuits } from './suitText'
+import { Explanation } from './Explanation'
 import { useTapDismiss } from '../tapDismiss'
 
 const OPT_LETTERS = 'abcdef'
@@ -133,7 +133,7 @@ export function PlayCenter({
               {result.correct ? 'Correct!' : 'Not quite'}
             </div>
             {result.question.explanation && (
-              <p className="explain-body">{withSuits(result.question.explanation)}</p>
+              <Explanation text={result.question.explanation} />
             )}
             <p className="explain-answer">
               Answer: <CardText card={result.question.answer} />

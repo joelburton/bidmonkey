@@ -612,10 +612,25 @@ body {
 .explain-status.no {
   color: #ff8a97;
 }
-.explain-body {
+/* Explanation body: paragraphs run together (no blank space), with the first
+   line of every paragraph after the first indented — book style. */
+.explain-para {
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.5;
+}
+.explain-para.indent {
+  text-indent: 1.4em;
+}
+/* Lines that start with "-" become a bulleted list. */
+.explain-list {
+  margin: 0.35rem 0 0;
+  padding-left: 1.3em;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.explain-list li {
+  margin: 0;
 }
 /* The explicit answer line under the explanation (some problems don't state it
  * clearly in prose). Separated by a hairline so it reads as a distinct footer. */

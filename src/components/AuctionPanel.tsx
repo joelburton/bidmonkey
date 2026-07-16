@@ -11,7 +11,7 @@ import {
 } from '../bidding'
 import { SuitGlyph } from './SuitGlyph'
 import { AuctionTable, CallText } from './AuctionTable'
-import { withSuits } from './suitText'
+import { Explanation } from './Explanation'
 import { useTapDismiss } from '../tapDismiss'
 
 const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
@@ -260,9 +260,7 @@ export function AuctionPanel({
             <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
               {result.correct ? 'Correct!' : 'Not quite'}
             </div>
-            {q.explanation && (
-              <p className="explain-body">{withSuits(q.explanation)}</p>
-            )}
+            {q.explanation && <Explanation text={q.explanation} />}
             <p className="explain-answer">
               Answer: <CallText call={q.answer} />
               {!!q.accept?.length && (

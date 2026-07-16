@@ -124,6 +124,18 @@ def parse_card(tok, where):
     return f"{SUIT_OF[m.group(2)]}{rank}"
 
 
+def normalize_explanation(text):
+    """Trim surrounding blank lines and per-line trailing whitespace, keeping the
+    line breaks intact — the app renders each line as a paragraph (first-line
+    indented after the first) and a run of `-` lines as a bulleted list."""
+    lines = [ln.rstrip() for ln in text.splitlines()]
+    while lines and not lines[0]:
+        lines.pop(0)
+    while lines and not lines[-1]:
+        lines.pop()
+    return "\n".join(lines)
+
+
 def normalize_vuln(value, player):
     if value is None:
         return None          # unspecified — the DB stores NULL, distinct from 'none'
@@ -249,7 +261,7 @@ def build_question(step, where, qid, parse, free_type):
     if accept:
         q["accept"] = accept
     if step.get("explain"):
-        q["explanation"] = step["explain"].strip()
+        q["explanation"] = normalize_explanation(step["explain"])
 
     order = ("id", "choiceType", "answer", "options", "accept", "explanation")
     return {k: q[k] for k in order if k in q}, answer

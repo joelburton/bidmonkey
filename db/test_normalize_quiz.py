@@ -181,6 +181,12 @@ def test_normalize_vuln(val, player, want):
     assert nq.normalize_vuln(val, player) == want
 
 
+def test_normalize_explanation():
+    # keeps line breaks (paragraphs + bullets), strips trailing ws and edge blanks
+    text = "\nIntro.\n- one\n- two  \n\nEnd.\n\n"
+    assert nq.normalize_explanation(text) == "Intro.\n- one\n- two\n\nEnd."
+
+
 @pytest.mark.parametrize("cards,trump,want", [
     ([("E", "H2"), ("S", "H9"), ("W", "H5"), ("N", "H3")], "NT", "S"),   # high heart
     ([("E", "HA"), ("S", "SA"), ("W", "H5"), ("N", "H3")], "NT", "E"),   # off-suit can't win
