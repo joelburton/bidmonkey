@@ -5,11 +5,23 @@ import { SourceList } from './components/SourceList'
 import { QuizList } from './components/QuizList'
 import { ProblemView } from './components/ProblemView'
 
-// Navigation: sources → quizzes (of a source) → quiz (a problem, in order).
+// Navigation: sources → quizzes (of a source) → quiz. `order` is the sequence of
+// problem slugs to present — the quiz's ordinal order, or a shuffle (random mode);
+// `index` walks it, so Prev/Next follow the chosen order, not the real ordinals.
 type Nav =
   | { view: 'sources' }
   | { view: 'quizzes'; source: string }
-  | { view: 'quiz'; quiz: string; index: number }
+  | { view: 'quiz'; quiz: string; index: number; order: string[] }
+
+/** Fisher–Yates shuffle into a fresh array. */
+function shuffle<T>(items: T[]): T[] {
+  const a = [...items]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 export default function App() {
   const [catalog, setCatalog] = useState<Catalog | null>(null)
@@ -75,12 +87,16 @@ export default function App() {
   }
 
   const goHome = () => setNav({ view: 'sources' })
+  const startQuiz = (slug: string, mode: 'order' | 'random') => {
+    const slugs = catalog.quizzes.find((q) => q.slug === slug)?.problemSlugs ?? []
+    setNav({ view: 'quiz', quiz: slug, index: 0, order: mode === 'random' ? shuffle(slugs) : slugs })
+  }
 
-  // Running a quiz: one problem at a time, in order, with Home + Next.
+  // Running a quiz: one problem at a time, in `order`, with Home + Prev/Next.
   if (nav.view === 'quiz') {
     const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)
     const problem =
-      quiz && catalog.problems.find((p) => p.slug === quiz.problemSlugs[nav.index])
+      quiz && catalog.problems.find((p) => p.slug === nav.order[nav.index])
     // A quiz can exist with no problems linked yet (content is authored by hand
     // in the DB) — show a note instead of crashing on the missing problem.
     if (!quiz || !problem) {
@@ -97,12 +113,10 @@ export default function App() {
         </div>
       )
     }
-    const hasNext = nav.index < quiz.problemSlugs.length - 1
+    const hasNext = nav.index < nav.order.length - 1
     const hasPrev = nav.index > 0
-    const goNext = () =>
-      hasNext && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index + 1 })
-    const goPrev = () =>
-      hasPrev && setNav({ view: 'quiz', quiz: nav.quiz, index: nav.index - 1 })
+    const goNext = () => hasNext && setNav({ ...nav, index: nav.index + 1 })
+    const goPrev = () => hasPrev && setNav({ ...nav, index: nav.index - 1 })
 
     return (
       <div className="app detail">
@@ -134,7 +148,7 @@ export default function App() {
         </header>
         <main className="app-main detail">
           <ProblemView
-            key={`${quiz.slug}-${nav.index}`}
+            key={problem.slug}
             problem={problem}
             onNext={goNext}
             hasNext={hasNext}
@@ -168,7 +182,7 @@ export default function App() {
         ) : (
           <QuizList
             quizzes={catalog.quizzes.filter((q) => q.source === nav.source)}
-            onSelect={(quiz) => setNav({ view: 'quiz', quiz, index: 0 })}
+            onStart={startQuiz}
           />
         )}
       </main>

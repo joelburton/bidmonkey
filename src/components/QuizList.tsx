@@ -1,18 +1,20 @@
 import type { Quiz } from '../types'
 
-/** The quizzes within a chosen source; clicking one starts it. */
+/** The quizzes within a chosen source. Each offers two ways to start: "In Order"
+ * (by problem ordinal) or "Random" (a shuffle of its problems). */
 export function QuizList({
   quizzes,
-  onSelect,
+  onStart,
 }: {
   quizzes: Quiz[]
-  onSelect: (slug: string) => void
+  onStart: (slug: string, mode: 'order' | 'random') => void
 }) {
   return (
     <ul className="problem-list">
-      {quizzes.map((q) => (
-        <li key={q.slug}>
-          <button className="problem-row" onClick={() => onSelect(q.slug)}>
+      {quizzes.map((q) => {
+        const empty = q.problemSlugs.length === 0
+        return (
+          <li key={q.slug} className="quiz-row">
             <div className="problem-row-main">
               <span className="problem-title">{q.title}</span>
               <div className="problem-meta">
@@ -21,12 +23,25 @@ export function QuizList({
                 </span>
               </div>
             </div>
-            <span className="problem-chevron" aria-hidden>
-              ›
-            </span>
-          </button>
-        </li>
-      ))}
+            <div className="quiz-actions">
+              <button
+                className="quiz-btn"
+                disabled={empty}
+                onClick={() => onStart(q.slug, 'order')}
+              >
+                In Order
+              </button>
+              <button
+                className="quiz-btn"
+                disabled={empty}
+                onClick={() => onStart(q.slug, 'random')}
+              >
+                Random
+              </button>
+            </div>
+          </li>
+        )
+      })}
     </ul>
   )
 }
