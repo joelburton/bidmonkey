@@ -889,6 +889,7 @@ body {
   margin-top: 10px;
 }
 .opt-btn {
+  position: relative; /* for the absolutely-placed choice letter */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -911,10 +912,15 @@ body {
   width: 1.2rem;
   height: 1.2rem;
 }
+/* The a/b/c label sits at the left edge in the accent yellow (as messages and
+   arrows); the choice itself stays centered. */
 .opt-letter {
-  font-size: 0.78rem;
+  position: absolute;
+  left: 0.8rem;
+  font-size: 1em; /* as large as the bid itself, for legibility */
   font-weight: 700;
-  opacity: 0.7;
+  text-transform: uppercase;
+  color: #ffe08a;
 }
 
 /* Contract shown as a button that opens the auction. */
