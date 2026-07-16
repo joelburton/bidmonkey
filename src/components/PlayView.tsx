@@ -75,10 +75,14 @@ export function PlayView({
   problem,
   contract,
   answers,
+  onNext,
+  hasNext,
 }: {
   problem: Problem
   contract: Contract | null
   answers: string[]
+  onNext: () => void
+  hasNext: boolean
 }) {
   const hero = problem.hero
   const moves = useMemo(() => flattenPlay(problem.play ?? []), [problem])
@@ -100,6 +104,7 @@ export function PlayView({
   const [leader, setLeader] = useState<Seat>(nextSeat(declarer))
   const [dummyRevealed, setDummyRevealed] = useState(false)
   const [allRevealed, setAllRevealed] = useState(false)
+  const [done, setDone] = useState(false) // recorded play exhausted — offer "Next"
   const [pending, setPending] = useState<{ seat: Seat; question: CardQuestion } | null>(null)
   const [review, setReview] = useState<Seat | null>(null)
   const [selected, setSelected] = useState<{ seat: Seat; card: string } | null>(null)
@@ -144,8 +149,10 @@ export function PlayView({
     if (tableTrick.length >= 4) return
     if (moveIndex >= moves.length) {
       // With every hand known, reveal them all for free study; otherwise the
-      // record is all we have, so just stop where it ends.
+      // record is all we have, so just stop where it ends. Either way the play
+      // is over — offer "Next".
       if (fullDeal) setAllRevealed(true)
+      setDone(true)
       return
     }
     const move = moves[moveIndex]
@@ -190,10 +197,10 @@ export function PlayView({
       : undefined
 
   // A keypress does the same as the click we're waiting for: dismiss the answer
-  // popup, advance past a completed trick, or (a–d, as in the auction) pick a
-  // multiple-choice option.
+  // popup, advance past a completed trick, (a–d, as in the auction) pick a
+  // multiple-choice option, or — once the play is over — press "Next".
   useEffect(() => {
-    if (!playResult && !review && !pendingMC) return
+    if (!playResult && !review && !pendingMC && !done) return
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return // leave browser shortcuts alone
       if (playResult) dismissPlayResult()
@@ -204,12 +211,15 @@ export function PlayView({
           answerPlay(pendingMC[idx])
           e.preventDefault()
         }
+      } else if (done && (e.key === 'Enter' || e.key === ' ')) {
+        if (hasNext) onNext()
+        e.preventDefault()
       }
     }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playResult, review, pendingMC])
+  }, [playResult, review, pendingMC, done])
 
   // The seat on turn during free play: clockwise from the trick's leader. Only
   // its hand is clickable, so free play can't jump seats or play out of order.
@@ -309,6 +319,9 @@ export function PlayView({
             onContractClick={() => setShowAuction(true)}
             result={playResult}
             onDismissResult={dismissPlayResult}
+            showNext={done}
+            onNext={onNext}
+            hasNext={hasNext}
           />
         }
       />

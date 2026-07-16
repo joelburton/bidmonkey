@@ -42,6 +42,8 @@ export function ProblemView({
         problem={problem}
         contract={finalContract(problem, answers)}
         answers={answers}
+        onNext={onNext}
+        hasNext={hasNext}
       />
     )
   }

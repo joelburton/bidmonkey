@@ -47,6 +47,9 @@ export function PlayCenter({
   onContractClick,
   result,
   onDismissResult,
+  showNext,
+  onNext,
+  hasNext,
 }: {
   problem: Problem
   contract: Contract | null
@@ -58,6 +61,9 @@ export function PlayCenter({
   onContractClick: () => void
   result?: { correct: boolean; question: CardQuestion } | null
   onDismissResult?: () => void
+  showNext?: boolean
+  onNext?: () => void
+  hasNext?: boolean
 }) {
   const byPos: Partial<Record<Pos, string>> = {}
   for (const t of trick) byPos[seatPos[t.seat]] = t.card
@@ -96,6 +102,11 @@ export function PlayCenter({
       </div>
 
       <div className="play-bottom">
+        {showNext && onNext && (
+          <button className="play-btn" onClick={onNext} disabled={!hasNext}>
+            Next ▸
+          </button>
+        )}
         {message && <div className="play-msg">{message}</div>}
         {options && onOption && (
           <div className="opt-grid center-opts">

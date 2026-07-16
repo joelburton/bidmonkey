@@ -88,15 +88,24 @@ export function AuctionPanel({
 
   // Keyboard: any key dismisses the popup; a-d pick MC options; the pad keys
   // (1-7, c/d/h/s/n, p, x) drive a free bid.
-  const ref = useRef({ level, result, dbl, model, isMC, onAnswer })
-  ref.current = { level, result, dbl, model, isMC, onAnswer }
+  const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay })
+  ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const st = ref.current
-      if (!st.model.actingSeat) return
       // Leave browser shortcuts alone — Cmd+C on the explanation text must not
-      // dismiss the popup (checked before the dismiss branch on purpose).
+      // dismiss the popup (checked before every branch on purpose).
       if (e.metaKey || e.ctrlKey || e.altKey) return
+      if (!st.model.actingSeat) {
+        // Auction over: Space/Enter presses the primary button (Play if the hand
+        // is playable, otherwise Next).
+        if (e.key === 'Enter' || e.key === ' ') {
+          if (st.canPlay) st.onPlay()
+          else if (st.hasNext) st.onNext()
+          e.preventDefault()
+        }
+        return
+      }
       if (st.result) {
         dismiss()
         return
@@ -160,7 +169,7 @@ export function AuctionPanel({
                 Play
               </button>
               <button className="play-btn" onClick={onNext} disabled={!hasNext}>
-                Next ▸
+                Skip
               </button>
             </div>
           ) : (
