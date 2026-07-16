@@ -1,0 +1,17 @@
+# Only South's hand is known, so the play may record only the lead (one play,
+# a question). This one has a prior recorded card (E leads) before South's
+# question — a trick with cards from a hand we don't have. No longer supported.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: sa10 haq9 d1098 cak1092
+  dealer: N
+  auction:
+  - n: 1NT
+  - all: p
+  contract: 1NT N
+  plays:
+  - e: 3C
+  - s: "?"
+    answer: 4C

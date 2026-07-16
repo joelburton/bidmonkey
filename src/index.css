@@ -688,8 +688,8 @@ body {
   flex: 1;
 }
 
-/* Auction finished on a bidding-only problem: no play, no next action here —
-   quiz nav is in the header. Just a quiet note under the completed auction. */
+/* Auction finished on a bidding-only problem: a quiet note over a "Next ▸"
+   button (quiz nav also lives in the header). */
 .auction-done {
   text-align: center;
   font-size: 0.9rem;

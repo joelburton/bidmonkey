@@ -1,0 +1,16 @@
+# A contract is stated but the author ended the auction on the last bid rather
+# than writing the closing passes — the normalizer appends them.
+source: Example Source [ex]
+quiz: Example Quiz [ex-q]
+titles: "Example #"
+problems:
+- hand: sa10 haq9 d1098 cak1092
+  dealer: E
+  auction:
+  - e: 1NT
+  - w: 3NT
+  contract: 3NT E
+  plays:
+  - s: "?"
+    explain: Lead a low club.
+    answer: 2C

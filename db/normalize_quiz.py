@@ -256,7 +256,7 @@ def build_question(step, where, qid, parse, free_type):
 
 
 # --- auction ----------------------------------------------------------------
-def process_auction(steps, dealer, player):
+def process_auction(steps, dealer, player, close=False):
     """Expand shorthand into a seat-contiguous canonical auction.
 
     Returns (canonical, echo, final): `canonical` is the schema.v1.json auction
@@ -264,7 +264,10 @@ def process_auction(steps, dealer, player):
     readable 'N:P E:1NT S:?(=1NT)' string; `final` is the computed final contract
     (level, strain, declarer, doubled) or None. Validates call legality as it
     goes (ascending bids, X/XX context) — the seat's answer for a `?` is checked
-    too, so an answer illegal at that point is caught.
+    too, so an answer illegal at that point is caught. Skipped seats are filled
+    with passes (a silent side that never bids is normal). When `close` is set
+    (the problem states a contract), the auction is completed with the closing
+    passes if the author didn't write them.
     """
     seated, canonical, echo = [], [], []   # seated = (seat, call) mirror of canonical
     idx = CLOCKWISE.index(dealer)
@@ -312,14 +315,10 @@ def process_auction(steps, dealer, player):
                 idx += 1
             break
 
-        # fill skipped seats with Pass; at most one skip between shown calls
-        skipped = 0
+        # fill any skipped seats with Pass (seats between shown calls stayed silent)
         while CLOCKWISE[idx % 4] != seat:
             emit(CLOCKWISE[idx % 4], {"call": "P"}, "P", "P")
             idx += 1
-            skipped += 1
-        if skipped > 1:
-            raise ProblemError(f"{where}: {skipped} seats skipped before {seat} (only one allowed)")
 
         if value == "?":
             if seat != player:
@@ -333,6 +332,13 @@ def process_auction(steps, dealer, player):
             check_legal(call, seat, where)
             emit(seat, {"call": call}, call, call)
         idx += 1
+
+    # A stated contract implies the auction closed: add the trailing passes if the
+    # author ended on the last bid rather than writing them (or `all: p`).
+    if close:
+        while not auction_complete():
+            emit(CLOCKWISE[idx % 4], {"call": "P"}, "P", "P")
+            idx += 1
 
     return canonical, " ".join(echo), compute_final_contract(seated)
 
@@ -369,6 +375,15 @@ def validate_play(play, deal, trump, declarer, where):
     hand-dependent ones (card-in-hand, follow-suit) run per seat where the hand
     is known; trick-winner-leads-next runs when the trump strain is known.
     """
+    # A problem that doesn't show all four hands can only pose the opening lead —
+    # a single play that is a question. Anything more (a recorded trick with cards
+    # from hands we don't have) isn't supported.
+    if not all(s in deal for s in ("N", "E", "S", "W")):
+        moves = [c for t in play for c in t["cards"]]
+        if len(moves) != 1 or "question" not in moves[0]:
+            raise ProblemError(f"{where}: without all four hands, the play may record "
+                               f"only the lead (one play, a question), got {len(moves)}")
+
     remaining = {seat: dict(hand) for seat, hand in deal.items()}   # mutable copy
     played, prev_winner = set(), None
 
@@ -457,7 +472,8 @@ def normalize_problem(p, ordinal, titles_tmpl, quiz_slug):
                     raise ProblemError(f"{where}: {card} is in both {all_cards[card]} and {seat}")
                 all_cards[card] = seat
 
-    auction, echo, final = process_auction(p.get("auction", []), dealer, player)
+    auction, echo, final = process_auction(
+        p.get("auction", []), dealer, player, close=bool(p.get("contract")))
 
     contract_txt, declarer, trump = None, None, None
     if p.get("contract"):

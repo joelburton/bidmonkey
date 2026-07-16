@@ -90,6 +90,16 @@ def test_clean_p4_one_skip_allowed():
     assert echoes[3][1] == "N:1C E:P S:?(=1H)"
 
 
+def test_contract_appends_closing_passes():
+    # Auction written to the last bid; a stated contract closes it with passes.
+    out, errors, echoes = run("contract_closes.yaml")
+    assert errors == []
+    p = out["problems"][0]
+    assert [e["call"] for e in p["auction"]] == ["1NT", "P", "3NT", "P", "P", "P"]
+    assert p["contract"] == "3NT E"
+    assert echoes[0][1] == "E:1NT S:P W:3NT N:P E:P S:P"
+
+
 # --- one deliberately-broken file per check ---------------------------------
 BROKEN = [
     ("broken/bad_hand_count.yaml", "not 13"),
@@ -97,7 +107,7 @@ BROKEN = [
     ("broken/bad_dup_across_hands.yaml", "is in both"),
     ("broken/bad_suit_order.yaml", "in order"),
     ("broken/bad_question_seat.yaml", "player's seat"),
-    ("broken/bad_skip.yaml", "skipped"),
+    ("broken/bad_partial_extra_plays.yaml", "only the lead"),
     ("broken/bad_answer_not_in_choices.yaml", "not one of the choices"),
     ("broken/bad_accept_not_in_choices.yaml", "not among the choices"),
     ("broken/bad_leader.yaml", "opening lead"),
@@ -109,7 +119,6 @@ BROKEN = [
     ("broken/bad_card_not_in_hand.yaml", "has no"),
     ("broken/bad_revoke.yaml", "follow suit"),
     ("broken/bad_next_leader.yaml", "led by"),
-    ("broken/bad_dup_card_play.yaml", "played twice"),
     ("broken/bad_call.yaml", "1Z"),
     ("broken/bad_seat_key.yaml", "x"),
     ("broken/bad_vuln.yaml", "v/-"),

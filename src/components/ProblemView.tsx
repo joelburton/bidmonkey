@@ -26,12 +26,15 @@ export function ProblemView({
   const [answers, setAnswers] = useState<string[]>([])
   const [phase, setPhase] = useState<'auction' | 'play'>('auction')
 
-  // Playable if we know every hand (full play / free study), or the problem has
-  // a recorded play even though some hands are hidden — e.g. a "what's your lead"
-  // or "win this trick" problem, where the specific cards are authored but the
-  // opponents' full hands aren't. PlayView plays as far as the record allows.
+  // Playable in exactly two cases: every hand is known (full play / free study),
+  // or it's an opening-lead problem — only the hero's hand, and the play is the
+  // single lead question. (Partial hands with a fuller recorded play aren't
+  // supported and don't import.)
   const allHandsKnown = ALL_SEATS.every((s) => problem.deal[s] != null)
-  const canPlay = allHandsKnown || (problem.play?.length ?? 0) > 0
+  const play = problem.play ?? []
+  const isLeadOnly =
+    play.length === 1 && play[0].cards.length === 1 && 'question' in play[0].cards[0]
+  const canPlay = allHandsKnown || isLeadOnly
 
   if (phase === 'play') {
     return (

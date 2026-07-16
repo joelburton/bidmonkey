@@ -1,18 +1,22 @@
-# N wins the first trick (high heart, no trump) so N must lead trick two —
-# here S leads instead.
+# All four hands known. N wins the first trick (the spade ace, no trump), so N
+# must lead trick two — here S leads instead.
 source: T [t]
 quiz: Q [q]
 titles: "Q #"
 problems:
-- hand: sak2 hq54 dkqj9 c876
+- hands:
+    n: sakqj hakq dakq cakq
+    e: st98 hjt98 djt9 cjt9
+    s: s765 h765 d8765 c876
+    w: s432 h432 d432 c5432
   dealer: N
   auction:
   - n: 1NT
   - all: p
   contract: 1NT N
   plays:
-  - e: 3H
-  - s: 4H
-  - w: 5H
-  - n: 6H
-  - s: 2S
+  - e: 8S
+  - s: 7S
+  - w: 4S
+  - n: AS
+  - s: 6S

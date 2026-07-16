@@ -1,14 +1,18 @@
-# Declarer is E, so the opening leader must be S (LHO). Here W leads instead
-# (normalizer check).
+# All four hands known. Declarer is N, so the opening leader must be E (LHO).
+# Here South leads instead.
 source: T [t]
 quiz: Q [q]
 titles: "Q #"
 problems:
-- hand: sa65 hkq2 d53 caqj97
-  dealer: E
+- hands:
+    n: sakqj hakq dakq cakq
+    e: st98 hjt98 djt9 cjt9
+    s: s765 h765 d8765 c876
+    w: s432 h432 d432 c5432
+  dealer: N
   auction:
-  - e: 1NT
+  - n: 1NT
   - all: p
-  contract: 1NT E
+  contract: 1NT N
   plays:
-  - w: 2D
+  - s: 7S

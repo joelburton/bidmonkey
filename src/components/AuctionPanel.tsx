@@ -164,7 +164,12 @@ export function AuctionPanel({
               </button>
             </div>
           ) : (
-            <div className="auction-done">Bidding complete.</div>
+            <>
+              <div className="auction-done">Bidding complete.</div>
+              <button className="play-btn" onClick={onNext} disabled={!hasNext}>
+                Next ▸
+              </button>
+            </>
           )}
         </div>
       ) : isMC ? (
