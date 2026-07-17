@@ -1,0 +1,203 @@
+source: Std Bidding with SAYC [sayc]
+quiz: One-Level Openings [sayc-1s]
+titles: "SAYC One Level Openings #"
+problems:
+
+- hand: skq54 ha873 d6 ck1064
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      12 HCP, 4 spades, 4 hearts = 20. Open 1♣.
+    answer: 1C
+
+#2
+- hand: saqj987 h- d972 ck953
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      10 HCP, 6 spades, 4 clubs = 20. Open 1♠.
+    answer: 1S
+
+#3
+- hand: skj8 ha876 dq75 cq75
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      12 HCP, 4 hearts, 3 spades = 19. Pass.
+    answer: p
+
+#4
+- hand: s98 hq76 dakq9765 c7
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      11 HCP, 7 diamonds, 3 hearts = 21. Open 1♦.
+    answer: 1d
+
+
+#5
+- hand: sqj854 hak732 d6 c64
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      10 HCP, 5 spades, 5 hearts = 20. Open 1♠, the higher ranking of equal length suits.
+    answer: 1s
+
+#6
+- hand: sa3 h2 dqj972 ckq953
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      12 HCP, 5 diamonds, 5 clubs = 22. Open 1♦. Again, the higher ranking suit.
+    answer: 1d
+
+#7
+- hand: skq87 ha dj1092 cq1083
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      2 HCP, 4 spades, 4 diamonds = 20. Open 1♦, the higher ranking of four-card minor suits.
+    answer: 1d
+
+
+#8
+- hand: sk98 hq1076 dakq c752
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      14 HCP. Open 1♣. With 3-3 in the minors and no 5-card major, open 1♣ regardless of suit quality of the minors.
+    answer: 1c
+
+#9
+- hand: saj75 hq83 daq5 cj73
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      With 14 HCP there is no question that we are going to open the bidding with this hand. Holding 3-3 in the minors, one may be tempted to bid one’s ‘better minor,’ here diamonds. However in SAYC, we open 1♣.
+    answer: 1c
+
+#10
+- hand: saj109 hq873 daq2 cj8
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      This is the rare distribution, 4-4-3-2, where diamonds, our longer minor, is only a three-card suit. Nonetheless, we bid it. The 1♦ opener will almost always have a four-card suit, but the 1♦ opening does not absolutely guarantee it.
+    answer: 1d
+
+#11
+- hand: sa4 hqj8 daq98 ckq84
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      With 4-4 in the minor suits and 18 HCP we are free to bid naturally; that is, four-card suits up the line. Open 1♣.
+    answer: 1c
+
+
+#12
+- hand: sak975 hk873 dq65 c4
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      12 HCP, 5 spades, 4 hearts = 21. You have strength in the major suits and a solid 1♠ opener. The fact that you have length in the majors makes this hand very attractive.
+    answer: 1s
+
+#13
+- hand: sj9 hk6 d109872 cakj9
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      It may be only a 12-HCP hand, but never discount the value of a long suit, in this case diamonds. Thus, 12 HCP, 5 diamonds and 4 clubs = 21. Open 1♦.
+    answer: 1d
+
+#14
+- hand: s- ha10876 d9875 cak75
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      Here we see an 11-HCP hand with ♣A K and ♥A, four clubs and five hearts (11+5+4=20). Do not count distribution points for short suits — in this case, our void — until a fit is found with partner. Think about it. When was the last time you actually took a trick with a void? And what if partner insists on playing in notrump? Nonetheless, the Rule of 20 allows us to open 1♥.
+    answer: 1h
+
+
+#15
+- hand: sj8 hq76 daj765 ck95
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      The values are scattered and our major suits are weak. And, according to the Rule of 20, we have only 19 points. We pass.
+    answer: p
+
+#16
+- hand: sj32 hqj8 d1087 cak109
+  dealer: n
+  auction:
+  - n: p
+  - s: "?"
+    explain: |
+      A 1♣ opening, in spite of its lack of preemptive value, does have merit since a club lead is welcome in the event the opponents win the auction. There is another positive consideration. When you open light in third seat, you should be willing to pass any new suit bid by partner. This hand qualifies.
+    answer: 1c
+
+#17
+- hand: saj109 h9 dj8765 ckj3
+  dealer: n
+  auction:
+  - n: p
+  - s: "?"
+    explain: |
+      Don’t embarrass yourself by bidding with this collection. Neither of your long suits is of sufficient quality and you are not ready to pass if partner bids hearts.
+    answer: p
+
+
+#18
+- hand: saqj75 hk83 d765 c43
+  dealer: w
+  auction:
+  - w: P
+  - n: P
+  - e: p
+  - s: "?"
+    explain: |
+      You have 10 HCP and five spades (10 + 5 = 15). Open “light” with 1♠.
+    answer: 1s
+
+#19
+- hand: sa109 hkj3 dj972 cq98
+  dealer: w
+  auction:
+  - w: P
+  - n: P
+  - e: p
+  - s: "?"
+    explain: |
+      11 HCP and three spades does not satisfy the Rule of 15. Opening this hand is more likely to lead to a loss than a profit. We suggest a pass.
+    answer: p
+
+
+#20
+- hand: s742 h108 dk75 cak1075
+  dealer: w
+  auction:
+  - w: P
+  - n: P
+  - e: p
+  - s: "?"
+    explain: |
+      Pass. Just because you hold 13 cards doesn’t mean you have to take action.
+    answer: p
+
+
+

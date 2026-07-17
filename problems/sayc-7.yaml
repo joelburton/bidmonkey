@@ -1,0 +1,109 @@
+source: Std Bidding with SAYC [sayc]
+quiz: Reverses [sayc-rev]
+titles: "SAYC Reverses #"
+problems:
+
+#1
+- hand: saj3 hk973 dakj72 c2
+  dealer: S
+  auction:
+  - s: 1d
+  - n: 1s
+  - s: "?"
+    explain: |
+      With the singleton club and very adequate support for partner’s suit, this hand surely qualifies for a reverse into 2♥.
+    answer: 2h
+
+#2
+- hand: sak1032 hakj762 d8 c10
+  dealer: S
+  auction:
+  - s: 1h
+  - n: 1nt
+  - s: "?"
+    explain: |
+      With two singletons and, importantly, all of your strength in the major suits, go for the 1♥ opening bid and proudly bid 2♠ over partner’s 1NT response.
+    answer: 2s
+
+#3
+- hand: skj9 hak107 dkj1096 ca
+  dealer: S
+  auction:
+  - s: 1d
+  - n: 1nt
+  - s: "?"
+    explain: |
+        After a 1♦ opening and a 1NT response by partner, some might choose a jump shift to 3♥. However, a reverse bid is forcing for at least one round and opener can clarify his strength at the next turn. The sole advantage of reversing here rather than jump shifting is that a reverse takes up less bidding space, giving more room to explore the possibility of slam.
+    answer: 2h
+
+#4
+- hand: sq haqj642 dakj94 c2
+  dealer: S
+  auction:
+  - s: 1d
+  - n: 1s
+  - s: "?"
+    explain: |
+      This hand is easy to bid naturally. When you add distribution points to the 17 in high cards, the hand is easily worth a jump shift
+    answer: 3d
+
+#5
+- hand: sak4 hj107 dkq7 caq97
+  dealer: S
+  auction:
+  - s: "?"
+    explain: |
+      Open 1♣ and plan to rebid with a jump to 2NT. While there is no question that this is a lovely collection, it is not appropriate to reverse with a flat hand. You could open 1♣ and reverse into any of the other suits — your first suit would be longer than your second — but you would be promising more shape.
+    answer: 1c
+
+#6
+- hand: s987 ha daqj caq10542
+  dealer: S
+  auction:
+  - s: 1C
+  - n: 1s
+  - s: "?"
+    explain: |
+      Reverses are often made on 6-5 hands and 6-4 hands but sometimes the second suit has only three cards, especially if it is diamonds. You open 1♣ and partner responds either 1♥ or 1♠. What else can you temporize with other than 2♦? You don’t want to raise partner in spades with three small, and a rebid of 3♣ simply doesn’t do the hand justice. If partner raises your diamonds, you can show delayed support with a call of 3♠.
+    answer: 2d
+
+
+#7
+- hand: sj103 hq83 dqj7 cj932
+  dealer: n
+  auction:
+  - n: 1C
+  - s: 1nt
+  - n: 2d
+  - s: "?"
+    explain: |
+      If you and your partner have agreed that simple preference bids are non-forcing, then you could bid 3♣. If you are playing a more modern approach, your only choice is 2NT*. This artificial bid, now commonly known as “Lebensohl after Opener’s Reverse”. Some still refer to it as Ingberman 2NT .
+    answer: 2nt
+    accept: 3c
+
+#8
+- hand: saq985 h108 d85 c8763
+  dealer: n
+  auction:
+  - n: 1d
+  - s: 1s
+  - n: 2h
+  - s: "?"
+    explain: |
+      Your only choice is 2♠. We know it is not a good idea to make a habit of rebidding five-card suits, but what’s a person to do in a situation like this?
+    answer: 2s
+
+#9
+- hand: saq98 h1086 d8 c87632
+  dealer: n
+  auction:
+  - n: 1d
+  - s: 1s
+  - n: 2h
+  - s: "?"
+    explain: |
+      Now bid 2NT. Once again, you are asking partner to rebid his first suit. If he complies, this action is non-forcing and you will correct to 3♥.
+    answer: 2nt
+
+
+

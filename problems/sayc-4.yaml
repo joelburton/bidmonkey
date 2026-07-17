@@ -1,0 +1,278 @@
+source: Std Bidding with SAYC [sayc]
+quiz: Responding to 1M [sayc-1maj-r]
+titles: "SAYC Responding 1M #"
+problems:
+
+# #1
+# - hand: sa1093 h74 daq952 c109
+#   dealer: n
+#   auction:
+#   - n: 1s
+#   - s: "?"
+#     explain: |
+#       Hand 1 offers a nine-card trump fit, a nice side suit, ruffing values and good intermediates. 4♠ should be easy and an overtrick is possible.
+#     answer: ??
+
+# #2
+# - hand: sj32 hk76 dqj3 ck532
+#   dealer: n
+#   auction:
+#   - n: 1s
+#   - s: "?"
+#     explain: |
+#       Flat. It lacks prime cards, such as aces, and the queen and jack assembly — fondly known as a ‘quack’ — is not a great feature when combined with scattered values.
+#     answer: ??
+
+#3
+- hand: sa954 hkj5 d652 c1064
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      With three- or four-card support for partner’s major and a weak hand, responder’s first obligation is to show support. A fit has been found and there is no reason to search elsewhere. Do not bid 1♠. You have a nice, simple call of 2♥. You will have set the trump suit and limited your hand to a maximum of 10 points in support of hearts. Had your partner opened 1♠, your bid would be 2♠.
+    answer: 2h
+
+#4
+- hand: sa976 h106 dk73 c9532
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      You cannot support partner’s heart suit, but you do have a four-card spade suit that you can show at the one-level. Bid 1♠. Do not ‘show your count’ by bidding 1NT. You have a biddable suit and partner may hold four spades. Also, if anyone should be playing notrump, it is your partner. He has the stronger hand.
+    answer: 1s
+
+#5
+- hand: s98 hk7 d7532 ckq975
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      You cannot support hearts, nor do you hold four spades, and you are not strong enough to bid your clubs at the two-level. Limit your hand with a bid of 1NT. Note that the response of 1NT does not guarantee either a balanced hand or stoppers in the unbid suits.
+    answer: 1nt
+
+#6
+- hand: sk982 hq753 d97 c753
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      Once a fit has been located you can give yourself an extra support point or two for the doubleton diamond and/or the fourth trump.
+    answer: 2h
+
+#7
+- hand: s106 ha10874 dj98 c742
+  dealer: n
+  auction:
+  - n: "1s"
+  - s: "?"
+    explain: |
+      In spite of your 5 HCP, if partner opens 1♠, we think most good players would respond with a call of 1NT based on the decent five-card heart suit and the lovely intermediates. Many players will not pass an opening bid holding an ace, regardless of the rest of their hand.
+    answer: 1nt
+
+#7alt
+- hand: s106 ha10874 dj98 c742
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      Your call is a preemptive raise to 4♥. This bid is made with five-plus cards in the trump suit and a weak hand — less than 10 HCP.
+    answer: 4h
+
+#8
+- hand: sa753 hk8 dk765 c432
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      You cannot support partner’s suit, but you have a very easy response of 1♠. Note that a simple one-level response in a new suit can be made with more than a minimum hand. In fact, new suits by an unpassed responder are essentially unlimited and are 100% forcing for one round.
+    answer: 1s
+
+#9
+- hand: sj109 hkj dkj732 cq98
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      Your partner opens 1♥. You cannot support partner, but you have a nice five-card diamond suit and sufficient count to bid it freely at the two-level. Bid 2♦. A new suit at the two-level shows at least five cards and an absolute minimum of 10 points (or four cards and 11+ points). This bid too is unlimited and forcing for one round.
+    answer: 2d
+
+
+#10
+- hand: sa4 hk102 dj753 cqj54
+  dealer: n
+  auction:
+  - n: "1s"
+  - s: "?"
+    explain: |
+      You have a nice hand, but you cannot support partner and you are too strong for 1NT. Bid 2♣, planning to rebid a non-forcing 2NT unless opener shows something exciting.
+    answer: 2c
+
+
+#11
+- hand: sa753 hk85 dk1076 c43
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      With three- or four-card support for partner’s major and 10-12 points, your response is a limit raise of 3♥. If partner had opened 1♠, your bid would be 3♠. In support of hearts, this hand contains 11 points, including one for the doubleton club. In support of spades, many would consider it a 12-point hand, including one additional point for the fourth spade.
+    answer: 3h
+
+
+#12
+- hand: sj984 h76 dakq9 ck84
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      Partner has opened 1♥. Although you have a wonderful collection, your bid is only 1♠. When an unpassed responder bids a new suit, even if only at the one-level, it is forcing for one round, and the hand may contain anywhere from 6 to perhaps 20 or more playing points. Therefore, this seemingly mild response does not limit your strength. There is no need to rush to show your opening count, since partner must bid again. When he does, you are likely to know a great deal more about your combined assets.
+    answer: 1s
+
+
+#13
+- hand: s9 hqj743 dq732 c987
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      When partner opens 1♥, you have a very special hand and the opportunity to raise directly to 4♥. Note that this bid does not show an opening hand. Rather, it shows a relatively weak hand, 9 HCP maximum, with great distribution and a minimum of five-card support for hearts.
+    answer: 4h
+
+
+#14
+- hand: skj7 hkj5 dkj653 c42
+  dealer: n
+  auction:
+  - n: "1h"
+  - s: "?"
+    explain: |
+      When partner opens 1♥, you know your side belongs in game, at least. Do not jump to 4♥. Partner will think you have a weak, distributional holding similar to that shown in Hand 2. With a better than average hand, he will pass and slam will be missed. And don’t you just hate it when that happens? Start with a forcing bid of 2♦ and jump in hearts at your next call.
+    answer: 2d
+
+
+#15
+- hand: sa1042 hk108 da75 cqj5
+  dealer: n
+  auction:
+  - n: "1s"
+  - s: "?"
+    explain: |
+      Partner opens 1♠ and we have the appropriate hand for the conventional response of 2NT*. This call is known as the Jacoby 2NT and is employed in response to a major-suit opening, with no intervening bids by the opponents. Jacoby 2NT shows an opening hand or better, and four-plus cards in support of partner’s major.
+    answer: 2nt
+
+
+#16
+- hand: sakj109 h8 daqj109 c87
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      Your second five-card suit is almost solid. Accordingly, a jump to 4♦* is recommended.
+    answer: 4d*
+
+
+#17
+- hand: sakqj8 h8 dq9763 caq
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      The poor texture of the diamond suit offers little of interest. This time, your primary feature is the singleton heart. Bid 3♥*.
+    answer: 3h*
+
+
+
+#18
+- hand: sa75 hkq1083 dk7 cj32
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      Holding a balanced minimum — which means no distributional features — bid 4♥*. This is a good example of The Principle of Fast Arrival in action. By jumping to game and not making any use of the lower levels of bidding that were available, you deny any interest in slam. Remember, partner’s bid of 2NT* was game forcing.
+    answer: 4h*
+
+
+#19
+- hand: sa75 hkq1083 dkj72 c2
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      Same auction. When you hold a singleton or a void, you show it by bidding the suit at the lowest possible level. Your bid is 3♣*.
+    answer: 3c*
+
+#20
+- hand: sa5 hkq10853 dk7 caj2
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      Holding a six-card suit and a great hand you are most certainly interested in slam. Your rebid is 3♥*. Note that once a game-forcing auction has been established, the stronger the hand, the more slowly we try to proceed, leaving room for slam exploration below game.
+    answer: 3h*
+
+#21
+- hand: sa754 hkq1083 dkj ck3
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      You hold a balanced medium of 15-17 HCP. With this collection, rebid an artificial 3NT*, asking partner to initiate a control-bidding sequence.
+    answer: 3nt*
+
+
+
+#22
+- hand: sk9 haj973 dkqj72 c8
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2nt*
+  - s: "?"
+    explain: |
+      When you hold a side five-card suit, you have a choice. You can bid the singleton (see above) or, when the side suit is strong, show the suit by jumping one level. Your bid here is 4♦*. A bid of only 3♦* would show a diamond singleton or void.
+    answer: 4d*
+
+
+
+#23
+- hand: sakj hkq3 d65 cakj95
+  dealer: n
+  auction:
+  - n: 1s
+  - s: "?"
+    explain: |
+      Begin with a jump shift to 3♣, followed by a spade raise. The jump shift is game forcing, slam invitational.
+    answer: 3c
+
+#24
+- hand: skqj ha32 dakj76 caq
+  dealer: n
+  auction:
+  - n: 1s
+  - s: "?"
+    explain: |
+      An initial jump shift to 3♦ is suggested, again followed by support for spades, though with this much strength it would be hard to quarrel with an immediate jump to 4NT, Blackwood
+    answer: 3d
+    accept: [4nt]
+

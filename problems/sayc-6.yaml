@@ -1,0 +1,276 @@
+source: Std Bidding with SAYC [sayc]
+quiz: Opener Rebid [sayc-op-rebid]
+titles: "SAYC Opener Rebid #"
+problems:
+
+#1
+- hand: sa987 h9765 daj ckq8
+  dealer: s
+  auction:
+  - s: 1c
+  - n: 1h
+  - s: "?"
+    explain: |
+      Your side has located an eight-card major suit fit. Do not bother to show your spade suit. Show the fit and the minimum with a simple raise to 2♥.
+    answer: 2h
+
+#2
+- hand: sa987 h976 daj ckq87
+  dealer: s
+  auction:
+  - s: 1c
+  - n: 1h
+  - s: "?"
+    explain: |
+      Since responder will show four-card majors up the line, partner could still own a four-card spade suit. If you fail to mention spades now, the suit will almost certainly be lost forever. Bid 1♠.
+    answer: 1s
+
+#3
+- hand: sa98 h976 daj ckq875
+  dealer: s
+  auction:
+  - s: 1c
+  - n: 1h
+  - s: "?"
+    explain: |
+      Rebid 1NT, a good description of your balanced minimum. As is true with an opening bid in notrump, the 1NT rebid does not guarantee stoppers in all of the unbid suits. Do not rebid your clubs, in spite of the fact that you never guaranteed more than three. A club rebid implies a more distributional hand and should include a six-card club suit. A raise to 2♠ is not recommended on this holding. Partner has promised no more than four cards in the suit. While not mandatory, four-card support is highly desirable.
+    answer: 1nt
+
+#4
+- hand: sa98 hakj753 d104 c86
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 1s
+  - s: "?"
+    explain: |
+      A simple minimum rebid of 2♥ is appropriate, showing the six-card one-suiter.
+    answer: 2h
+
+#5
+- hand: sk8 hakj75 dj6 cqj87
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 1s
+  - s: "?"
+    explain: |
+      You have a two-suited hand and an easy rebid of 2♣.
+    answer: 2c
+
+#6
+- hand: sak754 hq63 dak1042 c-
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2s
+  - s: "?"
+    explain: |
+      Two five-card suits, a void, first- and second-round control all over the place — a possible slam-try hand, not just "game-going." The cleanest, most descriptive rebid is a splinter to 4♣, showing club shortness with spade agreement and slam interest, letting partner evaluate their hand accordingly (e.g., wasted club honors become worthless, while diamond/heart controls become gold).
+    answer: 4c
+
+#7
+- hand: skq542 hk64 daj6 ck3
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2s
+  - s: "?"
+    explain: |
+      2NT — natural, invitational, balanced. You're not showing a second suit or extra trump length, you're showing extra balanced strength and letting partner pick between 3NT and 4♠ (or decline into a partscore) based on their hand.
+      (Many people would have opened this with 1NT).
+    answer: 2nt
+
+
+#8
+- hand: skj432 hkj7 dkq5 ca2
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2s
+  - s: "?"
+    explain: |
+      2NT — natural, invitational, balanced. You're not showing a second suit or extra trump length, you're showing extra balanced strength and letting partner pick between 3NT and 4♠ (or decline into a partscore) based on their hand.
+      (Many people would have opened this with 1NT).
+    answer: 2nt
+
+#9
+- hand: sa9 haq765 da97 ck98
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2h
+  - s: "?"
+    explain: |
+      The doubleton spade convinced you to open 1♥ (Joel: unclear why, perhaps "too good" for 17HCP given 3 aces and intermediates?) and partner raises to 2♥. Your natural rebid is 2NT. You want to play game if partner holds the top end of the simple raise.
+    answer: 2nt
+
+#10
+- hand: sa9 haj7654 da3 ck73
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 2h
+  - s: "?"
+    explain: |
+      On the same auction as Hand 9 (1♥-2♥), your rebid is now a simple ‘mom & pop’ invitation of 3♥, showing six or more cards in the suit. Knowing you are one-suited will be helpful to partner in evaluating your prospects for game.
+    answer: 3h
+
+
+#11
+- hand: sa9 hkq74 daj843 ck7
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1s
+  - s: "?"
+    explain: |
+      Your rebid is 2♥. This is a classic reverse, showing 17+ HCP and a two-suited hand containing a diamond suit longer than the heart suit. A reverse guarantees invitational values but may be employed with more.
+    answer: 2h
+
+#12
+- hand: sa987 h9 daj104 ckq87
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1s
+  - s: "?"
+    explain: |
+      This hand has just improved a ton from the original 14 HCP. With ruffing values, the singleton heart can be upgraded from a value of zero to the equivalent of second-round control, a king. We now give it three support points and the hand revalues to 17. Instead of 2♠, you should now invite partner to game with a raise to 3♠.
+    answer: 3s
+
+#13
+- hand: saq1098 h74 d3 ckqj87
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2h
+  - s: "?"
+    explain: |
+      You open 1♠ and partner responds 2♥, showing at least 10 HCP and five-plus hearts. You are not strong enough to rebid 3♣. In this situation, a new suit at the three-level would be forcing to game. In spite of the fact that it is normally wrong to rebid five-card suits, this situation provides one of the rare exceptions. You have no choice but to bid 2♠.
+    answer: 2s
+
+#14
+- hand: sa10987 ha8 daj10 ckq8
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 1nt
+  - s: "?"
+    explain: |
+      You are too strong to open 1NT and select 1♠ instead. Partner responds 1NT, showing 6-9/10 HCP. You should rebid an invitational 2NT. Partner, who is now captain, will accept the invitation with 8 HCP or more, declining with less.
+    answer: 2nt
+
+#15
+- hand: skq632 ha8 dk4 ckj86
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2s
+  - s: "?"
+    explain: |
+      You open 1♠ and partner responds 2♠. You can invite game with a bid of 3♣. Knowing you have strength in clubs may assist partner in making his decision.
+    answer: 3c
+
+#16
+- hand: sa987 ha4 daj98 ckq9
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1s
+  - s: "?"
+    explain: |
+      You open 1♦ and partner bids 1♠. Your rebid is 4♠. The hand revalues to 19 points, including one for the doubleton ace of hearts. The 4♠ bid is not a signoff. If partner has a decent hand, he is free to investigate slam.
+    answer: 4s
+
+#17
+- hand: sak87 hk4 dak875 ck7
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1h
+  - s: "?"
+    explain: |
+      You open 1♦ and partner bids 1♥. Your rebid is 2♠, a classic game-forcing jump shift that usually shows 19-21 HCP. XXX we use weak
+    answer: 2s
+
+#18
+- hand: sa9876 hk87 daj10 ckq
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 2h
+  - s: "?"
+    explain: |
+      You decide your hand is too good to open 1NT and instead you open 1♠. Partner responds 2♥. Partner’s bid is not yet limited. All we know is that it shows a decent 10+ HCP and five or more hearts. You now raise to game with three-card support and game-going values. Your 4♥ bid need not terminate the auction. It simply says that you are willing to play game opposite any minimum hand he might have for his original call. If partner has more, we are sure you will be the first to know.
+    answer: 4h
+
+#19
+- hand: sa9 hakj984 daj9 ck5
+  dealer: s
+  auction:
+  - s: 1h
+  - n: 1nt
+  - s: "?"
+    explain: |
+      You open 1♥ and partner responds 1NT. While there is no guarantee that partner holds trump support, it is reasonably certain that the bridge gods dislike a coward. 4♥ would seem to be the best description. Cross your fingers and pray.
+    answer: 4h
+
+
+#20
+- hand: sa98 hkq dak87 ck765
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1h
+  - s: "?"
+    explain: |
+      You open 1♦ and partner responds 1♥. Your rebid is 2NT, showing a balanced 18-19 HCP.
+    answer: 2nt
+
+#21
+- hand: sa96 h87 dakqj94 ck4
+  dealer: s
+  auction:
+  - s: 1d
+  - n: 1h
+  - s: "?"
+    explain: |
+      It’s not unreasonable to expect at least one spade trick, one or more heart tricks, six diamond tricks and, if you get a club lead, one more trick in that suit. Your choices are a gambling 3NT or a conservative and non-forcing 3♦. We like 3NT.
+    answer: 3nt
+    accept: [3d]
+
+#22
+- hand: saq982 hk105 dq86 cq6
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 3s
+  - s: "?"
+    explain: |
+      To bid or not to bid? We offer the following as a guideline. Look at your hand and answer two simple questions: a) is my hand balanced? b) is my hand a minimum? By definition, in a five-card major system, a balanced hand will have 5332 distribution. We define a minimum in this context as anywhere from 12 to a bad 14 points. If the answer to both questions is yes, then pass. If not, bid game.
+    answer: pass
+
+
+#23
+- hand: saq982 hk105 dkj86 c6
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 3s
+  - s: "?"
+    explain: |
+      Bid 4♠. It may look scary, but unbalanced holdings have an amazing way of producing extra tricks. We have followed this guideline with some very ugly minimums with surprising — and gratifying — results.
+    answer: 4s
+
+#24
+- hand: sakqj8 hk105 dq86 c98
+  dealer: s
+  auction:
+  - s: 1s
+  - n: 3s
+  - s: "?"
+    explain: |
+      Bid 4♠. It is balanced, but not minimum.
+    answer: 4s
+
