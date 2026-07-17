@@ -30,6 +30,9 @@ export function Card({ suit, rank }: { suit: Suit; rank: string }) {
   return (
     <svg className="card" viewBox="0 0 100 140" role="img" aria-label={label}>
       <rect className="card-bg" x="1.5" y="1.5" width="97" height="137" rx="11" />
+      {/* Left-edge divider, shown only when this is the first card of a new suit
+          group (see .slot.suit-start in the CSS). */}
+      <line className="card-divider" x1="2.5" y1="12.5" x2="2.5" y2="127.5" />
       <text className={`card-idx ${color}`} x="8" y="34">{rankLabel(rank)}</text>
       <svg
         className={color}

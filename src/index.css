@@ -478,6 +478,18 @@ body {
   stroke: #c4ccd6;
   stroke-width: 1.5;
 }
+/* The first card of each new suit (never the very first card — that's `.first`)
+   gets a black left-edge divider, so suit groups stay easy to tell apart,
+   especially when a void puts two same-color suits next to each other
+   (e.g. spades→clubs). Hidden on every other card. */
+.card-divider {
+  stroke: none;
+}
+.slot.suit-start .card-divider {
+  stroke: var(--control-border);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
 .card-idx {
   font-family: 'Roboto Flex', 'Roboto', sans-serif;
   font-weight: 400;
