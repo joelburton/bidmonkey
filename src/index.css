@@ -668,6 +668,9 @@ body {
 .explain-status.ok {
   color: #7ee0a3;
 }
+.explain-status.alt {
+  color: #ffb454;
+}
 .explain-status.no {
   color: #ff8a97;
 }

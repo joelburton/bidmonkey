@@ -125,9 +125,10 @@ describe('accepted alternative answers continue with the canonical card', () => 
     const user = userEvent.setup()
     await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
 
-    // Answer with the accepted alternative ♣5 — graded correct.
+    // Answer with the accepted alternative ♣5 — graded correct, shown "Alternate".
     await playCard(user, '5 of clubs')
-    await waitFor(() => expect(screen.getByText('Correct!')).toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText('Alternate')).toBeInTheDocument())
+    expect(screen.queryByText('Correct!')).not.toBeInTheDocument()
     await user.keyboard('{Enter}') // any key dismisses the popup
 
     // The canonical ♣Q is what actually lands in South's (bottom) trick slot.

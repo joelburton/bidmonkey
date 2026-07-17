@@ -127,7 +127,9 @@ describe('AuctionPanel accepted alternative answers', () => {
 
     // Answer with the accepted alternative 4H (option c).
     await user.keyboard('c')
-    expect(screen.getByText('Correct!')).toBeInTheDocument()
+    // An accepted-but-non-canonical answer reads "Alternate", not "Correct!".
+    expect(screen.getByText('Alternate')).toBeInTheDocument()
+    expect(screen.queryByText('Correct!')).not.toBeInTheDocument()
     expect(onAnswer).not.toHaveBeenCalled() // only on dismiss
 
     await user.keyboard('{Escape}')

@@ -53,7 +53,7 @@ export function AuctionPanel({
   const dbl = doubleState(model.prior, model.actingSeat)
 
   const [level, setLevel] = useState<number | null>(null)
-  const [result, setResult] = useState<{ correct: boolean; call: string; answer: string } | null>(null)
+  const [result, setResult] = useState<{ correct: boolean; alternate: boolean; call: string; answer: string } | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
 
   const doSubmit = useCallback((call: string) => {
@@ -62,10 +62,13 @@ export function AuctionPanel({
     // The player enters a plain bid; the answer may be alertable (e.g. "2D*").
     // Match on the call ignoring the alert marker.
     const entered = stripAlert(call)
-    const correct =
-      entered === stripAlert(cur.answer) ||
-      (cur.accept?.some((a) => stripAlert(a) === entered) ?? false)
-    setResult({ correct, call, answer: cur.answer })
+    const isCanonical = entered === stripAlert(cur.answer)
+    const isAccepted = cur.accept?.some((a) => stripAlert(a) === entered) ?? false
+    const correct = isCanonical || isAccepted
+    // An accepted alternative is correct but not the canonical answer — flagged
+    // so the popup reads "Alternate" (orange) rather than "Correct!" (green).
+    const alternate = correct && !isCanonical
+    setResult({ correct, alternate, call, answer: cur.answer })
     setLevel(null)
   }, [])
   const dismiss = useCallback(() => {
@@ -263,8 +266,12 @@ export function AuctionPanel({
         <>
           <div className="explain-backdrop" {...tapDismiss} />
           <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
-            <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
-              {result.correct ? 'Correct!' : 'Not quite'}
+            <div
+              className={`explain-status ${
+                result.alternate ? 'alt' : result.correct ? 'ok' : 'no'
+              }`}
+            >
+              {result.alternate ? 'Alternate' : result.correct ? 'Correct!' : 'Not quite'}
             </div>
             {q.explanation && <Explanation text={q.explanation} />}
             <p className="explain-answer">

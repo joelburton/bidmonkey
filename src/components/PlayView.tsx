@@ -109,7 +109,7 @@ export function PlayView({
   const [review, setReview] = useState<Seat | null>(null)
   const [selected, setSelected] = useState<{ seat: Seat; card: string } | null>(null)
   const [playResult, setPlayResult] = useState<
-    { correct: boolean; question: CardQuestion; card: string; seat: Seat } | null
+    { correct: boolean; alternate: boolean; question: CardQuestion; card: string; seat: Seat } | null
   >(null)
   const [showAuction, setShowAuction] = useState(false)
   const lastHuman = useRef(false)
@@ -170,8 +170,11 @@ export function PlayView({
   const answerPlay = (card: string) => {
     if (!pending) return
     const q = pending.question
-    const correct = card === q.answer || (q.accept?.includes(card) ?? false)
-    setPlayResult({ correct, question: q, card, seat: pending.seat })
+    const isCanonical = card === q.answer
+    const correct = isCanonical || (q.accept?.includes(card) ?? false)
+    // Accepted but non-canonical: shown as "Alternate" (orange), not "Correct!".
+    const alternate = correct && !isCanonical
+    setPlayResult({ correct, alternate, question: q, card, seat: pending.seat })
   }
   const dismissPlayResult = () => {
     const r = playResult

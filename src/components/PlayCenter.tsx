@@ -59,7 +59,7 @@ export function PlayCenter({
   options?: string[]
   onOption?: (card: string) => void
   onContractClick: () => void
-  result?: { correct: boolean; question: CardQuestion } | null
+  result?: { correct: boolean; alternate: boolean; question: CardQuestion } | null
   onDismissResult?: () => void
   showNext?: boolean
   onNext?: () => void
@@ -129,8 +129,12 @@ export function PlayCenter({
         <>
           <div className="explain-backdrop" {...tapDismiss} />
           <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
-            <div className={`explain-status ${result.correct ? 'ok' : 'no'}`}>
-              {result.correct ? 'Correct!' : 'Not quite'}
+            <div
+              className={`explain-status ${
+                result.alternate ? 'alt' : result.correct ? 'ok' : 'no'
+              }`}
+            >
+              {result.alternate ? 'Alternate' : result.correct ? 'Correct!' : 'Not quite'}
             </div>
             {result.question.explanation && (
               <Explanation text={result.question.explanation} />
