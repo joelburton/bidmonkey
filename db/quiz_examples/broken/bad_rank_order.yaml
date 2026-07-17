@@ -1,0 +1,9 @@
+# Spades given 9-10-8 instead of 10-9-8 — ranks within a suit must run high to
+# low, so the out-of-order run is caught as a likely typo. Still 13 cards and
+# suits in S H D C order, so only the rank-order check trips.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: s9108 hkq2 d53 caqj97
+  dealer: S

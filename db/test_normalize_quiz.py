@@ -116,6 +116,7 @@ BROKEN = [
     ("broken/bad_dup_in_hand.yaml", "twice in one hand"),
     ("broken/bad_dup_across_hands.yaml", "is in both"),
     ("broken/bad_suit_order.yaml", "in order"),
+    ("broken/bad_rank_order.yaml", "high-to-low"),
     ("broken/bad_question_seat.yaml", "player's seat"),
     ("broken/bad_dealer_not_first.yaml", "start with the dealer"),
     ("broken/bad_partial_extra_plays.yaml", "only the lead"),
@@ -156,6 +157,12 @@ def test_parse_hand():
 
 def test_parse_hand_void():
     assert nq.parse_hand("s- hakqjt98765 d- c432", "x")["S"] == ""
+
+
+def test_parse_hand_rejects_out_of_order_ranks():
+    # 9-10-8 within a suit is a typo (should be 10-9-8); ranks must run high-low.
+    with pytest.raises(nq.ProblemError, match="high-to-low"):
+        nq.parse_hand("s9108 hkq2 d53 caqj97", "x")
 
 
 @pytest.mark.parametrize("tok,want", [

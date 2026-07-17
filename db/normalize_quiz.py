@@ -91,7 +91,12 @@ def parse_hand(text, where):
             if r in seen:
                 raise ProblemError(f"{where}: {suit}{r} appears twice in one hand")
             seen.add(r)
-        hand[suit] = "".join(sorted(ranks, key=RANK_ORDER.index))
+        ordered = "".join(sorted(ranks, key=RANK_ORDER.index))
+        if ranks != ordered:
+            raise ProblemError(
+                f"{where}: {suit}{ranks} is not high-to-low "
+                f"(should be {suit}{ordered}) — likely a typo")
+        hand[suit] = ordered
         order.append(suit)
     if order != SUIT_ORDER:
         raise ProblemError(f"{where}: suits must be S H D C in order, got {' '.join(order)}")
