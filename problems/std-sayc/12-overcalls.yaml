@@ -1,0 +1,146 @@
+quiz: SAYC Overcalls
+problems:
+
+  #1
+  - hand: s975 hkqj83 daqj cq3
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          You have 15 HCP and a lovely five-card heart suit. Bid 1♥. If you were thinking of a takeout double, don’t. The shape is wrong and you don’t want a partner who might hold 4-4 in the majors picking the trump suit.
+        answer: 1h
+
+  #2
+  - hand: s109 hkj743 d872 c1098
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          You have a five-card suit but you are too weak to overcall. Simply pass.
+        answer: p
+
+  #3
+  - hand: s98542 hk108 d53 cak10
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          In spite of your 10 HCP, a 1♠ overcall is not a good idea. If your side ends up defending, you certainly do not want partner leading spades. With all your high cards outside the spade suit, it is best to pass and hope they are working for you on defense.
+        answer: p
+
+  #4
+  - hand: skj1092 h987 d53 ca53
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          your spades have body and you would welcome a spade lead from partner if the opponents declare. Besides, you will be making life that much more difficult for LHO — always a positive factor. Bid 1♠ over any one-level suit opening.
+        answer: 1s
+
+  #5
+  - hand: sakj1073 h6 dq84 cakj
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          A thing of beauty and a joy forever, but if RHO opens 1♥, do not overcall 1♠. Remember, overcalls limit your holding to roughly 16 HCP — occasionally a point or two more — and this hand is simply too good for this action. The solution is to start with a double. Partner thinks this is a takeout double, of course, and will respond accordingly. At your next turn, you will bid your spades. A double followed by a bid of your own suit shows hands that are too good for a normal overcall and typically advertises 17+ HCP.
+        answer: x
+
+  #6
+  - hand: s3 hakj74 dk96 caqj6
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          If RHO opens 1♣, do not double. In spite of your excellent holding, simply overcall 1♥. If you double first, you may have to overbid drastically later.
+        answer: 1h
+
+
+  #7
+  - hand: s975 hkqj873 da8 c53
+    dealer: e
+    auction:
+      - e: 1s
+      - s: "?"
+        explain: |
+          RHO opens 1♠. You have great trick-taking potential. Overcall 2♥.
+        answer: 2h
+
+  #8
+  - hand: s9 haq1095 d8 ckq8765
+    dealer: e
+    auction:
+      - e: 1s
+      - s: "?"
+        explain: |
+          If RHO opens 1♠, your highly distributional holding offsets the lack of HCP. Such hands typically have greater trick-taking potential. Also, if you bid one suit and an opponent doubles, you can then bid the other. We agree that it would be unfortunate if partner did not have tolerance for one of your suits. The small risk is worth the benefits that accrue the rest of the time. Bid 2♥ and mention the clubs at your next turn if the auction permits.
+        answer: 2h
+
+  #9
+  - hand: sj5 hk1087 dq843 cj63
+    dealer: w
+    auction:
+      - w: 1c
+      - n: 1h
+      - s: "?"
+        explain: |
+          Bid 3♥. A jump in this sequence should have less to do with HCP and more to do with your lovely four-card trump support. With one fewer heart you would simply make a competitive and natural raise to 2♥.
+        answer: 3h
+
+  #10
+  - hand: skq5 ha1087 dq843 c63
+    dealer: w
+    auction:
+      - w: 1c
+      - n: 1h
+      - s: "?"
+        explain: |
+          If the jump raise of an overcall is preemptive, with this collection you will respond to the overcall with a cuebid of 2♣. Partner will either rebid the agreed-upon suit at the lowest level — with a minimum — or jump to game if he has the appropriate values. The side benefit of this treatment should not be overlooked. Following a 1♣ opening and a 1♥ overcall by partner, in traditional auctions you would raise to 3♥. If partner has overcalled on minimum HCP, you might well be overextended. Instead, when you now bid 2♣, partner can sign off in 2♥, saving a level.
+        answer: 2c
+
+  #11
+  - hand: skq5 hkj75 dq876 ck7
+    dealer: w
+    auction:
+      - w: 1c
+      - n: 1h
+      - s: "?"
+        explain: |
+          Again, start with 2♣. If partner tries to sign off in 2♥ you will now raise to the three-level, showing your extra values.
+        answer: 2c
+
+  #12
+  - hand: s5 hkq10874 dk43 cj63
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Bid 2♥.
+        answer: 2h
+
+  #13
+  - hand: s65 haq108764 dq84 c6
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Bid 3♥.
+        answer: 3h
+
+  #14
+  - hand: sq5 haq1087642 d- c874
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Bid 4♥.
+        answer: 4h

@@ -1,0 +1,283 @@
+quiz: SAYC Subsequent Responder Bids
+problems:
+
+- hand: sa54 hk1054 d654 c1064
+  dealer: N
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 2h
+    - s: "?"
+      explain: |
+        Partner opens 1♦. You respond 1♥ and partner raises to 2♥. You have found the appropriate contract. Pass.
+      answer: pass
+
+#2
+- hand: sa9 h10986 d972 ck953
+  dealer: n
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 1s
+    - s: "?"
+      explain: |
+        Partner opens 1♦. You respond 1♥ and partner rebids 1♠. You now rebid 1NT, showing 6-9 points and no fit for opener’s suits. While you fully expect your bid to be the last for your side, opener is allowed to bid on with a strong hand.
+      answer: 1nt
+
+#3
+- hand: s98 hk98743 dk53 c75
+  dealer: n
+  auction:
+    - n: 1c
+    - s: 1h
+    - n: 1nt
+    - s: "?"
+      explain: |
+        You now sign off with 2♥. If it seems strange to take a second bid with only 6 HCP, think how much fun partner would have playing 1NT
+      answer: 2h
+
+#4
+- hand: sj984 h76 dq9 ck8754
+  dealer: n
+  auction:
+    - n: 1c
+    - s: 1s
+    - n: 1nt
+    - s: "?"
+      explain: |
+        You now sign off with 2♣.
+      answer: 2c
+
+#5
+- hand: sa543 h8 dk532 cj1064
+  dealer: n
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        This has to be a better spot than 2♥, so you pass.
+      answer: p
+
+  #6
+- hand: sj10943 hk9 d9732 ck9
+  dealer: n
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        Bid 2♥, returning to partner’s first suit to show heart preference and 6-9 points. Do not pass. Partner has at least five hearts, but may have only four clubs. Do not bid 2♦, which would be forcing. Do not bid 2NT. Weak hands should be played in a suit contract whenever possible. Finally, do not bid 2♠. We know you didn’t guarantee a five-card suit with your first bid, but partner might not have any spades at all. “Get out of Dodge” while you can.
+      answer: 2h
+
+  #7
+- hand: sa754 hk10 d652 ckj64
+  dealer: n
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2d
+    - s: "?"
+      explain: |
+        You now invite, by bidding 2NT.
+      answer: 2nt
+
+  #8
+- hand: sj9 hkqj986 d97 ck95
+  dealer: n
+  auction:
+    - n: 1c
+    - s: 1h
+    - n: 1s
+    - s: "?"
+      explain: |
+        You invite with 3♥.
+      answer: 3h
+
+  #9
+- hand: sq8762 hk9 dkj65 cq5
+  dealer: n
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2d
+    - s: "?"
+      explain: |
+        You now invite with 3♦. This is not a jump, but since you could have passed, the raise must be invitational.
+      answer: 3d
+
+  #10
+- hand: s7 hkq1097 dk10 ckj642
+  dealer: n
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 1s
+    - s: "?"
+      explain: |
+        Your 2♣* (FSF) rebid is forcing for one round. If partner holds three hearts, he should now show delayed support with a bid of 2♥.
+      answer: 2c
+
+  #11
+- hand: sa8765 hk9 d1042 cqj4
+  dealer: n
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2d
+    - s: "?"
+      explain: |
+        Try 2NT now, invitational. If partner has three-card spade support, he can still show it.
+      answer: 2nt
+
+  #12
+- hand: s9 hqj7432 d86 ck873
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 1nt
+    - n: 2d
+    - s: "?"
+      explain: |
+        Your 2♥ bid is now not forcing, because of your initial 1NT response. The expectation for a new suit rebid by a 1NT responder is a 6-card suit and 5-9 HCP.
+      answer: 2h
+
+  #13
+- hand: skq74 hkq1097 d10 ckj6
+  dealer: n
+  auction:
+    - n: 1c
+    - s: 1h
+    - n: 1nt
+    - s: "?"
+      explain: |
+        You are strong enough for a responder reverse — game forcing — of 2♠.
+      answer: 2s
+
+  #14
+- hand: s- hkq1097 dkqj87 ck54
+  dealer: n
+  auction:
+    - n: 1c
+    - s: 1h
+    - n: 1nt
+    - s: "?"
+      explain: |
+        Your 3♦ rebid is a jump shift and game forcing.
+      answer: 3d
+
+  #15
+- hand: skj9 hkq109 dj10 ckj64
+  dealer: n
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 1nt
+    - s: "?"
+      explain: |
+        You have all of the information you need to place the contract with a signoff of 3NT.
+      answer: 3nt
+
+  #16
+- hand: sq1098 hkq108 dkq43 c2
+  dealer: n
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 1s
+    - s: "?"
+      explain: |
+        An eight-card major fit has been located and your holding just went up a notch or two. There is no time like the present to tell partner about this lovely hand with a jump to 4♠. If opener has extra strength, he is allowed to bid on.
+      answer: 4s
+
+  #17
+- hand: s65 hak95 daq10743 c3
+  dealer: n
+  auction:
+    - n: 1d
+    - s: 1h
+    - n: 1nt
+    - s: "?"
+      explain: |
+        We suppose you could fool around a bit, but 5♦ looks like the right spot. Might as well get it over with.
+      answer: 5d
+
+  #18
+- hand: sk9 ha9 d9863 ckj643
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 2c
+    - n: 2h
+    - s: "?"
+      explain: |
+        A rebid of 2♠ simply takes a non-forcing preference.
+      answer: 2s
+
+  #19
+- hand: s7 hk108 dk74 ckj10432
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 2c
+    - n: 2h
+    - s: "?"
+      explain: |
+        A rebid of 3♣ is simply invitational.
+      answer: 3c
+
+  #20
+- hand: s5 h763 dkq75 caq643
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 2c
+    - n: 2d
+    - s: "?"
+      explain: |
+        You can now raise to 3♦, non-forcing.
+      answer: 3d
+
+  #21
+- hand: sk97 h10 da874 ckj643
+  dealer: n
+  auction:
+    - n: 1s
+    - s: "?"
+      explain: |
+        Since you may not use Jacoby 2NT or a splinter bid with only three-card support, you temporize with a bid of 2♣.
+      answer: 2c
+    - n: 2h
+    - s: "?"
+      explain: |
+        When partner rebids 2♥, your jump to 3♠ becomes game forcing. You could, of course, jump to 4♠. And on some auctions, for example,
+      answer: 3s
+      accept: [4s]
+
+  #22
+- hand: saq hq107 dj85 caj432
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 2c
+    - n: 2h
+    - s: "?"
+      explain: |
+        This time your rebid is 3♦*, forcing and often artificial, as here. You wish to be in game, but you are uncertain as to which game contract will be correct. If partner is 5-5 or 6-5 in the majors, you belong in a major. If not — and partner has a diamond stopper — you belong in 3NT. We need more information
+      answer: 3d*
+
+  #23
+- hand: s65 hk975 dk3 ckj643
+  dealer: n
+  auction:
+    - n: 1s
+    - s: 2c
+    - n: 2d
+    - s: "?"
+      explain: |
+        Since you promised partner a second bid, opener’s 2♦ bid is forcing. You can limit your holding with minimum rebids of 2♠, 2NT, 3♣ or 3♦. In this case, rebid 2NT.
+      answer: 2nt
+
+

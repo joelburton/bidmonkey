@@ -32,6 +32,7 @@ its problems). This script:
 """
 import argparse
 import json
+import os
 import re
 import sys
 
@@ -614,9 +615,78 @@ def document_sql(out):
     return emit_sql([out["source"]], [quiz], problem_rows, link_rows)
 
 
+# --- source-folder layout ---------------------------------------------------
+# A source is a directory `problems/<source-slug>/` holding one `index.yaml`
+# (`title:` = the source title; the folder name is the slug) plus one YAML file
+# per quiz. Each quiz file carries `quiz:` (the quiz title) + `problems:`; its
+# slug is `<source-slug>-<filestem>` and each problem's title is `<quiz> #n`.
+# Internally each file is folded to the single-doc shape normalize_document
+# already understands, so all the per-problem checks are shared.
+def normalize_source_dir(dirpath, schema_check=True):
+    """Normalize every quiz file in a source folder.
+
+    Returns (out, errors, echoes): `out` carries one source, its quizzes, all
+    problems, and the quiz↔problem links; `errors`/`echoes` mirror
+    normalize_document. Pure apart from reading the folder's files.
+    """
+    import yaml
+    source_slug = os.path.basename(os.path.normpath(dirpath))
+    index_path = os.path.join(dirpath, "index.yaml")
+    if not os.path.isfile(index_path):
+        return None, [f"{dirpath}: missing index.yaml (needs `title:`)"], []
+    index = yaml.safe_load(open(index_path, encoding="utf-8")) or {}
+    source_title = index.get("title")
+    if not source_title:
+        return None, [f"{index_path}: needs a `title:`"], []
+
+    files = sorted(f for f in os.listdir(dirpath)
+                   if f.endswith(".yaml") and f != "index.yaml")
+    source = {"slug": source_slug, "title": source_title}
+    quizzes, problems, links, echoes, errors = [], [], [], [], []
+    for fname in files:
+        stem = fname[:-len(".yaml")]
+        quiz_slug = f"{source_slug}-{stem}"
+        doc = yaml.safe_load(open(os.path.join(dirpath, fname), encoding="utf-8")) or {}
+        quiz_title = doc.get("quiz")
+        if not quiz_title:
+            errors.append(f"{fname}: needs a `quiz:` title")
+            continue
+        # Fold to the single-doc shape: source/quiz as `Title [slug]`, titles = the
+        # quiz title (no `#`, so normalize_problem appends ` #<ordinal>`).
+        synthetic = {"source": f"{source_title} [{source_slug}]",
+                     "quiz": f"{quiz_title} [{quiz_slug}]",
+                     "titles": quiz_title,
+                     "problems": doc.get("problems")}
+        out, errs, echs = normalize_document(synthetic, schema_check=schema_check)
+        if errs:
+            errors.extend(f"{fname}: {e}" for e in errs)
+            continue
+        quizzes.append(out["quiz"])
+        problems.extend(out["problems"])
+        links.extend({"quiz_slug": quiz_slug, "problem_slug": p["slug"], "ordinal": p["ordinal"]}
+                     for p in out["problems"])
+        echoes.extend((f"{stem} #{i}", echo) for i, echo in echs)
+    if errors:
+        return None, errors, echoes
+    return {"source": source, "quizzes": quizzes, "problems": problems, "links": links}, [], echoes
+
+
+def source_dir_sql(out):
+    """Upsert SQL for a whole source folder (one source, many quizzes)."""
+    src = out["source"]
+    problem_rows = [
+        {"slug": p["slug"], "title": p["title"], "source": src["slug"],
+         "difficulty": None, "tags": [], "hero": p["hero"], "dealer": p["dealer"],
+         "vulnerability": p["vulnerability"], "deal": p["deal"], "auction": p["auction"],
+         "play": p["play"], "contract": p["contract"], "commentary": None}
+        for p in out["problems"]
+    ]
+    return emit_sql([src], out["quizzes"], problem_rows, out["links"])
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("file")
+    ap.add_argument("path", help="a quiz YAML file, or a source folder (with index.yaml)")
     ap.add_argument("--sql", action="store_true",
                     help="emit upsert SQL instead of JSON")
     ap.add_argument("--review", action="store_true",
@@ -627,7 +697,22 @@ def main():
         import yaml
     except ImportError:
         sys.exit("error: PyYAML is required (pip install pyyaml).")
-    doc = yaml.safe_load(open(args.file, encoding="utf-8"))
+
+    if os.path.isdir(args.path):
+        out, errors, echoes = normalize_source_dir(args.path)
+        if errors:
+            _fail(errors)
+        print(source_dir_sql(out), end="") if args.sql else \
+            print(json.dumps(out, indent=2, ensure_ascii=False))
+        n_quizzes, n_problems = len(out["quizzes"]), len(out["problems"])
+        if args.review:
+            print(f"\nexpanded auctions ({n_quizzes} quiz(zes), "
+                  f"{n_problems} problem(s)):", file=sys.stderr)
+            for label, echo in echoes:
+                print(f"  {label}: {echo or '(none)'}", file=sys.stderr)
+        return
+
+    doc = yaml.safe_load(open(args.path, encoding="utf-8"))
 
     out, errors, echoes = normalize_document(doc)
     if errors:

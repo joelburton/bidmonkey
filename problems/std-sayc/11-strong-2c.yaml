@@ -1,0 +1,80 @@
+quiz: SAYC Strong 2C Opening
+problems:
+
+  #1
+  - hand: saqj hak daj5 cqj842
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Open 2♣. Your intended rebid is 2NT, showing 22-24 HCP and a balanced hand.
+        answer: 2C
+
+  #2
+  - hand: sk83 hakq543 dak ck4
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Open 2♣. Your plan is to bid hearts at your next opportunity.
+        answer: 2C
+
+  #3
+  - hand: sakq106 h43 dakj7 cak
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Open 2♣. You will show the spades with the rebid.
+        answer: 2C
+
+  #4
+  - hand: sakq10985432 h2 da4 c-
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Most players we know would open 2♣, though there seems to be at least a touch of controversy involved. The hand does not contain 22+ HCP, but it can take eleven tricks with no help from partner. (Those players who employ the 2♣ bid to show this kind of hand only require a reasonable expectation of taking nine tricks — more tricks, incidentally, than any of the preceding three hands in the set are likely to provide.) The controversy arose from an online tournament ruling in 2000 where the director adjusted the scores of all pairs who chose to open a similar collection with a strong 2♣. Perhaps by the time this book finds its way into print, agreement here will be universal.
+        answer: 2C
+
+  #5
+  - hand: skq7642 hk84 d975 c4
+    dealer: n
+    auction:
+      - n: 2c
+      - s: "?"
+        explain: |
+          Respond 2♠. These bids promise a suit of five-plus cards and, usually, two of the top three honors.
+        answer: 2s
+
+  #6
+  - hand: s983 h53 daq5432 ck4
+    dealer: n
+    auction:
+      - n: 2c
+      - s: "?"
+        explain: |
+          Respond 3♦. These bids promise a suit of five-plus cards and, usually, two of the top three honors.
+        answer: 3d
+
+  #7
+  - hand: saq6 hq732 dq1087 c64
+    dealer: n
+    auction:
+      - n: 2c
+      - s: "?"
+        explain: |
+          2NT shows 8+ HCP with no biddable five-card suit.
+        answer: 2nt
+
+  #8
+  - hand: skj98 h7652 d84 c864
+    dealer: n
+    auction:
+      - n: 2c
+      - s: "?"
+        explain: |
+          Respond 2♦, ‘waiting.’
+        answer: 2d
+
+

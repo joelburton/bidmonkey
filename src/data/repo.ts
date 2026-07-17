@@ -71,9 +71,9 @@ const mapQuiz = (r: QuizRow): Quiz => ({
 /** Load the whole catalogue in one shot (it's tiny). Throws on network/RLS errors. */
 export async function fetchCatalog(): Promise<Catalog> {
   const [sources, problems, quizzes] = await Promise.all([
-    sbSelect<Source[]>('sources?select=slug,title&order=title'),
+    sbSelect<Source[]>('sources?select=slug,title&order=slug'),
     sbSelect<ProblemRow[]>('problems?select=*&order=slug'),
-    sbSelect<QuizRow[]>('quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=title'),
+    sbSelect<QuizRow[]>('quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=slug'),
   ])
   return { sources, problems: problems.map(mapProblem), quizzes: quizzes.map(mapQuiz) }
 }

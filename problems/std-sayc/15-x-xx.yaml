@@ -1,0 +1,354 @@
+quiz: SAYC Doubles and Redoubles
+problems:
+
+  #1
+  - hand: sq875 h863 dkq4 c1098
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: x
+      - s: "?"
+        explain: |
+          Pass. Declarer is going to have no fun at all.
+        answer: p
+
+  #2
+  - hand: sqj9874 h53 d872 cj7
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♠. This is the same contract you would want to be in if partner had opened 1NT. Essentially, he did.
+        answer: 2s
+
+  #3
+  - hand: sj109 h86 d87 cj109872
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♣. This is not Stayman, in spite of the fact that partner has a 1NT opener. The best news is that you get to play one level lower than would be the case if he had actually opened 1NT.
+        answer: 2c
+
+  #4
+  - hand: s432 hq9843 d5 c7643
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♥. Partner was hoping for something else, but it wouldn’t surprise us too much if you actually make this. Remember, you know where most of the high cards are located.
+        answer: 2h
+
+  #5
+  - hand: sq875 h3 daqj7 ckj98
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          You should double, for takeout. You hold a classic collection for this call, 13 HCP and shortness in the bid suit. Since you also have wonderful support for any suit partner cares to name, you want partner to pick the trump suit.
+        answer: x
+
+  #6
+  - hand: sj9874 h- dkq72 ckj76
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          Again, you should double. You have fewer high cards, but even better shape. You have only 10 HCP, but given the assumption that partner will bid clubs, diamonds or spades, you can add as many as five support points for the heart void — more than enough to get involved. It is true that partner might have hearts and elect to take your double out to a notrump contract or, even worse, decide to defend one heart doubled. In either case, you are in trouble. This is definitely not what you wanted to hear. Sorry about that. No risk, no reward.
+        answer: x
+
+  #7
+  - hand: s92 hj108 daq87 cak92
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          Pass. You have plenty of strength, but the shape is wrong. You are not short in the opponent’s suit. This is important. When partner knows you have shortness in the opponent’s suit, he is in a much better position to evaluate the playing strength of his hand opposite your takeout double. You also do not have reasonable support for all of the unbid suits. Since partners never seem to bid what you want them to, you can be certain that yours will want to play in spades — not a pleasant prospect. You don’t have a suit you can overcall at the two-level, so sit back, relax and prepare to defend.
+        answer: p
+
+  #8
+  - hand: sa7 hqj965 dk62 ca92
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          Pass, and try to do it smoothly. You have 14 HCP, but your best suit is their suit. You hope that partner will double somewhere along the line. If so, you will be happy to pass, converting that double — whatever its intended purpose — to penalty.
+        answer: p
+
+  #9
+  - hand: sq8754 hkj983 da6 c3
+    dealer: w
+    auction:
+      - w: 1c
+      - e: 1d
+      - s: "?"
+        explain: |
+          LHO opens 1♣; partner passes and RHO bids 1♦. You can now show both of the unbid suits with a takeout double.
+        answer: x
+
+  #10
+  - hand: sak874 h3 daq62 cq87
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          When RHO opens 1♥, prefer to overcall with 1♠ rather than doubling. A simple overcall shows 8-16+ HCP. If partner does not raise, perhaps you will be able to get back into the auction with diamonds or a balancing double.
+        answer: 1s
+
+  #11
+  - hand: sak875 h8 dak96 ca87
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          RHO opens 1♥. You should double. With 18 HCP in aces and kings you are too strong for a mere overcall. Over partner’s weak response — 1♠, 1NT, 2♣ or 2♦ — you will now bid 2♠. You will do the same if opener’s partner bids and your partner passes. Principle: a double followed by a suit bid shows 17+ HCP.
+        answer: x
+
+  #12
+  - hand: saq86 hkj7 daj6 ckj7
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          RHO opens at the one-level in any suit. Again, double. You are too strong to overcall 1NT, which would show 15-18 HCP. With 19+ HCP you should start with a double, planning a notrump rebid.
+        answer: x
+
+  #13
+  - hand: saqj76 h5 dak1086 ck2
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          RHO opens 1♣. Despite your 17 HCP, start with an overcall of 1♠. Strong two-suited hands are difficult to show if you begin with a double. If partner is weak, you may be too high by the time you finish describing your shape.
+        answer: 1s
+
+  #14
+  - hand: sj843 h86 d876 c10874
+    dealer: w
+    auction:
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          It may not seem right, but you have no choice but to bid 2♣. You are far too weak to allow the opponents to play the contract of 1♠ doubled! They will make with several overtricks. We don’t expect you to be overjoyed at the prospect of playing 2♣, but on average you will only go down one or two, which could be a good score. If partner has 13 HCP, then your side has 14, and that means that the opponents will have probably missed a game. There is also the distinct possibility that LHO will save the day by bidding 2♠.
+        answer: 2c
+
+  #15
+  - hand: s986 hkj76 daj64 cj7
+    dealer: w
+    auction:
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          With a decent 10-12 HCP and a four or five-card suit, jump the bidding. With this hand, your call is 3♥.
+        answer: 3h
+
+  #16
+  - hand: sq1065 hk74 dqj2 cj86
+    dealer: w
+    auction:
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          With 6-10 points and a stopper in the opponents’ suit, bid 1NT. With a weaker hand, like Hand 14, you would not consider this course — notrump would indeed be a disaster. Keep in mind that notrump is not a desirable contract with an opening hand to your left and partner short in their long suit. Accordingly, a bid in this strain should be made only when you have a decent hand or no other rational choice.
+        answer: 1nt
+
+  #17
+  - hand: saq43 haj108 d76 ck87
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - s: "?"
+        explain: |
+          With 13+ HCP and good support for both majors, bid 2♦. The cuebid of the opponents suit in response to a takeout double (in principle and clarified later if not) says, “Partner, we have game wherever you like. You pick.”
+        answer: 2d
+
+  #18
+  - hand: sq8 hk76 daj64 cj873
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - s: "?"
+        explain: |
+          With 11-12 HCP, no four-card major and a reasonable double stopper in their suit, bid 2NT. With 13-16, bid 3NT.
+        answer: 2NT
+
+  #19
+  - hand: saq1065 hk7 dj32 cq86
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 4♠. Unless partner is lying through his teeth, this should be one of the easier contracts you will ever play. If partner is lying about the spade support, he should hold 17+ HCP and a reasonably self-sufficient suit. If partner corrects, we’d be tempted to go to six in partner’s suit.
+        answer: 4s
+
+  #20
+  - hand: sak863 h6 d876 c10874
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: 1h
+      - s: "?"
+        explain: |
+          Bid 3♠, even with your 7 HCP. Remember, partner’s double of 1♦ is most likely promising four spades, and you have five. Get in there with your nine-card trump fit and don’t make it easy for the opponents to find their heart game.
+        answer: 3s
+
+  #21
+  - hand: sq986 hk7 d7642 ca73
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: 1h
+      - s: "?"
+        explain: |
+          Compete with a bid of 1♠. The Law of Total Tricks should protect you nicely. With more, for example 10-12 HCP, jump to 2♠.
+        answer: 1s
+
+  #22
+  - hand: sk1065 ha7 d2 caq8642
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: 1h
+      - s: "?"
+        explain: |
+          With 12+ HCP, cuebid the opponent’s suit — in this case, either one. You do not know which game to play, and slam is possible. Let’s hear more from partner.
+        answer: 2d
+        accept: [2h]
+
+  #23
+  - hand: skj76 h6 dkj765 ca87
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          Redouble. This bid shows 10+ HCP and tends to deny a heart fit. If you do have a fit and cannot bid the hand any other way, then you can start with a redouble and show the fit later. Most redoubles will look a lot like this and will be penalty oriented. In other words, you are advising your partner that the hand belongs to your side and that the opponents should not be allowed to play any contract undoubled. If your side cannot envision doubling them for an adequate penalty, then you should be declaring the hand.
+        answer: xx
+
+  #24
+  - hand: sk86 hq32 d109862 cj3
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          Bid 2♥. It is what you would have done without the double and it is what you should do now. Knowing your side has a fit will help partner in deciding how high to compete.
+        answer: 2h
+
+  #25
+  - hand: sa hj7432 dqj6 c9874
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          Bid 4♥. With any luck you can keep them out of 4♠.
+        answer: 4h
+
+  #26
+  - hand: sj86 h32 dkq10632 cq3
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          Bid 3♦. The jump is preemptive and normally shows a six-card holding and less than 10 HCP.
+        answer: 3d
+
+  #27
+  - hand: skq74 h87 da65 c9864
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          Bid 1♠. We don’t know where we might be going, but at least we bid spades before they did. This auction often ends at 1NT or 2♥
+        answer: 1s
+
+  #28
+  - hand: s5 hq865 dqj96 ck743
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          In support of hearts, this hand is worthy of a limit raise. Bid 2NT (Jordan).
+        answer: 2nt
+
+  #29
+  - hand: s5 h10987 da653 cq864
+    dealer: n
+    auction:
+      - n: 1h
+      - e: x
+      - s: "?"
+        explain: |
+          A natural corollary of Jordan is that the jump raise can now be used preemptively. Bid 3♥. Tell partner about the four-card support and jam the auction a bit in the process. You will not bid again unless partner forces you to.
+        answer: 3h
+
+  #30
+  - hand: s63 hakj987 d876 c74
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: p
+      - e: 2h
+      - s: "?"
+        explain: |
+          LHO opens 1NT. Partner passes and RHO bids a 2♥ Jacoby Transfer. I don’t know about you, but we want a heart lead regardless of the final contract. If you double, you will get it.
+        answer: x
+
+  #31
+  - hand: sq986 h97 d95 cakq83
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: p
+      - e: 2c
+      - s: "?"
+        explain: |
+          This time it goes 1NT by LHO, pass by partner, 2♣ by RHO. The Stayman call is artificial, and once again a double is in order. If nothing else, partner will thank you for making his life easy on opening lead.
+        answer: x
+
+  #32
+  - hand: s6532 ha7 d- c10986542
+    dealer: w
+    auction:
+      - w: 1h
+      - e: 3h
+      - w: 4nt
+      - e: 5d
+      - s: "?"
+        explain: |
+          Assuming you want a diamond lead, now is the time to ensure that partner finds it. Double the artificial response to Blackwood.
+        answer: x

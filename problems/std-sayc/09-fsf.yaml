@@ -1,0 +1,103 @@
+quiz: SAYC Fourth Suit Forcing
+problems:
+
+#1
+- hand: sak97 ha8 d742 cq1072
+  dealer: N
+  auction:
+    - n: 1h
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        Since you must find a forcing call, a raise to 3♣ is clearly inadequate. You cannot raise hearts at this point — also not forcing — and you are not wild about declaring notrump from your side without a diamond stopper. The only choice left is to bid 2♦*.
+      answer: 2d*
+
+  #2
+- hand: skqj732 ha8 dk9 c1073
+  dealer: N
+  auction:
+    - n: 1d
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        You need to establish a force. A bid of 3♠ would be invitational and a bid of 4♠ would be a signoff, possibly missing a slam. Temporize with a bid of 2♥*. Note that the fourth suit says nothing about hearts. You are using it to keep the bidding open. With luck, partner can now show what is called ‘delayed support’ for spades; that is, a three-card suit. If he can’t, a subsequent spade bid by you will disclose the six-bagger.
+      answer: 2h*
+
+  #3
+- hand: saj1075 h732 dq8 ck102
+  dealer: N
+  auction:
+    - n: 1d
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        You have enough to invite a game, but which game? The solution is FSF, and a bid of 2♥*. If partner holds three spades, he will bid 2♠ and you can raise to the three-level. If partner has a heart stopper he will bid notrump now. If he rebids clubs, your high cards are well placed and you can raise him to 4♣.
+      answer: 2h*
+
+  #4
+- hand: saqj72 hq8 dk97 cj73
+  dealer: N
+  auction:
+    - n: 1d
+    - s: 1s
+    - n: 2c
+    - s: "?"
+      explain: |
+        You’d like to be in game, but 3NT could be in trouble off the top. You’d also like to find out if partner happens to have three spades. A bid of 2♥* should lead your side to the most logical contract. If partner raises spades, you can bid the spade game; if he bids 2NT, take him to three. If he rebids a minor, you can raise, allowing for the possibility of playing that suit at the four-level.
+      answer: 2h*
+
+  #5
+- hand: s732 hak2 da983 ck92
+  dealer: N
+  auction:
+    - n: 1c
+    - s: 1d
+    - n: 1h
+    - s: "?"
+      explain: |
+        You are in a truly difficult situation. You have enough to force to game; you have no clear-cut call and you really would prefer not to bid notrump from your side. Since a bid of 1♠ would be natural — and forcing for one round — the FSF bid in this auction is 2♠*. Partner should read this as an attempt to find 3NT if he has spades stopped. Note that if you had spades covered, you would already be bidding notrump from your side.
+      answer: 2s*
+
+
+  #6
+- hand: s82 hkq974 d83 cak83
+  dealer: s
+  auction:
+    - s: 1h
+    - n: 1s
+    - s: 2c
+    - n: 2d*
+    - s: "?"
+      explain: |
+        You can’t give delayed spade support, nor can you rebid your clubs or bid notrump. The only realistic call you can make with this hand is 2♥.
+      answer: 2h
+
+  #7
+- hand: s6 hqj72 dk7 caqj754
+  dealer: s
+  auction:
+    - s: 1c
+    - n: 1d
+    - s: 1h
+    - n: 2s*
+    - s: "?"
+      explain: |
+        Bid 3♣. A fine club slam might be reached.
+      answer: 3c
+
+  #8
+- hand: saq hqj64 dj107 ca643
+  dealer: s
+  auction:
+    - s: 1c
+    - n: 1d
+    - s: 1h
+    - n: 2s*
+    - s: "?"
+      explain: |
+        Bid 3NT and the contract will be declared from the proper side.
+      answer: 3nt
+

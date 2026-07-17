@@ -1,0 +1,205 @@
+quiz: SAYC Overcalling 1NT
+problems:
+
+  #1
+  - hand: saqj764 h3 dk97 cq52
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Bid 2♣ (Cappelletti). As we will see in a minute, partner’s normal response will be 2♦, after which you can bid the spades.
+        answer: 2c
+
+  #2
+  - hand: skq632 haq1075 d86 c3
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Bid 2♦ (Cappelletti), showing both major suits in one call.
+        answer: 2d
+
+  #3
+  - hand: s5 haq875 d109 cakj42
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Bid 2♥ (Cappelletti), showing hearts and an unspecified minor suit.
+        answer: 2h
+
+  #4
+  - hand: saqj84 h642 dkq1073 c-
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Bid 2♠ (Cappelletti), showing spades and a minor.
+        answer: 2s
+
+  #5
+  - hand: s87 h- daq1062 ckj10643
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Bid 2NT (Cappelletti), showing both minor suits in one call.
+        answer: 2nt
+
+  #6
+  - hand: s5 h65 dq97 cakj10742
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          You could bid 2♣ (Cappelletti); but since you will end up in 3♣ eventually, why give them time to find a suit? An immediate call of 3♣, natural, will make life all that more difficult for the opponents.
+        answer: 3c
+
+  #7
+  - hand: s852 h3 d109 caqj7642
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - s: "?"
+        explain: |
+          Cappelletti response: Feel free to pass. If you are new to the convention as a partnership, we suspect partner will think you forgot what you were playing!
+        answer: p
+
+  #8
+  - hand: sq632 hj984 d96 c865
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2♦. Partner will name his suit at his next turn. In the event he holds long diamonds, we expect he will pass. If so, you may end up declaring in 2♦. Lucky you.
+        answer: 2d
+
+  #9
+  - hand: s53 haqj1065 d109 c842
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2♥. This shows a good suit of five-plus cards. If partner has some support, you might get to a game you can make.
+        answer: 2h
+
+  #10
+  - hand: s84 h42 daqj1073 c872
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - s: "?"
+        explain: |
+          Cappelletti response: Feel free to pass. It’s as good a spot as any.
+        answer: p
+
+  #11
+  - hand: s873 h4 dj1062 cq10643
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2♠, to play. You prefer spades to hearts.
+        answer: 2s
+
+  #12
+  - hand: sa3 hqj65 dqj7 c9742
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 3♥, invitational to game.
+        answer: 3h
+
+  #13
+  - hand: s- h4 dqj10732 c1076432
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2NT, asking partner to name his better minor suit.
+        answer: 2nt
+
+  #14
+  - hand: s73 h4 d1062 cakq10643
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 3♣, to play.
+        answer: 3c
+
+  #15
+  - hand: s842 h742 d1073 cq872
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - s: "?"
+        explain: |
+          Cappelletti response: Pass, and try to think happy thoughts.
+        answer: p
+
+  #16
+  - hand: s965 h4 d10962 cq10643
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2NT, asking partner to bid his minor.
+        answer: 2nt
+
+  #17
+  - hand: s83 hq1065 dqj7 ca742
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 3♥, invitational. At least some of your minor-suit cards are bound to be useful.
+        answer: 3h
+
+  #18
+  - hand: skq109843 h42 d72 c76
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2♠, natural and non-forcing.
+        answer: 2s
+
+  #19
+  - hand: s73 hk1043 d1062 cak43
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - s: "?"
+        explain: |
+          Cappelletti response: Bid 2NT. When partner shows his minor, rebid 3♥, invitational to game.
+        answer: 2nt

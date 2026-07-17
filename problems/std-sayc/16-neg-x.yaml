@@ -1,0 +1,24 @@
+quiz: SAYC Negative Doubles
+problems:
+
+  #1
+  - hand: sa863 hkq73 d876 c74
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 2c
+      - s: "?"
+        explain: |
+          Had RHO passed, you would have bid 1♥. However, the 2♣ overcall gives you problems. The hand is unsuitable for a two-level bid and would, using traditional methods, be forced to pass. If partner has a four-card major and 13 HCP, he too will have to pass. If your side has any chance at all of bringing home a two-level contract in one of the other suits, then allowing your opponents to play in a contract of 2♣ — usually making — would be a crime.
+        answer: x
+
+  #2
+  - hand: s76 hk9653 da864 c87
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1s
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 1♠. Again, your side may have a good partscore contract available in one of the other suits. If you pass, and partner has a hand that is not suitable for a reopening bid of some kind, then these possible contracts will be lost.
+        answer: 2s

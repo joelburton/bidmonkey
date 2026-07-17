@@ -528,6 +528,12 @@ body {
   font-weight: 600;
   padding: 0 2px;
 }
+/* The problem id is a reference label, not part of the puzzle — mute it so it
+   recedes against the contract/vulnerability info on the felt. */
+.problem-id {
+  opacity: 0.55;
+  font-weight: 400;
+}
 
 /* A long (competitive) auction scrolls here instead of pushing the bottom-
    pinned bid pad out of the clipped center. */

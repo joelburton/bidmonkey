@@ -1,6 +1,4 @@
-source: Std Bidding with SAYC [sayc]
-quiz: Reverses [sayc-rev]
-titles: "SAYC Reverses #"
+quiz: SAYC Reverses
 problems:
 
 #1
@@ -40,7 +38,7 @@ problems:
 - hand: sq haqj642 dakj94 c2
   dealer: S
   auction:
-  - s: 1d
+  - s: 1h
   - n: 1s
   - s: "?"
     explain: |
@@ -79,7 +77,7 @@ problems:
     explain: |
       If you and your partner have agreed that simple preference bids are non-forcing, then you could bid 3♣. If you are playing a more modern approach, your only choice is 2NT*. This artificial bid, now commonly known as “Lebensohl after Opener’s Reverse”. Some still refer to it as Ingberman 2NT .
     answer: 2nt
-    accept: 3c
+    accept: [3c]
 
 #8
 - hand: saq985 h108 d85 c8763

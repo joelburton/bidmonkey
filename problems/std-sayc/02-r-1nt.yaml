@@ -1,6 +1,4 @@
-source: Std Bidding with SAYC [sayc]
-quiz: Responding to 1NT [sayc-nt-r]
-titles: "SAYC Responding to 1NT #"
+quiz: SAYC Responding to 1NT
 problems:
 
 - hand: skj10742 hj98 d9 ck74
@@ -100,7 +98,7 @@ problems:
     answer: 2c
 
 
-- hand: sj65 hq732 d109672 c8
+- hand: sj65 hq732 d109762 c8
   dealer: N
   auction:
   - n: 1nt

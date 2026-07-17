@@ -1,0 +1,168 @@
+quiz: SAYC Michaels / Unusual 2NT
+problems:
+
+  #1
+  - hand: sj10432 h108753 dj cak
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          Pass. You have the right shape, but look where the HCP are located. This is a defensive hand.
+        answer: p
+
+  #2
+  - hand: sq10984 haqj97 d754 c-
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          With your strength nicely concentrated in the majors, this hand is clearly worthy of a 2♣ Michaels cuebid. The same would be true if RHO had opened 1♦. Your bid would then be 2♦.
+        answer: 2c
+
+  #3
+  - hand: sak1095 h9 dkq caj943
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          When RHO opens 1♥, you start with a Michaels cuebid of 2♥. If partner bids 2♠, your raise to 3♠ will alert him to the fact that you have about 17-20 HCP.
+        answer: 2h
+
+  #4
+  - hand: sq109865 hkj1087 d3 c5
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          RHO opens 1♣. Bid 2♣, Michaels, showing your major two-suiter. If opener had bid 1♦, your bid would have been 2♦. While this hand contains only 6 HCP, the 6-5 distribution with all honors in the major suits makes it totally appropriate for a Michaels bid.
+        answer: 2c
+
+  #5
+  - hand: skq1087 hj dq4 cq9863
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          RHO opens 1♥. Bid 1♠ and hope to be able to show clubs later. Your scattered values and weak clubs make the hand unsuitable for a ‘mini’ Michaels.
+        answer: 1s
+
+  #6
+  - hand: s5 haq1086 dqj10876 c4
+    dealer: e
+    auction:
+      - e: 1s
+      - s: "?"
+        explain: |
+          RHO opens 1♠. Bid 2♠, showing hearts and one of the minors. If partner holds a club suit but has tolerance for diamonds or hearts, partner can bid 3♣. You will pull to 3♦. If partner likes diamonds he can then pass. If he prefers hearts, he will pull again.
+        answer: 2s
+
+  #7
+  - hand: saq986 hkq1087 d3 cq6
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          Simply overcall 1♠, planning to bid the hearts at your next turn.
+        answer: 1s
+
+  #8
+  - hand: skq1087 hkq1087 dq4 ca
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Cuebid opener’s suit. If partner bids 2♥, you will now raise to 3♥. With a ‘normal’ Michaels holding you wouldn’t think of bidding a second time unless forced, for example, by partner’s 2NT response. Thus, when you do bid again — voluntarily — you show a very strong hand instead of the weak one partner was expecting. Partner could, of course, have nothing. Therefore, if he actually holds a trick or so he should raise to game.
+        answer: 2d
+
+  #9
+  - hand: sak865 hqj1043 d3 c86
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: 1nt
+      - s: "?"
+        explain: |
+          LHO opens 1♦; partner passes and RHO bids 1NT. A 2♦ bid by you would be Michaels, showing the majors. The opponents have only bid one suit.
+        answer: 2d
+
+  #10
+  - hand: sqj10875 hkj1065 d54 c-
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - s: "?"
+        explain: |
+          LHO opens either 1♣ or 1♦. Partner and RHO both pass. If you now cuebid opener’s suit, it will be Michaels.
+        answer: 2d
+
+  #11
+  - hand: sak10653 h- da3 cqj972
+    dealer: e
+    auction:
+      - e: 2h
+      - s: "?"
+        explain: |
+          RHO opens 2♥. You have an easy 3♥ cuebid, showing spades and a minor.
+        answer: 3h
+
+  #12
+  - hand: s86 hkq1087 d- cqj9864
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          If RHO opens 1♦, bid 2NT. Partner will choose between hearts and clubs.
+        answer: 2nt
+
+  #13
+  - hand: s87 h- dkq10875 caj986
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          If RHO opens either 1♥ or 1♠, bid 2NT.
+        answer: 2nt
+
+  #14
+  - hand: s5 hkq1086 dqj10876 c4
+    dealer: e
+    auction:
+      - e: 1c
+      - s: "?"
+        explain: |
+          If RHO opens 1♣, bid 2NT. Over anything else, pass and hope to be able to come in later.
+        answer: 2nt
+
+  #15
+  - hand: s86 hkqj108 da caqj98
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          If RHO opens 1♦, bid 2NT. After partner picks the suit, raise one level.
+        answer: 2nt
+
+  #16
+  - hand: sa h4 dakq108 caq10987
+    dealer: e
+    auction:
+      - e: 1s
+      - s: "?"
+        explain: |
+          If RHO opens either 1♥ or 1♠, bid 4NT. This highly unusual jump tells partner to pick the minor-suit game. In the unlikely event that he can provide a trick, he will pick the minor-suit slam instead.
+        answer: 4nt
+        accept: [2nt]
+
+

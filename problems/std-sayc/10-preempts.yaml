@@ -1,0 +1,309 @@
+quiz: SAYC Preempts
+problems:
+
+  #1
+  - hand: skq10932 h83 dq765 c4
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          A typical 2♠ opener in any seat but fourth.
+        answer: 2s
+
+
+  #2a
+  - hand: sak1095 h53 dj108 cq98
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Pass.
+        answer: p
+
+  #2b
+  - hand: sak1095 h53 dj108 cq98
+    dealer: n
+    auction:
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          In third seat, however, you have choices. It may well be that your fourth-seat opponent is blessed with the vast majority of HCP. If so, a sensible bid by you will put pressure on your opponents to find their right spot. With this holding you may do well to bid 2♠. Yes, you have 10 HCP and might bid 1♠, but 2♠ will be more difficult for your opponents to deal with. You may also find a good sacrifice against their heart partial or game, or push them too high. Finally, since partner could not open, your own chances at a game are slim.
+        answer: 2s
+        accept: [1s]
+
+  #3a
+  - hand: saqj874 hq8 dk9 cq83
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          In first, second or third seat you will open 1♠.
+        answer: 1s
+
+  #3a
+  - hand: saqj874 hq8 dk9 cq83
+    dealer: w
+    auction:
+      - w: p
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          In fourth seat, however, you might open 2♠. Since there is no point in preempting in fourth seat, this bid is reserved for minimum range six-card openers, typically 12-14 HCP. Since many players simply bid out the hand ‘normally’ by opening 1♠ and rebidding 2♠, this treatment, as with so many in bridge, requires partnership discussion and agreement.
+        answer: 2s
+        accept: [1s]
+
+  #4
+  - hand: s986 haq10984 dqj2 c9
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2s
+      - s: "?"
+        explain: |
+          With three-card support, raise to 3♠.
+        answer: 3s
+
+  #5
+  - hand: s2 haq10984 dq1082 cq9
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2s
+      - s: "?"
+        explain: |
+          With a maximum, but no support in partner’s suit, you typically re-bid a second suit or 2NT. With this collection you would bid 3♦.
+        answer: 3d
+
+  #6
+  - hand: s82 haq10984 d982 c74
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2s
+      - s: "?"
+        explain: |
+          With no fit for partner and a minimum, simply rebid your original suit: 3♥.
+        answer: 3h
+
+  #7
+  - hand: s98 hak10984 d982 c109
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2nt
+      - s: "?"
+        explain: |
+          If opener holds a minimum hand (5-8 HCP) he will have no feature so he simply rebids the original suit. On this hand your rebid is 3♥.
+        answer: 3h
+
+  #8
+  - hand: s82 haq10984 dk102 c109
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2nt
+      - s: "?"
+        explain: |
+          When you hold a maximum for the original weak two, it is handled as follows: If opener has a feature, he bids the suit that contains it, in this case, 3♦.
+        answer: 3d
+
+  #9
+  - hand: sj2 hkqj984 dq102 cj9
+    dealer: s
+    auction:
+      - s: 2h
+      - n: 2nt
+      - s: "?"
+        explain: |
+          When you hold a maximum for the original weak two, it is handled as follows: If opener has a feature, he bids the suit that contains it, in this case, 3♦.
+        answer: 3d
+
+  #10
+  - hand: saj107653 hqj10 d10 cj4
+    dealer: n
+    auction:
+      - n: p
+      - s: "?"
+        explain: |
+          On the plus side, you have a long suit with good texture. On the minus side is the Q J 10 of hearts, good support for a possible heart contract, the defensive ♠A and a reasonable hand for a possible notrump contract. In first or second seat, one can easily argue that there are too many minuses for a 3♠ opening. We recommend that you pass. If partner cannot open the bidding, you can introduce your spades at your next turn. Holding the ‘boss’ suit, you are not likely to be out of this auction. In third seat, bid 3♠.
+        answer: 3s
+
+  #11
+  - hand: s5 hkq109852 d85 cj64
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Lovely suit texture. Open 3♥. If partner has three hearts, he will extend your preempt with a raise and deprive your opponents of even more bidding space.
+        answer: 3h
+
+  #12
+  - hand: s7 hkj10 d65 ca986432
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Pass. You have good defensive values, a poorly textured suit, too many points outside clubs and excellent support for a possible heart contract.
+        answer: p
+
+  #13
+  - hand: s7 h98 dakj9852 cj97
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          This is a textbook 3♦ opening at any vulnerability and in any position except fourth.
+        answer: 3d
+
+  #14
+  - hand: s9 h62 d10987 cakq985
+    dealer: s
+    vuln: none
+    auction:
+      - s: "?"
+        explain: |
+          An exception to the normal guidelines. You can’t bid a weak 2♣ since the 2♣ opening is reserved for all strong hands. If not vulnerable, open 3♣ in any position except fourth. You have excellent suit texture and no outside defense. When preempting in a minor suit, especially in clubs, a good six-card suit is acceptable.
+        answer: 3c
+
+  #15
+  - hand: sa1098654 h9842 d5 ca
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Pass. Your two aces and the four-card heart suit argue against a preempt.
+        answer: p
+
+  #16
+  - hand: s4 hkqj10872 dq106 cj4
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Open 3♥. This is a classic holding with perfect texture.
+        answer: 3h
+
+  #17
+  - hand: sk1087654 ha92 d5 cj7
+    dealer: n
+    auction:
+      - n: p
+      - s: "?"
+        explain: |
+          Pass. The trump suit is badly textured. Even worse, unless you are in third seat, partner might hold five hearts and an opening hand.
+        answer: p
+
+  #18
+  - hand: skj76432 ha985 dk5 c-
+    dealer: n
+    auction:
+      - n: 3c
+      - s: "?"
+        explain: |
+          Pass. Sure, 3♠ could be the better contract. But there is no way to get there as 3♠ is forcing to game.
+        answer: p
+
+  #19
+  - hand: sa h9732 dj1095 ckj74
+    dealer: n
+    auction:
+      - n: 3c
+      - s: "?"
+        explain: |
+          Based on the partnership’s combined trump fit of 11 cards, jump to 5♣. You cannot cause too much harm and you may not be able to defeat even 6♠, let alone 4♠!
+        answer: 5c
+
+  #20
+  - hand: sakj1074 hk84 da7 cq4
+    dealer: n
+    auction:
+      - n: 3c
+      - s: "?"
+        explain: |
+          Bid 3♠, forcing to game. If partner has two spades he should raise you to 4♠. Otherwise, he will have to risk 3NT, in which case you hope that he has some help in hearts.
+        answer: 3s
+
+  #21
+  - hand: sak5 ha3 da95 c109842
+    dealer: n
+    auction:
+      - n: 3s
+      - s: "?"
+        explain: |
+          Bid 3NT. You can count on seven spade tricks plus two aces, and your club length gives you protection in that suit. A 4♠ contract may have only nine tricks.
+        answer: 3nt
+
+  #22
+  - hand: s983 h82 da87643 ck4
+    dealer: n
+    auction:
+      - n: 3s
+      - s: "?"
+        explain: |
+          With only one defensive trick and a combined holding of ten trumps, raise preemptively to 4♠.
+        answer: 4s
+
+  #23
+  - hand: s- hakq da8652 ca9432
+    dealer: n
+    auction:
+      - n: 3s
+      - s: "?"
+        explain: |
+          Raise to 4♠. Partner is supposed to be two or three tricks short of making his opening bid, and you can supply five.
+        answer: 4s
+
+  #24
+  - hand: sk83 ha2 dakq106 c864
+    dealer: n
+    auction:
+      - n: 3s
+      - s: "?"
+        explain: |
+          Bid 4NT. If partner shows an ace, bid 6♠ and pray.
+        answer: 4nt
+
+  #25
+  - hand: saj1087432 h74 d- ck103
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          This collection should be opened 4♠.
+        answer: 4s
+
+  #26
+  - hand: skq1098642 ha dk105 c3
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          Much too strong. Open 1♠.
+        answer: 1s
+
+  #27
+  - hand: s4 hakq10864 d9873 c8
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          You only have a seven-card suit, but with any luck you have no losers there either. Open 4♥.
+        answer: 4h
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
