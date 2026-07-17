@@ -175,11 +175,14 @@ function suitLineSegs(hand: Hand, suit: Suit): Seg[] {
   return [{ text: meta.sym, red: meta.red }, { text: ' ' + (holding ? rankStr(holding) : '—') }]
 }
 
-const DEAL_SIZE = 9.5
-const DEAL_LINE_H = 11.5
-const DEAL_LABEL_H = 12
+const DEAL_SIZE = 8.5
+const DEAL_LINE_H = 10.5
+const DEAL_LABEL_H = 11
 const DEAL_BLOCK_H = DEAL_LABEL_H + 4 * DEAL_LINE_H
 const DEAL_ROW_GAP = 5
+// Pull West/East in from the column edges so the compass reads closer to square
+// than a wide rectangle.
+const DEAL_SIDE_INSET = 28
 
 /** Widest suit line in a hand (for centering / flush-right placement). */
 function handWidth(doc: jsPDF, hand: Hand): number {
@@ -188,7 +191,7 @@ function handWidth(doc: jsPDF, hand: Hand): number {
 
 /** Draw a stacked hand block (seat label + 4 suit lines) top-anchored at (x, top). */
 function drawHandBlock(doc: jsPDF, seat: Seat, hand: Hand, x: number, top: number): void {
-  plain(doc, seat, x, top + 8, 8.5, true)
+  plain(doc, seat, x, top + 8, 8, true)
   DIAGRAM_SUITS.forEach((suit, i) => {
     drawSegs(doc, x, top + DEAL_LABEL_H + 8 + i * DEAL_LINE_H, suitLineSegs(hand, suit), DEAL_SIZE)
   })
@@ -211,8 +214,8 @@ function renderDeal(
   const seats = (['N', 'E', 'S', 'W'] as Seat[]).filter((s) => problem.deal[s] != null)
   if (seats.length <= 1) {
     const hand = seats.length ? problem.deal[seats[0]]! : {}
-    if (draw) drawSegs(doc, x, yTop + 10, handLineSegs(hand), 11)
-    return 18
+    if (draw) drawSegs(doc, x, yTop + 9, handLineSegs(hand), 10)
+    return 16
   }
 
   let cy = yTop
@@ -227,11 +230,13 @@ function renderDeal(
     if (draw) centered('N')()
     cy += DEAL_BLOCK_H + DEAL_ROW_GAP
   }
-  // West / East row.
+  // West / East row, inset from the column edges toward the center.
   if (problem.deal.W != null || problem.deal.E != null) {
-    if (draw && problem.deal.W != null) drawHandBlock(doc, 'W', problem.deal.W, x, cy)
+    if (draw && problem.deal.W != null) {
+      drawHandBlock(doc, 'W', problem.deal.W, x + DEAL_SIDE_INSET, cy)
+    }
     if (draw && problem.deal.E != null) {
-      const bx = x + colW - handWidth(doc, problem.deal.E)
+      const bx = x + colW - DEAL_SIDE_INSET - handWidth(doc, problem.deal.E)
       drawHandBlock(doc, 'E', problem.deal.E, bx, cy)
     }
     cy += DEAL_BLOCK_H + DEAL_ROW_GAP
@@ -249,10 +254,10 @@ function renderDeal(
 // --- auction & play tables ------------------------------------------------
 
 const AUCTION_HEADERS = ['West', 'North', 'East', 'South']
-const AUC_COL_W = 64
-const PLAY_TRICK_W = 34
-const PLAY_COL_W = 58
-const TABLE_ROW_H = 13.5
+const AUC_COL_W = 60
+const PLAY_TRICK_W = 32
+const PLAY_COL_W = 54
+const TABLE_ROW_H = 12.5
 
 function tableHeader(
   doc: jsPDF,
@@ -264,10 +269,11 @@ function tableHeader(
   draw: boolean,
 ): void {
   if (!draw) return
-  headers.forEach((h, j) => drawSegsCentered(doc, centers[j], yTop + 8, [{ text: h, bold: true }], 9))
-  doc.setDrawColor(...BLACK)
-  doc.setLineWidth(0.7)
-  doc.line(x0, yTop + 11, right, yTop + 11)
+  headers.forEach((h, j) => drawSegsCentered(doc, centers[j], yTop + 7, [{ text: h, bold: true }], 8))
+  // A subtle hairline under the column headers.
+  doc.setDrawColor(150, 150, 150)
+  doc.setLineWidth(0.3)
+  doc.line(x0, yTop + 10, right, yTop + 10)
 }
 
 /** Draw the auction up to the first "?"; returns the height used. */
@@ -277,14 +283,14 @@ function renderAuction(doc: jsPDF, problem: Problem, x: number, yTop: number, dr
   const centers = AUCTION_HEADERS.map((_, j) => x + j * AUC_COL_W + AUC_COL_W / 2)
   tableHeader(doc, AUCTION_HEADERS, centers, x, x + 4 * AUC_COL_W, yTop, draw)
 
-  let y = yTop + 11
+  let y = yTop + 10
   model.grid.forEach((row) => {
     y += TABLE_ROW_H
     if (!draw) return
     row.forEach((cell, j) => {
       if (!cell) return
       const segs = cell.question ? [{ text: '?', bold: true }] : callSegs(cell.call ?? '')
-      drawSegsCentered(doc, centers[j], y, segs, 10)
+      drawSegsCentered(doc, centers[j], y, segs, 9)
     })
   })
   return y - yTop + 3
@@ -316,19 +322,19 @@ function renderPlay(doc: jsPDF, problem: Problem, x: number, yTop: number, draw:
     (_, j) => x + PLAY_TRICK_W + j * PLAY_COL_W + PLAY_COL_W / 2,
   )
   const right = x + PLAY_TRICK_W + 4 * PLAY_COL_W
-  if (draw) drawSegsCentered(doc, trickCx, yTop + 8, [{ text: 'Trick', bold: true }], 9)
+  if (draw) drawSegsCentered(doc, trickCx, yTop + 7, [{ text: 'Trick', bold: true }], 8)
   tableHeader(doc, AUCTION_HEADERS, centers, x, right, yTop, draw)
 
-  let y = yTop + 11
+  let y = yTop + 10
   rows.forEach((row, r) => {
     y += TABLE_ROW_H
     if (!draw) return
-    drawSegsCentered(doc, trickCx, y, [{ text: String(r + 1) }], 9)
+    drawSegsCentered(doc, trickCx, y, [{ text: String(r + 1) }], 8)
     row.forEach((cell, j) => {
       if (!cell) return
       // The card that led the trick is bracketed so the reading order is clear.
       const segs = cell.lead ? [{ text: '[' }, ...cell.segs, { text: ']' }] : cell.segs
-      drawSegsCentered(doc, centers[j], y, segs, 10)
+      drawSegsCentered(doc, centers[j], y, segs, 9)
     })
   })
   return y - yTop + 3
@@ -365,8 +371,15 @@ function renderProblem(
   draw: boolean,
 ): number {
   let yy = y
-  if (draw) plain(doc, problemTitle(quiz, problem, ordinal), x, yy + 11, 12, true)
-  yy += 16
+  // A thicker rule above the title so problems read as separate units.
+  if (draw) {
+    doc.setDrawColor(...BLACK)
+    doc.setLineWidth(1.1)
+    doc.line(x, yy + 1.5, x + colW, yy + 1.5)
+  }
+  yy += 8
+  if (draw) plain(doc, problemTitle(quiz, problem, ordinal), x, yy + 9, 11, true)
+  yy += 14
 
   // The first question is in the auction unless the whole auction is settled;
   // only then is there a contract to show and possibly a play question.
@@ -383,8 +396,8 @@ function renderProblem(
   const metaSegs: Seg[] = [{ text: `Dealer: ${SEAT_NAME[problem.dealer]}` }]
   if (problem.vulnerability) metaSegs.push({ text: `    Vul: ${VUL_SHORT[problem.vulnerability]}` })
   if (contract) metaSegs.push({ text: '    Contract: ' }, ...contractSegs(contract))
-  if (draw) drawSegs(doc, x, yy + 8, metaSegs, 9)
-  yy += 15
+  if (draw) drawSegs(doc, x, yy + 7, metaSegs, 8)
+  yy += 13
 
   yy += renderDeal(doc, problem, x, yy, colW, draw)
   yy += 4
@@ -437,8 +450,8 @@ function joinSegs(lists: Seg[][]): Seg[] {
   return out
 }
 
-const EXPL_SIZE = 9
-const EXPL_LINE_H = 11.5
+const EXPL_SIZE = 8.5
+const EXPL_LINE_H = 11
 
 /** Wrap an explanation (respecting its paragraph breaks) to lines for `colW`. */
 function explanationLines(doc: jsPDF, text: string, wrapW: number): string[] {
@@ -467,8 +480,8 @@ function renderAnswer(
   draw: boolean,
 ): number {
   let yy = y
-  if (draw) plain(doc, `#${ordinal}  ${problemTitle(quiz, problem, ordinal)}`, x, yy + 9, 10.5, true)
-  yy += 14
+  if (draw) plain(doc, `#${ordinal}  ${problemTitle(quiz, problem, ordinal)}`, x, yy + 8, 9.5, true)
+  yy += 13
 
   const fq = firstQuestion(problem)
   if (!fq) {
@@ -550,7 +563,7 @@ export function buildQuizPdf(quiz: Quiz, allProblems: Problem[]): jsPDF {
   flowBlocks(doc, problemBlocks, TOP, PROBLEM_GAP)
 
   doc.addPage()
-  plain(doc, 'Answer Key', MARGIN, TOP + 14, 16, true)
+  plain(doc, 'Answer Key', MARGIN, TOP + 12, 14, true)
   const answerBlocks: Block[] = problems.map((problem, i) => ({
     height: renderAnswer(doc, quiz, problem, i + 1, 0, 0, COL_W, false),
     draw: (x, y) => renderAnswer(doc, quiz, problem, i + 1, x, y, COL_W, true),
