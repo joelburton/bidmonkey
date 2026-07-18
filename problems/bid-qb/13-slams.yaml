@@ -1,0 +1,191 @@
+quiz: BQ Slam Bidding
+problems:
+
+#1
+- hand: saq862 hq6 da1087 ckj
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: 1s
+    - w: p
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [3nt, 4h, 4nt, 6h]
+      explain: |
+        The bidding starts 1♥ - 1♠; 3♥. Partner has suggested at least 16 points with his jump rebid. You have 16 HCP, which puts you in the slam zone. What’s more, you hold some good cards. The ♥Q will be very valuable and you have two precious aces. You intend to bid 6♥ but you might as well bid 4NT (Blackwood) on the way, just in case you are missing two aces.
+      answer: 4nt
+
+#2
+- hand: sq975 h96 dakj5 cqj7
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: 1s
+    - w: p
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [3nt, 4s, 4nt, 6s]
+      explain: |
+        The bidding starts 1♥ - 1♠; 3♠. You have some points to spare for a raise to 4♠ but the prospects for a slam are not particularly good. Look at your weak trumps! Only four of them and they are headed by just one honor. You have no heart honor to help set up partner’s suit and you hold only one ace. It is best to be conservative on such a hand, raising to 4♠. If you were slightly stronger you might cuebid 4♦. As we will see in the next chapter, this would invite a slam and show the ♦A.
+      answer: 4s
+
+#3
+- hand: s4 h75 dakj65 cak973
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 2h
+    - e: p
+    - s: 3c
+    - w: p
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [4c, 4h, 4nt, 6h]
+      explain: |
+        The bidding starts 1♦ - 2♥; 3♣ - 3♥. Partner has shown a very powerful hand (19 or more points) with a splendid heart suit. The prospects for slam are splendid, since you are bringing two A-K combinations to the party and partner may well be able to score a spade ruff or two as well. If partner has the ♠A and the ♥AK, 7♥ should be a very good contract, and may well be laydown. Blackwood will tell you whether or not this is the case.
+      answer: 4nt
+
+#4
+- hand: sa6 hkq7 dj9862 cq107
+  dealer: n
+  auction:
+    - n: 2nt
+    - e: p
+    - s: "?"
+      choices: [p, 4nt, 6nt]
+      explain: |
+        Partner opens 2NT, showing 20-21 points. It is not possible to bid the hand precisely because much will depend on whether your partner has a useful diamond holding opposite your five-card suit. The best you can do is to respond 4NT, asking partner to bid 6NT when he holds 21 points and to pass with 20.
+      answer: 4nt
+
+#5
+- hand: saj862 hk64 dakq10 c9
+  dealer: n
+  auction:
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [3s, 4h, 4nt, 6h]
+      explain: |
+        Your partner opens 3♥. If he holds seven hearts headed by the ace, you will have a good chance of scoring seven heart tricks and four top winners in the side suits. A twelfth trick may come from a club ruff or the ♦10, even if partner has no other useful card. You should respond 4NT to see if partner holds an ace. Even if this happens to be the ♣A, you will have a good chance of making twelve tricks.
+      answer: 4nt
+
+#6
+- hand: saqj63 h96 dq7 cakj7
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: 1s
+    - w: p
+    - n: 2h
+    - e: p
+    - s: "?"
+      choices: [3c, 3nt, 4nt, 6nt]
+      explain: |
+        The bidding starts 1♦ - 1♠; 2♥. Partner has reversed and will hold around 17 points or more. You hold 17 HCP. Although there is no great trump fit, you can expect there to be good play for slam on a combined total of at least 34 points. Since you cannot be missing two aces after partner’s strong bidding, there is little point in using Blackwood, although it would not be wrong to do so. You could simply bid 6NT, which will likely be a good contract. However, spades may play better, and opposite the right hand from partner, you may even be able to make seven. Start with 3♣, fourth suit forcing, and see whether partner can support spades.
+      answer: 3c
+
+#7
+- hand: sa4 hakq10752 dq6 cak
+  dealer: s
+  auction:
+    - s: 2c
+    - w: p
+    - n: 2d
+    - e: p
+    - s: 2h
+    - w: p
+    - n: 3c
+    - e: p
+    - s: "?"
+      choices: [p, 4nt, 5h, 6h]
+      explain: |
+        Your partner’s 3♣ is a second negative. He cannot have either the ♦A or ♦K and make this bid. If you advance to the five-level, there is every chance that you will lose a spade and two diamonds, going one down. You should pass.
+      answer: p
+
+#8
+- hand: sj53 h52 d9874 cq643
+  dealer: n
+  auction:
+    - n: 2c
+    - e: p
+    - s: 2d
+    - w: p
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [p, 3s, 4s]
+      explain: |
+        The bidding starts 2♣ - 2♦; 2♠. Partner’s rebid is forcing to game, so there is no question of passing on your hand. You should go directly to 4♠, which indicates a weak hand with no ace or king. Suppose you held ♦A984 instead of ♦9874. You would then make the more encouraging raise to 3♠. Knowing that you held at least one good card in your hand, partner might then try for a slam.
+      answer: 4s
+
+#9
+- hand: saj84 hq964 d- ca10976
+  dealer: w
+  auction:
+    - w: 3d
+    - n: 3s
+    - e: 5d
+    - s: "?"
+      choices: [x, 5s, 6s]
+      explain: |
+        The bidding starts (3♦) - 3♠ - (5♦). You have a fabulous hand in support of spades. Your void in diamonds will prevent the opponents from taking any diamond tricks. It is losing bridge to think ‘We might have two losing hearts.’ Your thoughts should run along these lines: ‘We are surely likely to make a slam here. It would be much too timid to bid just 5♠ and risk missing the slam bonus.’
+      answer: 6s
+
+#10
+- hand: saj hj763 dj54 ckq85
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: 1h
+    - w: p
+    - n: 4h
+    - e: p
+    - s: "?"
+      choices: [p, 4s, 4nt, 5h, 6h]
+      explain: |
+        The bidding starts 1♦ - 1♥; 4♥. Are you tempted to look for a slam? Partner wanted to play in 4♥ when you might hold only 6 points and you actually have 12 HCP. That’s true, but there are two factors that should warn you against bidding on. Your trumps (♥J763) are alarmingly weak. There is a big risk that you may have two trump losers, even if the other suits are watertight. Also, your diamond holding will not help much in avoiding a loser in that suit. You have only 2 points in partner’s long suits. Although there might be a good slam available, the odds are against it and you should pass.
+      answer: p
+
+#11
+- hand: sak hakj764 dkq caj7
+  dealer: s
+  auction:
+    - s: 2c
+    - w: p
+    - n: 3c
+    - e: p
+    - s: 3h
+    - w: p
+    - n: 3nt
+    - e: p
+    - s: "?"
+      choices: [p, 4c, 4h, 6c]
+      explain: |
+        The bidding starts 2♣ - 3♣; 3♥ - 3NT. Your partner has given a positive response in clubs, showing a good suit. He surely holds something like ♣KQxxxx. In that case 6♣ will be an easy make. Even if no diamond ruff in your hand is available, partner will be able to set up your heart suit. You should bid 4♣, agreeing clubs as trumps. We will see in the next chapter how you can actually check to see whether partner has the ♦A and the ♣KQ, in which case a grand slam will be possible.
+      answer: 4c
+
+#12
+- hand: sak762 hk3 dq74 ca105
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: 1s
+    - w: p
+    - n: 3d
+    - e: p
+    - s: "?"
+      choices: [4d, 4nt, 5d, 6d]
+      explain: |
+        The bidding starts 1♦ - 1♠; 3♦. Partner’s rebid shows 16-18 points. You hold 16 HCP and have a good fit for his six-card diamond suit. The scent of an excellent slam is in the air! You should head for 6♦. We will look at some advanced slam-bidding techniques in the next chapter. For the moment, it scarcely matters which route you take towards the slam.
+      answer: 4d
+      accept: [4nt, 6d]
+
