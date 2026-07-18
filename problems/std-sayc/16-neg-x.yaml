@@ -21,4 +21,171 @@ problems:
       - s: "?"
         explain: |
           Partner opens 1♣ and RHO overcalls 1♠. Again, your side may have a good partscore contract available in one of the other suits. If you pass, and partner has a hand that is not suitable for a reopening bid of some kind, then these possible contracts will be lost.
+        answer: x
+
+  #3
+  - hand: s63 hk875 dk64 c9872
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1s
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 1♠. Double. This is a minimum holding for the negative double.
+        answer: x
+
+  #4
+  - hand: sa864 hj53 dj986 c73
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 2h
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 2♥. Pass. In spite of the four-card spade suit, you are not strong enough to take action. Give RHO full marks for having succeeded in preempting you.
+        answer: p
+
+  #5
+  - hand: skq75 h984 dq965 c64
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1h
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 1♥. Double. Do not bid 1♠; when playing negative doubles, that call would, in this auction, show five-plus spades.
+        answer: x
+
+  #6
+  - hand: skj10865 hkq65 da3 c4
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1s
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 1♠. Pass. You cannot double for penalty, since the double would be negative. It is unlikely that LHO will have a call, so 1♠ will be passed to partner, who should strain to reopen the auction with a double. When he does, you can quietly pass. Laughing hysterically at this point would be bad form.
+        answer: p
+
+  #7
+  - hand: saq64 h- dk9864 ckj52
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 2h
+      - s: "?"
+        explain: |
+          Partner opens 1♣ and RHO overcalls 2♥. Double. You have a wonderful hand. If partner’s values are all outside the heart suit, it’s even better. Begin with a negative double and over partner’s bid of 2♠, 3♣ or 3♦, cuebid 3♥ to show slam interest.
+        answer: x
+
+  #8
+  - hand: sk963 haq107 d86 ckj3
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 2c
+      - s: "?"
+        explain: |
+          Partner opens 1♦ and RHO overcalls 2♣. Remember, partner has opened the bidding. Start with a negative double. If partner bids a major, leap to four of the major. If partner bids 2♦, bid 3NT.
+        answer: x
+      - n: 2h
+      - s: "?"
+        explain: |
+          Leap to four of the major. If partner bids 2♦, bid 3NT.
+        answer: 4h
+
+  #9
+  - hand: sq875 haj74 d109 ckj4
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 2c
+      - s: "?"
+        explain: |
+          Partner opens 1♦ and RHO overcalls 2♣. Double.
+        answer: x
+      - n: 2s
+      - s: "?"
+        explain: |
+          Raise to the three-level, invitational.
+        answer: 3s
+
+  #10
+  - hand: sk76 ha54 daq864 cj5
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♦ at IMP scoring, where you want the safest contract. Matchpoint players may choose 1NT knowing there is potential danger if RHO gains the lead.
+        answer: 2d
+        accept: [1nt]
+
+  #11
+  - hand: s87 hk5 dkqj97 ckj43
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Start with 2♣ and see where it leads. You may land in a notrump contract.
+        answer: 2c
+
+  #12
+  - hand: skj6 h874 dkq87 ca94
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 1NT. It’s a minimum, but you have adequate stoppers in spades.
+        answer: 1nt
+
+  #13
+  - hand: saj6 hk5 daqj93 ckj6
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 3NT. Partner has at least 6 HCP and you have 19.
+        answer: 3nt
+
+  #14
+  - hand: s5 haq76 dkqj97 caq6
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♠. You have a great hand but are not sure where to go. You are guaranteeing a heart fit or a strong hand with support for clubs and diamonds.
         answer: 2s
+
+  #15
+  - hand: sq7 haq76 dkj97 cj43
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - s: "?"
+        explain: |
+          Bid 2♥.
+        answer: 2h
+
+
+
+
+
+
+
