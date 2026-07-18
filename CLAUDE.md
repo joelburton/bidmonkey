@@ -93,8 +93,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   reveal the dummy after the opening lead, auto-play with pauses, stop at
   questions for the hero, then reveal all hands for free study.
 - **Phase 5 (done):** sources/quizzes + navigation. sources → quizzes → a quiz
-  run in order. Quiz nav (Home `‹` / Next `›`) lives in the app header, available
-  in every phase; header center is the non-link `QuizTitle #ordinal`.
+  started **In Order** or **Random** (per-quiz buttons, plus a **PDF** export).
+  Quiz nav lives in the app header, available in every phase: a left **Home**
+  button labelled `QuizTitle #ordinal` (→ sources) and a right Prev `‹` / Next `›`
+  pair.
 - **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
   catalogue on load (async, with loading/error/retry).
 - **Out of scope so far:** any backend beyond Supabase reads, per-question attempt
@@ -105,9 +107,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 - `App.tsx` — fetches the catalogue from Supabase on mount (`fetchCatalog`), with
   loading / error+retry screens, then drives a `Nav` union (`sources` | `quizzes`
   | `quiz`): `SourceList`, `QuizList`, or the quiz runner (header + `ProblemView`).
-  The quiz header holds Home (`‹`, → sources), the `QuizTitle #ordinal` label, and
-  Next (`›`, → next problem; disabled on the last). Nav is header-only so it works
-  during the auction, play, and free study alike.
+  The quiz header holds a left **Home** button (`‹` + the `QuizTitle #ordinal`
+  label, → sources) and a right Prev (`‹`) / Next (`›`) pair (disabled at the
+  ends). Nav is header-only so it works during the auction, play, and free study
+  alike.
 - `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`), no SDK;
   config from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
 - `data/repo.ts` — `fetchCatalog()`: reads sources/problems/quizzes and maps the
