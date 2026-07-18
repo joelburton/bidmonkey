@@ -1,0 +1,229 @@
+quiz: BQ Responding to 1NT
+problems:
+
+#1
+- hand: sj104 h96 dk10965 ca87
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [p, 2d, 2nt]
+      explain: |
+        You cannot bid 2♦ because this would be a transfer bid, showing hearts. Although you have only 8 HCP, you have extra values in the two tens and the five-card diamond suit. You are worth a game try of 2NT.
+      answer: 2nt
+
+#2
+- hand: sq8 haj65 d63 ckj764
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [2c, 3c, 3nt]
+      explain: |
+        You have enough for game, but not for an eleven-trick game in clubs. You should start with 2♣ (Stayman). If partner responds 2♥, you will raise to 4♥. Otherwise you will bid 3NT.
+      answer: 2c
+
+#3
+- hand: s92 hj3 d643 cak10872
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [p, 3c, 3nt]
+      explain: |
+        When you respond to a 1NT or 2NT opening bid and you have a five-card suit headed by the ace or king, add 1 point; if your suit is six cards, add 2 points. You should respond 3NT here, a contract that partner will have a great chance of making. It is a mistake to respond 3♣, thinking: ‘I want partner to rebid 3NT’. If you want to be in 3NT, bid it yourself! In any case, a response of 3♣ shows a much stronger hand, one on which you think a slam may be possible.
+      answer: 3nt
+
+#4
+- hand: saq763 h65 dk8 cj1065
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [2c, 2h, 3nt]
+      explain: |
+        With a five-card spade suit, you should respond with a 2♥ transfer bid rather than 2♣ (Stayman). Stayman is used when you are seeking a fit for a four-card major suit. Over partner’s 2♠ rebid, you should say 3NT. This will ask partner to choose between 3NT and 4♠. You should not bid your clubs on a hand of this strength, since you have no intention of playing in 5♣.
+      answer: 2h
+
+#5
+- hand: s4 haj8752 dj862 cq2
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [2d, 3h, 4h]
+      explain: |
+        You can add a couple of points for your six-card major and this means that you should head for game. It is better to bid 2♦ first, raising partner’s 2♥ rebid to 4♥. By allowing partner to play the contract, you will keep his honor cards hidden and prevent a possibly damaging lead though his high cards.
+      answer: 2d
+
+#6
+- hand: skq8732 ha6 dkq5 cq8
+  dealer: n
+  auction:
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [2h, 3s, 4s]
+      explain: |
+        Suppose you start with a 2♥ transfer bid, partner rebidding 2♠. What can you say next? Not an easy question to answer! Instead of transferring to spades with 2♥ over 1NT, you need to find a response that tells partner straight away that you have long spades and slam interest. That bid is 3♠. Partner may then show little enthusiasm by bidding 3NT. With a trump fit but not a particularly great hand for a slam, he can bid 4♠. With a useful hand and a fit, he may cuebid an ace or bid 4NT to ask for aces (or keycards), see Chapter 14.
+      answer: 3s
+
+#7
+- hand: sq84 ha75 dkq65 caj2
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2d
+    - e: p
+    - s: 2h
+    - w: p
+    - n: 2nt
+    - e: p
+    - s: "?"
+      choices: [p, 3h, 3nt, 4h]
+      explain: |
+        You open 1NT and the bidding continues 2♦; 2♥ - 2NT. Partner has five hearts and enough strength to invite a game. You are happy to play in hearts, with your three-card support. Should you bid 3♥ or 4♥? Your hand contains 16 points, in the middle of the range, but you have no tens and depressing 4-3-3-3 shape. You should decline the game try by rebidding 3♥.
+      answer: 3h
+
+#8
+- hand: sa7 haj6 dq1052 caj92
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2h
+    - e: p
+    - s: 2s
+    - w: p
+    - n: 3c
+    - e: p
+    - s: "?"
+      choices: [3s, 3nt, 4c, 5c]
+      explain: |
+        You open 1NT and the bidding continues 2♥; 2♠ - 3♣. Your partner has shown five spades and at least four clubs. What’s more, he has shown a hand that is strong enough to contemplate at least an eleven-trick club game. You have wonderful support for clubs: four trumps and three aces. You are very happy to raise to 4♣ and the bidding may well continue to 6♣.
+      answer: 4c
+
+#9
+- hand: skj65 hkq73 da82 ck10
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2c
+    - e: p
+    - s: 2h
+    - w: p
+    - n: 3nt
+    - e: p
+    - s: "?"
+      choices: [p, 4s]
+      explain: |
+        The bidding starts 1NT - 2♣; 2♥ - 3NT. How easy it would be to pass now, but this would be a mistake! Why did partner use Stayman? He hasn’t raised your 2♥ response, so he can’t have four hearts. He must hold four spades or he wouldn’t have bid 2♣ in the first place. You should now bid 4♠.
+      answer: 4s
+
+#10
+- hand: sk102 haj76 dk4 caj105
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2c
+    - e: p
+    - s: 2h
+    - w: p
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [p, 3nt, 4h]
+      explain: |
+        The bidding starts 1NT - 2♣; 2♥ - 3♥. Partner holds four hearts and enough strength to invite a game. You have a mid-range 16 points. Should you pass or bid 4♥? Your hand contains two positive features: you have two tens and you have a doubleton diamond, which may allow partner to score a ruffing trick or two. You should gladly accept his invitation, raising to the heart game.
+      answer: 4h
+
+#11
+- hand: saj84 ha6 dkj53 ck108
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2c
+    - e: p
+    - s: 2s
+    - w: p
+    - n: 3d
+    - e: p
+    - s: "?"
+      choices: [p, 3nt, 4d]
+      explain: |
+        The bidding starts 1NT - 2♣; 2♠ - 3♦. Your partner’s 3♦ continuation is forcing and natural, suggesting five diamonds. He will also hold four hearts to justify the Stayman bid at the start. Your partner would not introduce diamonds (a minor suit) unless he was strong enough to consider an eleven-trick game in that suit. You have four-card support for diamonds, giving you a nine-card fit, and good controls (aces and kings). You have no excuse whatsoever for failing to support partner’s diamonds!
+      answer: 4d
+
+#12
+- hand: sq84 ha75 dkq65 caj2
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2h
+    - e: p
+    - s: 2s
+    - w: p
+    - n: 3nt
+    - e: p
+    - s: "?"
+      choices: [p, 4s, 4nt]
+      explain: |
+        You open 1NT and the bidding continues 2♥; 2♠ - 3NT. Your partner has five spades and is offering you a choice between 3NT and 4♠. Since you have three-card spade support you should bid 4♠. Do not think that you should give 3NT a try, just because your hand is so flat. Partner might hold a singleton heart, for example. He would not introduce a four-card club suit on 5-1-3-4 shape unless his hand was strong enough to support an eleven-trick game in clubs.
+      answer: 4s
+
+#13
+- hand: sk103 haq6 daj762 cq9
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2nt
+    - e: p
+    - s: "?"
+      choices: [p, 3d, 3nt]
+      explain: |
+        You open 1NT and partner bids 2NT. This is a game try. Partner is asking you to decide whether to pass or go to 3NT. Your 16 HCP is in the middle of the 15-17 range. However, your five-card diamond suit, headed by a couple of honors, is worth a bit extra. You should have no hesitation in raising to 3NT.
+      answer: 3nt
+
+#14
+- hand: sa76 hk3 da95 ckj1072
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 2h
+    - e: p
+    - s: 2s
+    - w: p
+    - n: 4h
+    - e: p
+    - s: "?"
+      choices: [p, 4s, 4nt]
+      explain: |
+        You open 1NT and the bidding continues 2♥; 2♠ - 4♥. The 2♥ response shows five spades and the 4♥ rebid shows five hearts. Since you prefer spades to hearts, you should bid 4♠ now. You have no reason to think that partner has anything beyond game values, so there is no case for bidding 4NT.
+      answer: 4s
+
+#15
+- hand: s102 hakq6 dk842 ca105
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 3c
+    - e: p
+    - s: "?"
+      choices: [3d, 3h, 4c]
+      explain: |
+        You open 1NT and partner bids 3♣. He has at least six clubs and is suggesting a slam. You have three-card club support and a possible ruffing value in spades. In addition, your high cards are ‘prime’ — they are aces and kings, not queens and jacks. You should agree clubs as trumps by raising to 4♣.
+      answer: 4c
+
