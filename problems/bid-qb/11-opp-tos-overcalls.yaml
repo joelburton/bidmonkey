@@ -1,0 +1,201 @@
+quiz: BQ Opponents Takeout/Overcalls
+problems:
+
+#1
+- hand: s9 h10965 daq763 c1084
+  dealer: n
+  auction:
+    - n: 1s
+    - e: x
+    - s: "?"
+      choices: [p, xx, 1nt, 2d]
+      explain: |
+        Partner opens 1♠ and the next player doubles. Without the double you would have responded 1NT, keeping the bidding alive in case partner had a good hand. When there is an intervening double, partner will have a second chance to bid on a good hand. Anyway, 1NT here would show 7-9 HCP. You are unsuitable for 2♦; your suit is not good enough and your hand is too weak.
+      answer: p
+
+#2
+- hand: sq9862 hk54 d105 cj92
+  dealer: n
+  auction:
+    - n: 1h
+    - e: 2c
+    - s: "?"
+      choices: [p, x, 2h, 2s]
+      explain: |
+        Partner opens 1♥ and the next player overcalls 2♣. You should raise to 2♥, just as you would have done if your RHO had passed. By showing your support, you will enable partner to bid higher in hearts, either to contest the auction further if the opponents bid again or to look for a heart game.
+      answer: 2h
+
+#3
+- hand: s10963 haq1076 dq6 caj
+  dealer: s
+  auction:
+    - s: 1h
+    - w: 2d
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [p, 2h, 2s]
+      explain: |
+        You open 1♥, LHO overcalls 2♦ and your partner doubles. This is a negative double — a takeout double. Your partner almost certainly holds four cards in spades, the unbid major, and you should respond 2♠. If you held the ♠K instead of the ♠10, you would be strong enough to respond 3♠. It’s the same situation as when you respond to a normal takeout double: not only must you choose a trump suit (or notrump), you must also give some indication of your strength. Partner can then judge if a game contract will be a good idea.
+      answer: 2s
+
+#4
+- hand: sk872 h1092 d764 cak4
+  dealer: n
+  auction:
+    - n: 1s
+    - e: x
+    - s: "?"
+      choices: [xx, 2s, 2nt, 3s]
+      explain: |
+        Partner opens 1♠ and the next player doubles. Your hand is worth a sound raise to 3♠ and that is what you would have bid if the next player had passed. Over a double this response would be preemptive, showing a weak hand with four spades. To tell partner that you have a sound double raise with four trumps, you make the artificial bid of 2NT instead.
+      answer: 2nt
+
+#5
+- hand: sak4 hq1053 d64 cq962
+  dealer: n
+  auction:
+    - n: 1d
+    - e: x
+    - s: "?"
+      choices: [xx, 1h, 2nt]
+      explain: |
+        Your partner opens 1♦ and the next player doubles. A response of 1♥ would be forcing but it’s not particularly attractive since there is a good chance that the doubler holds four hearts. You cannot bid 2NT because this would be an artificial bid that showed a sound raise to at least 3♦. Instead you should redouble to tell partner that you hold at least 10 points and are interested in a possible penalty double of the opponents’ resting spot.
+      answer: xx
+
+#6
+- hand: sj84 h2 da1084 caq952
+  dealer: n
+  auction:
+    - n: 1h
+    - e: 2c
+    - s: "?"
+      choices: [p, x, 2nt]
+      explain: |
+        The bidding starts 1♥ (from partner) - 2♣. You would like to double for penalties but a double would be negative (for takeout). If you bid 2NT, to show 11-12 HCP and a good club stopper, there is no guarantee that you will end up making a game somewhere. Meanwhile, you will have waved goodbye to a considerable penalty. Your best move is to pass, hoping that your partner will reopen with a double. He is almost certain to do this since he must be short in clubs. You will pass the double and collect a big penalty.
+      answer: p
+
+#7
+- hand: sj75 hakq94 d103 ca96
+  dealer: s
+  auction:
+    - s: 1h
+    - w: 2d
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [p, 3h, 3s, 4s]
+      explain: |
+        You open 1♥ and the next player overcalls 2♦. Partner responds 2♠ and your RHO passes. Partner has made a forcing bid and will hold five-plus spades and at least 10 or 11 points. You have a good hand in support of spades, offering partner several tricks in hearts, the ♣A and a possible ruffing value in diamonds. You are well worth a raise to 4♠.
+      answer: 4s
+
+#8
+- hand: sa86 hakj4 d73 cqj65
+  dealer: n
+  auction:
+    - n: 1d
+    - e: 1s
+    - s: "?"
+      choices: [x, 2c, 2h, 3nt]
+      explain: |
+        Partner opens 1♦ and the next player overcalls 1♠. Since you have no five-card suit to bid, you should start with a negative double. Although you might hold only 8 points or so for such a call, you can also make a negative double on stronger hands. You plan to bid again, of course, once you have heard partner’s response.
+      answer: x
+
+#9
+- hand: saq762 h64 da973 ca10
+  dealer: s
+  auction:
+    - s: 1s
+    - w: x
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [p, 4s]
+      explain: |
+        You open 1♠, the next player doubles and partner raises to 3♠. This is a weak preemptive bid. You can expect your partner to hold four spades to the king and perhaps a king or queen outside. You would bid game over a normal 3♠ raise without the intervening double, yes, but partner does not hold such a hand. He is bidding high to shut out the opponents. You should pass.
+      answer: p
+
+#10
+- hand: sq1084 h972 daqj6 ck7
+  dealer: s
+  auction:
+    - s: 1d
+    - w: 1h
+    - n: x
+    - e: 2h
+    - s: "?"
+      choices: [p, 2s, 3d]
+      explain: |
+        The bidding starts 1♦ - 1♥ - Dbl (by partner) - 2♥. You can expect partner to hold four spades. (With five spades he would have responded 1♠ instead of making a negative double). You have a fair hand in support of spades and should not allow yourself to be shut out by this heart raise.
+      answer: 2s
+
+#11
+- hand: saj84 hq74 da1092 c95
+  dealer: n
+  auction:
+    - n: 1d
+    - e: 2c
+    - s: "?"
+      choices: [x, 2s, 3c, 3d]
+      explain: |
+        Partner opens 1♦ and the next player overcalls 2♣. You cannot bid 2♠ because this would show at least a five-card suit. You could bid 3♣ to show a sound raise to (at least) 3♦, but you might then miss a fit in spades. The best idea is to start with a negative double, in the hope that partner will bid spades. If he doesn’t, you can support diamonds.
+      answer: x
+
+#12
+- hand: sq983 h1054 da3 caq106
+  dealer: s
+  auction:
+    - s: 1c
+    - w: 1d
+    - n: 1s
+    - e: 3d
+    - s: "?"
+      choices: [p, x, 3s, 3nt]
+      explain: |
+        You open 1♣, the next player overcalls 1♦ and partner bids 1♠. Your RHO raises preemptively to 3♦. What now? If RHO had passed or bid just 2♦, you would have raised to 2♠. This option has been removed by the opponents, so you have to choose between a Pass and raising to 3♠. You should show the spade support. Partner may well hold five spades on this bidding, giving you a nine-card fit. He will realize that you may have been forced to stretch a bit by the 3♦ raise.
+      answer: 3s
+
+#13
+- hand: sj2 hj864 dk10965 c107
+  dealer: n
+  auction:
+    - n: 1d
+    - e: x
+    - s: "?"
+      choices: [p, 1h, 2d, 3d]
+      explain: |
+        Partner opens 1♦ and the next player doubles. There are several reasons why it is wrong to bid 1♥ now. Your suit is weak and there is a good chance that the doubler holds four hearts. To make it harder for the opponents to find their likely spade fit, you want to take away bidding space. You should raise preemptively to 3♦. This will prevent the fourth player from bidding 1♠ or 2♠. If he ventures a bid of 3♠, his partner will not know if he was full value for the bid or if he was forced to stretch a bit by your 3♦.
+      answer: 3d
+
+#14
+- hand: s962 hk1087 da93 ca104
+  dealer: n
+  auction:
+    - n: 1c
+    - e: 1s
+    - s: x
+    - w: p
+    - n: 2h
+    - e: p
+    - s: "?"
+      choices: [p, 2s, 3h]
+      explain: |
+        The bidding starts 1♣ (from partner), 1♠ overcall and a negative double from you. The next player passes and your partner rebids 2♥. Even though your hand has 4-3-3-3 shape, you are just about worth a game try. You should invite game by raising to 3♥.
+      answer: 3h
+
+#15
+- hand: sq1073 hj976 dk82 ca7
+  dealer: n
+  auction:
+    - n: 1d
+    - e: 2c
+    - s: x
+    - w: p
+    - n: 2nt
+    - e: p
+    - s: "?"
+      choices: [p, 3c, 3d, 3nt]
+      explain: |
+        Partner opens 1♦ and the next player overcalls 2♣. You double, the next player passes and partner rebids 2NT. Partner is showing you a 12-14 hand with a club stopper. You should therefore pass.
+      answer: p
+
