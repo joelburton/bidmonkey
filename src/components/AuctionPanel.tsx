@@ -99,8 +99,9 @@ export function AuctionPanel({
     pressTimer.current = setTimeout(() => setPressed(null), 150)
   }, [])
 
-  // Keyboard: any key dismisses the popup; a-d pick MC options; the pad keys
-  // (1-7, c/d/h/s/n, p, x) drive a free bid.
+  // Keyboard: any key dismisses the popup; a-f pick MC options; the pad keys
+  // (1-7, c/d/h/s/n, p, x) drive a free bid — and also a *bid* MC (type "1c"),
+  // in addition to its option letters.
   const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay })
   ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay }
   useEffect(() => {
@@ -126,12 +127,20 @@ export function AuctionPanel({
       const k = e.key.toLowerCase()
       if (st.isMC) {
         const opts = st.model.question?.options ?? []
-        const idx = OPT_LETTERS.indexOf(k)
-        if (idx >= 0 && idx < opts.length) {
-          doSubmit(opts[idx])
-          e.preventDefault()
+        // A bid MC also accepts a typed bid ("1c" for 1♣), like a free bid pad.
+        // While a level is pending, keys route to the pad below so c/d read as
+        // strains, not the option letters c/d.
+        const bidMC = st.model.question?.answerKind === 'bid'
+        if (!(bidMC && st.level != null)) {
+          const idx = OPT_LETTERS.indexOf(k)
+          if (idx >= 0 && idx < opts.length) {
+            doSubmit(opts[idx])
+            e.preventDefault()
+            return
+          }
         }
-        return
+        if (!bidMC) return // a text MC has no bid to type
+        // else fall through to the bid-pad keys below
       }
       if (k >= '1' && k <= '7') {
         const l = Number(k)

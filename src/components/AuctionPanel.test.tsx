@@ -87,6 +87,69 @@ describe('AuctionPanel multiple-choice', () => {
   })
 })
 
+describe('AuctionPanel bid MC — typed bid entry', () => {
+  // A bid multiple-choice question also accepts a typed bid (level then strain),
+  // like the free bid pad, in addition to its a/b/c option letters.
+  it('typing the answer bid ("3h") grades correct and advances', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+    await user.keyboard('3') // level (no option 'c'/'d' ambiguity: level pending)
+    await user.keyboard('h') // strain -> submits 3H
+    expect(screen.getByText('Correct!')).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+    expect(onAnswer).toHaveBeenCalledWith('3H')
+  })
+
+  it('typing a non-answer bid ("2h") grades wrong and lets you retry', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+    await user.keyboard('2')
+    await user.keyboard('h') // 2H — not the answer (3H)
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+    expect(onAnswer).not.toHaveBeenCalled()
+  })
+
+  it('still picks options by letter (a = 2H, wrong)', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+    await user.keyboard('a') // option a = 2H (no level pending → letter shortcut)
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+  })
+})
+
 describe('AuctionPanel accepted alternative answers', () => {
   // Same question, but 4H is also accepted (option c). Picking it is graded
   // correct, yet the auction must advance with the canonical answer (3H) — not
