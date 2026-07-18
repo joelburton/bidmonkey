@@ -1,0 +1,198 @@
+quiz: BQ RKCB and Cuebids
+problems:
+
+#1
+- hand: sak9865 ha5 dq76 caj
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [4c, 4s, 4nt, 6s]
+      explain: |
+        The bidding starts 1♠ - 3♠. A slam is possible but you are not certain you want to go so high. Blackwood will not help much, and in any case is not advisable with no diamond control in your hand. What you want to do is to suggest a slam and see how partner reacts. You can do this by bidding 4♣. This shows the ♣A and suggests a slam. If partner bids 4♦ next, showing the ♦A, you can bid 4♥ to tell him about the ♥A. Perhaps he will then be willing to bid 4NT. If instead he decides to sign off in 4♠, you will pass. This is how slam auctions should proceed, with both partners involved in the decision making.
+      answer: 4c
+
+#2
+- hand: sa10 hk9763 da642 cj7
+  dealer: s
+  auction:
+    - s: 1h
+    - w: p
+    - n: 4nt
+    - e: p
+    - s: "?"
+      choices: [5c, 5d, 5h, 6h]
+      explain: |
+        The bidding starts 1♥ - 4NT. Partner’s response is RKCB with hearts agreed as trumps. You have three keycards, so your response is 5♦ (showing 0 or 3 keycards). Remember the 1430 acronym.
+      answer: 5d
+
+#3
+- hand: saq1093 hk4 dak64 cq2
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2c
+    - e: p
+    - s: 2d
+    - w: p
+    - n: 4s
+    - e: p
+    - s: "?"
+      choices: [p, 4nt, 5d, 6s]
+      explain: |
+        The bidding starts 1♠ - 2♣; 2♦ - 4♠. Partner has shown a sound raise to the spade game and you have plenty of values to spare, including a possibly useful queen in his main suit (clubs). You should bid 4NT to check that partner holds at least two of the three missing keycards. If he does, you will bid 6♠.
+      answer: 4nt
+
+#4
+- hand: sa6 h7 dakqj2 ca10854
+  dealer: n
+  auction:
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [4c, 4s, 4nt, 6s]
+      explain: |
+        Your partner opens 2♠. If he holds six spades headed by the K-Q, a small slam should be a good contract. You start by bidding RKCB. If partner shows two keycards (♠K and ♥A) without the ♠Q, you will bid only 6♠. If he shows two keycards with the ♠Q, you can bid 7♠ (or 7NT). If partner responds 5♦, showing only one keycard, you will need to bid 5♥ to ask for the queen of trumps. If partner denies this card, you will pass his 5♠, and otherwise bid 6♠.
+      answer: 4nt
+
+#5
+- hand: s6 hkq8752 da76 c974
+  dealer: n
+  auction:
+    - n: 2c
+    - e: p
+    - s: 2h
+    - w: p
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [4d, 4h, 4nt, 6h]
+      explain: |
+        You hold a useful hand opposite a 2♣ opener. What is more, you have found a good trump fit. You are surely heading for at least a small slam in hearts. At this stage you should show partner the ♦A by bidding 4♦.
+      answer: 4d
+
+#6
+- hand: saq63 hj6 dak76 ca73
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 1s
+    - e: p
+    - s: 3s
+    - w: p
+    - n: 4nt
+    - e: p
+    - s: 5d
+    - w: p
+    - n: 5h
+    - e: p
+    - s: "?"
+      choices: [5s, 5nt, 6d, 6s]
+      explain: |
+        The bidding starts 1♦ - 1♠; 3♠ - 4NT; 5♦ - 5♥. What does that all mean? Your 3♠ showed a strong hand in support of spades and 4NT was RKCB. Your 5♦ response showed 0 or 3 keycards (presumably three in view of your strong bidding). Partner’s 5♥ continuation, the cheapest non-trump bid, is asking for the ♠Q. The possible responses are 5♠ (sign-off, no ♠Q), 5NT (♠Q but no side-suit king), 6♣/6♦/6♥ (♠Q and your cheapest side-suit king).
+      answer: 6d
+
+#7
+- hand: sk4 hkqj8762 d104 c63
+  dealer: s
+  auction:
+    - s: 3h
+    - w: p
+    - n: 4nt
+    - e: p
+    - s: 5c
+    - w: p
+    - n: 5nt
+    - e: p
+    - s: "?"
+      choices: [6c, 6d, 6h]
+      explain: |
+        The bidding starts 3♥ - 4NT; 5♣ - 5NT. Partner’s RKCB 4NT asked for keycards and your 5♣ response showed one (the ♥K). You could not hold four keycards when you opened with a preempt. Partner’s 5NT continuation is asking how many side-suit kings you hold. You would bid 6♣ with none and must now bid 6♦ to show one side-suit king.
+      answer: 6d
+
+#8
+- hand: saq10742 ha103 d98 ckq
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2nt
+    - e: p
+    - s: 3s
+    - w: p
+    - n: 4c
+    - e: p
+    - s: "?"
+      choices: [4d, 4h, 4s, 4nt]
+      explain: |
+        The bidding starts 1♠ - 2NT; 3♠ - 4♣. Partner’s 2NT was Jacoby 2NT, showing at least a sound game-raise in spades. Your 3♠ rebid showed extra values but no side-suit singleton. Spades are agreed as trumps and 4♣ is a control-showing cuebid. Partner is showing the ♣A and interest in bidding a slam. You have six good trumps and excellent cards for a slam. You indicate your enthusiasm by bidding 4♥, which shows the ♥A and denies the ♦A. (When cuebidding you always show the cheapest ace on the bidding ladder first.)
+      answer: 4h
+
+#9
+- hand: saj87 h105 d9852 ca74
+  dealer: n
+  auction:
+    - n: 2c
+    - e: p
+    - s: 2d
+    - w: p
+    - n: 2s
+    - e: p
+    - s: 3s
+    - w: p
+    - n: 4d
+    - e: p
+    - s: "?"
+      choices: [4s, 4nt, 5c, 6s]
+      explain: |
+        The bidding starts: 2♣ - 2♦; 2♠ - 3♠; 4♦. Partner’s 4♦ shows the ♦A and suggests a slam. With two aces facing a 2♣ opening, and a good trump fit already found, you must ensure that a slam is reached. To bid 4♠ now would be a bad mistake. (Such a bid would not show the ♠A, of course; a cuebid is made only in a side suit. 4♠ would be a sign-off). You should bid 5♣ to show partner the ♣A. Since you have little idea what his hand looks like, you should not take control of the auction by bidding 4NT.
+      answer: 5c
+
+#10
+- hand: sk976 h6 dqj85 ca1073
+  dealer: w
+  auction:
+    - w: 3h
+    - n: 4s
+    - e: p
+    - s: "?"
+      choices: [p, 4nt, 5c, 6s]
+      explain: |
+        Your LHO opens 3♥ and partner overcalls 4♠. This is a strong bid, since your opponent has shown a weak hand. Add in your values (good trump support, the singleton heart, the ♣A and the lower honors in diamonds) and the chances of a slam are excellent. You are entitled to bid 6♠ provided two keycards are not missing.
+      answer: 4nt
+
+#11
+- hand: sk94 haq86 d104 cak84
+  dealer: s
+  auction:
+    - s: 1nt
+    - w: p
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [3nt, 4c, 4s, 4nt]
+      explain: |
+        The bidding starts 1NT - 3♠. Partner has long spades and is suggesting a slam. Your hand could hardly be more splendid in support of spades. If you had a doubleton spade and relatively few controls, you might bid 3NT to tell partner you did not fancy a slam. With spade support in a minimum hand with few controls, you would raise to 4♠. Here you must bid more ambitiously. The best bid is 4♣. This cannot possibly be a natural bid when you have opened 1NT and partner has shown six-plus spades. It is a cuebid, showing the ♣A and telling partner that you like the idea of a slam.
+      answer: 4c
+
+#12
+- hand: saj6542 hk103 d8 ckq7
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: 1s
+    - w: p
+    - n: 4s
+    - e: p
+    - s: "?"
+      choices: [p, 4nt, 5s, 6s]
+      explain: |
+        Partner has gone all the way to 4♠ when you might hold only 6 points — he promises 19-20 points. You have plenty of values to spare, not least a six-card trump suit. You are worth a RKCB 4NT bid. If partner holds at least three keycards you will bid 6♠ (your singleton opposite partner’s long suit does not make 7♠ attractive). Note that the trump fit is expected to be 6-4, so you will not need to check for the ♠Q. If that card is missing it will probably drop under the ace and king. Or if the opponent shows out when you play dummy’s ♠K, you can catch the ♠Qxx with a finesse.
+      answer: 4nt
+

@@ -1,155 +1,73 @@
-RKCB and cuebidding controls — Problems A
+@quiz: BQ RKCB and Cuebids
 
-1.
-
-14.11.jpg
-
-Do you think a slam is likely after your partner’s 3♠? What will you bid next?
-
+1. s 1s p 3s p ?
+♠ A K 9 8 6 5 ♥ A 5 ♦ Q 7 6 ♣ A J
+# 1♠ - 3♠. Do you think a slam is likely after partner's 3♠? What will you bid next?
 (a) 4♣    (b) 4♠    (c) 4NT    (d) 6♠
-
-2.
-
-14.12.jpg
-
-What will you bid next after partner’s 4NT bid?
-
-(a) 5♣    (b) 5♦    (c) 5♥    (d) 6♥
-
-3.
-
-14.13.jpg
-
-Do you think a slam is likely after your partner’s bidding? What will you say next?
-
-(a) Pass    (b) 4NT   (c) 5♦    (d) 6♠
-
-4.
-
-14.14.jpg
-
-What is your bidding plan on this hand? What response will you make?
-
-(a) 4♣   (b) 4♠   (c) 4NT   (d) 6♠
-
-RKCB and cuebidding controls — Solutions A
-
-1. ♠ A K 9 8 6 5 ♥ A 5 ♦ Q 7 6 ♣ A J
-
 The bidding starts 1♠ - 3♠. A slam is possible but you are not certain you want to go so high. Blackwood will not help much, and in any case is not advisable with no diamond control in your hand. What you want to do is to suggest a slam and see how partner reacts. You can do this by bidding 4♣. This shows the ♣A and suggests a slam. If partner bids 4♦ next, showing the ♦A, you can bid 4♥ to tell him about the ♥A. Perhaps he will then be willing to bid 4NT. If instead he decides to sign off in 4♠, you will pass. This is how slam auctions should proceed, with both partners involved in the decision making. Answer: (a) 4♣.
 
-2. ♠ A 10 ♥ K 9 7 6 3 ♦ A 6 4 2 ♣ J 7
-
+2. s 1h p 4nt p ?
+♠ A 10 ♥ K 9 7 6 3 ♦ A 6 4 2 ♣ J 7
+# 1♥ - 4NT (RKCB). What will you bid next after partner's 4NT bid?
+(a) 5♣    (b) 5♦    (c) 5♥    (d) 6♥
 The bidding starts 1♥ - 4NT. Partner’s response is RKCB with hearts agreed as trumps. You have three keycards, so your response is 5♦ (showing 0 or 3 keycards). Remember the 1430 acronym. Answer: (b) 5♦.
 
-3. ♠ A Q 10 9 3 ♥ K 4 ♦ A K 6 4 ♣ Q 2
-
+3. s 1s p 2c p 2d p 4s p ?
+♠ A Q 10 9 3 ♥ K 4 ♦ A K 6 4 ♣ Q 2
+# 1♠ - 2♣; 2♦ - 4♠. Do you think a slam is likely after partner's bidding? What will you say next?
+(a) Pass    (b) 4NT   (c) 5♦    (d) 6♠
 The bidding starts 1♠ - 2♣; 2♦ - 4♠. Partner has shown a sound raise to the spade game and you have plenty of values to spare, including a possibly useful queen in his main suit (clubs). You should bid 4NT to check that partner holds at least two of the three missing keycards. If he does, you will bid 6♠. Answer: (b) 4NT.
 
-4. ♠ A 6 ♥ 7 ♦ A K Q J 2 ♣ A 10 8 5 4
-
+4. n 2s p ?
+♠ A 6 ♥ 7 ♦ A K Q J 2 ♣ A 10 8 5 4
+# Partner opens 2♠. What is your bidding plan? What response will you make?
+(a) 4♣   (b) 4♠   (c) 4NT   (d) 6♠
 Your partner opens 2♠. If he holds six spades headed by the K-Q, a small slam should be a good contract. You start by bidding RKCB. If partner shows two keycards (♠K and ♥A) without the ♠Q, you will bid only 6♠. If he shows two keycards with the ♠Q, you can bid 7♠ (or 7NT). If partner responds 5♦, showing only one keycard, you will need to bid 5♥ to ask for the queen of trumps. If partner denies this card, you will pass his 5♠, and otherwise bid 6♠. Answer: (c) 4NT.
 
-RKCB and cuebidding controls — Problems B
-
-5.
-
-14.15.jpg
-
-Do you think a slam is likely after your partner’s 3♥ raise? What will you bid next?
-
+5. n 2c p 2h p 3h p ?
+♠ 6 ♥ K Q 8 7 5 2 ♦ A 7 6 ♣ 9 7 4
+# 2♣ (partner) - 2♥ - 3♥ (partner's raise). Do you think a slam is likely? What will you bid next?
 (a) 4♦    (b) 4♥    (c) 4NT    (d) 6♥
-
-6.
-
-14.16.jpg
-
-What has the auction meant so far? What will you bid next?
-
-(a) 5♠    (b) 5NT    (c) 6♦    (d) 6♠
-
-7.
-
-14.17.jpg
-
-What will you bid now?
-
-(a) 6♣    (b) 6♦    (c) 6♥
-
-8.
-
-14.18.jpg
-
-What does partner’s bidding mean? What will you bid now?
-
-(a) 4♦    (b) 4♥    (c) 4♠    (d) 4NT
-
-RKCB and cuebidding controls — Solutions B
-
-5. ♠ 6 ♥ K Q 8 7 5 2 ♦ A 7 6 ♣ 9 7 4
-
 You hold a useful hand opposite a 2♣ opener. What is more, you have found a good trump fit. You are surely heading for at least a small slam in hearts. At this stage you should show partner the ♦A by bidding 4♦. Answer: (a) 4♦.
 
-6. ♠ A Q 6 3 ♥ J 6 ♦ A K 7 6 ♣ A 7 3
-
+6. s 1d p 1s p 3s p 4nt p 5d p 5h p ?
+♠ A Q 6 3 ♥ J 6 ♦ A K 7 6 ♣ A 7 3
+# 1♦ - 1♠; 3♠ - 4NT; 5♦ - 5♥. What has the auction meant so far? What will you bid next?
+(a) 5♠    (b) 5NT    (c) 6♦    (d) 6♠
 The bidding starts 1♦ - 1♠; 3♠ - 4NT; 5♦ - 5♥. What does that all mean? Your 3♠ showed a strong hand in support of spades and 4NT was RKCB. Your 5♦ response showed 0 or 3 keycards (presumably three in view of your strong bidding). Partner’s 5♥ continuation, the cheapest non-trump bid, is asking for the ♠Q. The possible responses are 5♠ (sign-off, no ♠Q), 5NT (♠Q but no side-suit king), 6♣/6♦/6♥ (♠Q and your cheapest side-suit king). Answer: (c) 6♦.
 
-7. ♠ K 4 ♥ K Q J 8 7 6 2 ♦ 10 4 ♣ 6 3
-
+7. s 3h p 4nt p 5c p 5nt p ?
+♠ K 4 ♥ K Q J 8 7 6 2 ♦ 10 4 ♣ 6 3
+# 3♥ - 4NT; 5♣ - 5NT. What will you bid now?
+(a) 6♣    (b) 6♦    (c) 6♥
 The bidding starts 3♥ - 4NT; 5♣ - 5NT. Partner’s RKCB 4NT asked for keycards and your 5♣ response showed one (the ♥K). You could not hold four keycards when you opened with a preempt. Partner’s 5NT continuation is asking how many side-suit kings you hold. You would bid 6♣ with none and must now bid 6♦ to show one side-suit king. Answer: (b) 6♦.
 
-8. ♠ A Q 10 7 4 2 ♥ A 10 3 ♦ 9 8 ♣ K Q
-
+8. s 1s p 2nt p 3s p 4c p ?
+♠ A Q 10 7 4 2 ♥ A 10 3 ♦ 9 8 ♣ K Q
+# 1♠ - 2NT (Jacoby); 3♠ - 4♣ (cuebid). What does partner's bidding mean? What will you bid now?
+(a) 4♦    (b) 4♥    (c) 4♠    (d) 4NT
 The bidding starts 1♠ - 2NT; 3♠ - 4♣. Partner’s 2NT was Jacoby 2NT, showing at least a sound game-raise in spades. Your 3♠ rebid showed extra values but no side-suit singleton. Spades are agreed as trumps and 4♣ is a control-showing cuebid. Partner is showing the ♣A and interest in bidding a slam. You have six good trumps and excellent cards for a slam. You indicate your enthusiasm by bidding 4♥, which shows the ♥A and denies the ♦A. (When cuebidding you always show the cheapest ace on the bidding ladder first.) Answer: (b) 4♥.
 
-RKCB and cuebidding controls — Problems C
-
-9.
-
-14.19.jpg
-
-What will you bid next?
-
+9. n 2c p 2d p 2s p 3s p 4d p ?
+♠ A J 8 7 ♥ 10 5 ♦ 9 8 5 2 ♣ A 7 4
+# 2♣ - 2♦; 2♠ - 3♠; 4♦ (partner's cuebid). What will you bid next?
 (a) 4♠   (b) 4NT    (c) 5♣    (d) 6♠
-
-10.
-
-14.20.jpg
-
-What action will you take?
-
-(a) Pass    (b) 4NT    (c) 5♣    (d) 6♠
-
-11.
-
-14.21.jpg
-
-Partner’s 3♠ shows six-plus spades and suggests a slam. What will you bid now?
-
-(a) 3NT    (b) 4♣    (c) 4♠    (d) 4NT
-
-12.
-
-14.22.jpg
-
-What does partner’s bidding mean? What will you bid now?
-
-(a) Pass    (b) 4NT    (c) 5♠    (d) 6♠
-
-RKCB and cuebidding controls — Solutions C
-
-9. ♠ A J 8 7 ♥ 10 5 ♦ 9 8 5 2 ♣ A 7 4
-
 The bidding starts: 2♣ - 2♦; 2♠ - 3♠; 4♦. Partner’s 4♦ shows the ♦A and suggests a slam. With two aces facing a 2♣ opening, and a good trump fit already found, you must ensure that a slam is reached. To bid 4♠ now would be a bad mistake. (Such a bid would not show the ♠A, of course; a cuebid is made only in a side suit. 4♠ would be a sign-off). You should bid 5♣ to show partner the ♣A. Since you have little idea what his hand looks like, you should not take control of the auction by bidding 4NT. Answer: (c) 5♣.
 
-10. ♠ K 9 7 6 ♥ 6 ♦ Q J 8 5 ♣ A 10 7 3
-
+10. w 3h 4s p ?
+♠ K 9 7 6 ♥ 6 ♦ Q J 8 5 ♣ A 10 7 3
+# (3♥) - 4♠ (partner overcalls) - (pass). What action will you take?
+(a) Pass    (b) 4NT    (c) 5♣    (d) 6♠
 Your LHO opens 3♥ and partner overcalls 4♠. This is a strong bid, since your opponent has shown a weak hand. Add in your values (good trump support, the singleton heart, the ♣A and the lower honors in diamonds) and the chances of a slam are excellent. You are entitled to bid 6♠ provided two keycards are not missing. Answer: (b) 4NT.
 
-11. ♠ K 9 4 ♥ A Q 8 6 ♦ 10 4 ♣ A K 8 4
-
+11. s 1nt p 3s p ?
+♠ K 9 4 ♥ A Q 8 6 ♦ 10 4 ♣ A K 8 4
+# 1NT - 3♠. Partner's 3♠ shows six-plus spades and suggests a slam. What will you bid now?
+(a) 3NT    (b) 4♣    (c) 4♠    (d) 4NT
 The bidding starts 1NT - 3♠. Partner has long spades and is suggesting a slam. Your hand could hardly be more splendid in support of spades. If you had a doubleton spade and relatively few controls, you might bid 3NT to tell partner you did not fancy a slam. With spade support in a minimum hand with few controls, you would raise to 4♠. Here you must bid more ambitiously. The best bid is 4♣. This cannot possibly be a natural bid when you have opened 1NT and partner has shown six-plus spades. It is a cuebid, showing the ♣A and telling partner that you like the idea of a slam. Answer: (b) 4♣.
 
-12. ♠ A J 6 5 4 2 ♥ K 10 3 ♦ 8 ♣ K Q 7
-
-Partner has gone all the way to 4♠ when you might hold only 6 points — he promises 19-20 points. You have plenty of values to spare, not least a six-card trump suit. You are worth a RKCB 4NT bid. If partner holds at least three keycards you will bid 6♠ (your singleton opposite partner’s long suit does not make 7♠ attractive). Note that the trump fit is expected to be 6-4, so you will not need to check for the ♠Q. If that card is missing it will probably drop under the ace and king. Or if South shows out when you play dummy’s ♠K, you can catch North’s ♠Qxx with a finesse. Answer: (b) 4NT.
+12. n 1d p 1s p 4s p ?
+♠ A J 6 5 4 2 ♥ K 10 3 ♦ 8 ♣ K Q 7
+# 1♦ - 1♠; 4♠ (partner's strong jump, 19-20). What does partner's bidding mean? What will you bid now?
+(a) Pass    (b) 4NT    (c) 5♠    (d) 6♠
+Partner has gone all the way to 4♠ when you might hold only 6 points — he promises 19-20 points. You have plenty of values to spare, not least a six-card trump suit. You are worth a RKCB 4NT bid. If partner holds at least three keycards you will bid 6♠ (your singleton opposite partner’s long suit does not make 7♠ attractive). Note that the trump fit is expected to be 6-4, so you will not need to check for the ♠Q. If that card is missing it will probably drop under the ace and king. Or if the opponent shows out when you play dummy’s ♠K, you can catch the ♠Qxx with a finesse. Answer: (b) 4NT.
