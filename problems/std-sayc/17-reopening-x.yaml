@@ -1,0 +1,15 @@
+quiz: SAYC Reopening Double
+problems:
+
+  #1
+  - hand: sak63 hak53 dk1072 c2
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 2c
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          You open 1♦. LHO overcalls 2♣ and partner and RHO pass. Since you are not about to allow the opponents to play unmolested in 2♣, you now reopen the bidding with a double. If it looks a lot like a takeout double, that’s because it is a lot like a takeout double. The only difference is that this double is made by the opener, in the passout seat.
+        answer: x
