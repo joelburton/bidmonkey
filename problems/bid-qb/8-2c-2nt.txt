@@ -1,0 +1,61 @@
+@quiz: BQ 2♣ and 2NT Openings
+
+1. s ?
+♠ A Q 6 ♥ K Q 10 ♦ A J 5 ♣ A Q 9 4
+# What opening bid will you make?
+(a) 1♣    (b) 2♣    (c) 2NT
+In North America a 2NT opening would show 20-21 HCP. Since you have 22 HCP here, you must open 2♣ instead, intending to rebid 2NT. (In Europe it is common for 2NT to show 20-22 HCP, in which case you would open 2NT.) Answer: (b) 2♣.
+
+2. n 2c p ?
+♠ 10 7 4 ♥ A Q 7 2 ♦ 9 8 5 ♣ A J 4
+# Your partner opens 2♣. What will you respond? What is your subsequent bidding plan?
+(a) 2♦    (b) 2♥    (c) 2NT    (d) 3NT
+With 11 HCP including two precious aces, you will be heading into the slam zone. For the moment, you should make the waiting response of 2♦ to see which type of hand the opener has. If he rebids 2NT, showing 22-24 points, you will raise to 6NT. If instead he rebids in a suit, you will agree that suit as trumps with a raise. Answer: (a) 2♦.
+
+3. n 2nt p 3c p 3h p ?
+♠ A 6 ♥ Q 8 7 5 ♦ 9 8 4 ♣ K 10 6 2
+# The bidding starts 2NT - 3♣; 3♥. What will you say now?
+(a) 3NT    (b) 4♥    (c) 4NT    (d) 6♥
+The bidding starts 2NT - 3♣; 3♥. By using Stayman, you have found a 4-4 heart fit. The question is: do you have enough for a slam? Partner has shown 20-21 HCP, so it would be too ambitious to invite a slam. You should raise to 4♥. Answer: (b) 4♥.
+
+4. n 2c p ?
+♠ K 3 ♥ K Q J 8 6 ♦ 10 7 6 4 ♣ 9 2
+# Partner opens 2♣. What response will you make?
+(a) 2♦    (b) 2♥    (c) 3♥
+Partner opens 2♣. You should respond 2♥ to show a useful suit of (at least) five cards. Suppose instead you were to make the waiting response of 2♦ and partner then rebid 3♣. You would bid 3♥ next but partner would have little idea whether you had a good suit or just any old five-card suit. Answer: (b) 2♥.
+
+5. s 2c p 2d p 2s p 3s p ?
+♠ A K Q 9 7 6 ♥ 3 ♦ A K Q 2 ♣ K Q
+# The bidding starts 2♣ - 2♦; 2♠ - 3♠. What will you say now?
+(a) 4♦    (b) 4♠    (c) 4NT
+The bidding starts 2♣ - 2♦; 2♠ - 3♠. Partner’s single raise is a strong move that shows a spade fit and at least an ace or a king somewhere. You should bid 4NT to ask for aces. You will sign off in 5♠ if he has no ace, advance to 6♠ if he has one ace and to 7♠ if he has two aces. (With no ace or king, your partner would rebid 4♠ instead of 3♠ and you would pass. Remember that your 2♠ bid was game-forcing, however weak the responder is.) Answer: (c) 4NT.
+
+6. s 2nt p 4nt p ?
+♠ A 7 ♥ A Q 9 7 6 ♦ A K 4 ♣ K J 5
+# You open 2NT and partner responds 4NT. What action will you take?
+(a) Pass    (b) 5♣    (c) 6♥    (d) 6NT
+You open 2NT and partner responds 4NT. He is inviting you to go to 6NT if you have an upper-range opening. Not only do you hold 21 HCP instead of 20, you also have a five-card suit. You intend to accept his slam try, but nothing is lost by bidding 6♥ instead of 6NT. This tells partner that you have five hearts, just in case he has heart support and would prefer 6♥ to 6NT. Answer: (c) 6♥.
+
+7. n 2c p 2d p 2nt p ?
+♠ K 4 ♥ 9 3 ♦ K 9 8 5 3 2 ♣ 10 7 6
+# The bidding starts 2♣ - 2♦; 2NT. What action will you take as responder?
+(a) 3♦    (b) 3NT    (c) 5♦    (d) 6♦
+Partner opens 2♣. Your suit is not good enough for a positive response of 3♦. You make the waiting response of 2♦ and partner rebids 2NT, showing 22-23 points. It is barely possible to envisage a diamond slam if partner has perfect cards — but they never do! Take the conservative approach and bid 3NT, choosing the nine-trick game. Answer: (b) 3NT.
+
+8. s ?
+♠ K Q 7 ♥ A K 8 ♦ A K J 7 6 ♣ 10 3
+# What opening bid will you make?
+(a) 1♦    (b) 2♣    (c) 2NT
+You are well short of the power to open 2♣. The best opening is 2NT, despite the fact that you have no stopper in clubs. If partner raises to 3NT, the most likely location for his honors is in clubs, where you have nothing. The problem in opening 1♦ instead is not so much that you might miss a game. It’s that your hand would be difficult to describe if partner did find a response. Answer: (c) 2NT.
+
+9. n 2nt p 3c p 3s p ?
+♠ 9 6 ♥ A J 6 5 ♦ K Q 10 4 2 ♣ Q 8
+# The bidding starts 2NT - 3♣; 3♠. What will you bid now?
+(a) 3NT    (b) 4♦    (c) 4NT    (d) 6NT
+Partner opens 2NT and you bid 3♣ (Stayman) to look for a heart fit. Partner’s 3♠ response shows four (or five) spades but denies four hearts. With this shape and 32-33 HCP between the hands, you are entitled to continue towards a slam. The best slam may well be 6♦ if partner has a fit for that suit. You should therefore bid 4♦ next. Answer: (b) 4♦.
+
+10. n 2c p 2d p 3d p 3s p 3nt p ?
+♠ A J 7 3 2 ♥ 3 ♦ J 4 2 ♣ 8 7 4 3
+# The bidding starts 2♣ - 2♦; 3♦ - 3♠; 3NT. What will you say next?
+(a) Pass    (b) 4♦     (c) 4♠    (d) 4NT
+The bidding starts 2♣ - 2♦; 3♦. Your spades are worth showing now and you continue with 3♠ in case there is a fit there. The opener signs off in 3NT. You should not pass, though, because you have a useful hand in support of diamonds. Not only do you have a wonderful ace, you have three-card support for partner’s diamonds and a singleton heart. You should continue with 4♦. Partner may then be able to ask for aces. Answer: (b) 4♦.
