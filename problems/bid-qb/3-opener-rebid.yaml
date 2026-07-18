@@ -1,0 +1,213 @@
+quiz: BQ Opener Rebid
+problems:
+
+#1
+- hand: saj6 h8 daj873 ck1076
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [1nt, 2c, 2d]
+      explain: |
+        The bidding starts 1♦ - 1♥. A 1NT rebid would show 12-14 points, yes, but it would also tell partner that you held a balanced hand. Here you should rebid 2♣, showing your second suit. It would be a mistake to rebid 2♦, just because you wanted to let partner know that you had a minimum opening bid.
+      answer: 2c
+
+#2
+- hand: s92 haqj76 dkj cak94
+  dealer: s
+  auction:
+    - s: 1h
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [2c, 2nt, 3c]
+      explain: |
+        The bidding starts 1♥ - 1♠. A jump to 2NT would show your 18 points, but showing your second suit with the simple (wide range) rebid of 2♣ describes your hand better. You are not strong enough to rebid 3♣, a ‘jump shift’. This would be forcing to game and you cannot justify such an action. Suppose partner holds ♠AQ85 and little else. Game is then very unlikely.
+      answer: 2c
+
+#3
+- hand: saj42 hq973 dk7 cqj5
+  dealer: s
+  auction:
+    - s: 1c
+    - w: p
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [1s, 1nt, 2h]
+      explain: |
+        You have a balanced hand but not enough points to open a 15-17 point 1NT. You open 1♣, intending to rebid 1NT if partner responds 1♦. When partner responds 1♥ instead, you have found an eight-card fit in a major suit and should raise to 2♥. This single raise shows that you are close to a minimum opening bid (around 12-14 points). There would be no purpose in bidding spades when you have already found a satisfactory trump fit.
+      answer: 2h
+
+#4
+- hand: sq3 haq54 daq986 c85
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [1nt, 2d, 2h]
+      explain: |
+        You open 1♦, partner responding 1♠. It would not be a mistake to rebid 1NT, showing a balanced hand in the 12-14 range. The low doubleton in clubs is a bit worrying, however, and it is better to rebid 2♦. You are not strong enough to rebid 2♥ because this would be a reverse, promising 17 points or more.
+      answer: 2d
+
+#5
+- hand: sa1072 h6 dakj853 ca4
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [1s, 2d, 3d]
+      explain: |
+        You open 1♦, partner responding 1♥. If you were going to rebid in diamonds, you would be worth 3♦ rather than 2♦. However, there is still a chance of finding a spade fit and you should therefore rebid 1♠. You are not nearly strong enough to rebid 2♠, which would be forcing to game. 1♠ is a ‘wide-range rebid’: you might have 12 points; you might have 18.
+      answer: 1s
+
+#6
+- hand: sakj76 haq104 dj8 ck6
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2d
+    - e: p
+    - s: "?"
+      choices: [2h, 3h, 3nt]
+      explain: |
+        The bidding starts 1♠ - 2♦. You should rebid 2♥. Rebidding in a new suit is forcing for one round when partner has responded at the two-level. (This makes good sense. If you had to rebid 3♥ to make sure that partner did not pass, the bidding would be quite high and he would not know whether you held four hearts or five.) You do not yet know whether it will be best to play in spades, hearts, diamonds or notrump. Nor do you know whether a slam is possible. Rebidding 3NT, consuming so much bidding space, would therefore be very unwise.
+      answer: 2h
+
+#7
+- hand: saqj762 haq2 d103 ca4
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2d
+    - e: p
+    - s: "?"
+      choices: [2s, 3s, 3nt]
+      explain: |
+        The bidding starts 1♠ - 2♦. Since you have a good six-card spade suit, you should rebid 3♠. This tells partner of the good suit and the extra high-card strength.
+      answer: 3s
+
+#8
+- hand: sa104 hkq4 dak10954 cq
+  dealer: s
+  auction:
+    - s: 1d
+    - w: p
+    - n: 1nt
+    - e: p
+    - s: "?"
+      choices: [2nt, 3d, 3nt]
+      explain: |
+        The bidding starts 1♦ - 1NT. With 18 HCP and a strong six-card diamond suit, you should be able to make 3NT even if partner holds a minimum 6 points. So… bid 3NT! A rebid of either 2NT or 3♦ would be a non-forcing game try and would risk missing an excellent game.
+      answer: 3nt
+
+#9
+- hand: s63 hak982 da8 caq107
+  dealer: s
+  auction:
+    - s: 1h
+    - w: p
+    - n: 2c
+    - e: p
+    - s: "?"
+      choices: [3c, 3h, 4c]
+      explain: |
+        The bidding starts 1♥ - 2♣. You have excellent support for clubs and therefore should agree that suit as trumps. A simple rebid of 3♣ would suggest a hand in the minimum 12-14 point range. Here you should jump to 4♣, to let your partner know that you have a strong hand and want the bidding to go to the game-level (at least).
+      answer: 4c
+
+#10
+- hand: saj762 hk103 da5 c1093
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2c
+    - e: p
+    - s: "?"
+      choices: [2s, 2nt, 3c]
+      explain: |
+        The bidding starts 1♠ - 2♣. You have already shown a spade suit of five cards or more, so it would not be right to bid that suit again. Partner may hold only four clubs, so it is not attractive to raise to 3♣. The best rebid is 2NT. This is not a jump, so it shows a balanced hand of 12-14 points. Since this is a limited bid, partner will be able to work out whether your side has enough for a game contract.
+      answer: 2nt
+
+#11
+- hand: sq104 hak103 d8 cakj72
+  dealer: s
+  auction:
+    - s: 1c
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [2c, 2h, 2s]
+      explain: |
+        The bidding starts 1♣ - 1♠. With 17 points, you’re strong enough for a reverse to 2♥. This is forcing for one round facing a one-level response. If partner bids spades again, showing five or more cards in the suit, you will have found a satisfactory trump suit and can raise to 4♠. A 2♣ rebid would show a fairly minimum hand and might result in a missed game. Raising spades immediately on three to an honor can be a good idea on a minimum opening bid. You do not have to do it here because you’re strong enough for a forcing 2♥.
+      answer: 2h
+
+#12
+- hand: skqj72 hk3 da1073 c98
+  dealer: s
+  auction:
+    - s: 1s
+    - w: p
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [p, 3d, 3s]
+      explain: |
+        The bidding starts 1♠ - 2♠. Partner has shown a fairly minimum response with at least three spades. Since your hand is close to a minimum, you should pass.
+      answer: p
+
+#13
+- hand: sk104 haj9764 da73 c2
+  dealer: s
+  auction:
+    - s: 1h
+    - w: p
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [p, 4h]
+      explain: |
+        The bidding starts 1♥ - 3♥. Partner has shown four-card heart support and around 10-12 points, including support points. You should raise to game without thinking twice about it! Although you have only 12 points in high cards, you are entitled to count extra when partner has supported your suit.
+      answer: 4h
+
+#14
+- hand: sk6 haj92 d8 cak9853
+  dealer: s
+  auction:
+    - s: 1c
+    - w: p
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [2h, 3h, 4h]
+      explain: |
+        You open 1♣ and partner responds 1♥. You have a splendid hand in support of hearts. Although you have only 15 HCP, you can add one support point for the doubleton spade and three more for the singleton diamond. Your hand is therefore worth 19 points and you should raise to 4♥.
+      answer: 4h
+
+#15
+- hand: sakj3 h5 dq5 cakq872
+  dealer: s
+  auction:
+    - s: 1c
+    - w: p
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1s, 2s, 3c]
+      explain: |
+        The bidding starts 1♣ - 1♦. With 19 HCP and fabulous clubs, this is one of those rare hands that justify a forcing-to-game jump rebid in a new suit. Give partner the good news by rebidding 2♠. Although 1♠ would be a wide-range rebid, it would not do justice to your hand. A rebid of 3♣ suffers from two faults: it is non-forcing and does not show your second suit.
+      answer: 2s
+

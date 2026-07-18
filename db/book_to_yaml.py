@@ -21,10 +21,15 @@ Input format (one file = one quiz):
 
     @quiz: <quiz title>            # no slug — that comes from the filename
 
-    16. - - 1c x p 1s p ?         # the auction (see below)
-    ♠ A 7 ♥ A Q 7 6 ♦ A K J 6 5 ♣ 6 3
-    (a) Pass  (b) 2♣  (c) 2♦  (d) 3♦
-    …explanation… Answer: (c) 2♦.
+    1. s 1d - 1h - ?              # the auction (see below)
+    ♠ A J 6 ♥ 8 ♦ A J 8 7 3 ♣ K 10 7 6
+    # You open 1♦ and partner responds 1♥. What will you rebid?   (optional; ignored)
+    (a) 1NT  (b) 2♣  (c) 2♦
+    …explanation… Answer: (b) 2♣.
+
+Any line starting with `#` is a comment and is skipped — handy for leaving the
+book's plain-text auction/question in place after paste (as a transcription
+cross-check) instead of deleting it.
 
 **Auction line** (after `N.`): `<dealer> <call> <call> …`.
   - The first token is the DEALER's seat (`n`/`e`/`s`/`w`).
@@ -208,7 +213,10 @@ def main():
     problems, errors = [], []
     expected = 0
     for block in blocks[1:]:
-        lines = [ln for ln in block.splitlines() if ln.strip()]
+        # `#` lines are comments — the book's plain-text auction / question, left
+        # in after paste as a transcription cross-check. Ignore them here.
+        lines = [ln for ln in block.splitlines()
+                 if ln.strip() and not ln.lstrip().startswith("#")]
         if not lines:
             continue
         m = NUM_RE.match(lines[0])
