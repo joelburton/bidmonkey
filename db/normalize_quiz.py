@@ -684,7 +684,9 @@ def normalize_source_dir(dirpath, schema_check=True):
 
     files = sorted(f for f in os.listdir(dirpath)
                    if f.endswith(".yaml") and f != "index.yaml")
-    source = {"slug": source_slug, "title": source_title}
+    # Optional `cover_url:` in index.yaml -> the sources.cover_url column.
+    source = {"slug": source_slug, "title": source_title,
+              "cover_url": index.get("cover_url")}
     quizzes, problems, links, echoes, errors = [], [], [], [], []
     for fname in files:
         stem = fname[:-len(".yaml")]

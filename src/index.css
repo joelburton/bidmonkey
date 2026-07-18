@@ -266,6 +266,17 @@ body {
   line-height: 1;
 }
 
+/* Book cover thumbnail at the left of a source card (~2:3 book ratio). A soft
+   shadow lifts it off the card without a faint grey border. */
+.source-cover {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 66px;
+  object-fit: cover;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
 /* A quiz row: title + meta over two start buttons (In Order / Random). */
 .quiz-row {
   display: flex;

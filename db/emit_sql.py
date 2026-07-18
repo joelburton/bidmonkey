@@ -10,7 +10,7 @@ Every insert is `on conflict … do update`, so fixing the source and re-running
 just updates the rows (better for DB-authored content than plain inserts). Rows
 are plain dicts:
 
-    sources:  {slug, title}
+    sources:  {slug, title, cover_url?}
     quizzes:  {slug, title, source}
     problems: {slug, title, source, difficulty, tags, hero, dealer,
                vulnerability, deal, auction, play, contract, commentary}
@@ -60,8 +60,9 @@ def emit_sql(sources, quizzes, problems, links):
     out.append("\n-- sources")
     for s in sources:
         out.append(
-            f"insert into sources (slug, title) values ({sql_str(s['slug'])}, {sql_str(s['title'])})\n"
-            f"  on conflict (slug) do update set title = excluded.title;")
+            f"insert into sources (slug, title, cover_url) values "
+            f"({sql_str(s['slug'])}, {sql_str(s['title'])}, {sql_str(s.get('cover_url'))})\n"
+            f"  on conflict (slug) do update set title = excluded.title, cover_url = excluded.cover_url;")
 
     out.append("\n-- quizzes")
     for q in quizzes:

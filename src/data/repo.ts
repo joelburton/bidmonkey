@@ -36,12 +36,24 @@ interface ProblemRow {
   commentary: string | null
 }
 
+interface SourceRow {
+  slug: string
+  title: string
+  cover_url: string | null
+}
+
 interface QuizRow {
   slug: string
   title: string
   source: string | null
   quizzes_problems: { problem_slug: string; ordinal: number }[] | null
 }
+
+const mapSource = (r: SourceRow): Source => ({
+  slug: r.slug,
+  title: r.title,
+  coverUrl: r.cover_url ?? undefined,
+})
 
 const mapProblem = (r: ProblemRow): Problem => ({
   slug: r.slug,
@@ -71,9 +83,9 @@ const mapQuiz = (r: QuizRow): Quiz => ({
 /** Load the whole catalogue in one shot (it's tiny). Throws on network/RLS errors. */
 export async function fetchCatalog(): Promise<Catalog> {
   const [sources, problems, quizzes] = await Promise.all([
-    sbSelect<Source[]>('sources?select=slug,title&order=slug'),
+    sbSelect<SourceRow[]>('sources?select=slug,title,cover_url&order=slug'),
     sbSelect<ProblemRow[]>('problems?select=*&order=slug'),
     sbSelect<QuizRow[]>('quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=slug'),
   ])
-  return { sources, problems: problems.map(mapProblem), quizzes: quizzes.map(mapQuiz) }
+  return { sources: sources.map(mapSource), problems: problems.map(mapProblem), quizzes: quizzes.map(mapQuiz) }
 }

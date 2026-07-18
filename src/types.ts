@@ -71,6 +71,8 @@ export interface Problem {
 export interface Source {
   slug: string
   title: string
+  /** Optional cover image URL (e.g. a book cover), shown in the sources list. */
+  coverUrl?: string
 }
 
 /**

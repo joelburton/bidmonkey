@@ -13,6 +13,9 @@ export function SourceList({
       {sources.map((src) => (
         <li key={src.slug}>
           <button className="problem-row" onClick={() => onSelect(src.slug)}>
+            {src.coverUrl && (
+              <img className="source-cover" src={src.coverUrl} alt="" loading="lazy" />
+            )}
             <div className="problem-row-main">
               <span className="problem-title">{src.title}</span>
             </div>
