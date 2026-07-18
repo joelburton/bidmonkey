@@ -1,0 +1,204 @@
+quiz: BQ Takeout Doubles and Responses
+problems:
+
+#1
+- hand: saq982 hq5 dk105 cq93
+  dealer: e
+  auction:
+    - e: 1s
+    - s: "?"
+      choices: [p, x, 1nt]
+      explain: |
+        Your RHO opens 1♠. A double would be for takeout and partner’s most likely response would be 2♥, where you have no support. You are not strong enough for a 1NT overcall, which would show 15-18 HCP. You should pass.
+      answer: p
+
+#2
+- hand: sak92 haj1076 dj63 c6
+  dealer: w
+  auction:
+    - w: 1c
+    - n: p
+    - e: 1d
+    - s: "?"
+      choices: [p, x, 1h]
+      explain: |
+        The bidding starts (1♣) - Pass - (1♦) to you. You have enough to contest the auction. With support for both the unbid suits, it is best to double. If partner holds the same length in both majors, he will respond 1♥ (the cheaper suit) and you will be in your best fit. It would not be so good to overcall 1♥, guessing that this is the best trump suit. Partner might hold only one heart and four or five spades.
+      answer: x
+
+#3
+- hand: s62 haq1073 dk1095 ca2
+  dealer: w
+  auction:
+    - w: 1h
+    - n: p
+    - e: 2h
+    - s: "?"
+      choices: [p, x, 3d]
+      explain: |
+        The auction goes (1♥) - Pass - (2♥) to you. You cannot contemplate a double because it would be for takeout. Your partner would almost certainly respond in one of the black suits, where you hold no support. Not only would you probably end in a silly contract, you would have let the opponents off the hook. They are heading for an awful heart break and will not relish playing their final contract, whatever it should be. Of course, 3♦ on a four-card suit is obviously wrong.
+      answer: p
+
+#4
+- hand: sa9 haj53 d10963 c642
+  dealer: w
+  auction:
+    - w: 1d
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [p, 1h, 2h]
+      explain: |
+        Your LHO opens 1♦ and partner doubles for takeout. The next player passes and you now have two duties: to choose a trump suit (or notrump) and to give an idea of your strength. Here you want to suggest hearts as trumps. Should you respond 1♥ or 2♥? You would have to bid 1♥ on this shape even if you held only 1 or 2 points. You should respond 2♥, telling partner that you hold around 9-11 points.
+      answer: 2h
+
+#5
+- hand: s9 hakj4 daq763 ck42
+  dealer: w
+  auction:
+    - w: 1s
+    - n: p
+    - e: 3s
+    - s: "?"
+      choices: [p, x, 4d, 4h]
+      explain: |
+        The bidding is (1♠) - Pass - (3♠) to you. With this number of points and support for all three unbid suits, you have enough for a takeout double. Overcalling 4♦ would not be a good bid. Partner might have no diamond support at all, so it is better to ask him to choose a suit.
+      answer: x
+
+#6
+- hand: s9842 hq52 d1073 cj92
+  dealer: w
+  auction:
+    - w: 1s
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [p, 1nt, 2c, 2h]
+      explain: |
+        The bidding starts (1♠) - dbl - (pass). That’s awkward! You have no unbid suit containing four cards or more. Responding 1NT would be poor: you do not have a stopper in spades, and you are well short of 6-9 HCP that such a response requires. Just look for the lowest bid possible. Here you respond 2♣ and hope for the best. It’s not your fault that you were dealt such a poor hand!
+      answer: 2c
+
+#7
+- hand: sq752 haq94 da105 cj6
+  dealer: w
+  auction:
+    - w: 1d
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [2d, 2h, 3nt, 4h]
+      explain: |
+        The bidding starts (1♦) - dbl - (pass). You are strong enough to insist on game, but which game? A response of 2♥ would not do your hand justice: it would suggest only 9-11 points and be non-forcing. If you bid 3NT, 4♥ or 4♠, you are trying to guess the best game. The right option, by a mile, is a cuebid of 2♦. If partner bids 2♥ or 2♠, you can then raise to game in that suit. In the unlikely event that he has no four-card major, you will play in 3NT.
+      answer: 2d
+
+#8
+- hand: saq873 hk5 dk94 c976
+  dealer: w
+  auction:
+    - w: 1c
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [1s, 2c, 2s, 4s]
+      explain: |
+        The bidding starts (1♣) - dbl (by partner) - (pass). You are happy to make spades trumps, so you must judge how many spades to bid. 1♠ would be a bad underbid; you would have to bid 1♠ on some hands with no points at all. 2♠ would also be an underbid, showing around 9-11 points. With five cards in a major suit, where you expect partner to hold support, you are worth closer to 14 points than 12 points. You should go all the way to 4♠.
+      answer: 4s
+
+#9
+- hand: sk6 h984 daq65 cj983
+  dealer: w
+  auction:
+    - w: 1d
+    - n: x
+    - e: p
+    - s: "?"
+      choices: [p, 1nt, 2c, 3c]
+      explain: |
+        The bidding starts (1♦) - dbl - (pass). If you were going to respond in clubs, you would bid 3♣ (9-11 points) rather than 2♣ (0-7 points). However, with your double stopper in diamonds it is much better to respond 1NT. If your partner has a good hand it is much more likely that the possible game will be 3NT than 5♣.
+      answer: 1nt
+
+#10
+- hand: sak108 ha97 d73 caq103
+  dealer: e
+  auction:
+    - e: 1d
+    - s: x
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [p, 1nt, 2s, 3s]
+      explain: |
+        The bidding starts (1♦) - dbl (by you) - (pass) - 1♠ - (pass). Although partner has denied the values for 2♠, you might still make game. You are worth a raise to 2♠. If partner has around 6-7 points, he may advance towards 4♠. For example, game would be good opposite: ♠Q975 ♥J4 ♦1086 ♣KJ64.
+      answer: 2s
+
+#11
+- hand: skj82 h6 d875 caq1072
+  dealer: w
+  auction:
+    - w: 1d
+    - n: x
+    - e: 3d
+    - s: "?"
+      choices: [3s, 4c, 4d, 4s, 5c]
+      explain: |
+        The bidding starts (1♦) - dbl - (3♦). You have enough to attempt a game in one of the black suits. How can you choose between 4♠ and 5♣? If you bid either black suit, you are simply guessing. Instead you should show your strength with 4♦. Partner will bid his cheapest suit. If he bids 4♠, you have found a fit. If instead he bids 4♥, you will bid 4♠. With five spades you would have been willing to bid 4♠ straight away. So, partner can infer that you have four spades and probably five clubs.
+      answer: 4d
+
+#12
+- hand: saj54 hkq107 dj2 ca106
+  dealer: w
+  auction:
+    - w: 1d
+    - n: p
+    - e: 1nt
+    - s: "?"
+      choices: [p, x, 2h, 2s]
+      explain: |
+        The bidding starts (1♦) - pass - (1NT). If you chose to bid 2♥ or 2♠ now, you would be showing at least a five-card suit. You are strong enough to contest the auction and it is quite likely that partner will have length in one of the unbid suits. You should make a takeout double. Everyone treats a double in this auction as a takeout double of diamonds. You are prepared for any response that your partner might make.
+      answer: x
+
+#13
+- hand: sa86 haq76 d9 ckj752
+  dealer: e
+  auction:
+    - e: 1d
+    - s: x
+    - w: p
+    - n: 2h
+    - e: p
+    - s: "?"
+      choices: [p, 3h, 4h]
+      explain: |
+        Your RHO opens 1♦. You double and partner responds 2♥. This suggests 9-11 points and is non-forcing. You have a bit to spare and do have four-card heart support. You are worth a game try of 3♥ but no more.
+      answer: 3h
+
+#14
+- hand: sa7 haq76 dakj65 c63
+  dealer: e
+  auction:
+    - e: 1c
+    - s: x
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [p, 2c, 2d, 3d]
+      explain: |
+        The bidding starts (1♣) - dbl (by you) - (pass) - 1♠ - (pass). Judging that your hand is too strong for a 1♦ overcall, you begin with a double. Partner responds 1♠ and the opponents are silent. You should bid 2♦ now. By changing the suit after a takeout double you show a powerful hand (18+ HCP). Remember that partner was forced to bid and might have no values at all.
+      answer: 2d
+
+#15
+- hand: sak108 ha97 dk103 caj7
+  dealer: e
+  auction:
+    - e: 1c
+    - s: x
+    - w: p
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [p, 1s, 1nt, 2c, 2h]
+      explain: |
+        Your RHO opens 1♣. You are too strong to overcall 1NT so you begin with a takeout double. Your partner responds 1♥, with the opponents not bidding again. You can show your strength by bidding 1NT now. An original 1NT overcall would have shown around 15-18 HCP, and with 13-14 HCP you would pass partner’s 1♥ bid, so 1NT after an initial double suggests 19-21 HCP.
+      answer: 1nt
+
