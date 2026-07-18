@@ -151,10 +151,10 @@ def parse_problem(lines, num):
     hand = parse_hand(lines[1])
 
     opts = OPTION_RE.findall(lines[2])
-    if not (2 <= len(opts) <= 4):
-        raise ProblemError(f"#{num}: expected 2-4 choices, got {len(opts)}")
+    if not (2 <= len(opts) <= 6):        # the app keys options a-f (OPT_LETTERS)
+        raise ProblemError(f"#{num}: expected 2-6 choices, got {len(opts)}")
     letters = [ltr for ltr, _ in opts]
-    if letters != list("abcd"[:len(opts)]):
+    if letters != list("abcdef"[:len(opts)]):
         raise ProblemError(f"#{num}: choices not labelled a,b,c…: {letters}")
     by_letter = {ltr: to_call(val) for ltr, val in opts}
     choices = [by_letter[ltr] for ltr in letters]

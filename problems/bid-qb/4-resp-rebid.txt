@@ -1,0 +1,92 @@
+@quiz: BQ Responder's Rebid
+
+1. n 1d - 1h - 1nt - ?
+♠ A 9 4 ♥ K Q 7 6 ♦ J 8 2 ♣ 10 5 3
+# The bidding starts 1♦ - 1♥; 1NT. What will you say now as responder?
+(a) Pass    (b) 2♦    (c) 2NT
+The bidding starts 1♦ - 1♥; 1NT. With only 10 points opposite 12-14, you are not strong enough to try for game. (With two balanced hands, you need a combined 25 points for 3NT.) You should pass. Answer: (a) Pass.
+
+2. n 1d - 1s - 2nt - ?
+♠ K 8 7 6 3 ♥ J 10 5 ♦ Q 3 ♣ J 9 8
+# The bidding starts 1♦ - 1♠; 2NT. What will you say now as responder?
+(a) Pass    (b) 3♠    (c) 3NT
+The bidding starts 1♦ - 1♠; 2NT. Partner has shown a balanced hand containing 18-19 points. Add your 7 points and you have enough for game. You should raise to 3NT. There is not much point in bidding the spades again, just in case you have a 5-3 fit there. If partner holds three spades, you should be able to make four or five spade tricks in 3NT. Answer: (c) 3NT.
+
+3. n 1s - 2c - 2nt - ?
+♠ 7 4 ♥ J 9 8 2 ♦ K 3 ♣ A Q 10 5 2
+# The bidding starts 1♠ - 2♣; 2NT. What will you bid now?
+(a) Pass    (b) 3♥    (c) 3NT
+The bidding starts 1♠ - 2♣; 2NT. Partner has shown 12-14 points, so you cannot raise to game on just 10 points. You might have only 22 points between you! You should pass. Suppose you held ♥K982 instead. The combined point-count would then be 24-26 and you would raise to 3NT. Answer: (a) Pass.
+
+4. n  1c - 1s - 2c - ?
+♠ A K 10 8 7 2 ♥ K 10 8 ♦ 10 6 ♣ 5 4
+# The bidding starts 1♣ - 1♠; 2♣. What will you bid next, as responder?
+(a) 2♠    (b) 3♠    (c) 4♠
+After a start of 1♣ - 1♠; 2♣, you must consider your next move. You are too strong for 2♠, which would be a sign-off. With about 11 points and a good six-card suit, your hand is just right for 3♠. Going all the way to game would be a stretch, particularly as partner might hold only one spade or none at all. Answer: (b) 3♠.
+
+5. n 1c - 3c - 3d - ?
+♠ 8 2 ♥ A Q 6 ♦ J 8 4 ♣ K 10 7 5 3
+# The bidding starts 1♣ - 3♣; 3♦. What will you say next?
+(a) 3♥    (b) 3NT    (c) 4♣    (d) 5♣
+After a start of 1♣ - 3♣ your partner rebids 3♦. What does this mean? You have already found a club fit, so he cannot be suggesting diamonds as trumps. He is showing you a diamond stopper (perhaps ♦AK7) in the hope that a final contract of 3NT may be possible. Since he did not bid 3NT himself, he probably has no stopper in one of the major suits and is hoping that you can help. You should rebid 3♥ to announce that you have a heart stopper. He may then be happy to bid 3NT. You can see how much better this sort of bidding is than simply bidding 3NT in the hope that every suit is stopped. Answer: (a) 3♥.
+
+6. n 1d - 1h - 2h - ?
+♠ 9 4 2 ♥ K J 7 6 ♦ 8 7 3 ♣ A Q 6
+# The bidding starts 1♦ - 1♥; 2♥. What will you say now as responder?
+(a) Pass    (b) 2NT    (c) 3♥
+The bidding starts 1♦ - 1♥; 2♥. Partner has shows a minimum hand of around 12-14 points. With 10 points and 4-3-3-3 shape, you are not quite strong enough to make a game try and should pass. Answer: (a) Pass.
+
+7. n 1c - 1h - 3h - ?
+♠ J 8 7 4 ♥ Q 9 8 2 ♦ K 3 2 ♣ 10 5
+# The bidding starts 1♣ - 1♥; 3♥. What will you say now as responder?
+(a) Pass   (b) 3NT   (c) 4♥
+The bidding starts 1♣ - 1♥; 3♥. Partner has shown better than a minimum, but not enough for game. He will have 16-18 points (perhaps including some ‘support points’). Your hand represents a minimum response. You have nothing extra for your bidding so far and should pass. Answer: (a) Pass.
+
+8. n 1s - 2c - 3c - ?
+♠ 6 2 ♥ K 5 2 ♦ Q 10 4 ♣ A K J 6 4
+# The bidding starts 1♠ - 2♣; 3♣. What will you bid now?
+(a) 3♦   (b) 3NT    (c) 4♣    (d) 5♣
+The bidding starts 1♠ - 2♣; 3♣. Partner has shown around 12-14 points and you are strong enough to head for game. When you have a fit in a minor suit, it is usually right to play in 3NT rather than five of a minor. You will then need to score only nine tricks instead of eleven. Here you have stoppers in both the red suits and therefore an easy rebid of 3NT. Answer: (b) 3NT.
+
+9. n 1c - 1s - 4s - ?
+♠ A K 8 3 2 ♥ A 10 3 ♦ K 6 4 ♣ 5 4
+# The bidding starts 1♣ - 1♠; 4♠. What will you bid next, as responder?
+(a) Pass    (b) 4NT    (c) 5♠    (d) 6♠
+After a start of 1♣ - 1♠; 4♠, it would be a huge mistake to pass. By raising all the way to game when you might have held just 6 points, partner has shown a great hand (19 or 20 points). You can surely make a slam and should ‘ask for aces’ with 4NT (we will look at the Blackwood 4NT bid in Chapter 13). Answer: (b) 4NT.
+
+10. n 1d - 3d - 3s - ?
+♠ 9 8 4 ♥ A Q 6 ♦ A J 8 4 ♣ 8 7 5
+# The bidding starts 1♦ - 3♦; 3♠. What will you say next?
+(a) 3NT    (b) 4♦    (c) 5♦
+What does partner’s 3♠ mean in the sequence 1♦ - 3♦; 3♠? It is a stopper bid. He is hoping for a 3NT contract but cannot bid it himself because he has no stopper in hearts. (Doubtless he has a club stopper or it’s unlikely that he would be heading for game.) Since you hold a healthy ♥AQ6, you are happy to bid 3NT.
+Answer: (a) 3NT.
+
+11. n 1d - 1s - 2c - ?
+♠ K Q 6 4 ♥ K J 3 ♦ Q 8 2 ♣ 10 9 5
+# The bidding starts 1♦ - 1♠; 2♣. As responder, what is your next bid?
+(a) 2♦    (b) 2NT    (c) 3♦    (d) 3NT
+The bidding starts 1♦ - 1♠; 2♣. It’s your task to make the first limit bid. Bidding 2♦ would not be enough with 11 points. A jump to 3♦ would be a better description but the most constructive rebid is 2NT, suggesting 11-12 HCP and a stopper in hearts, the unbid suit. This is a non-forcing limit bid. Partner is entitled to pass with nothing to spare for the opening bid. Answer: (b) 2NT.
+
+12. n 1h - 1s - 2d - ?
+♠ Q J 7 6 ♥ Q 9 2 ♦ K 10 8 4 ♣ K 5
+# The bidding starts 1♥ - 1♠; 2♦. As responder, what is your next bid?
+(a) 2NT   (b) 3♦    (c) 3♥    (d) 4♥
+The bidding starts 1♥ - 1♠; 2♦. You are too strong to sign off and not strong enough to insist on game. You should make a game try, leaving the final decision to your partner. You have good support for both hearts and diamonds, but you should bid 3♥, showing your fit in the major. Eleven tricks is a tough target, so bidding game in a minor suit is something you should seek to avoid. Answer: (c) 3♥.
+
+13. n 1s - 2d - 2h - ?
+♠ 8 3 2 ♥ A 6 4 ♦ A Q 10 9 7 ♣ 10 2
+# The bidding starts 1♠ - 2♦; 2♥. What is your next action?
+(a) Pass    (b) 2♠    (c) 3♦    (d) 3♥
+The bidding starts 1♠ - 2♦; 2♥. You have three-card support for partner’s spades, so you need to show it now. However, to show that you have only minimum values for responding at the two-level, you should bid just 2♠ at your second turn. Jumping to 3♠ would show a game-forcing hand. Answer: (b) 2♠.
+
+14. n 1d - 1s - 2c - ?
+♠ A 10 9 7 6 ♥ K J 7 3 ♦ 8 5 ♣ 10 9
+# The bidding starts 1♦ - 1♠; 2♣. What now?
+(a) Pass   (b) 2♦   (c) 2♥   (d) 2♠   (e) 2NT
+The start is 1♦ - 1♠; 2♣. You have a good stopper in hearts but 8 points is not enough to justify a game try of 2NT. Your spades are not strong enough for 2♠; partner might well hold only one spade. On hands such as this, you display your lack of ambition by giving preference to 2♦. Partner probably holds five diamonds and four clubs, so it would be a poor idea to pass instead of bidding 2♦. Bidding 2♥ would be game-forcing (see Chapter 12). Answer: (b) 2♦.
+
+15. n 1h - 2c - 2s - ?
+♠ 7 2 ♥ A 8 2 ♦ K J 4 ♣ A 10 8 7 2
+# The bidding starts 1♥ - 2♣; 2♠. How will you continue?
+(a) 2NT   (b) 3♥    (c) 3NT   (d) 4♥
+Partner shows extra values with a reverse: 1♥ - 2♣; 2♠. This is forcing to game facing a two-level response. (The points will be 17 opposite 10 at least, so this makes good sense.) With three-card support for partner’s longer major, you should not think of bidding notrump. You should bid 3♥. Remember that the bidding must go to the game-level at least. By bidding 3♥ instead of the space-consuming 4♥, you allow partner the chance to investigate a possible slam. Answer: (b) 3♥.
