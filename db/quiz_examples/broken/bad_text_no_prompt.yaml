@@ -1,0 +1,11 @@
+# A text_choices question needs a prompt.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: skqj9873 h5 dq94 c82
+  dealer: S
+  auction:
+  - s: "?"
+    text_choices: ["Any", "Only non-vulnerable"]
+    answer: "Any"

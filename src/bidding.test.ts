@@ -63,13 +63,57 @@ const twoQ: Problem = {
   auction: [
     { call: '1H' },
     { call: 'P' },
-    { question: { id: 'q1', choiceType: 'multiple_choice', answer: '1S', options: ['1S', '1NT'] } },
+    { question: { id: 'q1', answerKind: 'bid', choiceType: 'multiple_choice', answer: '1S', options: ['1S', '1NT'] } },
     { call: 'P' },
     { call: '2C' },
     { call: 'P' },
-    { question: { id: 'q2', choiceType: 'multiple_choice', answer: '2NT', options: ['2NT', '3C'] } },
+    { question: { id: 'q2', answerKind: 'bid', choiceType: 'multiple_choice', answer: '2NT', options: ['2NT', '3C'] } },
   ],
 }
+
+// A terminal 'text' question (answerKind 'text') rides the auction but does NOT
+// continue it: its answer is a phrase, not a call.
+const textQ: Problem = {
+  slug: 'pt',
+  tags: [],
+  hero: 'S',
+  dealer: 'S',
+  vulnerability: null,
+  deal: {},
+  auction: [
+    {
+      question: {
+        id: 'q1',
+        answerKind: 'text',
+        choiceType: 'multiple_choice',
+        prompt: 'At what vulnerability?',
+        answer: 'Only non-vulnerable',
+        options: ['Any vulnerability', 'Only non-vulnerable'],
+      },
+    },
+  ],
+}
+
+describe('buildAuction (terminal text question)', () => {
+  it('poses the text question at the hero, then completes without a phantom call', () => {
+    expect(auctionQuestionCount(textQ)).toBe(1)
+
+    const m0 = buildAuction(textQ, [])
+    expect(m0.complete).toBe(false)
+    expect(m0.actingSeat).toBe('S')
+    expect(m0.question?.answerKind).toBe('text')
+
+    // Answered: the auction is complete, and the text answer added no call.
+    const m1 = buildAuction(textQ, ['Only non-vulnerable'])
+    expect(m1.complete).toBe(true)
+    expect(m1.actingSeat).toBeNull()
+    expect(m1.question).toBeNull()
+    expect(m1.priorCalls).toEqual([])
+  })
+  it('finalContract ignores the text answer (no contract)', () => {
+    expect(finalContract(textQ, ['Only non-vulnerable'])).toBeNull()
+  })
+})
 
 describe('buildAuction (multi-question)', () => {
   it('counts questions', () => {

@@ -30,6 +30,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Partner opened 1H and reversed into 2D. Your call?',
           options: ['2NT', '3D', '3H', '4H'],
@@ -65,6 +66,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Partner opened 1S. Your call?',
           options: ['2S', '3S', '4S', '2NT'],
@@ -97,6 +99,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Partner opened 1D. Your call?',
           options: ['1NT', '2NT', '3NT', '2C'],
@@ -141,6 +144,7 @@ export const problems: Problem[] = [
             seat: 'S',
             question: {
               id: 'p1',
+              answerKind: 'card',
               choiceType: 'multiple_choice',
               prompt: 'Choose your opening lead.',
               answer: 'HQ',
@@ -198,7 +202,8 @@ export const problems: Problem[] = [
             seat: 'S',
             question: {
               id: 'p1',
-              choiceType: 'enter_card',
+              answerKind: 'card',
+              choiceType: 'free',
               answer: 'HQ',
               accept: ['HJ'], // ♥J is accepted, but the canonical ♥Q is what lands
               explanation:
@@ -217,7 +222,8 @@ export const problems: Problem[] = [
             seat: 'S',
             question: {
               id: 'p2',
-              choiceType: 'enter_card',
+              answerKind: 'card',
+              choiceType: 'free',
               answer: 'S5',
               explanation: 'Follow suit — nothing to gain by splitting. Answer: ♠5.',
             },
@@ -250,6 +256,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q1',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Partner opened 1♥. Your response?',
           options: ['1S', '1NT', '2D', '2H'],
@@ -263,6 +270,7 @@ export const problems: Problem[] = [
       {
         question: {
           id: 'q2',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Partner rebid 2♣. Your call?',
           options: ['2D', '2NT', '3C', '2H'],
@@ -272,5 +280,39 @@ export const problems: Problem[] = [
         },
       },
     ],
+  },
+
+  {
+    slug: 'preempt-which-vulnerability',
+    title: 'At what vulnerability?',
+    source: 'fakebook',
+    difficulty: 2,
+    tags: ['preempt', 'vulnerability', 'free-form'],
+    hero: 'S',
+    dealer: 'S',
+    // The solution applies at a specific vulnerability, not to any — but this
+    // problem *asks about* vulnerability, so the deal states none of its own.
+    vulnerability: null,
+    // Only your hand is shown; the question is a free-form multiple choice whose
+    // answer is neither a call nor a card (answerKind 'text'). It rides the
+    // auction as a terminal, non-continuing question.
+    deal: {
+      S: { S: 'KQJ9873', H: '5', D: 'Q94', C: '82' },
+    },
+    auction: [
+      {
+        question: {
+          id: 'q1',
+          answerKind: 'text',
+          choiceType: 'multiple_choice',
+          prompt: 'You could open a preemptive 4♠. At what vulnerability would you do this?',
+          options: ['Any vulnerability', 'Only non-vulnerable', 'Only vulnerable'],
+          answer: 'Only non-vulnerable',
+          explanation:
+            'A seven-card suit with almost no defense is a textbook 4♠ preempt when NOT vulnerable — the risk of a large penalty is worth the pressure it puts on the opponents. Vulnerable, the downside is too steep. Answer: Only non-vulnerable.',
+        },
+      },
+    ],
+    commentary: 'Free-form multiple choice: the answer is a phrase, not a bid.',
   },
 ]

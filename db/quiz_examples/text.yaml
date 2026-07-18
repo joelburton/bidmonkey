@@ -1,0 +1,15 @@
+# A free-form (text) auction question: the answer is a phrase, not a call, so it
+# uses `text_choices` + `prompt` and rides the auction as a terminal step.
+source: Text Source [tx]
+quiz: Text Quiz [tx-q]
+titles: "Text #"
+problems:
+- hand: skqj9873 h5 dq94 c82
+  dealer: S
+  auction:
+  - s: "?"
+    prompt: "You could open a preemptive 4S. At what vulnerability would you do this?"
+    text_choices: ["Any vulnerability", "Only non-vulnerable", "Only vulnerable"]
+    answer: "Only non-vulnerable"
+    accept: ["Only vulnerable"]
+    explain: "A seven-card suit with little defense is a classic non-vulnerable 4S preempt."

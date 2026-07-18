@@ -53,7 +53,7 @@ describe('flattenPlay', () => {
     const moves = flattenPlay([
       {
         cards: [
-          { seat: 'S', question: { id: 'p1', choiceType: 'multiple_choice', answer: 'HQ' } },
+          { seat: 'S', question: { id: 'p1', answerKind: 'card', choiceType: 'multiple_choice', answer: 'HQ' } },
           { seat: 'W', card: 'H4' },
         ],
       },

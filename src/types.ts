@@ -10,9 +10,21 @@ export type Holding = string
 export type Hand = Partial<Record<Suit, Holding>>
 export type Deal = Partial<Record<Seat, Hand>>
 
+// A question's answer domain (how `answer`/`options`/`accept` are read and
+// rendered) and its input mode are orthogonal:
+//   answerKind — 'bid' | 'card' | 'text'  (what the strings mean)
+//   choiceType — 'multiple_choice' | 'free'  ('free' = bid pad / card click)
+// 'text' is a free-form multiple-choice question whose answer is neither a call
+// nor a card (e.g. "at what vulnerability?"); it is always 'multiple_choice'.
+export type AnswerKind = 'bid' | 'card' | 'text'
+export type ChoiceType = 'multiple_choice' | 'free'
+
 export interface BidQuestion {
   id: string
-  choiceType: 'multiple_choice' | 'enter_bid'
+  // 'text' rides the auction as a terminal, non-continuing question — its answer
+  // is not a call, so it doesn't extend the auction (see buildAuction).
+  answerKind: 'bid' | 'text'
+  choiceType: ChoiceType
   prompt?: string
   answer: string
   options?: string[]
@@ -23,7 +35,8 @@ export type AuctionEntry = { call: string } | { question: BidQuestion }
 
 export interface CardQuestion {
   id: string
-  choiceType: 'multiple_choice' | 'enter_card'
+  answerKind: 'card'
+  choiceType: ChoiceType
   prompt?: string
   answer: string // a card, e.g. "HQ"
   options?: string[]

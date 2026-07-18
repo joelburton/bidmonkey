@@ -115,7 +115,7 @@ describe('accepted alternative answers continue with the canonical card', () => 
           cards: [
             {
               seat: 'S',
-              question: { id: 'q1', choiceType: 'enter_card', prompt: 'Your lead', answer: 'CQ', accept: ['C5'] },
+              question: { id: 'q1', answerKind: 'card', choiceType: 'free', prompt: 'Your lead', answer: 'CQ', accept: ['C5'] },
             },
           ],
         },

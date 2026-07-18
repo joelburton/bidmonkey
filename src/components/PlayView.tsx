@@ -42,7 +42,7 @@ const POS_RAISE: Record<Pos, Raise> = {
 const ARROW_ROT: Record<Pos, number> = { bottom: 0, top: 180, left: 90, right: -90 }
 
 /** An arrow next to a hand, pointing at it, shown when that seat is expected to
- * play a card (an enter-card question, or its turn in free play). */
+ * play a card (a free card question, or its turn in free play). */
 function PlayArrow({ pos }: { pos: Pos }) {
   return (
     <span className={`play-arrow play-arrow-${pos}`}>
@@ -229,8 +229,8 @@ export function PlayView({
   const toAct = seatToAct(leader, tableTrick)
 
   // A hand is clickable when it's that seat's turn in free play (and the trick
-  // isn't already full), or when it's the seat to act on an *enter_card*
-  // question. Multiple-choice questions are answered with the option buttons.
+  // isn't already full), or when it's the seat to act on a *free* card question.
+  // Multiple-choice questions are answered with the option buttons.
   const clickable = (seat: Seat) =>
     (allRevealed && tableTrick.length < 4 && seat === toAct) ||
     (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')

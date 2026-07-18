@@ -1006,6 +1006,31 @@ body {
   color: #ffe08a;
 }
 
+/* A free-form (text) multiple-choice question: the prompt above, and options
+   that are phrases rather than bids. One per row so a phrase isn't cramped; the
+   pill grows to fit and wraps, with the a/b/c letter kept clear on the left. */
+.mc-prompt {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #fff;
+}
+.opt-grid-text {
+  grid-template-columns: 1fr;
+}
+.opt-btn-text {
+  height: auto;
+  min-height: 2.3rem;
+  padding: 0.5rem 0.9rem 0.5rem 2.4rem;
+  justify-content: flex-start;
+  text-align: left;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: normal;
+  line-height: 1.25;
+}
+
 /* Contract shown as a button that opens the auction. */
 .contract-btn {
   display: inline-flex;

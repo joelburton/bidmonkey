@@ -46,7 +46,8 @@ def test_clean_p1_free_entry_and_ten():
     p = out["problems"][0]
     assert p["deal"] == {"S": {"S": "A65", "H": "KQ2", "D": "T53", "C": "AQJ9"}}
     q = p["auction"][0]["question"]
-    assert q["choiceType"] == "enter_bid"
+    assert q["answerKind"] == "bid"
+    assert q["choiceType"] == "free"
     assert q["answer"] == "1NT"
     assert q["accept"] == ["1C"]
     assert "options" not in q
@@ -77,7 +78,8 @@ def test_clean_p3_handsmap_allpass_contract_and_lead():
     lead = p["play"][0]["cards"][0]
     assert lead["seat"] == "S"
     assert lead["question"]["answer"] == "DK"       # `KD` -> D-K canonical
-    assert lead["question"]["choiceType"] == "enter_card"
+    assert lead["question"]["answerKind"] == "card"
+    assert lead["question"]["choiceType"] == "free"
 
 
 def test_clean_p4_one_skip_allowed():
@@ -85,7 +87,7 @@ def test_clean_p4_one_skip_allowed():
     p = out["problems"][3]
     # N opens, E (silent) filled with a pass, S answers
     assert p["auction"] == [{"call": "1C"}, {"call": "P"},
-                            {"question": {"id": "b1", "choiceType": "enter_bid",
+                            {"question": {"id": "b1", "answerKind": "bid", "choiceType": "free",
                                           "answer": "1H", "explanation": "Respond 1H."}}]
     assert echoes[3][1] == "N:1C E:P S:?(=1H)"
 
@@ -98,6 +100,24 @@ def test_no_auction_contract_only():
     assert p["auction"] == []
     assert p["contract"] == "4S E"
     assert p["play"][0]["cards"][0]["question"]["answer"] == "HK"
+
+
+def test_text_question():
+    # A free-form (text) auction question: terminal, non-continuing, answerKind
+    # 'text', options are phrases, and it adds no call to the auction.
+    out, errors, echoes = run("text.yaml")
+    assert errors == []
+    p = out["problems"][0]
+    assert len(p["auction"]) == 1
+    q = p["auction"][0]["question"]
+    assert q["answerKind"] == "text"
+    assert q["choiceType"] == "multiple_choice"
+    assert q["prompt"].startswith("You could open")
+    assert q["options"] == ["Any vulnerability", "Only non-vulnerable", "Only vulnerable"]
+    assert q["answer"] == "Only non-vulnerable"
+    assert q["accept"] == ["Only vulnerable"]
+    assert p["contract"] is None
+    assert echoes[0][1] == "S:?(text)"
 
 
 def test_contract_appends_closing_passes():
@@ -137,6 +157,10 @@ BROKEN = [
     ("broken/bad_vuln.yaml", "v/-"),
     ("broken/bad_contract.yaml", "3NT"),
     ("broken/bad_both_hand_and_hands.yaml", ""),   # oneOf; just require failure
+    ("broken/bad_text_not_last.yaml", "last auction step"),
+    ("broken/bad_text_no_prompt.yaml", "needs a `prompt`"),
+    ("broken/bad_text_both_choices.yaml", "not both"),
+    ("broken/bad_text_answer_not_in_choices.yaml", "not one of the text_choices"),
 ]
 
 

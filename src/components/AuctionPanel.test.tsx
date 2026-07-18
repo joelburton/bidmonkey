@@ -17,6 +17,7 @@ const problem: Problem = {
     {
       question: {
         id: 'q1',
+        answerKind: 'bid',
         choiceType: 'multiple_choice',
         prompt: 'Your call?',
         answer: '3H', // option b
@@ -99,6 +100,7 @@ describe('AuctionPanel accepted alternative answers', () => {
       {
         question: {
           id: 'q1',
+          answerKind: 'bid',
           choiceType: 'multiple_choice',
           prompt: 'Your call?',
           answer: '3H', // option b
@@ -166,5 +168,60 @@ describe('AuctionPanel answer popup dismissal', () => {
     fireEvent.pointerDown(popup, { clientX: 100, clientY: 100 })
     fireEvent.pointerUp(popup, { clientX: 101, clientY: 103 })
     expect(onAnswer).toHaveBeenCalledWith('3H')
+  })
+})
+
+describe('AuctionPanel free-form (text) question', () => {
+  const textProblem: Problem = {
+    slug: 'text-q',
+    tags: [],
+    hero: 'S',
+    dealer: 'S',
+    vulnerability: null,
+    deal: {},
+    auction: [
+      {
+        question: {
+          id: 'q1',
+          answerKind: 'text',
+          choiceType: 'multiple_choice',
+          prompt: 'At what vulnerability would you preempt 4♠?',
+          answer: 'Only non-vulnerable', // option b
+          options: ['Any vulnerability', 'Only non-vulnerable', 'Only vulnerable'],
+          explanation: 'Best when not vulnerable.',
+        },
+      },
+    ],
+  }
+
+  it('renders the prompt and phrase options, and grades the text answer', async () => {
+    const onAnswer = vi.fn()
+    render(
+      <AuctionPanel
+        problem={textProblem}
+        answers={[]}
+        onAnswer={onAnswer}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+      />,
+    )
+    const user = userEvent.setup()
+
+    // The prompt shows and the options are the literal phrases (not bids).
+    expect(screen.getByText('At what vulnerability would you preempt 4♠?')).toBeInTheDocument()
+    expect(screen.getByText('Any vulnerability')).toBeInTheDocument()
+
+    // Wrong phrase (a) → retry.
+    await user.keyboard('a')
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+
+    // Correct phrase (b) → advances with the text answer verbatim on dismiss.
+    await user.keyboard('b')
+    expect(screen.getByText('Correct!')).toBeInTheDocument()
+    await user.keyboard('{Escape}')
+    expect(onAnswer).toHaveBeenCalledWith('Only non-vulnerable')
   })
 })

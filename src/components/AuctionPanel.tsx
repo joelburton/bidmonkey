@@ -26,9 +26,11 @@ const preventFocus = (e: MouseEvent) => e.preventDefault()
 
 /**
  * Center during the auction. Controlled by ProblemView via `answers`/`onAnswer`.
- * Multiple-choice questions show a button per option; free (enter_bid) questions
- * show the bid pad. Every answer shows the explanation popup; dismissing a
- * correct answer advances the auction, a wrong one lets you retry.
+ * Multiple-choice questions show a button per option; free bid questions
+ * (choiceType 'free') show the bid pad. A 'text' question (answerKind 'text') is
+ * a free-form multiple-choice — options are plain words, not calls. Every answer
+ * shows the explanation popup; dismissing a correct answer advances the auction,
+ * a wrong one lets you retry.
  */
 export function AuctionPanel({
   problem,
@@ -50,6 +52,7 @@ export function AuctionPanel({
   const model = buildAuction(problem, answers)
   const q = model.question
   const isMC = !!(q && q.choiceType === 'multiple_choice' && q.options?.length)
+  const isText = q?.answerKind === 'text'
   const dbl = doubleState(model.prior, model.actingSeat)
 
   const [level, setLevel] = useState<number | null>(null)
@@ -59,11 +62,12 @@ export function AuctionPanel({
   const doSubmit = useCallback((call: string) => {
     const cur = ref.current.model.question
     if (!cur) return
-    // The player enters a plain bid; the answer may be alertable (e.g. "2D*").
-    // Match on the call ignoring the alert marker.
-    const entered = stripAlert(call)
-    const isCanonical = entered === stripAlert(cur.answer)
-    const isAccepted = cur.accept?.some((a) => stripAlert(a) === entered) ?? false
+    // Bid/card answers may be alertable ("2D*"), so match ignoring the alert
+    // marker; a text answer is graded as a trimmed exact string.
+    const norm = (s: string) => (cur.answerKind === 'text' ? s.trim() : stripAlert(s))
+    const entered = norm(call)
+    const isCanonical = entered === norm(cur.answer)
+    const isAccepted = cur.accept?.some((a) => norm(a) === entered) ?? false
     const correct = isCanonical || isAccepted
     // An accepted alternative is correct but not the canonical answer — flagged
     // so the popup reads "Alternate" (orange) rather than "Correct!" (green).
@@ -192,16 +196,17 @@ export function AuctionPanel({
         </div>
       ) : isMC ? (
         <div className="bidpad">
-          <div className="opt-grid">
+          {q!.prompt && <div className="mc-prompt">{q!.prompt}</div>}
+          <div className={`opt-grid${isText ? ' opt-grid-text' : ''}`}>
             {q!.options!.map((opt, i) => (
               <button
                 key={opt}
-                className="opt-btn"
+                className={`opt-btn${isText ? ' opt-btn-text' : ''}`}
                 onMouseDown={preventFocus}
                 onClick={() => doSubmit(opt)}
               >
                 <span className="opt-letter">{OPT_LETTERS[i]}</span>
-                <CallText call={opt} />
+                {isText ? opt : <CallText call={opt} />}
               </button>
             ))}
           </div>
@@ -275,7 +280,7 @@ export function AuctionPanel({
             </div>
             {q.explanation && <Explanation text={q.explanation} />}
             <p className="explain-answer">
-              Answer: <CallText call={q.answer} />
+              Answer: {isText ? q.answer : <CallText call={q.answer} />}
               {!!q.accept?.length && (
                 <>
                   {' '}
@@ -283,7 +288,7 @@ export function AuctionPanel({
                   {q.accept.map((a, i) => (
                     <span key={a}>
                       {i > 0 ? ', ' : ''}
-                      <CallText call={a} />
+                      {isText ? a : <CallText call={a} />}
                     </span>
                   ))}
                   )

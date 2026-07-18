@@ -1,0 +1,13 @@
+# `choices` and `text_choices` are mutually exclusive.
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: skqj9873 h5 dq94 c82
+  dealer: S
+  auction:
+  - s: "?"
+    prompt: "At what vulnerability?"
+    choices: [1S, 2S]
+    text_choices: ["Any", "Only non-vulnerable"]
+    answer: "Any"

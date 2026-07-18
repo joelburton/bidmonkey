@@ -27,9 +27,23 @@ Input format (one file = one quiz):
     (a) 1NT  (b) 2♣  (c) 2♦
     …explanation… Answer: (b) 2♣.
 
-Any line starting with `#` is a comment and is skipped — handy for leaving the
-book's plain-text auction/question in place after paste (as a transcription
-cross-check) instead of deleting it.
+Any line starting with `#` is a comment and is skipped for the structural lines
+— handy for leaving the book's plain-text auction/question in place after paste
+(as a transcription cross-check) instead of deleting it.
+
+**Free-form (text) questions.** Some problems ask something whose answer is not a
+bid, e.g. "at what vulnerability would you preempt 4♠?". Write the choices as
+phrases and the converter detects them (a choice that isn't a bid/pass/double):
+
+    6. s ?
+    ♠ K Q 8 7 3 2 ♥ A 6 ♦ K Q 5 ♣ Q 8
+    # At what vulnerability would you open a preemptive 4♠?   ← becomes the prompt
+    (a) Any    (b) Not vulnerable    (c) Favorable
+    …explanation… Answer: (b) Not vulnerable.
+
+A question's choices must be ALL bids or ALL phrases (mixing is an error). A
+phrase question emits `prompt` + `text_choices` and MUST keep the book's question
+as a `#` line (there's no implicit "your call" to fall back on).
 
 **Auction line** (after `N.`): `<dealer> <call> <call> …`.
   - The first token is the DEALER's seat (`n`/`e`/`s`/`w`).
@@ -48,6 +62,7 @@ when the emitted YAML is imported, so those errors come from one place. What thi
 converter DOES check are copy-paste slips it alone can see: sequential problem
 numbering, a bad dealer seat, and the `?` not landing on South.
 """
+import json
 import os
 import re
 import sys
@@ -61,6 +76,13 @@ CLOCKWISE = ["n", "e", "s", "w"]               # auction rotates N -> E -> S -> 
 OPTION_RE = re.compile(r"\(\s*([a-z])\s*\)\s*([^()]+)")   # tolerant of "(   d)"
 NUM_RE = re.compile(r"^(\d+)\.\s*(.*)$")
 ANSWER_RE = re.compile(r"Answer:\s*\(\s*([a-z])\s*\)")
+CALL_RE = re.compile(r"^(?:[1-7](?:nt|n|[cdhs])|p|x|xx)$")   # a call, post to_call
+
+
+def looks_like_call(token):
+    """Does this choice normalize to a bid/pass/double? (else it's a phrase — a
+    free-form `text_choices` option like `Any` or `Not vulnerable`.)"""
+    return bool(CALL_RE.match(to_call(token)))
 
 
 class ProblemError(Exception):
@@ -139,9 +161,11 @@ def parse_hand(text):
     return " ".join(parts)
 
 
-def parse_problem(lines, num):
+def parse_problem(lines, num, comments):
     """One 4+-line block -> a problem dict. Extra trailing lines are treated as a
-    wrapped explanation (joined with spaces)."""
+    wrapped explanation (joined with spaces). `comments` are the block's `#`
+    lines (the book's plain-text question), used as the `prompt` when the choices
+    are phrases rather than bids (a free-form `text_choices` question)."""
     if len(lines) < 4:
         raise ProblemError(f"#{num}: expected 4 lines (auction, hand, choices, "
                            f"explanation), got {len(lines)}")
@@ -156,8 +180,14 @@ def parse_problem(lines, num):
     letters = [ltr for ltr, _ in opts]
     if letters != list("abcdef"[:len(opts)]):
         raise ProblemError(f"#{num}: choices not labelled a,b,c…: {letters}")
-    by_letter = {ltr: to_call(val) for ltr, val in opts}
-    choices = [by_letter[ltr] for ltr in letters]
+
+    # Bid choices vs. free-form phrases: all-or-nothing (a question is one kind).
+    raw = {ltr: val.strip() for ltr, val in opts}
+    call_like = [looks_like_call(v) for v in raw.values()]
+    is_text = not any(call_like)
+    if any(call_like) and not all(call_like):
+        raise ProblemError(f"#{num}: choices mix bids and phrases {list(raw.values())} — "
+                           f"a question's choices must be all bids or all phrases")
 
     expl = " ".join(lines[3:])
     idx = expl.rfind("Answer:")
@@ -168,18 +198,31 @@ def parse_problem(lines, num):
     if not am:
         raise ProblemError(f"#{num}: malformed answer tail: {expl[idx:]!r}")
     ans_letter = am.group(1)
-    if ans_letter not in by_letter:
+    if ans_letter not in raw:
         raise ProblemError(f"#{num}: answer ({ans_letter}) is not among the choices {letters}")
 
-    return {"hand": hand, "dealer": dealer, "prior": prior,
-            "choices": choices, "answer": by_letter[ans_letter],
-            "explanation": explanation}
+    if is_text:
+        # A free-form question needs a prompt — the book's `#` question line(s).
+        prompt = " ".join(c for c in comments if c).strip()
+        if not prompt:
+            raise ProblemError(f"#{num}: a free-form (phrase) question needs a prompt — "
+                               f"leave the book's question as a `#` line in the block")
+        return {"kind": "text", "hand": hand, "dealer": dealer, "prior": prior,
+                "prompt": prompt, "choices": [raw[ltr] for ltr in letters],
+                "answer": raw[ans_letter], "explanation": explanation}
+
+    by_letter = {ltr: to_call(val) for ltr, val in opts}
+    return {"kind": "bid", "hand": hand, "dealer": dealer, "prior": prior,
+            "choices": [by_letter[ltr] for ltr in letters],
+            "answer": by_letter[ans_letter], "explanation": explanation}
 
 
 def emit_yaml(quiz_title, problems):
     """Render the authoring YAML. Each problem gets a `#N` ordinal comment; the
     prior calls become plain auction steps and the hero's `?` step (always South)
-    carries the choices/explain/answer (a choices list => multiple choice)."""
+    carries the choices/explain/answer. A bid question uses `choices`; a free-form
+    question uses `prompt` + `text_choices` (phrases, JSON-quoted so any text is
+    safe)."""
     out = [f"quiz: {quiz_title}", "problems:", ""]
     for i, p in enumerate(problems, start=1):
         out.append(f"#{i}")
@@ -189,10 +232,17 @@ def emit_yaml(quiz_title, problems):
         for seat, call in p["prior"]:
             out.append(f"    - {seat}: {call}")
         out.append('    - s: "?"')
-        out.append(f"      choices: [{', '.join(p['choices'])}]")
-        out.append("      explain: |")
-        out.append(f"        {p['explanation']}")
-        out.append(f"      answer: {p['answer']}")
+        if p.get("kind") == "text":
+            out.append(f"      prompt: {json.dumps(p['prompt'], ensure_ascii=False)}")
+            out.append(f"      text_choices: {json.dumps(p['choices'], ensure_ascii=False)}")
+            out.append("      explain: |")
+            out.append(f"        {p['explanation']}")
+            out.append(f"      answer: {json.dumps(p['answer'], ensure_ascii=False)}")
+        else:
+            out.append(f"      choices: [{', '.join(p['choices'])}]")
+            out.append("      explain: |")
+            out.append(f"        {p['explanation']}")
+            out.append(f"      answer: {p['answer']}")
         out.append("")
     return "\n".join(out) + "\n"
 
@@ -214,9 +264,12 @@ def main():
     expected = 0
     for block in blocks[1:]:
         # `#` lines are comments — the book's plain-text auction / question, left
-        # in after paste as a transcription cross-check. Ignore them here.
-        lines = [ln for ln in block.splitlines()
-                 if ln.strip() and not ln.lstrip().startswith("#")]
+        # in after paste as a transcription cross-check. They're skipped for the
+        # structural lines, but kept as `comments` (the prompt for a free-form
+        # phrase question, which has no implicit "your call").
+        raw = block.splitlines()
+        lines = [ln for ln in raw if ln.strip() and not ln.lstrip().startswith("#")]
+        comments = [ln.lstrip()[1:].strip() for ln in raw if ln.lstrip().startswith("#")]
         if not lines:
             continue
         m = NUM_RE.match(lines[0])
@@ -229,7 +282,7 @@ def main():
             errors.append(f"#{expected}: numbered {num} in the file — problem numbers "
                           f"must be sequential (1, 2, 3, …)")
         try:
-            problems.append(parse_problem(lines, expected))
+            problems.append(parse_problem(lines, expected, comments))
         except ProblemError as e:
             errors.append(str(e))
 

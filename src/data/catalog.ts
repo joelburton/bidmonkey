@@ -22,4 +22,11 @@ export const quizzes: Quiz[] = [
     source: 'fakebook',
     problemSlugs: ['partnership-slam-try', 'choose-your-opening-lead', 'two-decisions', 'defend-four-spades'],
   },
+  {
+    slug: 'quiz-c',
+    title: 'QuizC',
+    source: 'fakebook',
+    // Demonstrates the free-form (text) multiple-choice question.
+    problemSlugs: ['preempt-which-vulnerability'],
+  },
 ]

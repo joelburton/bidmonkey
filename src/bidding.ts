@@ -94,10 +94,15 @@ export function buildAuction(problem: Problem, answers: string[]): AuctionModel 
     const e = auction[k]
     if ('question' in e) {
       if (qSeen < answers.length) {
-        // already answered — show the answer as a made call
-        const call = answers[qSeen]
-        cells.push({ seat, call })
-        prior.push({ seat, call })
+        // already answered. A 'text' question (e.g. "at what vulnerability?") is
+        // terminal and does not continue the auction — it contributes no call and
+        // no grid cell. A 'bid' question shows its answer as a made call.
+        if (e.question.answerKind !== 'text') {
+          const call = answers[qSeen]
+          cells.push({ seat, call })
+          prior.push({ seat, call })
+        }
+        qSeen++
       } else {
         // the current question — the "?"
         cells.push({ seat, question: true })
@@ -106,7 +111,6 @@ export function buildAuction(problem: Problem, answers: string[]): AuctionModel 
         qSeen++
         break // hide everything after the current question
       }
-      qSeen++
     } else {
       cells.push({ seat, call: e.call })
       prior.push({ seat, call: e.call })
@@ -155,9 +159,19 @@ export function finalContract(problem: Problem, answers: string[]): Contract | n
   for (let k = 0; k < problem.auction.length; k++) {
     const e = problem.auction[k]
     const seat = cols[(dealerIdx + k) % 4]
-    const call = 'question' in e ? answers[qSeen++] : e.call
-    if (call == null) return null
-    seated.push({ seat, call })
+    if ('question' in e) {
+      // A 'text' question's answer isn't a call — skip it (it never continues
+      // the auction, so it can't affect the contract).
+      if (e.question.answerKind === 'text') {
+        qSeen++
+        continue
+      }
+      const call = answers[qSeen++]
+      if (call == null) return null
+      seated.push({ seat, call })
+    } else {
+      seated.push({ seat, call: e.call })
+    }
   }
 
   let last: { level: number; strain: Strain; seat: Seat } | null = null

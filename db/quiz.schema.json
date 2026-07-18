@@ -10,6 +10,7 @@
     "single `hand` is assigned to `player` (default S)",
     "auction: starts at dealer and proceeds clockwise, at most one skipped seat between shown calls; bids strictly ascending; X only over an opponent's live suit/NT bid; XX only over an opponent's X",
     "auction: `answer`/`accept` are legal calls at that point in the auction",
+    "auction text question (`text_choices`): needs a `prompt`, `answer`/`accept` ⊆ `text_choices`, must be the LAST auction step; `choices` and `text_choices` are mutually exclusive",
     "every `?` step's seat equals `player` (auctions and plays)",
     "each auction/play step has exactly one seat key",
     "a `?` step requires `answer`",
@@ -105,7 +106,7 @@
 
     "bidStep": {
       "type": "object",
-      "description": "One auction step: exactly one seat key (N/E/S/W, or `all` for `all: p`) whose value is a call or `?`. A `?` step also carries `explain`/`answer`, plus optional `choices` (a list => multiple choice; omitted => free bid entry) and `accept`. (Exactly-one-seat, answer-required-for-?, and answer/accept ⊆ choices are enforced by the normalizer.)",
+      "description": "One auction step: exactly one seat key (N/E/S/W, or `all` for `all: p`) whose value is a call or `?`. A `?` step also carries `explain`/`answer`, plus EITHER `choices` (a bid list => multiple choice; omitted => free bid entry) OR `text_choices` (a phrase list => a free-form question whose answer is not a call — e.g. `at what vulnerability?`). `text_choices` needs a `prompt`, must be the LAST auction step, and its answer/accept are phrases. (Exactly-one-seat, answer-required-for-?, choices XOR text_choices, terminal-text, and answer/accept ⊆ choices are enforced by the normalizer.)",
       "additionalProperties": false,
       "minProperties": 1,
       "patternProperties": {
@@ -113,10 +114,13 @@
       },
       "properties": {
         "explain": { "type": "string" },
-        "answer": { "$ref": "#/$defs/call" },
+        "prompt": { "type": "string", "description": "The question text. Required for a `text_choices` step; optional otherwise." },
+        "answer": { "type": "string", "minLength": 1, "description": "A call (bid step) or a phrase (text_choices step). Call legality / choice membership is checked by the normalizer." },
         "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/call" },
-                     "description": "Multiple-choice options (in display order). Omit for free entry." },
-        "accept": { "type": "array", "items": { "$ref": "#/$defs/call" } }
+                     "description": "Multiple-choice bid options (in display order). Omit for free entry; mutually exclusive with `text_choices`." },
+        "text_choices": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 },
+                     "description": "Free-form (phrase) options for a non-continuing question. Mutually exclusive with `choices`." },
+        "accept": { "type": "array", "items": { "type": "string", "minLength": 1 } }
       }
     },
 

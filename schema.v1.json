@@ -50,33 +50,45 @@
 
     "bidQuestion": {
       "type": "object",
-      "required": ["id", "choiceType", "answer"],
+      "description": "A question posed at a seat in the auction. `answerKind` says how `answer`/`options`/`accept` read: `bid` = a call that continues the auction; `text` = a free-form multiple-choice question (e.g. `at what vulnerability?`) whose answer is NOT a call — it does not continue the auction and must be the auction's last entry.",
+      "required": ["id", "answerKind", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
         "id":          { "type": "string", "minLength": 1 },
-        "choiceType":  { "enum": ["multiple_choice", "enter_bid"] },
+        "answerKind":  { "enum": ["bid", "text"] },
+        "choiceType":  { "enum": ["multiple_choice", "free"] },
         "prompt":      { "type": "string" },
-        "answer":      { "$ref": "#/$defs/bid" },
-        "options":     { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/bid" } },
-        "accept":      { "type": "array", "items": { "$ref": "#/$defs/bid" },
-                         "description": "Extra acceptable answers beyond `answer` (enter_bid)." },
+        "answer":      { "type": "string", "minLength": 1 },
+        "options":     { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 } },
+        "accept":      { "type": "array", "items": { "type": "string", "minLength": 1 },
+                         "description": "Extra acceptable answers beyond `answer` (⊆ options for multiple_choice)." },
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "properties": { "choiceType": { "const": "multiple_choice" } } },
+        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "multiple_choice" } } },
           "then": { "required": ["options"] } },
-        { "if":   { "properties": { "choiceType": { "const": "enter_bid" } } },
-          "then": { "not": { "required": ["options"] } } }
+        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
+          "then": { "not": { "required": ["options"] } } },
+        { "if":   { "required": ["answerKind"], "properties": { "answerKind": { "const": "bid" } } },
+          "then": { "properties": {
+            "answer":  { "$ref": "#/$defs/bid" },
+            "options": { "items": { "$ref": "#/$defs/bid" } },
+            "accept":  { "items": { "$ref": "#/$defs/bid" } }
+          } } },
+        { "if":   { "required": ["answerKind"], "properties": { "answerKind": { "const": "text" } } },
+          "then": { "required": ["prompt"], "properties": { "choiceType": { "const": "multiple_choice" } } } }
       ]
     },
 
     "cardQuestion": {
       "type": "object",
-      "required": ["id", "choiceType", "answer"],
+      "description": "A question posed at a play. `answerKind` is always `card`.",
+      "required": ["id", "answerKind", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
         "id":          { "type": "string", "minLength": 1 },
-        "choiceType":  { "enum": ["multiple_choice", "enter_card"] },
+        "answerKind":  { "const": "card" },
+        "choiceType":  { "enum": ["multiple_choice", "free"] },
         "prompt":      { "type": "string" },
         "answer":      { "$ref": "#/$defs/card" },
         "options":     { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" } },
@@ -84,9 +96,9 @@
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "properties": { "choiceType": { "const": "multiple_choice" } } },
+        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "multiple_choice" } } },
           "then": { "required": ["options"] } },
-        { "if":   { "properties": { "choiceType": { "const": "enter_card" } } },
+        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
           "then": { "not": { "required": ["options"] } } }
       ]
     },

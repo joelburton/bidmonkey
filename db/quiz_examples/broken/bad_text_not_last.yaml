@@ -1,0 +1,13 @@
+# A text question must be the auction's LAST step (it continues nothing).
+source: T [t]
+quiz: Q [q]
+titles: "Q #"
+problems:
+- hand: skqj9873 h5 dq94 c82
+  dealer: S
+  auction:
+  - s: "?"
+    prompt: "At what vulnerability?"
+    text_choices: ["Any", "Only non-vulnerable"]
+    answer: "Any"
+  - s: p

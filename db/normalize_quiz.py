@@ -233,7 +233,7 @@ def compute_final_contract(seated):
 
 
 # --- step helpers (auction & play share the seat-key convention) ------------
-META_KEYS = {"explain", "answer", "accept", "choices"}
+META_KEYS = {"explain", "prompt", "answer", "accept", "choices", "text_choices"}
 
 
 def seat_key_of(step, where, allow_all):
@@ -248,19 +248,52 @@ def seat_key_of(step, where, allow_all):
     return raw.upper(), step[raw]
 
 
-def build_question(step, where, qid, parse, free_type):
-    """A `?` step -> canonical question (multiple_choice if `choices`, else free).
+CANON_Q_ORDER = ("id", "answerKind", "choiceType", "prompt",
+                 "answer", "options", "accept", "explanation")
 
-    Returns (question, answer); `answer` is also the call/card that continues.
-    Shared by the auction (parse_call / enter_bid) and play (parse_card /
-    enter_card).
+
+def build_question(step, where, qid, parse, kind):
+    """A `?` step -> canonical question.
+
+    `kind` is the answer domain: 'bid' (auction) or 'card' (play). A `choices`
+    list makes it multiple_choice, else 'free' (bid pad / card click). An auction
+    step may instead carry `text_choices` — a free-form multiple choice whose
+    answer is a phrase, not a call (answerKind 'text'); it does not continue the
+    auction. Returns (question, answer): `answer` is the continuing call/card, or
+    None for a text question (which continues nothing).
     """
     if "answer" not in step:
         raise ProblemError(f"{where}: a '?' needs an `answer`")
+
+    if "text_choices" in step:
+        if kind != "bid":
+            raise ProblemError(f"{where}: `text_choices` is only for auction questions")
+        if "choices" in step:
+            raise ProblemError(f"{where}: use either `choices` or `text_choices`, not both")
+        if not str(step.get("prompt", "")).strip():
+            raise ProblemError(f"{where}: a `text_choices` question needs a `prompt`")
+        answer = str(step["answer"]).strip()
+        accept = [str(a).strip() for a in step.get("accept", [])]
+        options = [str(c).strip() for c in step["text_choices"]]
+        if len(options) < 2:
+            raise ProblemError(f"{where}: `text_choices` needs at least 2 choices")
+        if answer not in options:
+            raise ProblemError(f"{where}: answer {answer!r} is not one of the text_choices {options}")
+        bad = [a for a in accept if a not in options]
+        if bad:
+            raise ProblemError(f"{where}: accept {bad} not among the text_choices {options}")
+        q = {"id": qid, "answerKind": "text", "choiceType": "multiple_choice",
+             "prompt": str(step["prompt"]).strip(), "answer": answer, "options": options}
+        if accept:
+            q["accept"] = accept
+        if step.get("explain"):
+            q["explanation"] = normalize_explanation(step["explain"])
+        return {k: q[k] for k in CANON_Q_ORDER if k in q}, None
+
     answer = parse(step["answer"], f"{where} answer")
     accept = [parse(a, f"{where} accept") for a in step.get("accept", [])]
 
-    q = {"id": qid, "answer": answer}
+    q = {"id": qid, "answerKind": kind, "answer": answer}
     if "choices" in step:
         options = [parse(c, f"{where} choice") for c in step["choices"]]
         if len(options) < 2:
@@ -274,14 +307,15 @@ def build_question(step, where, qid, parse, free_type):
         q["choiceType"] = "multiple_choice"
         q["options"] = options
     else:
-        q["choiceType"] = free_type
+        q["choiceType"] = "free"
+    if step.get("prompt"):
+        q["prompt"] = str(step["prompt"]).strip()
     if accept:
         q["accept"] = accept
     if step.get("explain"):
         q["explanation"] = normalize_explanation(step["explain"])
 
-    order = ("id", "choiceType", "answer", "options", "accept", "explanation")
-    return {k: q[k] for k in order if k in q}, answer
+    return {k: q[k] for k in CANON_Q_ORDER if k in q}, answer
 
 
 # --- auction ----------------------------------------------------------------
@@ -359,7 +393,16 @@ def process_auction(steps, dealer, player, close=False):
             if seat != player:
                 raise ProblemError(f"{where}: a question must be the player's seat ({player}), not {seat}")
             qn += 1
-            q, ans = build_question(step, where, f"b{qn}", parse_call, "enter_bid")
+            q, ans = build_question(step, where, f"b{qn}", parse_call, "bid")
+            if ans is None:
+                # A free-form (text) question doesn't continue the auction, so it
+                # adds no call to `seated` — it must be the last auction step.
+                if si != len(steps) - 1:
+                    raise ProblemError(f"{where}: a `text_choices` question must be "
+                                       f"the last auction step")
+                canonical.append({"question": q})
+                echo.append(f"{seat}:?(text)")
+                break
             check_legal(ans, seat, f"{where} answer")
             emit(seat, {"question": q}, f"?(={ans})", ans)
         else:
@@ -392,7 +435,7 @@ def process_play(steps, player):
             if seat != player:
                 raise ProblemError(f"{where}: a question must be the player's seat ({player}), not {seat}")
             qn += 1
-            q, _ = build_question(step, where, f"c{qn}", parse_card, "enter_card")
+            q, _ = build_question(step, where, f"c{qn}", parse_card, "card")
             cards.append({"seat": seat, "question": q})
         else:
             cards.append({"seat": seat, "card": parse_card(value, where)})
