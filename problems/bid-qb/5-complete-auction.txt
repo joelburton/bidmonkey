@@ -1,0 +1,91 @@
+@quiz: BQ Completing the Auction
+
+1. s 1d p 1h p 2c p 2d p ?
+♠ A K 4 ♥ 6 ♦ A J 8 7 2 ♣ K Q 9 3
+# The bidding starts 1♦ - 1♥; 2♣ - 2♦. What will you say now as the opener?
+(a) Pass   (b) 2NT   (c) 3♦
+The bidding starts 1♦ - 1♥; 2♣ - 2♦. With 17 points and a double stopper in spades, you are entitled to make a game try of 2NT. 3♦ would not be such an accurate advance. Not only would you keep partner in the dark about your good spade stopper, you might have only a 5-2 fit in diamonds. Answer: (b) 2NT.
+
+2. s 1h p 1s p 2d p 2nt p ?
+♠ K 8 7 ♥ A Q 9 4 2 ♦ K Q 6 5 ♣ 7
+# The bidding starts 1♥ - 1♠; 2♦ - 2NT. What will you say now as the opener?
+(a) Pass   (b) 3♠    (c) 3NT
+The bidding starts 1♥ - 1♠; 2♦ - 2NT. With 14 points opposite partner’s 11-12, you have enough to bid game. In case partner holds five spades, you should bid 3♠ now. This is forcing. It could not logically be otherwise, since partner will have to bid 3NT anyway if he holds only four spades. Answer: (b) 3♠.
+
+3. s 1d p 1s p 2d p 2s p ?
+♠ 4 ♥ Q 9 7 ♦ A K 9 8 6 5 ♣ A J 7
+# The bidding starts 1♦ - 1♠; 2♦ - 2♠. What will you bid now?
+(a) Pass    (b) 2NT    (c) 3♦
+The bidding starts 1♦ - 1♠; 2♦ - 2♠. Partner has around 6-9 points and a six-card spade suit. You should pass. You are not strong enough to invite a game with 2NT. You have already shown long diamonds and it would be very unwise to bid the suit again. For one thing, this would raise the auction to the three-level. Get out as low as you can when you have a misfit. Answer: (a) Pass.
+
+4. s 1d p 1s p 2d p 2h p ?
+♠ J 8 7 ♥ Q 8 ♦ A K J 9 7 5 ♣ K 10
+# The bidding starts 1♦ - 1♠; 2♦ - 2♥. What will you bid next?
+(a) 2♠    (b) 3♦    (c) 3♠
+After a start of 1♦ - 1♠; 2♦ - 2♥, you must consider your next move. Partner’s sequence is forcing, so he is likely to hold at least 10 points. So far, he has shown five spades and four hearts (with four spades and four hearts, his first response would have been 1♥). You are too strong to give mere preference to 2♠ and should jump to 3♠. Answer: (c) 3♠.
+
+5. s 1c p 1d p 1s p 3nt p ?
+♠ A Q 10 6 ♥ A 6 ♦ 10 ♣ A K J 8 7 2
+# The bidding starts 1♣ - 1♦; 1♠ - 3NT. What will you say next?
+(a) Pass    (b) 4♣    (c) 6NT
+The bidding starts 1♣ - 1♦; 1♠ - 3NT. It would not be wrong to bid 6NT, but a slam could be better in clubs if partner has a fit for that suit. You should show the good clubs by bidding 4♣. An advance from the game contract of 3NT into four of a minor is forcing and shows a very good hand. Answer: (b) 4♣.
+
+6. s 1c p 1h p 2c p 3c p ?
+♠ 10 8 3 ♥ 6 ♦ A Q 8 ♣ A K 10 8 6 5
+# The bidding starts 1♣ - 1♥; 2♣ - 3♣. What will you say now as the opener?
+(a) Pass    (b) 3♦     (c) 5♣
+The bidding starts 1♣ - 1♥; 2♣ - 3♣. Partner has raised the clubs. This is a non-forcing limit bid, showing 10-12 points. You are worth accepting the try with six good clubs and a side ace-queen. The best continuation is 3♦. When a minor suit has been agreed, a new suit at the three-level shows a stopper. Here you hope that partner has a spade stopper and can bid 3NT. If not, you are likely to end in 5♣. Answer: (b) 3♦.
+
+7. s 1d p 1h p 1s p 2s p ?
+♠ K Q 7 3 ♥ 2 ♦ K Q J 8 2 ♣ A 10 8
+# The bidding starts 1♦ - 1♥; 1♠ - 2♠. What will you say now as the opener?
+(a) Pass    (b) 3♣    (c) 3♠
+The bidding starts 1♦ - 1♥; 1♠ - 2♠. Partner has four-card spade support and fewer than 10 points. What is your hand worth? The singleton heart is not as good as it may seem because partner has bid that suit. Nevertheless, there might easily be a playable game available. You are worth a game try of 3♣. Partner will realize that you are very short in hearts and value his hand accordingly. Answer: (b) 3♣.
+
+8. s 1s p 1nt p 2c p 2d p ?
+♠ A Q 8 7 2 ♥ A Q ♦ 6 5 ♣ Q 10 8 3
+# The bidding starts 1♠ - 1NT; 2♣ - 2♦. What will you bid now?
+(a) Pass    (b) 2♠    (c) 2NT
+The bidding starts 1♠ - 1NT; 2♣ - 2♦. Partner is weak with long diamonds. If he held 10 points or more, he would have responded 2♦ and not 1NT. You are not strong enough to invite a game with 2NT and should pass. You have already shown five spades, so there is no reason to bid the spades again. Answer: (a) Pass.
+
+9. s 1s p 2h p 2s p 3c p ?
+♠ A Q J 8 5 2 ♥ Q 7 ♦ J 9 7 ♣ K 3
+# The bidding starts 1♠ - 2♥; 2♠ - 3♣. What will you bid next?
+(a) 3♥    (b) 3♠    (c) 3NT
+After a start of 1♠ - 2♥; 2♠ - 3♣, you must consider your next move. Partner’s 2♥ response showed at least five hearts. His rebid in a new suit is forcing to game. You have already bid your spades twice and your diamonds are not good enough to bid 3NT. You should bid 3♥ in case partner holds six hearts. He will not expect three-card support since you did not raise hearts on the previous round. Answer: (a) 3♥.
+
+10. s 1c p 1h p 2c p 3h p ?
+♠ K Q 6 ♥ 7 6 ♦ J 8 ♣ K Q J 7 6 2
+# The bidding starts 1♣ - 1♥; 2♣ - 3♥. What will you say next?
+(a) Pass    (b) 3♠    (c) 3NT   (d) 4♥
+The bidding starts 1♣ - 1♥; 2♣ - 3♥. Partner has made a game try on a hand that contains six hearts. Since you hold a minimum opener, you should pass. The doubleton heart would be sufficient support to raise to 4♥ if you held a few more points. Answer: (a) Pass.
+
+11. s 1d p 1h p 2c p 2nt p ?
+♠ 4 ♥ Q 9 6 ♦ A Q 9 7 4 ♣ A K J 4
+# The bidding starts 1♦ - 1♥; 2♣ - 2NT. What will you say now as the opener?
+(a) Pass    (b) 3♦    (c) 3♥    (d) 3NT
+The bidding starts 1♦ - 1♥; 2♣ - 2NT. Partner has around 11 points and is inviting a game. With 16 points, you are easily strong enough to accept. However, if partner holds five hearts it may well be better to play in 4♥ rather than 3NT. You should bid 3♥ to show your three-card heart support now. This is forcing to game. If instead you held only 12 points and this shape, you would pass 2NT. (You might well have raised to 2♥ at your second turn with such a hand.) Answer: (c) 3♥.
+
+12. s 1c p 1s p 2c p 3s p ?
+♠ K 8 ♥ 10 7 3 ♦ K 5 ♣ A K J 10 7 6
+# The bidding starts 1♣ - 1♠; 2♣ - 3♠. What will you say now as the opener?
+(a) Pass    (b) 3NT    (c) 4♣    (d) 4♠
+The bidding starts 1♣ - 1♠; 2♣ - 3♠. Partner holds six spades and game-invitational values, perhaps 10 or 11 points. You have a good hand in support of spades (a high trump honor, a good club side suit, a possible ruffing value in diamonds and 14 HCP). You are easily worth a raise to 4♠. Answer: (d) 4♠.
+
+13. s 1h p 1s p 2c p 2h p ?
+♠ 10 ♥ A Q 10 7 3 ♦ A J 2 ♣ A K 7 4
+# The bidding starts 1♥ - 1♠; 2♣ - 2♥. What will you bid now?
+(a) 2NT    (b) 3♥    (c) 3NT    (d) 4♥
+The bidding starts 1♥ - 1♠; 2♣ - 2♥. Partner has signed off on a hand with around 6-9 points. He almost certainly has only two hearts, since with three hearts he would have raised to 2♥ instead of showing his spades. You are entitled to make a game try with 18 HCP in your hand. Since the heart fit is likely to be 5-2, you should bid 2NT to invite a game in notrump. Answer: (a) 2NT.
+
+14. s 1s p 1nt p 3s p 3nt p ?
+♠ A Q J 8 7 2 ♥ 9 7 ♦ A 4 ♣ K Q 4
+# The bidding starts 1♠ - 1NT; 3♠ - 3NT. What will you bid next?
+(a) Pass    (b) 4♠
+After a start of 1♠ - 1NT; 3♠ - 3NT, you have already described your hand admirably. Bidding 4♠ might make partner think that you did not trust him. Remember that his 1NT response did not guarantee a balanced hand. He may well hold only one spade and might even be void in the suit. Whatever he has, you know that he thinks that 3NT will be a better prospect than 4♠ and you have no reason to overrule that decision. Answer: (a) Pass.
+
+15. s 1h p 1nt p 2nt p 3c p ?
+♠ A Q 6 ♥ K Q 10 9 5 ♦ A Q 8 ♣ J 7
+# The bidding starts 1♥ - 1NT; 2NT - 3♣. What will you say next?
+(a) Pass    (b) 3♥    (c) 3NT
+The bidding starts 1♥ - 1NT; 2NT - 3♣. As on the previous example, you have already described your hand perfectly: you have a balanced hand of around 18 HCP. If partner thought that 3NT would be a good idea, that is what he would have bid! He is telling you that he thinks 3♣ will be a safer contract than 2NT. He will have a minimum response with six or seven weakish clubs. Answer: (a) Pass.
