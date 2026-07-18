@@ -1,0 +1,61 @@
+@quiz: BQ Overcalls and Responses
+
+1. e 1h ?
+♠ A J 6 5 ♥ Q 5 4 ♦ A Q J 4 3 ♣ 4
+# RHO opens 1♥. What action will you take?
+(a) Pass    (b) Double   (c) 1♠    (d) 2♦
+Your RHO opens 1♥. You cannot overcall 1♠ on a four-card suit, and your shape is wrong for a double (no support for clubs). So that leaves either passing or overcalling 2♦. With opening values and a decent diamond suit, 2♦ describes your hand well. Answer: (d) 2♦.
+
+2. w 1d 1s 2c ?
+♠ K 10 7 6 2 ♥ 9 5 ♦ 10 8 2 ♣ J 9 6
+# The auction starts (1♦) - 1♠ - (2♣). What will you say?
+(a) Pass    (b) 2♠    (c) 3♠    (d) 4♠
+The auction starts: (1♦) - 1♠ - (2♣). With five-card support, you would sometimes go all the way to 4♠. Here you have no side singleton or void and are not worth going that high at any vulnerability. You should bid 3♠, showing a weak hand with good trump support. (With a stronger raise, start with 2♦.) Answer: (c) 3♠.
+
+3. w 1h 1nt p ?
+♠ K J 9 8 2 ♥ 10 7 ♦ A Q 6 3 ♣ 7 5
+# LHO opens 1♥, partner overcalls 1NT. What will you bid? What are your future plans?
+(a) 2♥    (b) 3♠    (c) 3NT    (d) 4♠
+LHO opens 1♥ and your partner overcalls 1NT. With 10 HCP opposite 15-18, you are worth a game contract. Which game will be better, 3NT or 4♠? You can find out by starting with a transfer response of 2♥, showing at least five spades. Over partner’s expected 2♠ you will jump to 3NT. Partner can then choose between the two possible games. Answer: (a) 2♥.
+
+4. w 1s 3d p ?
+♠ A Q 5 ♥ K 10 5 4 ♦ 9 5 ♣ K J 8 6
+# Neither side is vulnerable. LHO opens 1♠, partner overcalls 3♦, next player passes. What action will you take?
+(a) Pass    (b) 3♠    (c) 3NT
+With neither side vulnerable LHO opens 1♠ and your partner overcalls 3♦, the next player passing. This is a weak jump overcall, remember, and you should pass. Your partner might hold ♦KQJ10732 and little else! In 3NT, the defenders would kill the dummy by holding up the ♦A and you might go four or five down. Suppose instead that partner had overcalled 2♦. Then a game is very possible and you would respond 2NT. Your chances would be better if you held three low diamonds instead of two. Answer: (a) Pass.
+
+5. w 1d 1h p ?
+♠ A K 10 4 ♥ Q 8 7 ♦ J 9 6 3 ♣ J 3
+# LHO opens 1♦, partner overcalls 1♥, next player passes. What will you say?
+(a) 1NT    (b) 2♦    (c) 2♥    (d) 3♥
+Your LHO opens 1♦ and partner overcalls 1♥, next player passing. You are going to show your heart support. Since you have 11 HCP, you begin with 2♦ — a bid in the opponent’s suit. This shows at least a sound raise to the two-level (10+). If you were stronger, you could bid 2♦ and then make a further try if partner signed off in 2♥. Answer: (b) 2♦.
+
+6. e 1c 1s p 2h p ?
+♠ A 10 9 7 5 4 ♥ Q 5 2 ♦ A K ♣ 8 6
+# RHO opens 1♣, you overcall 1♠, LHO passes, partner responds 2♥, next player passes. What will you say?
+(a) Pass    (b) 2♠    (c) 3♥    (d) 4♥
+Partner’s 2♥ is constructive and forcing. You would have to find a second bid even on a minimum overcall with no heart fit. Here you have a respectable hand and a fit for partner’s hearts! Give partner the good news with a raise all the way to 4♥. Remember you would have to raise to 3♥ if your diamonds were only ♦K4. Answer: (d) 4♥.
+
+7. e 1h p p 1s p ?
+♠ Q 10 5 ♥ A 9 4 ♦ K 10 5 3 ♣ J 6 4
+# RHO opens 1♥, you pass, next player passes, partner bids 1♠, opener passes. What will you say?
+(a) Pass    (b) 1NT    (c) 2♥    (d) 2♠
+Facing a second-seat overcall of 1♠, you would bid 2♥ to show a sound raise to the two-level. When your partner bids in the passout seat, he may well be quite weak. He knows that you hold some points (from his RHO’s pass) and he may already be assuming that you have something close to 10 points. In case he does have a good hand (also to shut out your LHO) you should raise to 2♠. You are not quite worth a strength-showing 2♥ instead. Answer: (d) 2♠.
+
+8. w 1c 1s p ?
+♠ 6 2 ♥ K 8 5 ♦ Q J 9 3 ♣ A J 10 4
+# LHO opens 1♣, partner bids 1♠, RHO passes. What will you say?
+(a) Pass    (b) 1NT    (c) 2♣    (d) 2NT
+The bidding starts 1♣ - 1♠ (by partner) - Pass. Although you hold 11 points, you cannot bid 2♣ because this should show at least three-card support for partner’s spades. You are very suitable for a response in notrump. If partner held the values for an opening bid, on some different sequence, you might bid 2NT to suggest a game. Here he has only overcalled at the one-level and may hold no more than 8 or 9 points. Respond just 1NT, suggesting around 8-11 HCP. With 12-14 HCP, you would go to 2NT. Answer: (b) 1NT.
+
+9. e 1d 1s p 2d p ?
+♠ A K 9 7 6 2 ♥ 10 3 ♦ K 5 ♣ A 9 4
+# RHO opens 1♦, you overcall 1♠, LHO passes, partner responds 2♦, RHO passes. What will you say next?
+(a) 2♠    (b) 2NT    (c) 3♠    (d) 4♠
+The bidding starts 1♦ - 1♠ (by you) - Pass - 2♦. The next player passes and you must calculate your rebid. Partner has shown (at least) a sound raise to 2♠. You have six excellent trumps and two good cards outside. You should bid 4♠ now. A jump to 3♠ would not be forcing and you might miss an excellent game. Answer: (d) 4♠.
+
+10. w 1d p p ?
+♠ K Q 6 3 ♥ 9 7 ♦ A J 4 ♣ K 10 9 5
+# The bidding starts 1♦ - Pass - Pass. What will you say now?
+(a) Pass    (b) Double     (c) 1♠    (d) 1NT
+The bidding starts 1♦ - Pass - Pass. You cannot double because you have no support for hearts. Nor is an overcall of 1♠ a good bid, when you have only four cards in the suit. Your hand would be too weak for a 1NT overcall in second seat (you would have to pass, in fact). In the fourth seat, the balancing or passout seat, a 1NT overcall shows around 12-14 points. This is the action you should take. Answer: (d) 1NT.
