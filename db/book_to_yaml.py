@@ -26,15 +26,14 @@ Input format (one file = one quiz):
     (a) Pass  (b) 2♣  (c) 2♦  (d) 3♦
     …explanation… Answer: (c) 2♦.
 
-**Auction line** (after `N.`): space-separated tokens running clockwise from
-**West** (W N E S W N E S …).
-  - A leading `-` = a seat *before* the dealer (the auction hasn't started).
-    The first non-`-` token is the DEALER's opening call.
-  - After the opening bid there are NO more dashes: `p` is a pass, anything else
-    is a call (`1c`, `x`, `2h`, `1nt`, unicode strains all work).
+**Auction line** (after `N.`): `<dealer> <call> <call> …`.
+  - The first token is the DEALER's seat (`n`/`e`/`s`/`w`).
+  - The rest are the calls in order, clockwise from the dealer (N→E→S→W→…).
+    `-` and `p` both mean pass; anything else is a call (`1c`, `x`, `2h`, `1nt`,
+    unicode strains all work).
   - `?` marks the hero's turn, must be the last token, and must land on South.
-  - A bare `?` is the opening-bid shorthand: South deals and is asked at once.
-So `- - 1c x p 1s p ?` is E(deal) 1♣, S dbl, W pass, N 1♠, E pass, S asked.
+So `e 1c x p 1s p ?` is E(deal) 1♣, S dbl, W pass, N 1♠, E pass, S asked; and an
+opening bid is just `s ?` (South deals, asked at once).
 
 Only single-question problems are emitted (edit the YAML by hand for multi-
 question auctions). The "Answer: (x) …" tail is stripped from the explanation
@@ -42,7 +41,7 @@ question auctions). The "Answer: (x) …" tail is stripped from the explanation
 high-to-low, ascending bids, …) is NOT re-checked here — normalize_quiz does that
 when the emitted YAML is imported, so those errors come from one place. What this
 converter DOES check are copy-paste slips it alone can see: sequential problem
-numbering, a dash after the opening, and the `?` not landing on South.
+numbering, a bad dealer seat, and the `?` not landing on South.
 """
 import os
 import re
@@ -52,7 +51,7 @@ SUIT_SYM = {"♠": "s", "♥": "h", "♦": "d", "♣": "c"}
 SUIT_ORDER = ["s", "h", "d", "c"]
 DASHES = {"—", "–", "-", "−"}                 # void markers (hands)
 STRAIN_SYM = {"♣": "c", "♦": "d", "♥": "h", "♠": "s"}
-SEATS = ["w", "n", "e", "s"]                   # auction runs clockwise from West
+CLOCKWISE = ["n", "e", "s", "w"]               # auction rotates N -> E -> S -> W
 
 OPTION_RE = re.compile(r"\(\s*([a-z])\s*\)\s*([^()]+)")   # tolerant of "(   d)"
 NUM_RE = re.compile(r"^(\d+)\.\s*(.*)$")
@@ -79,35 +78,36 @@ def to_call(token):
 
 
 def parse_bidding(bidding, num):
-    """'- - 1c x p 1s p ?' -> (dealer, [(seat, call), …]) — the calls BEFORE the
-    hero's question. Tokens run clockwise from West; leading '-' marks seats before
-    the dealer (skipped); the first non-'-' is the dealer's opening call; after
-    that a '-' is an error and 'p' is a pass; '?' (last token) is the hero and must
-    land on South. A bare '?' is the opening-bid shorthand (South deals & asked)."""
+    """'n 1c p ?' -> (dealer, [(seat, call), …]) — the calls BEFORE the hero's
+    question. The first token is the DEALER's seat; the rest are the calls in
+    order, clockwise from the dealer (N->E->S->W). '-' and 'p' both mean pass;
+    '?' (last token) is the hero and must land on South. So an opening bid is
+    just 's ?'."""
     tokens = bidding.split()
-    if tokens == ["?"]:
-        return "s", []                        # opening bid: South opens & is asked
-    first = next((i for i, t in enumerate(tokens) if t != "-"), None)
-    if first is None:
-        raise ProblemError(f"#{num}: auction has no calls and no '?'")
+    if not tokens:
+        raise ProblemError(f"#{num}: empty auction")
+    dealer = tokens[0].lower()
+    if dealer not in CLOCKWISE:
+        raise ProblemError(f"#{num}: first token must be the dealer seat (n/e/s/w), got {tokens[0]!r}")
+    calls = tokens[1:]
+    if not calls:
+        raise ProblemError(f"#{num}: auction has a dealer but no calls / '?'")
+    start = CLOCKWISE.index(dealer)
     prior, hero = [], None
-    for i in range(first, len(tokens)):
-        seat, tok = SEATS[i % 4], tokens[i]
-        if tok == "-":
-            raise ProblemError(f"#{num}: '-' after the opening bid is not allowed — "
-                               f"use 'p' for a pass")
+    for i, tok in enumerate(calls):
+        seat = CLOCKWISE[(start + i) % 4]
         if tok == "?":
-            if i != len(tokens) - 1:
+            if i != len(calls) - 1:
                 raise ProblemError(f"#{num}: '?' must be the last token (one question per problem)")
             hero = seat
             break
-        prior.append((seat, to_call(tok)))
+        prior.append((seat, "p" if tok in ("-", "p") else to_call(tok)))
     if hero is None:
         raise ProblemError(f"#{num}: auction has no '?' (the hero's turn)")
     if hero != "s":
         raise ProblemError(f"#{num}: the '?' must land on South, but it falls on "
-                           f"{hero.upper()} — check the token count / leading dashes")
-    return SEATS[first % 4], prior
+                           f"{hero.upper()} — check the calls after the dealer")
+    return dealer, prior
 
 
 def parse_hand(text):

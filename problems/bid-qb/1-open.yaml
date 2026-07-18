@@ -151,18 +151,3 @@ problems:
         Opening 1♥ or 1♠ promises at least five cards in your suit, so you cannot do that. 1NT shows 15-17 points and you are too strong for that. You must open 1♣, intending to bid strongly thereafter. If partner responds 1♦, you will jump to 2NT. If partner responds 1♥ or 1♠, you will raise him to the three-level.
       answer: 1c
 
-#16
-- hand: sa7 haq76 dakj65 c63
-  dealer: e
-  auction:
-    - e: 1c
-    - s: x
-    - w: p
-    - n: 1s
-    - e: p
-    - s: "?"
-      choices: [p, 2c, 2d, 3d]
-      explain: |
-        The bidding starts (1♣) - dbl (by you) - (pass) - 1♠ - (pass). Judging that your hand is too strong for a 1♦ overcall, you begin with a double. Partner responds 1♠ and the opponents are silent. You should bid 2♦ now. By changing the suit after a takeout double you show a powerful hand (18+ HCP). Remember that partner was forced to bid and might have no values at all.
-      answer: 2d
-

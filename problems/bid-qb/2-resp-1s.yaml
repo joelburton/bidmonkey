@@ -1,0 +1,183 @@
+quiz: BQ Responding to 1-suit
+problems:
+
+#1
+- hand: sa1094 h975 dqj82 c105
+  dealer: n
+  auction:
+    - n: 1c
+    - e: p
+    - s: "?"
+      choices: [1d, 1s, 1nt]
+      explain: |
+        When partner opens 1♣, you should respond 1♠ (showing a major suit in preference to a minor suit when you are worth only one bid). You should not respond 1NT when you have a major suit to show.
+      answer: 1s
+
+#2
+- hand: s954 hq105 d93 caq1076
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1nt, 2c]
+      explain: |
+        Partner opens 1♦. You need at least 10 points to respond at the two-level, so you cannot bid 2♣. Since you have no four-card suit to show at the one-level, you have to respond 1NT. You have a balanced hand here, but 1NT does not necessarily show a balanced hand.
+      answer: 1nt
+
+#3
+- hand: sak84 hq965 d74 cq95
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1h, 1s, 2nt]
+      explain: |
+        Partner opens 1♦. You should show a four-card major if you can do so at the one-level. Here you have both majors and should respond in the lower suit, hearts. This will give your partner the chance to rebid in spades if he holds four cards there.
+      answer: 1h
+
+#4
+- hand: s7 haj54 dkq1096 ca105
+  dealer: n
+  auction:
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [2d, 2h, 3nt]
+      explain: |
+        Partner opens 1♠. You should respond 2♦, showing your longest suit. If partner holds four or five hearts, he can rebid 2♥ now. Although 3NT may be the best final contract, nothing is lost by responding 2♦ at this stage. You might have a good fit in either diamonds or hearts. Also, a slam may be possible if partner has a strong hand.
+      answer: 2d
+
+#5
+- hand: s7 hkq1065 dak872 c96
+  dealer: n
+  auction:
+    - n: 1c
+    - e: p
+    - s: "?"
+      choices: [1d, 1h, 2h]
+      explain: |
+        Partner opens 1♣. With two five-card suits, you respond in the higher suit, bidding 1♥ instead of 1♦. You will probably have the chance to bid your diamonds on the next round. Although you have enough points to do so, you do not respond at the two-level unless you have to. If partner had opened 1♠ instead, you would have responded 2♥.
+      answer: 1h
+
+#6
+- hand: s102 hk983 d65 ca10985
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1h, 1nt, 2c]
+      explain: |
+        Partner opens 1♦. You should not respond 1NT when you can show a four-card major at the one-level. If you had this shape and 10+ points, you would respond 2♣ with the intention of bidding your hearts on the next round. Since you are not strong enough to bid at the two-level, you should bid 1♥ now.
+      answer: 1h
+
+#7
+- hand: saj104 h97 daq862 ck3
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [1s, 2d, 3nt]
+      explain: |
+        Partner opens 1♥. 3NT may or may not be the right eventual contract but there is no need for you to guess that immediately. To find out more about partner’s hand, you should respond in a suit. Since you are strong enough to make two bids (at least), you show your longest suit first.
+      answer: 2d
+
+#8
+- hand: sa8 hq72 dq973 cj1072
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1nt, 2c, 2d, 3d]
+      explain: |
+        Partner opens 1♦. Perhaps you are tempted to raise the diamonds. There are two good reasons why this is not the best idea. Firstly it is possible that partner holds only three diamonds. Secondly, you have stoppers in the other suits and a balanced hand, so 1NT gives a better description of your hand. If partner holds a good hand, the most likely game is 3NT.
+      answer: 1nt
+
+#9
+- hand: skq4 hq105 d982 ckj86
+  dealer: n
+  auction:
+    - n: 1d
+    - e: p
+    - s: "?"
+      choices: [1nt, 2c, 2nt]
+      explain: |
+        Partner opens 1♦. It would not be a mistake to respond 2♣, since you do hold 11 points. However, on hands with no major-suit fit the target game contract is usually 3NT. The bid that gives the best description of your hand is 2NT, showing 11-12 points. You hope that partner can raise to 3NT.
+      answer: 2nt
+
+#10
+- hand: sa1076 hj94 dk973 c103
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [1s, 1nt, 2h]
+      explain: |
+        Partner opens 1♥ and therefore has at least five hearts. Since you hold three-card support, you have already found at least an eight-card fit in a major. You are in the 6-9 point range so give partner the good news by raising to 2♥. If you made the mistake of responding 1♠, the bidding might go 1♥ - 1♠; 2♣ - 2♥. Partner would then expect you to hold only two hearts.
+      answer: 2h
+
+#11
+- hand: sk1083 hk2 d84 ck10863
+  dealer: n
+  auction:
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [2c, 2s, 3s]
+      explain: |
+        Partner opens 1♠. With at least a 5-4 fit in spades, it would be pointless to bid your clubs. How high should you raise the spades? You hold 9 HCP and 2 support points for the red-suit doubletons. That is a total of 11 points in support and enough to bid 3♠ rather than 2♠.
+      answer: 3s
+
+#12
+- hand: sak6 ha82 d109762 c83
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [2d, 2h, 3h]
+      explain: |
+        Partner opens 1♥. With 11 HCP and an extra support point in clubs, you are too strong to raise to 2♥. Should you bid 3♥? No, because that would promise at least four-card trump support. You should respond 2♦ for the moment. If partner rebids 2♥, showing a fairly minimum hand, you will raise to 3♥. Partner can then decide whether to bid 4♥.
+      answer: 2d
+
+#13
+- hand: saq82 hj3 d1094 cak72
+  dealer: n
+  auction:
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [2nt, 3s, 4s]
+      explain: |
+        Partner opens 1♠. A response of 3♠ would invite a game and you are too strong for that response. Should you therefore bid 4♠? No, because that is a preemptive response. Your correct bid is 2NT (Jacoby), showing at least game values and four-card spade support.
+      answer: 2nt
+
+#14
+- hand: s107 hk10872 dqj874 c6
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [2h, 3h, 4h]
+      explain: |
+        Partner opens 1♥. You have a ‘weak freak’ hand type and should make a preemptive leap to 4♥. Your partner may well make the contract if he has a suitable hand. Meanwhile, your high response may make life difficult for your LHO if his side has a good fit in one of the black suits.
+      answer: 4h
+
+#15
+- hand: s64 haj854 d105 ca872
+  dealer: n
+  auction:
+    - n: 1h
+    - e: p
+    - s: "?"
+      choices: [2h, 3h, 4h]
+      explain: |
+        Partner opens 1♥. It would not be a mistake to respond 4♥. However, with two aces, your hand is not really suitable for a preemptive response. A more accurate description is a simple limit bid of 3♥. (The reason to bid 4♥ on a weaker and more shapely hand is that if you go down the opponents could probably have made game their way. Here, with two aces in your hand and a partner who has opened the bidding, you do not expect them to make game.)
+      answer: 3h
+
