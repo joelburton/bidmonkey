@@ -1,0 +1,235 @@
+quiz: SAYC Balancing
+problems:
+
+  #1
+  - hand: s9 haj10872 dj85 c974
+    dealer: w
+    auction:
+      - w: 1s
+      - n: p
+      - s: "?"
+        explain: |
+          LHO opens 1♠, passed to you. If you were in the direct seat, you would be forced to pass. In the passout seat, you can add 3 HCP to your lovely distributional holding and balance with a call of 2♥. Obviously, partner will need to take all of this into account and must be aware that your hand will often be weaker than normal for your action.
+        answer: 2h
+
+#2
+  - hand: sj65 hak10872 dkq5 c9
+    dealer: w
+    auction:
+      - w: 1c
+      - n: p
+      - s: "?"
+        explain: |
+          LHO opens 1♣, passed to you. This collection is too strong for an overcall of 1♥. Bid 2♥ instead. A jump overcall in the balancing seat is not a weak bid. Rather, it shows a hand in the normal opening-bid range, usually containing six-plus cards in the bid suit.
+        answer: 2h
+
+#3
+  - hand: s86 hj10874 da74 ckj8
+    dealer: e
+    auction:
+      - e: 1d
+      - w: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          RHO opens 1♦. You pass. LHO raises to 2♦, passed to you. You can now balance with 2♥. The safest time for this type of action is when the opponents have found a fit and do not make a game try. They have only about 20 points between them, so partner should have about 10. As they didn’t bid hearts, the chances of finding partner with heart support are reasonable. Finally, we don’t want to sell out at the two-level, especially in a minor.
+        answer: 2h
+
+#4
+  - hand: sqj874 h43 dk74 cq98
+    dealer: e
+    auction:
+      - e: 1h
+      - w: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          RHO opens 1♥. You pass. LHO raises to 2♥ and this bid is passed to you. You weren’t strong enough to overcall with 1♠ immediately, but now it is correct to balance with 2♠. The opponents have shown no interest in game, so they have at most 23 HCP and might have as few as 19 or 20. Partner, therefore, is marked with some values, perhaps as much as an opening bid. With a defensively oriented hand containing scattered points (especially points in the opponents’ suit) but lacking tricks, he might choose to pass the 2♥ call. It is, in fact, safer to bid 2♠ now than it would have been to overcall at your first turn. You may drive the opponents to 3♥, where your chances for a plus score will be greater. If they let you play 2♠, you may well make it. Even if they let you play 2♠ and you go down, your result might well be an improvement over their making 2♥.
+        answer: 2s
+
+#5
+  - hand: skq1087 h32 d84 cqj98
+    dealer: w
+    auction:
+      - w: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♥. Partner and RHO pass. Partner should have some count and some spade support, and we certainly don’t want to let them play 1♥. Bid 1♠.
+        answer: 1s
+
+#6
+  - hand: s987 hqj7 dk974 ck98
+    dealer: e
+    auction:
+      - e: 1h
+      - w: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          RHO opens 1♥. You pass. LHO raises to 2♥ and this is passed to you. This time you must pass. You have more than enough points to balance, but your shape is unattractive and your points are the wrong ones. The ♥Q and ♥J will be worthless to your side if you declare. Since you possess those cards, your chances of finding partner with some values that will be useful are decreased. It is too dangerous to balance.
+        answer: p
+
+#7
+  - hand: sq1087 hk954 daj3 c42
+    dealer: w
+    auction:
+      - w: 1c
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♣, passed to you. In the passout seat, with both majors covered, tolerance for diamonds and 10 HCP, you have a clear balancing double. Note that you might well have chosen to pass had RHO opened the bidding. In the balancing seat, you may take liberties.
+        answer: x
+
+#8
+  - hand: sa106 ha94 d73 cq10752
+    dealer: w
+    auction:
+      - w: 1d
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♦, passed to you. Again, while you would never contemplate doubling over a direct 1♦ bid, in the balancing seat you don’t have much choice. RHO is weak, and partner could have a lovely hand while unable to take action in the direct seat.
+        answer: x
+
+#9
+  - hand: sa1084 h84 dq1087 ck106
+    dealer: e
+    auction:
+      - e: 1h
+      - w: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          RHO opens 1♥. You pass. LHO raises to 2♥ and this is passed to you. You should now balance with a double. This double is for takeout, in spite of the fact that you passed at your first opportunity. When the opponents stop low and you balance with a double, your double is not for penalties.
+        answer: x
+
+#10
+  - hand: sq863 h65 daj76 ck87
+    dealer: w
+    auction:
+      - w: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♥, and partner and RHO pass. Double. With shortage in the opponent’s suit and 10+ HCP, a double is always the best option as it gives partner the opportunity to pass with length and strength in the opposition suit. If this is, in fact, the case, partner will have to decide whether or not a sufficient penalty can be exacted from a one-level contract. Vulnerability may be a key factor here.
+        answer: x
+
+#11
+  - hand: saqj93 h72 d84 cakq5
+    dealer: w
+    auction:
+      - w: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          Again, LHO opens 1♥, passed to you. In the direct seat, you would simply overcall 1♠. But when you add 3 HCP, you are now looking at a hand that is too strong for a simple overcall. You are also too strong to bid 2♠. Start with a double. You intend to bid your long suit at your next opportunity.
+        answer: x
+
+#12
+  - hand: saj7 hkq4 dqj107 ck92
+    dealer: w
+    auction:
+      - w: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♥, passed to you. You would like to bid 1NT, but the hand is too strong to do that in the balancing seat. The answer is to start with a double, intending a notrump bid at your next turn, showing a hand in the normal 1NT range.
+        answer: x
+
+#13
+  - hand: s9 hk109854 da cqj875
+    dealer: w
+    auction:
+      - w: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          If LHO opens 1♠, passed to you, bid 2♠. Doubling risks partner passing for penalty. If he does, things could get messy.
+        answer: 2s
+
+#14
+  - hand: sq865 hkq65 dqj96 c4
+    dealer: w
+    auction:
+      - w: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♥, passed to you. Pass! If partner couldn’t take any action over 1♥, it’s hard to conceive of a good contract for your side. The most likely scenario is that opener has a very nice hand. Reopening here runs the risk of your opponents finding a better spot, or your side getting into trouble. Defend. It might be fun.
+        answer: p
+
+#15
+  - hand: s98 ha43 d109652 cj87
+    dealer: w
+    auction:
+      - w: 1c
+      - e: p
+      - s: "?"
+        explain: |
+          LHO opens 1♣, passed to you. Pass. Even after you add 3 HCP, you do not have the strength to contemplate any balancing action. Here you have a clear, smooth pass — the hardest bid in bridge!
+        answer: p
+
+#16
+  - hand: sq1075 hk54 dk95 ck83
+    dealer: e
+    auction:
+      - e: 1c
+      - w: p
+      - n: 1s
+      - s: "?"
+        explain: |
+          Bid 2♠. We suggest a range of 7-11 HCP for a single raise. This hand represents a maximum.
+        answer: 2s
+
+#17
+  - hand: sk87 ha1095 d42 cq973
+    dealer: e
+    auction:
+      - e: 1c
+      - w: p
+      - n: 1s
+      - s: "?"
+        explain: |
+          Again, bid 2♠. This is a decent holding for the call.
+        answer: 2s
+
+#18
+  - hand: sk843 ha4 dk32 cqj62
+    dealer: e
+    auction:
+      - e: 1c
+      - w: p
+      - n: 1s
+      - s: "?"
+        explain: |
+          Bid 3♠. The double raise of a balancing overcall shows a 12-14 count.
+        answer: 3s
+
+#19
+  - hand: skq73 hj104 d864 caj3
+    dealer: e
+    auction:
+      - e: 1d
+      - n: x
+      - s: "?"
+        explain: |
+          We suggest a bid of 2♠. A jump to the two-level should show 10-12 points. Holding anything less, be content with 1♠.
+        answer: 2s
+
+#20
+  - hand: sk6 hk104 daq1043 c643
+    dealer: e
+    auction:
+      - e: 1d
+      - n: x
+      - s: "?"
+        explain: |
+          Every bridge player’s dream come true. You couldn’t double the opening call, but you are delighted to pass partner’s balancing double and take the sure plus.
+        answer: p
+
+
+
+
+
+
