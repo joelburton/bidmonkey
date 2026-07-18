@@ -8,3 +8,10 @@
 
 [build.environment]
   NODE_VERSION = "22"       # Vite 8 needs Node >= 20.19 / 22.12
+
+  # Vite inlines VITE_* vars into the client bundle at build time — that's how a
+  # static site talks to Supabase. Both of these are public by design (the anon
+  # key is the publishable key; access is gated by RLS, verified read-only), so
+  # tell Netlify's secret scanner they're expected in the output. Do NOT add the
+  # service_role / secret key here — it never belongs in the frontend build.
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
