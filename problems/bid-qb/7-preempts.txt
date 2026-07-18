@@ -1,163 +1,91 @@
-Preemptive openings — Problems A
+@quiz: BQ Preemptive Openings
 
-1. ♠ 8 4 ♥ A K 9 6 ♦ A 10 9 ♣ A J 10 4
-
-Your partner opens 2♠. What action will you take?
-
+1. n 2s p ?
+♠ 8 4 ♥ A K 9 6 ♦ A 10 9 ♣ A J 10 4
+# Your partner opens 2♠. What action will you take?
 (a) 2NT (game try)    (b) 3NT    (c) 4♠
-
-2. ♠ 9 8 2 ♥ K Q 10 9 5 2 ♦ 3 ♣ K 10 6
-
-You open 2♥ and partner responds 2NT, asking for a feature. What action will you take?
-
-(a) 3♣    (b) 3♥    (c) 4♥
-
-3. ♠ K J 6 ♥ 8 7 5 ♦ 10 2 ♣ K Q 8 7 4
-
-Partner opens 2♠. What will you say now?
-
-(a) Pass    (b) 3♣    (c) 3♠
-
-4. ♠ A Q 10 9 7 3 ♥ 6 ♦ A J 9 ♣ A 10 4
-
-Partner opens 2♥. What response will you make?
-
-(a) Pass    (b) 2♠    (c) 3♠
-
-5. ♠ K 9 7 5 4 2 ♥ 8 3 ♦ 6 2 ♣ K 10 8
-
-Under what conditions would you open 2♠?
-
-(a) Never    (b) Not vulnerable     (c) Not vulnerable in third seat
-
-
-
-Preemptive openings — Solutions A
-
-1. ♠ 8 4 ♥ A K 9 6 ♦ A 10 9 ♣ A J 10 4
-
 Your partner opens 2♠. You are just about worth a raise to 4♠. If his trumps are ♠KQJ962, you will probably have five trump tricks and four top winners. If he holds two or three low clubs in addition, you may be able to take two club finesses for an extra trick. If instead his trumps are ♠AQJ875, you may be able to score six trump tricks with a repeated finesse. A contract of 3NT would often be hopeless; you could be cut off from dummy’s spade suit. Answer: (c) 4♠.
 
-2. ♠ 9 8 2 ♥ K Q 10 9 5 2 ♦ 3 ♣ K 10 6
-
+2. s 2h p 2nt p ?
+♠ 9 8 2 ♥ K Q 10 9 5 2 ♦ 3 ♣ K 10 6
+# You open 2♥ and partner responds 2NT, asking for a feature. What action will you take?
+(a) 3♣    (b) 3♥    (c) 4♥
 You open 2♥ and partner bids 2NT, asking for a feature. You have the ♣K, so you show it. Partner might have a hand like ♠53 ♥J43 ♦AQ7 ♣AQJ32, in which case he will be delighted to hear you have the ♣K. Answer: (a) 3♣.
 
-3. ♠ K J 6 ♥ 8 7 5 ♦ 10 2 ♣ K Q 8 7 4
-
+3. n 2s p ?
+♠ K J 6 ♥ 8 7 5 ♦ 10 2 ♣ K Q 8 7 4
+# Partner opens 2♠. What will you say now?
+(a) Pass    (b) 3♣    (c) 3♠
 Partner opens 2♠ and you do not expect to make 4♠. Indeed, if partner holds ♠AQ10742 and nothing much else, you may score only 7 or 8 tricks. Since you have little defense to a red-suit contract, you should raise preemptively to 3♠. This is not a game try; you would respond 2NT if you had genuine game interest. Answer: (c) 3♠.
 
-4. ♠ A Q 10 9 7 3 ♥ 6 ♦ A J 9 ♣ A 10 4
-
+4. n 2h p ?
+♠ A Q 10 9 7 3 ♥ 6 ♦ A J 9 ♣ A 10 4
+# Partner opens 2♥. What response will you make?
+(a) Pass    (b) 2♠    (c) 3♠
 Partner opens 2♥. If he holds, say, ♥KQJ962 and little else, you will lose a lot of tricks in a spade contract. If instead partner holds a good weak two including two or three spades, the ♥A and a minor-suit king, you may make 4♠. You should test the waters by responding 2♠, which is forcing for one round. Answer: (b) 2♠.
 
-5. ♠ K 9 7 5 4 2 ♥ 8 3 ♦ 6 2 ♣ K 10 8
-
+5. s ?
+♠ K 9 7 5 4 2 ♥ 8 3 ♦ 6 2 ♣ K 10 8
+# Under what conditions would you open 2♠?
+(a) Never    (b) Not vulnerable     (c) Not vulnerable in third seat
 The first two players pass. In the third seat it is often worth bidding on hands that you would normally not open. After two passes, you can visualize that your LHO has a strong hand. So, open 2♠ when non-vulnerable and in the third seat. You will often see players opening 2♠ on this type of hand in other situations. It may work, it may not. It is much more of a gamble. Answer: (c) 2♠ not vulnerable in third seat.
 
-Preemptive openings — Problems B
-
-6. ♠ 3 ♥ A J ♦ A K Q J 5 3 2 ♣ K 10 7
-
-Partner opens 3♠. What action will you take?
-
+6. n 3s p ?
+♠ 3 ♥ A J ♦ A K Q J 5 3 2 ♣ K 10 7
+# Partner opens 3♠. What action will you take?
 (a) 3NT     (b) 4♦     (c) 4♠
-
-7. ♠ A J 4 ♥ 5 ♦ Q 10 8 7 6 4 ♣ J 9 2
-
-Partner opens 3♠. What action will you take as responder? Does it depend on the vulnerability?
-
-(a) Pass    (b) 4♠
-
-8. ♠ 7 ♥ Q 10 6 4 ♦ A K 10 7 6 3 2 ♣ J
-
-What action will you take, sitting in the first seat with neither side vulnerable?
-
-(a) Pass     (b) 1♦    (c) 3♦
-
-9. ♠ A K 6 ♥ 3 ♦ A Q 7 4 2 ♣ K Q 5 4
-
-Partner opens 3♥. What will you say now?
-
-(a) Pass    (b) 3NT   (c) 4♥
-
-10. ♠ K Q J 10 6 3 2 ♥ A K 3 ♦ 6 4 ♣ A
-
-Partner opens 3♦. What will you respond?
-
-(a) 3♠    (b) 4♠    (c) 5♦
-
-Preemptive openings — Solutions B
-
-6. ♠ 3 ♥ A J ♦ A K Q J 5 3 2 ♣ K 10 7
-
 Partner opens 3♠. Your best chance of making a game is to respond 3NT. Partner is not allowed to go back to 4♠. He has already described the nature of his hand and must trust that you know what you’re doing. Answer: (a) 3NT.
 
-7. ♠ A J 4 ♥ 5 ♦ Q 10 8 7 6 4 ♣ J 9 2
-
+7. n 3s p ?
+♠ A J 4 ♥ 5 ♦ Q 10 8 7 6 4 ♣ J 9 2
+# Partner opens 3♠. What action will you take as responder? Does it depend on the vulnerability?
+(a) Pass    (b) 4♠
 Partner opens 3♠. You expect that the opponents can make 4♥, maybe 6♥. At any vulnerability you should raise to 4♠. You expect to score seven trump tricks, plus one or two ruffs in the heart suit. Do not dwell solely on the risk that you might go 500 down against a non-vulnerable game. Think instead how incredibly difficult it will be for the opponents to judge their subsequent bidding. Answer: (b) 4♠.
 
-8. ♠ 7 ♥ Q 10 6 4 ♦ A K 10 7 6 3 2 ♣ J
-
+8. s ?
+♠ 7 ♥ Q 10 6 4 ♦ A K 10 7 6 3 2 ♣ J
+# What action will you take, sitting in the first seat with neither side vulnerable?
+(a) Pass     (b) 1♦    (c) 3♦
 You are much too strong for a preemptive 3♦, even when vulnerable. If partner held as little as ♥AK732 and a black-suit ace, he would pass 3♦ when you could make twelve tricks in hearts! Although you hold only 10 HCP, you are entitled to add extra points for your splendid seven-card suit and the good shape outside. You should open 1♦. If opening a one-bid on so few points does not appeal to you, then it is better to pass than open 3♦. Answer: (b) 1♦.
 
-9. ♠ A K 6 ♥ 3 ♦ A Q 7 4 2 ♣ K Q 5 4
-
+9. n 3h p ?
+♠ A K 6 ♥ 3 ♦ A Q 7 4 2 ♣ K Q 5 4
+# Partner opens 3♥. What will you say now?
+(a) Pass    (b) 3NT   (c) 4♥
 Partner opens 3♥ and you have to calculate the best final contract. The first point to note is that 3NT is likely to be hopeless. Partner’s heart suit would not contribute at all as his hand will usually contain no entries. A much better chance is that you can make 4♥, by adding partner’s trump tricks to the top cards in your hand. Suppose partner has ♥KQJxxxx and little else. You should be able to score six trump tricks plus at least four side-suit winners in your hand. Answer: (c) 4♥.
 
-10. ♠ K Q J 10 6 3 2 ♥ A K 3 ♦ 6 4 ♣ A
-
+10. n 3d p ?
+♠ K Q J 10 6 3 2 ♥ A K 3 ♦ 6 4 ♣ A
+# Partner opens 3♦. What will you respond?
+(a) 3♠    (b) 4♠    (c) 5♦
 Partner opens 3♦. If he has a good diamond suit, you might be able to make 5♦. However, you can see your own wonderful spades and you must have an excellent chance of making 4♠. Six spade tricks, plus your three side-suit winners give you a total of nine tricks. You have every chance of a diamond trick too. A response of 3♠ would be forcing but since you do not need spade support, you should go straight to the spade game. Answer: (b) 4♠.
 
-Preemptive openings — Problems C
-
-11. ♠ K 8 ♥ A Q 10 7 6 3 ♦ 10 9 4 ♣ 6 2
-
-You open 2♥ and partner responds 2♠. What action will you take?
-
+11. s 2h p 2s p ?
+♠ K 8 ♥ A Q 10 7 6 3 ♦ 10 9 4 ♣ 6 2
+# You open 2♥ and partner responds 2♠. What action will you take?
 (a) Pass    (b) 3♥   (c) 3♠
-
-12. ♠ A J 10 7 6 2 ♥ K 10 4 ♦ 10 5 ♣ 9 8
-
-You open 2♠ and hear a 3♦ response. What action will you take?
-
-(a) Pass    (b) 3♥   (c) 3♠    (d) 3NT
-
-13. ♠ K 10 8 7 5 4 2 ♥ 9 3 ♦ Q 8 7 ♣ J
-
-Partner and your RHO pass. What action will you take and does your vulnerability affect the decision?
-
-(a) Pass    (b) 2♠    (c) 3♠
-
-14. ♠ A K J 7 ♥ 3 ♦ A Q 7 2 ♣ A K 6 4
-
-Partner opens 3♥. What response will you make?
-
-(a) 3NT    (b) 4♥   (c) 4NT
-
-15. ♠ 10 8 2 ♥ J 3 ♦ K Q J 7 6 2 ♣ 9 4
-
-You are not vulnerable and the first two players pass. What will you bid?
-
-(a) Pass    (b) 2♦    (c) 3♦
-
-Preemptive openings — Solutions C
-
-11. ♠ K 8 ♥ A Q 10 7 6 3 ♦ 10 9 4 ♣ 6 2
-
 You open 2♥ and partner bids 2♠. A change of suit is forcing for one round. If your partner sees the chance of game in spades, he will hold a good hand almost certainly with six spades. Rebidding 3♥ would not be a good idea. Your partner already knows that you have six hearts. Instead you should raise to 3♠. Knowing that you can assist him in the spade suit will often allow him to bid a good spade game. Answer: (c) 3♠.
 
-12. ♠ A J 10 7 6 2 ♥ K 10 4 ♦ 10 5 ♣ 9 8
-
+12. s 2s p 3d p ?
+♠ A J 10 7 6 2 ♥ K 10 4 ♦ 10 5 ♣ 9 8
+# You open 2♠ and hear a 3♦ response. What action will you take?
+(a) Pass    (b) 3♥   (c) 3♠    (d) 3NT
 You open 2♠ and partner bids 3♦. You have to bid again, whatever you hold. Tell partner something useful! Bid 3♥ to show a feature (stopper) in hearts. This may be enough to trigger a 3NT bid from your partner. Answer: (b) 3♥.
 
-13. ♠ K 10 8 7 5 4 2 ♥ 9 3 ♦ Q 8 7 ♣ J
+13. n p p ?
+♠ K 10 8 7 5 4 2 ♥ 9 3 ♦ Q 8 7 ♣ J
+# Partner and your RHO pass. What action will you take and does your vulnerability affect the decision?
+(a) Pass    (b) 2♠    (c) 3♠
+Not vulnerable you should open 3♠ in third seat. The next player is marked with a good hand. If he doubles, this will be for takeout. Vulnerable, and with an unimpressive spade suit, you would not take the risk; you would open just 2♠. There is a small chance that a takeout double by LHO might be left in by your RHO if he has no great shape and a few high cards. Answer: (c) 3♠.
 
-Not vulnerable you should open 3♠ in third seat. The next player is marked with a good hand. If he doubles, this will be for takeout. Vulnerable, and with an unimpressive spade suit, you would not take the risk. There is a small chance that a takeout double by LHO might be left in by your RHO if he has no great shape and a few high cards. You would open just 2♠. Answer vul: (b) 2♠, not vul: (c) 3♠.
-
-14. ♠ A K J 7 ♥ 3 ♦ A Q 7 2 ♣ A K 6 4
-
+14. n 3h p ?
+♠ A K J 7 ♥ 3 ♦ A Q 7 2 ♣ A K 6 4
+# Partner opens 3♥. What response will you make?
+(a) 3NT    (b) 4♥   (c) 4NT
 Partner opens 3♥. It is too ambitious to think of a slam. Even if your side is vulnerable, you cannot expect partner to hold ♥AKQxxxx. With such a suit many players would open 4♥. Suppose instead that you are facing ♥KQJxxxx. With no side entry to dummy, to reach any established cards in hearts, a contract of 3NT will be hopeless! You should raise to 4♥, adding your high cards to partner’s trump tricks. Answer: (b) 4♥.
 
-15. ♠ 10 8 2 ♥ J 3 ♦ K Q J 7 6 2 ♣ 9 4
-
+15. n p p ?
+♠ 10 8 2 ♥ J 3 ♦ K Q J 7 6 2 ♣ 9 4
+# You are not vulnerable and the first two players pass. What will you bid?
+(a) Pass    (b) 2♦    (c) 3♦
 The first two players pass and you are not vulnerable. You will hear players say ‘Anything goes in the third seat’. Yes, indeed! Here you have virtually no defense against a major-suit game and can expect to make a fair number of tricks in diamonds. You should open 3♦. Don’t even think that you are being a bit daring. It is the ‘normal opening bid’ on such a hand in the third seat. If you were vulnerable, you might well show some caution and open just 2♦. Answer: (c) 3♦.

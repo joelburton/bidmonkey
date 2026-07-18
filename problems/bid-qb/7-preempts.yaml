@@ -1,0 +1,187 @@
+quiz: BQ Preemptive Openings
+problems:
+
+#1
+- hand: s84 hak96 da109 caj104
+  dealer: n
+  auction:
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [2nt, 3nt, 4s]
+      explain: |
+        Your partner opens 2♠. You are just about worth a raise to 4♠. If his trumps are ♠KQJ962, you will probably have five trump tricks and four top winners. If he holds two or three low clubs in addition, you may be able to take two club finesses for an extra trick. If instead his trumps are ♠AQJ875, you may be able to score six trump tricks with a repeated finesse. A contract of 3NT would often be hopeless; you could be cut off from dummy’s spade suit.
+      answer: 4s
+
+#2
+- hand: s982 hkq10952 d3 ck106
+  dealer: s
+  auction:
+    - s: 2h
+    - w: p
+    - n: 2nt
+    - e: p
+    - s: "?"
+      choices: [3c, 3h, 4h]
+      explain: |
+        You open 2♥ and partner bids 2NT, asking for a feature. You have the ♣K, so you show it. Partner might have a hand like ♠53 ♥J43 ♦AQ7 ♣AQJ32, in which case he will be delighted to hear you have the ♣K.
+      answer: 3c
+
+#3
+- hand: skj6 h875 d102 ckq874
+  dealer: n
+  auction:
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [p, 3c, 3s]
+      explain: |
+        Partner opens 2♠ and you do not expect to make 4♠. Indeed, if partner holds ♠AQ10742 and nothing much else, you may score only 7 or 8 tricks. Since you have little defense to a red-suit contract, you should raise preemptively to 3♠. This is not a game try; you would respond 2NT if you had genuine game interest.
+      answer: 3s
+
+#4
+- hand: saq10973 h6 daj9 ca104
+  dealer: n
+  auction:
+    - n: 2h
+    - e: p
+    - s: "?"
+      choices: [p, 2s, 3s]
+      explain: |
+        Partner opens 2♥. If he holds, say, ♥KQJ962 and little else, you will lose a lot of tricks in a spade contract. If instead partner holds a good weak two including two or three spades, the ♥A and a minor-suit king, you may make 4♠. You should test the waters by responding 2♠, which is forcing for one round.
+      answer: 2s
+
+#5
+- hand: sk97542 h83 d62 ck108
+  dealer: s
+  auction:
+    - s: "?"
+      prompt: "Under what conditions would you open 2♠?"
+      text_choices: ["Never", "Not vulnerable", "Not vulnerable in third seat"]
+      explain: |
+        The first two players pass. In the third seat it is often worth bidding on hands that you would normally not open. After two passes, you can visualize that your LHO has a strong hand. So, open 2♠ when non-vulnerable and in the third seat. You will often see players opening 2♠ on this type of hand in other situations. It may work, it may not. It is much more of a gamble.
+      answer: "Not vulnerable in third seat"
+
+#6
+- hand: s3 haj dakqj532 ck107
+  dealer: n
+  auction:
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [3nt, 4d, 4s]
+      explain: |
+        Partner opens 3♠. Your best chance of making a game is to respond 3NT. Partner is not allowed to go back to 4♠. He has already described the nature of his hand and must trust that you know what you’re doing.
+      answer: 3nt
+
+#7
+- hand: saj4 h5 dq108764 cj92
+  dealer: n
+  auction:
+    - n: 3s
+    - e: p
+    - s: "?"
+      choices: [p, 4s]
+      explain: |
+        Partner opens 3♠. You expect that the opponents can make 4♥, maybe 6♥. At any vulnerability you should raise to 4♠. You expect to score seven trump tricks, plus one or two ruffs in the heart suit. Do not dwell solely on the risk that you might go 500 down against a non-vulnerable game. Think instead how incredibly difficult it will be for the opponents to judge their subsequent bidding.
+      answer: 4s
+
+#8
+- hand: s7 hq1064 dak107632 cj
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1d, 3d]
+      explain: |
+        You are much too strong for a preemptive 3♦, even when vulnerable. If partner held as little as ♥AK732 and a black-suit ace, he would pass 3♦ when you could make twelve tricks in hearts! Although you hold only 10 HCP, you are entitled to add extra points for your splendid seven-card suit and the good shape outside. You should open 1♦. If opening a one-bid on so few points does not appeal to you, then it is better to pass than open 3♦.
+      answer: 1d
+
+#9
+- hand: sak6 h3 daq742 ckq54
+  dealer: n
+  auction:
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [p, 3nt, 4h]
+      explain: |
+        Partner opens 3♥ and you have to calculate the best final contract. The first point to note is that 3NT is likely to be hopeless. Partner’s heart suit would not contribute at all as his hand will usually contain no entries. A much better chance is that you can make 4♥, by adding partner’s trump tricks to the top cards in your hand. Suppose partner has ♥KQJxxxx and little else. You should be able to score six trump tricks plus at least four side-suit winners in your hand.
+      answer: 4h
+
+#10
+- hand: skqj10632 hak3 d64 ca
+  dealer: n
+  auction:
+    - n: 3d
+    - e: p
+    - s: "?"
+      choices: [3s, 4s, 5d]
+      explain: |
+        Partner opens 3♦. If he has a good diamond suit, you might be able to make 5♦. However, you can see your own wonderful spades and you must have an excellent chance of making 4♠. Six spade tricks, plus your three side-suit winners give you a total of nine tricks. You have every chance of a diamond trick too. A response of 3♠ would be forcing but since you do not need spade support, you should go straight to the spade game.
+      answer: 4s
+
+#11
+- hand: sk8 haq10763 d1094 c62
+  dealer: s
+  auction:
+    - s: 2h
+    - w: p
+    - n: 2s
+    - e: p
+    - s: "?"
+      choices: [p, 3h, 3s]
+      explain: |
+        You open 2♥ and partner bids 2♠. A change of suit is forcing for one round. If your partner sees the chance of game in spades, he will hold a good hand almost certainly with six spades. Rebidding 3♥ would not be a good idea. Your partner already knows that you have six hearts. Instead you should raise to 3♠. Knowing that you can assist him in the spade suit will often allow him to bid a good spade game.
+      answer: 3s
+
+#12
+- hand: saj10762 hk104 d105 c98
+  dealer: s
+  auction:
+    - s: 2s
+    - w: p
+    - n: 3d
+    - e: p
+    - s: "?"
+      choices: [p, 3h, 3s, 3nt]
+      explain: |
+        You open 2♠ and partner bids 3♦. You have to bid again, whatever you hold. Tell partner something useful! Bid 3♥ to show a feature (stopper) in hearts. This may be enough to trigger a 3NT bid from your partner.
+      answer: 3h
+
+#13
+- hand: sk1087542 h93 dq87 cj
+  dealer: n
+  auction:
+    - n: p
+    - e: p
+    - s: "?"
+      choices: [p, 2s, 3s]
+      explain: |
+        Not vulnerable you should open 3♠ in third seat. The next player is marked with a good hand. If he doubles, this will be for takeout. Vulnerable, and with an unimpressive spade suit, you would not take the risk; you would open just 2♠. There is a small chance that a takeout double by LHO might be left in by your RHO if he has no great shape and a few high cards.
+      answer: 3s
+      accept: [2s]
+
+#14
+- hand: sakj7 h3 daq72 cak64
+  dealer: n
+  auction:
+    - n: 3h
+    - e: p
+    - s: "?"
+      choices: [3nt, 4h, 4nt]
+      explain: |
+        Partner opens 3♥. It is too ambitious to think of a slam. Even if your side is vulnerable, you cannot expect partner to hold ♥AKQxxxx. With such a suit many players would open 4♥. Suppose instead that you are facing ♥KQJxxxx. With no side entry to dummy, to reach any established cards in hearts, a contract of 3NT will be hopeless! You should raise to 4♥, adding your high cards to partner’s trump tricks.
+      answer: 4h
+
+#15
+- hand: s1082 hj3 dkqj762 c94
+  dealer: n
+  auction:
+    - n: p
+    - e: p
+    - s: "?"
+      choices: [p, 2d, 3d]
+      explain: |
+        The first two players pass and you are not vulnerable. You will hear players say ‘Anything goes in the third seat’. Yes, indeed! Here you have virtually no defense against a major-suit game and can expect to make a fair number of tricks in diamonds. You should open 3♦. Don’t even think that you are being a bit daring. It is the ‘normal opening bid’ on such a hand in the third seat. If you were vulnerable, you might well show some caution and open just 2♦.
+      answer: 3d
+
