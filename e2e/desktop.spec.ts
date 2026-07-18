@@ -8,7 +8,7 @@ test('desktop keeps a centered portrait layout that fits', async ({ page }) => {
   await page.goto('/')
   // Sources → quizzes → QuizB #2 is "Choose your opening lead".
   await page.getByText('FakeBook').click()
-  await page.getByText('QuizB').click()
+  await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
   await page.getByRole('button', { name: 'Next problem' }).click()
   await page.getByRole('button', { name: 'Play', exact: true }).click()
   await expect(page.locator('.center-opts .opt-btn')).toHaveCount(4)

@@ -5,10 +5,10 @@ import type { Page } from '@playwright/test'
 async function gotoTwoDecisions(page: Page) {
   await page.goto('/')
   await page.getByText('FakeBook').click()
-  await page.getByText('QuizB').click()
+  await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
   await page.getByRole('button', { name: 'Next problem' }).click()
   await page.getByRole('button', { name: 'Next problem' }).click()
-  await expect(page.locator('.quiz-title')).toHaveText('QuizB #3')
+  await expect(page.locator('.qbtn-label')).toHaveText('QuizB #3')
 }
 
 test.describe('auction', () => {
@@ -50,7 +50,7 @@ test.describe('auction', () => {
     // Auction complete, no fourth hand → no "Play" button; nav is in the header.
     await expect(page.getByText('Bidding complete.')).toBeVisible()
     await expect(page.getByRole('button', { name: 'Play', exact: true })).toHaveCount(0)
-    // Last problem of the quiz → Next is disabled, Home (‹) still available.
-    await expect(page.getByRole('button', { name: 'Next problem' })).toBeDisabled()
+    // Mid-quiz problem (#3 of 4) → header Next stays available to move on.
+    await expect(page.getByRole('button', { name: 'Next problem' })).toBeEnabled()
   })
 })
