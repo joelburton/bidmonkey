@@ -34,3 +34,8 @@ playwright/.cache/
 # Claude Code local settings
 .claude/settings.local.json
 db-conn
+
+# Editor cruft (vim swap / undo / backup files)
+*.un~
+*.sw[nop]
+*~

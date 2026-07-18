@@ -1,0 +1,168 @@
+quiz: BQ Opening Bid
+problems:
+
+#1
+- hand: sa2 hj9862 daqj73 c10
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1d, 1h]
+      explain: |
+        With 12 HCP and two five-card suits, there is no temptation whatsoever to pass. Should you open 1♥ or 1♦? The diamonds are much stronger but remember the rule that you should open the higher-ranking of two five-card suits. When you choose a trump suit, it is often important to choose the suit where you have the greatest combined length. Suppose you have eight or nine hearts between you. That will make a fine trump suit even if you are missing, say, the ♥A and ♥K. Also, it is important to seek a fit in a major suit rather than a minor suit. That’s because you will need only ten tricks to make game in a major.
+      answer: 1h
+
+#2
+- hand: s985 hk1076 da3 cak74
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1h, 1nt]
+      explain: |
+        Your hand is balanced and you therefore want to show this by bidding notrump as soon as possible. Should you open 1NT? No, because you don’t hold 15-17 HCP. You should therefore plan to open one of a suit and to bid notrump at your next turn. You cannot open 1♥ because that would promise at least a five-card suit. Here you are happy to open in clubs.
+      answer: 1c
+
+#3
+- hand: saqj8 h1083 dkq7 ca95
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1s, 1nt]
+      explain: |
+        Your hand is balanced and you hold 15-17 HCP. End of discussion! You will open 1NT, giving an excellent description of your hand. When your hand is balanced, aim to bid notrump as soon as possible.
+      answer: 1nt
+
+#4
+- hand: s10973 haj4 d75 caq94
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1c, 1s]
+      explain: |
+        Once again you hold a balanced hand. It is nowhere near strong enough to open 1NT. Should you open 1♣? No, because you have only 11 HCP and you are not worth opening the bidding at all. Some 11-point hands are worth an opening bid but only when they are shapely and contain a good suit or two.
+      answer: p
+
+#5
+- hand: s432 h32 dqj92 cakq3
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1d]
+      explain: |
+        Open 1♦. If partner responds 1♥, you can now rebid 2♣. If you were to choose your ‘better minor’ instead (a common myth in the world of social players) and open 1♣, then you would be stuck for a rebid over 1♥. Bidding 2♣ at this point would promise more than four of them, and you cannot bid 1NT without a spade stopper. Bidding 2♦ would promise a very different hand (see p. 34).
+      answer: 1d
+
+#6
+- hand: s2 hak93 dqj763 ck84
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1d, 1h]
+      explain: |
+        You will nearly always open when you hold only 12 HCP, so of course you are happy to open here with 13 HCP. Will you open 1♥ or 1♦? There are two good reasons not to open 1♥. Firstly, such an opening bid would promise at least a five-card suit. Secondly, when you hold five cards in one suit and four in another, you open in the five-card suit.
+      answer: 1d
+
+#7
+- hand: saq5 hk7 dak106 cq982
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1d, 1nt, 2nt]
+      explain: |
+        Since you hold a balanced hand, you should aim to bid notrump as soon as possible. Should you open 1NT? No, because that would show 15-17 HCP and you hold 18 HCP. How about 2NT? No, that would show 20-21 points, so you are not strong enough. You should open one of a suit, intending to rebid 2NT if partner responds at the one-level. With four cards in each minor, you start with 1♦.
+      answer: 1d
+
+#8
+- hand: saj86 hk1083 d72 caj4
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1h, 1s, 1nt]
+      explain: |
+        Once again you hold a balanced hand but cannot open 1NT because you do not have 15-17 HCP. Nor can you open 1♠ or 1♥ because these bids promise a five-card suit. You will have to open a three-card minor instead.
+      answer: 1c
+
+#9
+- hand: s42 hakj93 d9 ck10742
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1c, 1h]
+      explain: |
+        Always consider your distribution on unbalanced hands. Not only do you have a splendid five-card heart suit, you also have a second five-card suit. Shapely hands like these will provide plenty of tricks if you end as declarer. When you open the bidding on this type of hand do not think: ‘I’m being a bit bold, opening on just 11 points’. You have an excellent hand and it would be a big mistake not to open the bidding. With two five-card suits you will open the higher one, as usual.
+      answer: 1h
+
+#10
+- hand: sk hj8754 da10532 cqj
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1d, 1h]
+      explain: |
+        You have 11 HCP and some shape but there are two reasons why you should choose to pass on this hand. Firstly, you would have to open 1♥ and your hearts are weak. You would not want partner to lead a heart if the opponents played in a spade contract. Secondly, if the opponents hold the ace and king, your bare ♣QJ will be worth almost nothing. The same applies to the ♠K. High cards are at their most valuable when they are in your long suits.
+      answer: p
+
+#11
+- hand: skj8 haq daq1083 ckq9
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1d, 1nt, 2c, 2nt]
+      explain: |
+        You have a balanced hand of 21 HCP. All balanced hands containing 20 or 21 points are opened 2NT, giving an excellent description of your hand immediately.
+      answer: 2nt
+
+#12
+- hand: sq9854 haj10763 da10 c-
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [p, 1h, 1s]
+      explain: |
+        Only 11 HCP but remember that to assess the strength of a hand you must look at both the HCP and the shape. With two long major suits and the consequent shortness in the minors, this hand has excellent ‘playing strength’. What does that mean? It means that if you end up playing the hand, particularly if partner has a fit for one of your suits, you can expect to make plenty of tricks. As always, you will open in your longer suit, bidding 1♥ rather than 1♠.
+      answer: 1h
+
+#13
+- hand: s8 hakj982 dakq7 ca5
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1h, 2c, 2h]
+      explain: |
+        Suppose you open 1♥ on this hand and this is followed by three passes. What would your reaction be? You would surely be worried that you had missed a game in hearts! If partner holds as little as three low hearts and no HCP at all, you would have a great chance of scoring at least ten tricks. On hands like these, where you fear missing a game if partner passes a one-bid, you should choose bridge’s strongest opening bid: 2♣. Partner will then have to bid, even if he has no points at all. An opening bid of 2♥ would be no good. We will see in a later chapter that this is a weak opening bid, showing a six-card suit and 6-10 points.
+      answer: 2c
+
+#14
+- hand: s107 haj542 daq7 caj8
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1h, 1nt]
+      explain: |
+        It seems here that you have two satisfactory opening bids: 1♥ and 1NT. Suppose you open 1♥, though, and partner responds 1♠. What will you bid next? It’s a problem. You cannot rebid 1NT, showing 12-14 points. Nor should you rebid 2♥. That would suggest a minimum hand with 13-15 points only, and you have a bit more than that. Simply open 1NT, even though you hold a five-card major.
+      answer: 1nt
+
+#15
+- hand: saj76 hak54 daq c1076
+  dealer: s
+  auction:
+    - s: "?"
+      choices: [1c, 1h, 1s, 1nt]
+      explain: |
+        Opening 1♥ or 1♠ promises at least five cards in your suit, so you cannot do that. 1NT shows 15-17 points and you are too strong for that. You must open 1♣, intending to bid strongly thereafter. If partner responds 1♦, you will jump to 2NT. If partner responds 1♥ or 1♠, you will raise him to the three-level.
+      answer: 1c
+
+#16
+- hand: sa7 haq76 dakj65 c63
+  dealer: e
+  auction:
+    - e: 1c
+    - s: x
+    - w: p
+    - n: 1s
+    - e: p
+    - s: "?"
+      choices: [p, 2c, 2d, 3d]
+      explain: |
+        The bidding starts (1♣) - dbl (by you) - (pass) - 1♠ - (pass). Judging that your hand is too strong for a 1♦ overcall, you begin with a double. Partner responds 1♠ and the opponents are silent. You should bid 2♦ now. By changing the suit after a takeout double you show a powerful hand (18+ HCP). Remember that partner was forced to bid and might have no values at all.
+      answer: 2d
+
