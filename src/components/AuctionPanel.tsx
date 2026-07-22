@@ -102,6 +102,10 @@ export function AuctionPanel({
   // Keyboard: any key dismisses the popup; a-f pick MC options; the pad keys
   // (1-7, c/d/h/s/n, p, x) drive a free bid — and also a *bid* MC (type "1c"),
   // in addition to its option letters.
+  // The ref mirror is deliberate, not a leftover: the keydown listener is
+  // registered once (deps below are the stable callbacks only) and reads fresh
+  // state/props through ref.current instead of re-subscribing every render.
+  // (PlayView takes the other route — a plain re-subscribing effect.)
   const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay })
   ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay }
   useEffect(() => {
@@ -180,7 +184,9 @@ export function AuctionPanel({
       </div>
 
       <div className="auction-scroll">
-        <AuctionTable cols={model.cols} grid={model.grid} entered={result?.call} />
+        {/* A text answer is a phrase, not a call — don't render it into the
+            auction grid's "?" cell while the popup is up. */}
+        <AuctionTable cols={model.cols} grid={model.grid} entered={isText ? undefined : result?.call} />
       </div>
 
       {!model.actingSeat ? (
