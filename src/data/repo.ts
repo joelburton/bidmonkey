@@ -75,16 +75,24 @@ const mapQuiz = (r: QuizRow): Quiz => ({
   slug: r.slug,
   title: r.title,
   source: r.source ?? undefined,
+  // The sort is load-bearing, not defensive: the embedded quizzes_problems rows
+  // arrive from PostgREST in arbitrary order, and this array's order IS the
+  // order the quiz presents its problems in.
   problemSlugs: [...(r.quizzes_problems ?? [])]
     .sort((a, b) => a.ordinal - b.ordinal)
     .map((l) => l.problem_slug),
 })
 
-/** Load the whole catalogue in one shot (it's tiny). Throws on network/RLS errors. */
+/** Load the whole catalogue up front (sbSelect pages past the PostgREST row
+ * cap, so size isn't a concern). Throws on network/RLS errors. */
 export async function fetchCatalog(): Promise<Catalog> {
   const [sources, problems, quizzes] = await Promise.all([
     sbSelect<SourceRow[]>('sources?select=slug,title,cover_url&order=slug'),
-    sbSelect<ProblemRow[]>('problems?select=*&order=slug'),
+    // Explicit columns (matching ProblemRow) — `*` would also drag the unused
+    // created_at/updated_at/schema_version along for every problem.
+    sbSelect<ProblemRow[]>(
+      'problems?select=slug,title,source,difficulty,tags,hero,dealer,vulnerability,deal,auction,play,contract,commentary&order=slug',
+    ),
     sbSelect<QuizRow[]>('quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=slug'),
   ])
   return { sources: sources.map(mapSource), problems: problems.map(mapProblem), quizzes: quizzes.map(mapQuiz) }
