@@ -126,7 +126,7 @@ export default function App() {
     return (
       <div className="app detail">
         <header className="app-header quiz-header">
-          <button className="qbtn qbtn-home" onClick={goHome} aria-label="Home">
+          <button className="qbtn" onClick={goHome} aria-label="Home">
             <span className="chev">‹</span>
             <span className="qbtn-label">
               {quiz.title} #{nav.index + 1}

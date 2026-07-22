@@ -132,7 +132,8 @@ export function PlayView({
     if (plays.length >= 1) setDummyRevealed(true)
   }, [plays.length])
 
-  // Completed trick: pause for a click unless the hero played the last card.
+  // Completed trick: pause for a click unless the user played the last card
+  // (any human-clicked card counts, including other seats during free play).
   useEffect(() => {
     if (tableTrick.length !== 4) return
     const winner = trickWinner(tableTrick, trump)

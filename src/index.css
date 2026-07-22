@@ -8,7 +8,6 @@
      grey, never a faint near-background grey. See the no-subtle-grey rule. */
   --control-border: #4b5563;
   --accent: #1f7a4d;
-  --accent-soft: #e3f2ea;
   --red: #d21f3c;
   --black: #1a2230;
   --felt: #14532d;
@@ -81,10 +80,17 @@ body {
 .app-header {
   position: sticky;
   top: 0;
-  /* Above the full-screen click catchers (.review-catch z-30, .explain-backdrop
-     z-40, .auction-overlay z-50) so Home/Prev/Next stay tappable while a popup
-     is open or a trick-review pause is active. Safe because the header doesn't
-     dismiss anything (popups dismiss on their own tap) and Home/Next remount
+  /* Top of the z ladder. The full registry:
+       2  .rail            (fans above the center, so a raised card overflows it)
+       6  .play-arrow      (turn indicator above the fan's cards)
+       20 .slot.selected   (a raised card above everything on the table)
+       30 .review-catch    (full-screen click catcher)
+       40 .explain-backdrop (full-screen click catcher)
+       41 .explain-popup   (above its backdrop)
+       50 .auction-overlay
+       60 here — so Home/Prev/Next stay tappable while a popup is open or a
+     trick-review pause is active. Safe because the header doesn't dismiss
+     anything (popups dismiss on their own tap) and Home/Next remount
      ProblemView, discarding any popup/pending state. */
   z-index: 60;
   display: flex;
@@ -112,11 +118,6 @@ body {
   padding: 6px 10px;
   cursor: pointer;
 }
-.back:disabled {
-  color: var(--border);
-  cursor: default;
-}
-
 /* Quiz header: three thin-bordered buttons — a home button showing the quiz +
    problem on the left, and a prev/next chevron pair on the right. Tighter
    vertical padding than the list header. */
@@ -192,6 +193,8 @@ body {
   gap: 10px;
   text-align: center;
   color: var(--ink-soft);
+  /* 15vh sets the message in the upper third rather than vertically centering
+     it — less of a jump when the loading message swaps for content. */
   padding: 15vh 24px;
   font-size: 1.05rem;
 }
@@ -333,11 +336,6 @@ body {
      at the app width, so it never showed there. */
   grid-template-columns: minmax(0, 1fr);
   background: var(--felt);
-  /*background-image: radial-gradient(*/
-  /*  circle at 50% 42%,*/
-  /*  color-mix(in srgb, var(--felt) 82%, white) 0%,*/
-  /*  var(--felt) 75%*/
-  /*);*/
   overflow: hidden;
 }
 
@@ -379,6 +377,8 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  /* position:relative is load-bearing: .explain-popup fills its nearest
+     positioned ancestor with inset:0, and this must be it. */
   /* A little breathing room from the N hand; kept small to avoid dead space. */
   padding: 8px 12px;
 }
@@ -432,7 +432,9 @@ body {
 
 /* Vertical fan (E/W): each card rotated 90°, stacked top→bottom. The .slot
    reserves the rotated footprint (long side wide, short side tall); the inner
-   .rot holds the natural-size card and spins it into place. */
+   .rot holds the natural-size card and spins it into place. The 1.4 is the
+   card aspect ratio (viewBox 100×140 in Card.tsx) — the rail-shift math above
+   and .trick-slot lean on the same factor, so change them together. */
 .hand-v {
   flex-direction: column;
   align-items: center;
@@ -505,6 +507,8 @@ body {
   font-family: 'Roboto Flex', 'Roboto', sans-serif;
   font-weight: 400;
   font-stretch: 75%;
+  /* Not a rem-rule violation: these are SVG user units inside the card's
+     100×140 viewBox, so the text scales with --card-w like everything else. */
   font-size: 30px;
 }
 .red {
@@ -607,6 +611,8 @@ body {
 }
 .suit-glyph path {
   stroke: #fff;
+  /* In the pip path's own viewBox units (the Wikimedia paths are ~300-380
+     across — see SuitGlyph), not px: ~10% of the pip, a slim outline at 1em. */
   stroke-width: 34;
   paint-order: stroke;
   stroke-linejoin: round;
@@ -654,6 +660,24 @@ body {
 .bid-btn:disabled .suit-glyph {
   opacity: 0.35;
 }
+/* Strain-button pips: sized to keep the button the same height as the others. */
+.bid-btn .suit-glyph {
+  width: 1.45rem;
+  height: 1.45rem;
+}
+.bid-btn.sel {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--felt);
+}
+/* Pushed look — for mouse (:active) and keyboard (.pressed) entry. Same
+   specificity as .sel and later in the file, so pressing a selected level
+   still shows the pushed scale. */
+.bid-btn:active:not(:disabled),
+.bid-btn.pressed {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--felt);
+  transform: scale(0.95);
+}
 
 /* ---- Explanation popup -------------------------------------------------- */
 
@@ -664,7 +688,8 @@ body {
   inset: 0;
   z-index: 40;
 }
-/* Covers the auction/bid-entry area only (the center column). */
+/* Covers the auction/bid-entry area only: inset:0 fills .center, the nearest
+   positioned ancestor (its position:relative is what anchors this). */
 .explain-popup {
   position: absolute;
   inset: 0;
@@ -730,22 +755,6 @@ body {
 }
 .suit-black-text {
   color: #eef2f7;
-}
-/* Strain-button pips: sized to keep the button the same height as the others. */
-.bid-btn .suit-glyph {
-  width: 1.45rem;
-  height: 1.45rem;
-}
-.bid-btn.sel {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--felt);
-}
-/* Pushed look — for mouse (:active) and keyboard (.pressed) entry. */
-.bid-btn:active:not(:disabled),
-.bid-btn.pressed {
-  background: rgba(255, 255, 255, 0.92);
-  color: var(--felt);
-  transform: scale(0.95);
 }
 
 /* ---- Play / continue buttons ------------------------------------------- */
@@ -840,7 +849,9 @@ body {
 
 /* Current trick: cards placed by the seat that played them. Compact tracks
    (narrower than a card) so the four cards sit close together in a tight
-   diamond; the grid is centered and only as wide as its tracks. */
+   diamond; the grid is centered and only as wide as its tracks. The 0.62/0.72
+   track factors are visual tuning: a card is 1×1.4 card-widths, so tracks at
+   ~⅔ of that overlap neighbouring cards without hiding their indices. */
 .trick {
   --card-w: 4rem;
   width: fit-content;
@@ -888,6 +899,8 @@ body {
    is on the span so it doesn't fight the rotation. */
 .play-arrow {
   position: absolute;
+  /* Above the fan's cards, below a selected (raised) card — see the z registry
+     at .app-header. */
   z-index: 6;
   width: 1.6rem;
   height: 1.6rem;
@@ -938,7 +951,9 @@ body {
 }
 
 /* Clickable cards + two-tap selection: first tap raises + highlights (toward
-   center, per the hand's `raise` direction), second tap plays. */
+   center, per the hand's `raise` direction), second tap plays. The 1.1rem
+   raise ≈ a quarter card — enough to read the whole index clear of the fan
+   without escaping the table. */
 .slot.playable {
   cursor: pointer;
 }
@@ -948,6 +963,8 @@ body {
 }
 .slot.selected {
   position: relative;
+  /* Above neighbouring cards AND the turn arrow (z-6), so a raised card is
+     never overlapped. See the z registry at .app-header. */
   z-index: 20;
 }
 .slot.selected .card-bg {
@@ -967,13 +984,16 @@ body {
   transform: translateX(1.1rem);
 }
 
-/* Option buttons (multiple-choice bidding & play). */
+/* Play-phase root: wraps the whole table (PlayView) so it fills the detail
+   column; a click that no card catches clears the two-tap selection. */
 .play-root {
   flex: 1;
   min-height: 0;
   display: flex;
   flex-direction: column;
 }
+
+/* Option buttons (multiple-choice bidding & play). */
 .opt-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

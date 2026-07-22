@@ -1,8 +1,8 @@
 import type { Problem } from '../types'
 
-// Sample data for phase 2. Shapes match schema.v1.json so this drops in behind
-// a real API later (replace this array with a fetch). Some problems intentionally
-// omit hands — those seats render face-down.
+// The initial seed + test fixtures — NOT read at runtime (the app fetches from
+// Supabase via data/repo.ts). db/gen-seed.mjs and the tests consume this. Some
+// problems intentionally omit hands — those seats render face-down.
 
 export const problems: Problem[] = [
   {

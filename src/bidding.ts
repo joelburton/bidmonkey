@@ -29,6 +29,12 @@ export function stripAlert(call: string): string {
   return call.endsWith('*') ? call.slice(0, -1) : call
 }
 
+/**
+ * Parse a contract bid ("1C" … "7NT"; "N" = "NT", trailing alert `*` ignored).
+ * Returns null for anything that isn't a bid — P/X/XX and garbage alike; every
+ * caller (legality, contract derivation, rendering) relies on null meaning
+ * "not a bid".
+ */
 export function parseBid(call: string): { level: number; strain: Strain } | null {
   const m = /^([1-7])(NT|N|C|D|H|S)$/.exec(stripAlert(call))
   if (!m) return null
@@ -36,10 +42,11 @@ export function parseBid(call: string): { level: number; strain: Strain } | null
   return { level: Number(m[1]), strain }
 }
 
-/** Ordinal rank of a contract bid; higher beats lower. Non-bids return -1. */
+/** Ordinal rank of a contract bid; higher beats lower. */
 export function bidRank(level: number, strain: Strain): number {
   return (level - 1) * 5 + STRAINS.indexOf(strain)
 }
+/** As bidRank, from the raw call string; non-bids (P/X/XX) return -1. */
 function callRank(call: string): number {
   const b = parseBid(call)
   return b ? bidRank(b.level, b.strain) : -1

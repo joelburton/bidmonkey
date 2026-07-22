@@ -63,6 +63,10 @@ export function ProblemView({
       bottom={<Hand hand={problem.deal[problem.hero]} orientation="horizontal" />}
       center={
         <AuctionPanel
+          // Load-bearing, not a list key: a correct answer advances via
+          // onAnswer without the panel ever clearing its popup state — the key
+          // change remounts it, which is what closes the popup and resets any
+          // pending level.
           key={answers.length}
           problem={problem}
           answers={answers}

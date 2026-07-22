@@ -1,5 +1,4 @@
-// Mirrors schema.v1.json / schema.sql. Only the fields phase 2 needs are
-// fully typed; auction/play are kept loose until the bidding phase.
+// Mirrors schema.v1.json and the Supabase tables (supabase/migrations/).
 
 export type Seat = 'N' | 'E' | 'S' | 'W'
 export type Suit = 'S' | 'H' | 'D' | 'C'
