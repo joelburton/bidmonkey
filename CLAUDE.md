@@ -43,7 +43,19 @@ denied").
 `problem_flags` is the **one table the app writes to** (see "Review flags"
 below): `anon` has insert/update/delete on it, with open policies, because with
 no auth there is nothing to check a row against. Deliberate — it's one person's
-review list, pointing at already-public content. Local:
+review list, pointing at already-public content.
+
+**Grants don't start where you'd think on the remote project.** Its DEFAULT
+PRIVILEGES in `public` hand `anon` full DML on every table postgres creates
+(`anon=arwdDxtm`), where a fresh local stack hands out only `Dxtm`. So for months
+`anon` held insert/update/delete on all four content tables on remote and
+SELECT-only locally, from the same migrations — invisible because RLS (no
+write policies) refused every attempt anyway. `20260724110000` revokes those
+grants *and* the defaults, so both layers hold and a new table doesn't reopen it.
+Lesson: after adding a table, check the **remote** grants
+(`information_schema.role_table_grants where grantee='anon'`), not just local.
+(`authenticated` still carries the wide defaults — no part of this app uses that
+role, since there's no auth.) Local:
 
 ```
 supabase start                        # brings up the local stack (applies migrations + seed)
