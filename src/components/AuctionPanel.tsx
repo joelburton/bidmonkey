@@ -272,6 +272,10 @@ export function AuctionPanel({
         </div>
       ) : (
         <div className="bidpad">
+          {/* Free bid entry carries a prompt too, when the problem needs standing
+              context the auction can't show — e.g. a chapter that starts at
+              partner's RKCB 4NT with the trump-agreeing auction left unseen. */}
+          {q!.prompt && <div className="mc-prompt">{withSuits(q!.prompt)}</div>}
           <div className="bid-grid">
             {LEVELS.map((l) => (
               <button
