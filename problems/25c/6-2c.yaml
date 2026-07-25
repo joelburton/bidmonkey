@@ -1,0 +1,197 @@
+quiz: 25C Strong 2C Opening
+problems:
+
+# Book question 1 (hands a-f): what is your opening bid? You are the dealer.
+
+  #1 — book 1a
+  - hand: skq95 haj7 dak ckqj5
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          2♣. You will rebid 2NT to show a balanced hand with 22-23 HCP.
+        answer: 2c
+
+  #2 — book 1b
+  - hand: sa5 hkqj10762 dakj c5
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          2♣. Although you have only 17 HCP, once you add your distributional points you have more than enough; you can just about make game in your own hand. You will be able to investigate slam, but stop in game if partner has nothing useful.
+        answer: 2c
+
+  #3 — book 1c
+  - hand: s3 ha7 daqj85 ckqj106
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          1♦. You have a nice hand, but if partner cannot respond to 1♦, it is unlikely you can make game.
+        answer: 1d
+
+  #4 — book 1d
+  - hand: skj3 hkq10 dakq53 cak
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          2♣. You will rebid 3NT to show a balanced hand with 24-25 HCP.
+        answer: 2c
+
+  #5 — book 1e
+  - hand: sak86 hak42 dak74 c4
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          1♦. Experience has shown that this works best on unbalanced hands with no strong suit. You are not likely to get passed out in 1♦.
+        answer: 1d
+
+  #6 — book 1f
+  - hand: sak8642 h3 dak8532 c-
+    dealer: s
+    auction:
+      - s: "?"
+        explain: |
+          1♠. You won't get passed out here, and you'll get to bid both suits.
+        answer: 1s
+
+# Book question 2 (hands a-d): partner opens 2♣ — what is your response?
+
+  #7 — book 2a
+  - hand: skq1043 hkj5 d952 c72
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You have more than 8 HCP and a qualifying five-card suit.
+        answer: 2s
+
+  #8 — book 2b
+  - hand: s852 h9632 dj7432 c7
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. Much as you would like to, you cannot pass. 2♦ simply tells partner that you don't have a descriptive positive bid to make. If partner next bids 2♥ or 2♠, raise to game because you do have a fit.
+        answer: 2d
+
+  #9 — book 2c
+  - hand: sq98643 hak5 d3 ck53
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. The spades aren't good enough to bid directly (only one top honor), but you'll get plenty of chances to bid them later.
+        answer: 2d
+
+  #10 — book 2d
+  - hand: sq986 hak5 dqj7 ck53
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. How can you have a hand this good opposite a 2♣ opener? For now, you await events. Remember, if partner has a heart void, your hand may not be as good as it looks!
+        answer: 2d
+
+# Book question 3 (hands a-f): what is your next bid? Partner opens the 2♣ in
+# a-d (dealer N); you are the 2♣ opener in e and f (dealer S).
+
+  #11 — book 3a
+  - hand: s98754 h97 d8642 c42
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          3♣, a second negative, telling partner what a terrible hand you have.
+        answer: 3c
+
+  #12 — book 3b
+  - hand: skq82 hk1076 dq4 cj85
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♣, Stayman. You intend to bid a slam, but right now you don't know whether it will be in hearts, spades, or notrump.
+        answer: 3c
+
+  #13 — book 3c
+  - hand: s7654 hq862 d73 cj95
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠, the picture bid. You have spade support and a poor hand.
+        answer: 4s
+
+  #14 — book 3d
+  - hand: skj932 hk74 dq62 c95
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. The strongest bid you can make at this stage. Once hearts are agreed, you can explore slowly for the right level to play at.
+        answer: 3h
+
+  #15 — book 3e
+  - hand: skj9 haj7 dak ckqj105
+    dealer: s
+    auction:
+      - s: 2c
+      - w: p
+      - n: 2d
+      - e: p
+      - s: 2nt
+      - w: p
+      - n: 4nt
+      - e: p
+      - s: "?"
+        explain: |
+          6NT. Partner's 4NT was quantitative, asking you to bid slam with a maximum. You have 22 points, but a good five-card suit, so accept.
+        answer: 6nt
+
+  #16 — book 3f
+  - hand: sakqj1084 ha dkqj10 c7
+    dealer: s
+    auction:
+      - s: 2c
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. This was a trick question, since we did not discuss this earlier. Although 2♠ now cannot be passed, a jump below game tells partner that you have a solid suit, and want to play there even if he has a void. All you really need to know on this hand is how many aces partner has: but first tell him which suit is going to be trumps.
+        answer: 3s

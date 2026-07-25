@@ -1,0 +1,148 @@
+quiz: 25C Reverses
+problems:
+
+# One group this time — "what is your next bid on each of these auctions?" You
+# are the opener in #1-#5 (dealer S) and the responder in #6-#10 (partner opens
+# 1♣ and reverses into 2♦, dealer N).
+
+  #1
+  - hand: skq6 haq107 d7 cq10864
+    dealer: s
+    auction:
+      - s: 1c
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You are too weak to bid 2♥. Raising spades is preferable to rebidding your indifferent clubs.
+        answer: 2s
+
+  #2
+  - hand: saq64 hk97532 dk4 c5
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. You are not interested in game opposite a 1NT response, but this will likely be the best contract. You are too weak for 2♠, and besides, partner cannot have four spades on this auction.
+        answer: 2h
+
+  # Same hand as #1, a different response from partner.
+  #3
+  - hand: skq6 haq107 d7 cq10864
+    dealer: s
+    auction:
+      - s: 1c
+      - w: p
+      - n: 1d
+      - e: p
+      - s: "?"
+        explain: |
+          1♥. Rebidding a second suit at the one-level is not a reverse.
+        answer: 1h
+
+  #4
+  - hand: skq104 hakq753 d- ckj3
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. This is forcing, so partner cannot pass. You don't intend to play in spades, since partner cannot have four of them, but this is the best way to describe your hand. When you rebid hearts, partner will know you have a strong hand with 4-6 in the majors.
+        answer: 2s
+
+  #5
+  - hand: sk6 h73 daqj6 caqj85
+    dealer: s
+    auction:
+      - s: 1c
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. This hand is worth a reverse — only just!
+        answer: 2d
+
+  #6
+  - hand: sj7532 hj53 da6 c974
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♣. You are not interested in game if partner has only 17 points. Your spades are not worth rebidding, and your heart stopper is not good enough for 2NT. Note that even with three diamonds and only two clubs, 3♣ would be the right bid (opener has more clubs than diamonds).
+        answer: 3c
+
+  #7
+  - hand: skq10 hk853 dj63 c1086
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. Your hand is too good to bid only 2NT, which partner can pass. You have solid stoppers in the fourth suit (spades) so jump to what is the most likely game.
+        answer: 3nt
+
+  #8
+  - hand: sk10 hk8543 dq6 ca1086
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Time to tell partner about your club support, since he has at least five of them, and if you bid only 3♣, partner could pass. Your ♦Q is a big card too, and slam is not out of the question.
+        answer: 4c
+
+  #9
+  - hand: s106 hkq8543 da64 c108
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. It's not clear yet what the right game is. Make a forcing bid and keep describing your hand.
+        answer: 3h
+
+  # #9's hand with ♦A64 downgraded to ♦1064 — that's the whole point.
+  #10
+  - hand: s106 hkq8543 d1064 c108
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. Notice the difference between this hand and the one in Question 9, and the way they are bid as a result. With any luck, partner will pass this…
+        answer: 2h

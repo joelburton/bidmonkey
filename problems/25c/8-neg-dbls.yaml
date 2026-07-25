@@ -1,0 +1,153 @@
+quiz: 25C Negative Doubles
+problems:
+
+# LHO / Partner / RHO / You columns = W / N / E / S. In #1-#8 partner opens and
+# RHO overcalls, so the dealer is North and you are the one making (or not
+# making) the negative double. In #9-#12 you open, LHO overcalls and it is
+# *partner* who doubles, so the dealer is South.
+
+  #1
+  - hand: skj63 hq1052 dq5 c743
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1d
+      - s: "?"
+        explain: |
+          Double. You have two four-card majors and more than the necessary 6 points.
+        answer: x
+
+  #2
+  - hand: skj63 hq105 dq542 c74
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1d
+      - s: "?"
+        explain: |
+          1♠. Double here would promise both majors.
+        answer: 1s
+
+  #3
+  - hand: skj963 hq105 dq2 c754
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1h
+      - s: "?"
+        explain: |
+          1♠. This shows 6 or more points and at least five spades.
+        answer: 1s
+
+  #4
+  - hand: skj93 hq105 dqj82 c75
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 1h
+      - s: "?"
+        explain: |
+          Double. You have exactly four spades, more than the necessary 6 points, and both unbid suits.
+        answer: x
+
+  # #4's hand with ♥Q105 weakened to ♥J105, and RHO preempting to 3♥.
+  #5
+  - hand: skj93 hj105 dqj82 c75
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 3h
+      - s: "?"
+        explain: |
+          Pass. You have both unbid suits but not enough strength to force partner to bid at the three-level.
+        answer: p
+
+  #6
+  - hand: skj97 hkj105 dk32 ca5
+    dealer: n
+    auction:
+      - n: 1c
+      - e: 2d
+      - s: "?"
+        explain: |
+          Double. You have two unbid four-card majors. You can show your extra high-card strength on the next round.
+        answer: x
+
+  #7
+  - hand: s73 hkj95 daq82 c765
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 2s
+      - s: "?"
+        explain: |
+          Double. You do have the unbid major, and although you don't have clubs, you have good support for partner's diamonds. If partner bids 3♣, you will retreat to 3♦. This says you have four hearts, but that you were just kidding about clubs.
+        answer: x
+
+  #8
+  - hand: s93 haq865 dj82 caq5
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 1s
+      - s: "?"
+        explain: |
+          2♥. You have an opening bid and a good five-card suit: more than enough to make a forcing bid.
+        answer: 2h
+
+  #9
+  - hand: skj93 h105 daqj82 cq5
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1s
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. A minimum notrump rebid: you have a spade stopper, and partner has promised hearts. Don't even think about passing for penalties — your spades are badly placed for defense.
+        answer: 1nt
+
+  #10
+  - hand: skj93 h105 dakj82 ck5
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1h
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. This time all your high cards seem to be working well, and you have just discovered a nine-card trump fit (partner must have five spades).
+        answer: 3s
+
+  #11
+  - hand: skj9 h1053 daqj82 cq5
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 2c
+      - n: x
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. This is how partner shows you five or six hearts with too weak a hand to bid 2♥ directly over the 2♣ overcall.
+        answer: p
+
+  # Same hand as #9, a different auction.
+  #12
+  - hand: skj93 h105 daqj82 cq5
+    dealer: s
+    auction:
+      - s: 1d
+      - w: 1h
+      - n: x
+      - e: 2h
+      - s: "?"
+        explain: |
+          2♠. Partner's double showed four spades.
+        answer: 2s

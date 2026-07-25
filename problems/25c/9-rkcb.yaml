@@ -1,0 +1,138 @@
+quiz: 25C Roman Keycard BW
+problems:
+
+# This chapter starts each auction mid-stream: "assume hearts have been agreed
+# as trumps in the unseen auction that precedes the (RKCB) 4NT bid". There is no
+# preceding auction to record, so each problem opens with partner's 4NT (dealer
+# N) exactly as the book prints it, and the standing instruction rides on the
+# question's `prompt` — without it the solver can't know what the trump suit is,
+# and 5♣ vs 5♠ is unanswerable. The prompt says ONLY what the book's preamble
+# says: it must not hint at what partner's follow-up bid asks, which is the part
+# being tested.
+#
+# The book reuses hands across questions: #1/#6, #2/#5 and #3/#4 are pairs, with
+# different responses from partner.
+
+  #1
+  - hand: sa8 hkq83 dj963 ck42
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5♠. You have two keycards (♠A and ♥K) plus the queen of trumps.
+        answer: 5s
+
+  #2
+  - hand: sa94 haq42 da1073 ca5
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5♣. You have four keycards. 5♣ = 1 or 4.
+        answer: 5c
+
+  #3
+  - hand: skq63 hk63 dkj875 c3
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5♣. You have one keycard (♥K). 5♣ = 1 or 4.
+        answer: 5c
+
+  #4
+  - hand: skq63 hk63 dkj875 c3
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: 5c
+      - w: p
+      - n: 5d
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5♥. You do not have the queen of trumps (hearts) so you make the lowest available bid in the agreed suit.
+        answer: 5h
+
+  #5
+  - hand: sa94 haq42 da1073 ca5
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: 5c
+      - w: p
+      - n: 5d
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5NT. You have the queen of trumps but no outside king.
+        answer: 5nt
+
+  # The book prints this hand with only 12 cards (♣K4); it is #1's hand, so the
+  # missing ♣2 is restored here.
+  #6
+  - hand: sa8 hkq83 dj963 ck42
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: 5c
+      - w: p
+      - n: 5d
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          6♣. You have the queen of trumps and an outside king. Cuebidding your (lowest) king also shows the ♥Q.
+        answer: 6c
+
+  #7
+  - hand: saq63 hk63 daj875 c3
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: 5d
+      - w: p
+      - n: 5h
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          Pass. 5♥ was a sign off. 5♠ would have asked for the trump queen.
+        answer: p
+
+  #8
+  - hand: skq63 hq32 dqj875 c3
+    dealer: n
+    auction:
+      - n: 4nt
+      - e: p
+      - s: 5d
+      - w: p
+      - n: 5s
+      - e: p
+      - s: "?"
+        prompt: "Hearts are agreed as trumps in the unseen auction before partner's RKCB 4NT."
+        explain: |
+          5NT. We are sure you realized there is a problem here. With hearts agreed, after the 5♠ queen-ask, if you bid as we have recommended, then 5NT says you have the ♥Q and ♠K, while 6♥ says you have the ♥Q and no side kings. So how do you say 'Sorry, I don't have the ♥Q'? We suggest that in this specific auction, with hearts agreed as trumps, then over the 5♠ queen-ask you play the following:
+
+          5NT — I have the ♥Q but not the ♦K or ♣K
+          6♣/6♦ — I have the ♥Q and this king (bid 6♣ if you have both)
+          6♥ — I don't have the ♥Q
+
+          So, with this hand, you still respond 5NT, promising the ♥Q but denying either minor-suit king. There are more complex methods available, but for now, this will handle most situations. Remember that once partner has bid 5♠, you are committed to playing a small slam at least.
+        answer: 5nt
