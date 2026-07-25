@@ -311,7 +311,11 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
     double), `a`–`f` = multiple-choice options, **`Shift+F` = flag/unflag for
     review** (in the auction and the play phase alike). Handled keys flash the
     button (`.pressed`). **Any key closes the answer popup** — except a bare
-    modifier (see "Review flags").
+    modifier (see "Review flags") and `<`/`>`.
+  - **`<` and `>` step between problems**, the keyboard twins of the header's
+    Prev/Next. Owned by `App` (like the buttons), not the phases, so one pair
+    works in the auction, the play and free study alike; both phase key
+    handlers skip them so the any-key-dismisses rule doesn't fire as well.
   - The popup covers only the center (cards stay visible), is scrollable, and
     dismisses on any click outside (transparent full-screen catcher).
 

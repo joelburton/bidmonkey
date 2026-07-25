@@ -90,6 +90,30 @@ export default function App() {
     return () => document.removeEventListener('mousedown', onMouseDown)
   }, [])
 
+  // Keyboard twins for the header's ‹ / › — "<" and ">" step through a run's
+  // problems. Owned here rather than by the phases, for the same reason the
+  // buttons are: one pair of keys that works in the auction, the play and free
+  // study alike. (The phases skip these two keys so their any-key-dismisses
+  // rule doesn't fire as well — see AuctionPanel/PlayView.)
+  //
+  // Declared with the other effects, above the early returns, so the hook order
+  // never changes; the functional setNav both keeps the listener off `nav` (so
+  // it subscribes once) and makes it a no-op on the list screens.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      if (e.key !== '<' && e.key !== '>') return
+      setNav((n) => {
+        if (n.view !== 'run') return n
+        const i = n.index + (e.key === '>' ? 1 : -1)
+        return i >= 0 && i < n.order.length ? { ...n, index: i } : n
+      })
+      e.preventDefault()
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [])
+
   if (error) {
     return (
       <div className="app list">

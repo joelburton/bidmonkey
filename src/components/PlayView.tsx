@@ -268,6 +268,9 @@ export function PlayView({
       // A bare modifier isn't "a key" here: the Shift held for Shift+F must not
       // dismiss the popup (which would let the F toggle the flag).
       if (e.key === 'Shift' || e.key === 'CapsLock') return
+      // As in the auction: "<" / ">" belong to App's problem stepping and must
+      // not double as the any-key that dismisses a popup or clears a trick.
+      if (e.key === '<' || e.key === '>') return
       if (playResult) dismissPlayResult()
       // Shift+F belongs to the flag listener above: it must not also advance a
       // completed trick or land on a six-option question's `f`.

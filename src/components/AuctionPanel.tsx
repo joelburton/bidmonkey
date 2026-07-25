@@ -193,6 +193,11 @@ export function AuctionPanel({
       // otherwise the Shift held for Shift+F would close the popup, and the F
       // would then land as a flag toggle.
       if (e.key === 'Shift' || e.key === 'CapsLock') return
+      // "<" and ">" step between problems (handled in App, like the header's
+      // ‹ / ›). They aren't "a key" for the any-key-dismisses rule below, or
+      // they'd also close the popup — and at the end of a run they would close
+      // it while going nowhere.
+      if (e.key === '<' || e.key === '>') return
       // Shift+F flags/unflags this problem, in every auction state — but with the
       // answer popup up it only closes it, like any other key: a wrong answer has
       // just flagged the problem, so toggling here would silently undo that.
