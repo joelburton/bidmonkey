@@ -10,6 +10,7 @@ export function QuizList({
   problemCount,
   flaggedCount,
   quizzes,
+  flaggedIn,
   onSelect,
   onRandomSource,
   onFlaggedSource,
@@ -19,6 +20,9 @@ export function QuizList({
   /** How many of this source's problems are flagged for review. */
   flaggedCount: number
   quizzes: Quiz[]
+  /** How many of these problem slugs are on the review list. App owns the flags,
+   * so it answers this per row. */
+  flaggedIn: (problemSlugs: string[]) => number
   onSelect: (slug: string) => void
   onRandomSource: () => void
   onFlaggedSource: () => void
@@ -47,23 +51,29 @@ export function QuizList({
         </div>
       </div>
       <ul className="problem-list">
-        {quizzes.map((q) => (
-          <li key={q.slug}>
-            <button className="problem-row" onClick={() => onSelect(q.slug)}>
-              <div className="problem-row-main">
-                <span className="problem-title">{q.title}</span>
-                <div className="problem-meta">
-                  <span className="chip">
-                    {q.problemSlugs.length} problem{q.problemSlugs.length === 1 ? '' : 's'}
-                  </span>
+        {quizzes.map((q) => {
+          const flagged = flaggedIn(q.problemSlugs)
+          return (
+            <li key={q.slug}>
+              <button className="problem-row" onClick={() => onSelect(q.slug)}>
+                <div className="problem-row-main">
+                  <span className="problem-title">{q.title}</span>
+                  <div className="problem-meta">
+                    <span className="chip">
+                      {q.problemSlugs.length} problem{q.problemSlugs.length === 1 ? '' : 's'}
+                    </span>
+                    {/* Only when there's something to review — a red "0 flagged"
+                        on every row would warn about nothing. */}
+                    {flagged > 0 && <span className="chip chip-flagged">{flagged} flagged</span>}
+                  </div>
                 </div>
-              </div>
-              <span className="problem-chevron" aria-hidden>
-                ›
-              </span>
-            </button>
-          </li>
-        ))}
+                <span className="problem-chevron" aria-hidden>
+                  ›
+                </span>
+              </button>
+            </li>
+          )
+        })}
       </ul>
     </>
   )

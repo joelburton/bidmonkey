@@ -8,6 +8,7 @@ export function SourceList({
   sources,
   problemCount,
   flaggedCount,
+  counts,
   onSelect,
   onRandomAll,
   onFlaggedAll,
@@ -17,6 +18,9 @@ export function SourceList({
   problemCount: number
   /** Every flagged problem, across all sources. */
   flaggedCount: number
+  /** One source's own totals, for its row's pills. App owns both the problems and
+   * the flags, so it answers this per row. */
+  counts: (sourceSlug: string) => { problems: number; flagged: number }
   onSelect: (slug: string) => void
   onRandomAll: () => void
   onFlaggedAll: () => void
@@ -44,21 +48,33 @@ export function SourceList({
         </div>
       </div>
       <ul className="problem-list">
-        {sources.map((src) => (
-          <li key={src.slug}>
-            <button className="problem-row" onClick={() => onSelect(src.slug)}>
-              {src.coverUrl && (
-                <img className="source-cover" src={src.coverUrl} alt="" loading="lazy" />
-              )}
-              <div className="problem-row-main">
-                <span className="problem-title">{src.title}</span>
-              </div>
-              <span className="problem-chevron" aria-hidden>
-                ›
-              </span>
-            </button>
-          </li>
-        ))}
+        {sources.map((src) => {
+          const n = counts(src.slug)
+          return (
+            <li key={src.slug}>
+              <button className="problem-row" onClick={() => onSelect(src.slug)}>
+                {src.coverUrl && (
+                  <img className="source-cover" src={src.coverUrl} alt="" loading="lazy" />
+                )}
+                <div className="problem-row-main">
+                  <span className="problem-title">{src.title}</span>
+                  <div className="problem-meta">
+                    <span className="chip">
+                      {n.problems} problem{n.problems === 1 ? '' : 's'}
+                    </span>
+                    {/* As on the quizzes list: only when there's something to review. */}
+                    {n.flagged > 0 && (
+                      <span className="chip chip-flagged">{n.flagged} flagged</span>
+                    )}
+                  </div>
+                </div>
+                <span className="problem-chevron" aria-hidden>
+                  ›
+                </span>
+              </button>
+            </li>
+          )
+        })}
       </ul>
     </>
   )

@@ -10,6 +10,11 @@
   --accent: #1f7a4d;
   --red: #d21f3c;
   --black: #1a2230;
+  /* Count-pill colours (.chip): dark enough to read as text on white, not as
+     decoration. --chip-red is a darker sibling of --red, which is tuned for
+     suit symbols rather than small type. */
+  --chip-blue: #1e40af;
+  --chip-red: #a4132f;
 
   /* On-felt palette. The table and everything drawn over it (buttons, popups,
      prompts) use these rather than repeating the literals. */
@@ -246,7 +251,9 @@ body {
   gap: 10px;
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.12s, transform 0.06s;
+  transition:
+    border-color 0.12s,
+    transform 0.06s;
 }
 /* Hover feedback only on devices that hover — on touch, :hover sticks after
    the tap and rows/buttons stay lit. */
@@ -274,14 +281,22 @@ body {
   gap: 6px;
   margin-top: 6px;
 }
+/* Count pills on a list row. Outline and text are always the same colour
+   (`currentColor`), on white, so a variant only sets `color`: blue for "how many
+   problems", red for "how many are flagged". Deliberately not the old muted grey
+   — these are the numbers you scan the list for. */
 .chip {
   font-size: 0.72rem;
-  color: var(--ink-soft);
-  background: var(--bg);
-  border: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--chip-blue);
+  background: var(--surface);
+  border: 1px solid currentColor;
   border-radius: 999px;
   padding: 2px 8px;
   white-space: nowrap;
+}
+.chip-flagged {
+  color: var(--chip-red);
 }
 .problem-chevron {
   color: var(--ink-soft);
@@ -364,7 +379,9 @@ body {
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.12s, transform 0.06s;
+  transition:
+    border-color 0.12s,
+    transform 0.06s;
 }
 /* :hover is grouped with .problem-row's, up in the list-row block. */
 .quiz-btn:active {
@@ -637,7 +654,10 @@ body {
   background: transparent;
   color: #fff;
   cursor: pointer;
-  transition: color 0.12s, border-color 0.12s, background 0.12s;
+  transition:
+    color 0.12s,
+    border-color 0.12s,
+    background 0.12s;
 }
 .flag-btn .flag-icon {
   width: 0.95rem;

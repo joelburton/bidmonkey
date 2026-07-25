@@ -316,6 +316,10 @@ export default function App() {
             sources={catalog.sources}
             problemCount={allSlugs.length}
             flaggedCount={allFlagged.length}
+            counts={(source) => ({
+              problems: sourceProblems(source).length,
+              flagged: sourceProblems(source, true).length,
+            })}
             onSelect={(source) => setNav({ view: 'quizzes', source })}
             onRandomAll={startAllRandom}
             onFlaggedAll={startAllFlagged}
@@ -331,6 +335,7 @@ export default function App() {
             problemCount={sourceProblems(nav.source).length}
             flaggedCount={sourceProblems(nav.source, true).length}
             quizzes={catalog.quizzes.filter((q) => q.source === nav.source)}
+            flaggedIn={(slugs) => slugs.filter(flagged).length}
             onSelect={(quiz) => setNav({ view: 'quiz', quiz })}
             onRandomSource={() => startSourceRandom(nav.source)}
             onFlaggedSource={() => startSourceFlagged(nav.source)}
