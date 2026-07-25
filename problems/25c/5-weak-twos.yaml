@@ -1,0 +1,142 @@
+quiz: 25C Weak Two-Bids
+problems:
+
+# Book question 1 (hands a-f): you are dealer, both sides vulnerable — what do
+# you open? This chapter is the first that states the vulnerability, and it is
+# load-bearing here (a weak two is a different proposition vulnerable), so it's
+# recorded rather than left null.
+
+  #1 — book 1a
+  - hand: s85 haq10753 dq7 c963
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          2♥. This is a perfect description of your hand.
+        answer: 2h
+
+  #2 — book 1b
+  - hand: sj1074 hkq10853 dj7 c8
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          Pass. You cannot open 2♥ with a four-card spade suit on the side.
+        answer: p
+
+  #3 — book 1c
+  - hand: skqj9753 h86 dj74 c7
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          3♠. You cannot open a Weak Two-Bid on a seven-card suit.
+        answer: 3s
+
+  #4 — book 1d
+  - hand: sj74 h864 dkq9843 c7
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          2♦. Your hand qualifies for a Weak Two-Bid in every respect.
+        answer: 2d
+
+  #5 — book 1e
+  - hand: saj8743 hq6 dq85 c85
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          Pass. You don't have two of the top three or three of the top five honors in spades. But you could open 2♠ in third seat.
+        answer: p
+
+  #6 — book 1f
+  - hand: saj10743 hk6 dqj5 c85
+    dealer: s
+    vuln: both
+    auction:
+      - s: "?"
+        explain: |
+          1♠. Count your points — you are too good to open with a preempt.
+        answer: 1s
+
+# Book question 2 (hands a-f): neither side vulnerable, partner opens a weak 2♠
+# and RHO passes — what do you respond?
+
+  #7 — book 2a
+  - hand: sqj hkq dakq85 ckj85
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Partner must have the ♠AK and cannot therefore have either of the other missing aces, so there is no hope of slam.
+        answer: 4s
+
+  #8 — book 2b
+  - hand: s4 hkq64 dkj853 caj7
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. With a singleton spade, despite your good hand, don't be surprised if 2♠ is too high.
+        answer: p
+
+  #9 — book 2c
+  - hand: sqj2 h- daqj43 caqj84
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. Partner must have the ♠AK. If he also has a minor-suit king then you will be able to count thirteen tricks and you can bid 7♠. If he does not, then you plan to settle for 6♠, which at worst will require one of the minor-suit finesses to work.
+        answer: 2nt
+
+  #10 — book 2d
+  - hand: s63 hakq107 daq5 ck108
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. You have too much not to bid game, but 4♥ may be the best contract. See whether partner can support your suit before making a decision.
+        answer: 3h
+
+  #11 — book 2e
+  - hand: sk74 h8643 dq963 cj4
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. You expect the hand to belong to the opponents, but this little raise will make life that much tougher for them.
+        answer: 3s
+
+  #12 — book 2f
+  - hand: sj8743 hk6 dq105 c852
+    dealer: n
+    vuln: none
+    auction:
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. If the red-suit honors are badly placed, you may have no tricks at all on defense! Raise the stakes as high as you dare right away, and make your opponents start the bidding at the five-level if they want to get involved.
+        answer: 4s

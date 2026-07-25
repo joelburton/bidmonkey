@@ -1,0 +1,246 @@
+quiz: 25C Stayman
+problems:
+
+# Book question 1 (hands a-i): partner opens 1NT (15-17). What do you respond,
+# and if you bid Stayman 2♣, what do you intend over each of partner's three
+# possible responses? As in chapter 2, the plan for the next round is graded as
+# part of the explanation — opener's response isn't given, so there is no
+# auction to continue.
+
+  #1 — book 1a
+  - hand: skj73 hj532 da3 c1086
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣, Stayman. You will bid 2NT over a 2♦ response and raise a response of either major to the three-level to show an invitational hand.
+        answer: 2c
+
+  #2 — book 1b
+  - hand: skj32 hj7 d863 ckj53
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣, Stayman. You will bid 2NT over a 2♦/2♥ response and raise a 2♠ response to the three-level.
+        answer: 2c
+
+  #3 — book 1c
+  - hand: skj732 h8 dk742 caq2
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, a transfer to spades. When partner bids 2♠, you next bid 3NT. Partner will bid 4♠ or pass 3NT.
+        answer: 2h
+
+  #4 — book 1d
+  - hand: skj732 haj52 dq3 c106
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. This time you use Stayman in case you have a major-suit fit. You will raise a response of either major to game, and bid 3♠ over 2♦ (forcing, and showing five spades and four hearts).
+        answer: 2c
+
+  #5 — book 1e
+  - hand: skj732 h8 d8742 cj62
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, a transfer to spades. You have a five-card major and a weak hand, so do not use Stayman. Opener will bid 2♠ and you will pass.
+        answer: 2h
+
+  #6 — book 1f
+  - hand: skj73 hj532 d73 c1086
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. While 2♥ or 2♠ might be a better contract than 1NT if partner has a four-card major, you cannot handle a 2♦ response to Stayman.
+        answer: p
+
+  #7 — book 1g
+  - hand: sj763 hq873 dj9852 c-
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣, Stayman. You intend to pass any response.
+        answer: 2c
+
+  #8 — book 1h
+  - hand: skj732 h82 dk74 cj62
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, a transfer to spades. When partner bids 2♠, you now bid 2NT, inviting him to pass, bid 3♠ with a minimum, bid 4♠ with a maximum, or bid 3NT with a maximum and fewer than three spades.
+        answer: 2h
+
+  #9 — book 1i
+  - hand: sa732 hk82 daj4 c762
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. Never use Stayman with 4-3-3-3 distribution.
+        answer: 3nt
+
+# Book question 2 (hands a-h): this time you are the opener — what do you bid
+# next in each case?
+
+  #10 — book 2a
+  - hand: skq4 ha642 dkq5 cj74
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2h
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. With a flat 15 points, you have no excuse for accepting partner's invitation.
+        answer: p
+
+  #11 — book 2b
+  - hand: skq7 ha642 dkq53 cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2h
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Partner is inviting, but you have a minimum.
+        answer: p
+
+  #12 — book 2c
+  - hand: skq74 ha642 dkq5 cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2h
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. Partner must have four spades but not four hearts. Your 3♠ shows a minimum with 4-4 in the majors.
+        answer: 3s
+
+  #13 — book 2d
+  - hand: skq74 haj42 dkqj cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2h
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Partner has invitational values with four hearts and your hand is a maximum with four-card support for hearts.
+        answer: 4h
+
+  #14 — book 2e
+  - hand: skq94 ha104 dkqj2 cq4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. Partner is inviting you to game and does not like spades, so he has four hearts. You have 17 HCP, so you happily accept his invitation to game in notrump.
+        answer: 3nt
+
+  #15 — book 2f
+  - hand: skqj4 ha104 dkqj2 cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 4nt
+      - e: p
+      - s: "?"
+        explain: |
+          6NT. 4NT isn't Blackwood! Partner has four hearts, and having failed to find a fit in that suit has invited you to slam in notrump. Your 17 points look great, so you accept the invitation and bid a slam.
+        answer: 6nt
+
+  #16 — book 2g
+  - hand: skqj ha104 dkqj42 cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. We know, you have a great 17 and you don't like clubs much. So what? Don't worry about the club suit. Just pray!
+        answer: p
+
+  #17 — book 2h
+  - hand: skqj ha104 dkqj42 cj4
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Partner shows an invitational hand with five spades and four hearts. You have a maximum with three good spades. Just accept the invitation.
+        answer: 4s

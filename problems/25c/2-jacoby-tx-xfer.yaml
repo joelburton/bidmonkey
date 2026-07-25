@@ -1,0 +1,188 @@
+quiz: 25C Jacoby/Texas Xfers
+problems:
+
+# Book question 1 (hands a-j): partner opens 1NT (15-17). What is your first
+# bid, and if you transfer, what do you plan to bid next round? The plan for the
+# second round is graded as part of the explanation, not as a second question —
+# opener's rebid isn't given, so there is no auction to continue.
+
+  #1 — book 1a
+  - hand: sa8642 h76 d9652 c32
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, a Jacoby transfer asking partner to bid 2♠. You will pass partner's 2♠.
+        answer: 2h
+
+  #2 — book 1b
+  - hand: s976432 h4 dj875 cq7
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades. You will pass partner's 2♠. Despite the six-card suit you do not have enough to invite game.
+        answer: 2h
+
+  #3 — book 1c
+  - hand: skj853 hq7 dq105 c874
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades. You will then bid 2NT over partner's 2♠. You want to invite game and show your five-card spade suit. Opener will now choose the final contract — 2NT, 3NT, 3♠ or 4♠.
+        answer: 2h
+
+  #4 — book 1d
+  - hand: saq753 hkj753 da5 c3
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades. You will then bid 3♥ over partner's 2♠. This tells partner that you have five or more spades along with five hearts and enough values for game.
+        answer: 2h
+
+  #5 — book 1e
+  - hand: saq753 hkj5 dj73 c84
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades. You will then bid 3NT over partner's 2♠. This tells opener to choose between 3NT (if he has only two spades) and 4♠.
+        answer: 2h
+
+  #6 — book 1f
+  - hand: saq753 hkj63 dj7 c84
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. Remember that you use Stayman with 5-4 in the majors and 8+ points.
+        answer: 2c
+
+  #7 — book 1g
+  - hand: sj108632 h4 da643 cq6
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades. You will then bid 3♠ over partner's 2♠. This invites opener to bid 4♠ with a maximum 1NT. With a minimum he will pass 3♠.
+        answer: 2h
+
+  #8 — book 1h
+  - hand: sqj86432 h85 da6 cq7
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♥, a Texas transfer asking partner to bid 4♠. You are not interested in slam, but you have enough for game and you want spades to be trumps. You will pass when partner completes the transfer with a 4♠ bid.
+        answer: 4h
+
+  #9 — book 1i
+  - hand: sj9753 h8643 dq4 c93
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♥, transferring to spades; you will pass partner's 2♠. Remember that to use Stayman on a weak hand you must be able to deal with any of the three possible responses. If partner responds 2♦ to Stayman here you will not then be able to bid 2♠, as that shows an invitational hand.
+        answer: 2h
+
+  #10 — book 1j
+  - hand: saqj764 hk54 d7 ckq5
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♥, a Texas transfer. This tells partner you have six spades and a hand worth at least game opposite his 1NT opening. On this hand, you will continue with a Blackwood 4NT bid after partner's 4♠ bid, asking for aces.
+        answer: 4h
+
+# Book question 2 (hands a-d): the same 1NT opener each time — you are the
+# opener, and the four auctions differ in what partner does after the transfer.
+
+  #11 — book 2a
+  - hand: skq5 ha5 dkj73 cq1095
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2h
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. With a minimum hand, you are declining the game invitation. However, with three-card support you should convert to partner's suit.
+        answer: 3s
+
+  #12 — book 2b
+  - hand: skq5 ha5 dkj73 cq1095
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2h
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Partner has a strong hand with spades and clubs; your first duty is to raise clubs with four of them. Later you can support spades too.
+        answer: 4c
+
+  #13 — book 2c
+  - hand: skq5 ha5 dkj73 cq1095
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2d
+      - e: p
+      - s: 2h
+      - w: p
+      - n: 3nt
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. With only a doubleton heart, you should choose to play the hand in notrump.
+        answer: p
+
+  #14 — book 2d
+  - hand: skq5 ha5 dkj73 cq1095
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: p
+      - n: 2h
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Convert to spades with three-card support.
+        answer: 4s

@@ -1,0 +1,145 @@
+quiz: 25C Takeout Doubles
+problems:
+
+# The book lays these out as LHO / Partner / RHO / You columns — i.e. W / N / E
+# / S, which is already clockwise from West, so the dealer is whichever of those
+# columns the auction starts in: East for #1-#5 and #11-#12 (RHO opens), West
+# for #6-#10 (LHO opens, partner doubles).
+
+  #1
+  - hand: saj74 hkj96 d3 ck874
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Double. You have 15 dummy points and support for all unbid suits.
+        answer: x
+
+  #2
+  - hand: sk4 hkq964 dk4 cq1085
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          1♥. You do not have support for spades so cannot make a takeout double.
+        answer: 1h
+
+  #3
+  - hand: saqj875 haq da4 cj85
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          Double. You are too strong simply to overcall 1♠, so double and then bid spades on the next round.
+        answer: x
+
+  #4
+  - hand: sa6 hkq86 daj97 cak3
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Double. You are too strong to overcall 1NT, so double and then bid notrump on the next round.
+        answer: x
+
+  #5
+  - hand: skq64 h62 dk97 caj73
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          Pass. With 13-15 points, you must have support for all the unbid suits to make a takeout double. You are not strong enough to bid 1NT, and you have no suit long and strong enough to overcall.
+        answer: p
+
+  #6
+  - hand: s97 h103 dj9864 c9754
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. Pick your favorite of the three unbid suits. You must not pass partner's takeout double with this type of hand — you don't really think those diamonds are good enough to defend with, do you?
+        answer: 2c
+
+  #7
+  - hand: sq10753 hk4 d853 ckj6
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You have 10 points so you jump in your best suit.
+        answer: 2s
+
+  #8
+  - hand: sq107 hj5 dkj74 ck964
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. You have 10 HCP, no four-card major, and a stopper in the opponents' suit. Perfect!
+        answer: 1nt
+
+  #9
+  - hand: s5 hkq1085 da63 ckj74
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. You have enough points for game, and partner has promised you heart support.
+        answer: 4h
+
+  #10
+  - hand: s65 hkq108 da63 ckj74
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You have an opening bid, but it's not yet clear what the right game is. Let partner know right away by making a cuebid. If partner bids hearts you will raise, otherwise you can try notrump.
+        answer: 2d
+
+  #11
+  - hand: sak85 hk1098 d8 cj974
+    dealer: e
+    auction:
+      - e: 1d
+      - s: x
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Partner has a minimum (0-8 points), and you have a minimum also, despite your four-card spade support.
+        answer: p
+
+  #12
+  - hand: saq5 hkq105 d63 ckq74
+    dealer: e
+    auction:
+      - e: 1d
+      - s: x
+      - w: p
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. Just enough for a single raise (showing 16-18 points). If partner is at the top of his 0-8 point range, game just might be there.
+        answer: 2h
