@@ -66,6 +66,7 @@ export function Hand({
   canPlay,
   selectedCard,
   raise,
+  bottomPad = false,
 }: {
   hand?: HandType
   faceDown?: boolean
@@ -75,6 +76,9 @@ export function Hand({
   canPlay?: (card: string) => boolean
   selectedCard?: string
   raise?: Raise
+  /** Give each (face-up) card extra white below its pips — for the bottom hand on
+   * a phone, so the rounded screen corner clips blank space, not a pip. */
+  bottomPad?: boolean
 }) {
   const vertical = orientation !== 'horizontal'
   const cls = `hand ${HAND_CLASS[orientation]}${raise ? ` raise-${raise}` : ''}`
@@ -112,7 +116,7 @@ export function Hand({
                 : undefined
             }
           >
-            {wrap(<Card suit={s.suit} rank={s.rank} />)}
+            {wrap(<Card suit={s.suit} rank={s.rank} bottomPad={bottomPad} />)}
           </span>
         )
       })}

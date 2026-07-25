@@ -26,14 +26,28 @@ export function rankLabel(rank: string): string {
  * (top-left) edge — the part that stays visible when cards overlap in a fan or a
  * rotated rail. Pips are the Wikimedia suit shapes, dropped in as a nested SVG.
  */
-export function Card({ suit, rank }: { suit: Suit; rank: string }) {
+export function Card({
+  suit,
+  rank,
+  bottomPad = false,
+}: {
+  suit: Suit
+  rank: string
+  bottomPad?: boolean
+}) {
   const shape = SUIT_SHAPE[suit]
   const color = shape.red ? 'red' : 'black'
   const label = `${RANK_NAME[rank] ?? rank} of ${SUIT_NAME[suit]}`
+  // The bottom (South) hand grows a little taller — extra blank white BELOW the
+  // rank/suit — so on a real phone the rounded bottom screen corner clips only
+  // that blank space, never a pip (gated by useIsPhone). The rank/suit and the
+  // suit divider stay put at the top; only the viewBox + white background extend
+  // downward, lifting the pips clear of the curve.
+  const h = bottomPad ? 80 : 66
 
   return (
-    <svg className="card" viewBox="0 0 44 66" role="img" aria-label={label}>
-      <rect className="card-bg" x="1" y="1" width="42" height="64" rx="7" />
+    <svg className="card" viewBox={`0 0 44 ${h}`} role="img" aria-label={label}>
+      <rect className="card-bg" x="1" y="1" width="42" height={h - 2} rx="7" />
       {/* Left-edge divider, shown only when this is the first card of a new suit
           group (see .slot.suit-start in the CSS). */}
       <line className="card-divider" x1="2.5" y1="9" x2="2.5" y2="57" />

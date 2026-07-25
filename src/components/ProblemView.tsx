@@ -5,6 +5,7 @@ import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { AuctionPanel } from './AuctionPanel'
 import { PlayView } from './PlayView'
+import { useIsPhone } from '../useIsPhone'
 
 const ALL_SEATS: Seat[] = ['N', 'E', 'S', 'W']
 
@@ -24,6 +25,7 @@ export function ProblemView({
   hasNext: boolean
 }) {
   const [answers, setAnswers] = useState<string[]>([])
+  const isPhone = useIsPhone()
 
   // Playable in exactly two cases: every hand is known (full play / free study),
   // or it's an opening-lead problem — only the hero's hand, and the play is the
@@ -60,7 +62,7 @@ export function ProblemView({
       top={<Hand faceDown orientation="horizontal" />}
       left={<Hand faceDown orientation="west" />}
       right={<Hand faceDown orientation="east" />}
-      bottom={<Hand hand={problem.deal[problem.hero]} orientation="horizontal" />}
+      bottom={<Hand hand={problem.deal[problem.hero]} orientation="horizontal" bottomPad={isPhone} />}
       center={
         <AuctionPanel
           // Load-bearing, not a list key: a correct answer advances via

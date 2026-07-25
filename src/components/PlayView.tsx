@@ -18,6 +18,7 @@ import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { PlayCenter } from './PlayCenter'
 import { AuctionTable } from './AuctionTable'
+import { useIsPhone } from '../useIsPhone'
 
 // Hotkeys for the multiple-choice option buttons (matches their labels and the
 // auction's a–d keys).
@@ -85,6 +86,7 @@ export function PlayView({
   hasNext: boolean
 }) {
   const hero = problem.hero
+  const isPhone = useIsPhone()
   const moves = useMemo(() => flattenPlay(problem.play ?? []), [problem])
   const trump = contract?.strain ?? 'NT'
   const declarer = contract?.declarer ?? hero
@@ -284,6 +286,7 @@ export function PlayView({
           canPlay={playable ? canPlay(seat) : undefined}
           selectedCard={sel(seat)}
           raise={POS_RAISE[pos]}
+          bottomPad={pos === 'bottom' && isPhone}
         />
         {playable && <PlayArrow pos={pos} />}
       </>
