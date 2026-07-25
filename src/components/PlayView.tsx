@@ -71,6 +71,9 @@ function PlayArrow({ pos }: { pos: Pos }) {
  * cards (1s pause each), stops at questions for the hero, reveals the dummy
  * after the opening lead, and pauses for a click after any trick the hero didn't
  * play the last card to. When the recorded play runs out it reveals every hand.
+ *
+ * Playing anything but the preferred card also flags the problem for review
+ * (`onFlagAnswer`); the ⚑ button on the contract line and Shift+F flag by hand.
  */
 export function PlayView({
   problem,
@@ -78,12 +81,20 @@ export function PlayView({
   answers,
   onNext,
   hasNext,
+  flagged = false,
+  onToggleFlag = () => {},
+  onFlagAnswer = () => {},
 }: {
   problem: Problem
   contract: Contract | null
   answers: string[]
   onNext: () => void
   hasNext: boolean
+  // Inert by default so tests can render the play view alone; ProblemView always
+  // passes them.
+  flagged?: boolean
+  onToggleFlag?: () => void
+  onFlagAnswer?: (reason: 'wrong' | 'alternate') => void
 }) {
   const hero = problem.hero
   const isPhone = useIsPhone()
@@ -178,6 +189,11 @@ export function PlayView({
     // Accepted but non-canonical: shown as "Alternate" (orange), not "Correct!".
     const alternate = correct && !isCanonical
     setPlayResult({ correct, alternate, question: q, card, seat: pending.seat })
+    // Anything but the preferred card puts the problem on the review list — an
+    // accepted alternative included (as 'alternate'): not wrong, but not the play
+    // the problem is about. Grading is unaffected; only the flag is new.
+    if (!correct) onFlagAnswer('wrong')
+    else if (alternate) onFlagAnswer('alternate')
   }
   const dismissPlayResult = () => {
     const r = playResult
@@ -202,6 +218,24 @@ export function PlayView({
       ? pending.question.options
       : undefined
 
+  // Shift+F flags/unflags this problem for review. Its own always-on listener,
+  // unlike the conditional one below, so it works while cards are auto-playing
+  // and during free study — but it stands down while the answer popup is up,
+  // where every key just closes the popup (and where a wrong card has already
+  // flagged the problem, so toggling would undo that).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+      if (playResult) return
+      if (e.shiftKey && e.key.toLowerCase() === 'f') {
+        onToggleFlag()
+        e.preventDefault()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+  }, [playResult, onToggleFlag])
+
   // A keypress does the same as the click we're waiting for: dismiss the answer
   // popup, advance past a completed trick, (a–d, as in the auction) pick a
   // multiple-choice option, or — once the play is over — press "Next".
@@ -209,7 +243,13 @@ export function PlayView({
     if (!playResult && !review && !pendingMC && !done) return
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return // leave browser shortcuts alone
+      // A bare modifier isn't "a key" here: the Shift held for Shift+F must not
+      // dismiss the popup (which would let the F toggle the flag).
+      if (e.key === 'Shift' || e.key === 'CapsLock') return
       if (playResult) dismissPlayResult()
+      // Shift+F belongs to the flag listener above: it must not also advance a
+      // completed trick or land on a six-option question's `f`.
+      else if (e.shiftKey && e.key.toLowerCase() === 'f') return
       else if (review) proceed(review)
       else if (pendingMC) {
         const idx = OPT_LETTERS.indexOf(e.key.toLowerCase())
@@ -309,7 +349,6 @@ export function PlayView({
   return (
     <div className="play-root" onClick={() => setSelected(null)}>
       <BridgeTable
-        className={allRevealed ? 'revealed' : ''}
         top={slot('top')}
         left={slot('left')}
         right={slot('right')}
@@ -329,6 +368,8 @@ export function PlayView({
             showNext={done}
             onNext={onNext}
             hasNext={hasNext}
+            flagged={flagged}
+            onToggleFlag={onToggleFlag}
           />
         }
       />

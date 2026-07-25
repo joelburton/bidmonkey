@@ -34,10 +34,16 @@ public; **RLS** on the server is the real access control.
 Content (`sources`, `problems`, `quizzes`, `quizzes_problems`) is authored in the
 DB and read by the app. `quizzes_problems` is the m2m with a 1-based `ordinal` (a
 problem may be in several quizzes). Use the **Supabase CLI, not the web GUI** —
-schema changes are migrations. `anon` gets `SELECT`-only, enforced by **RLS +
-table grants** — note both are required: an RLS `select` policy is useless
-without `grant select … to anon` (the GUI adds the grant implicitly; a migration
-must be explicit, or reads 401/"permission denied"). Local:
+schema changes are migrations. On the **content** tables `anon` gets
+`SELECT`-only, enforced by **RLS + table grants** — note both are required: an
+RLS `select` policy is useless without `grant select … to anon` (the GUI adds the
+grant implicitly; a migration must be explicit, or reads 401/"permission
+denied").
+
+`problem_flags` is the **one table the app writes to** (see "Review flags"
+below): `anon` has insert/update/delete on it, with open policies, because with
+no auth there is nothing to check a row against. Deliberate — it's one person's
+review list, pointing at already-public content. Local:
 
 ```
 supabase start                        # brings up the local stack (applies migrations + seed)
@@ -99,27 +105,40 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   questions for the hero, then reveal all hands for free study.
 - **Phase 5 (done):** sources/quizzes + navigation. sources → quizzes → a quiz
   started **In Order** or **Random** (per-quiz buttons, plus a **PDF** export).
-  Quiz nav lives in the app header, available in every phase: a left **Home**
-  button labelled `QuizTitle #ordinal` (→ sources) and a right Prev `‹` / Next `›`
-  pair.
+  Quiz nav lives in the app header, available in every phase: a left **Back**
+  button labelled `QuizTitle #ordinal` (→ the quizzes of the source the run came
+  from) and a right Prev `‹` / Next `›` pair.
 - **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
   catalogue on load (async, with loading/error/retry).
+- **Phase 7 (done):** **review flags** (`problem_flags`) — a problem is flagged
+  automatically when answered with anything but the preferred answer, or by hand
+  (the ⚑ button / Shift+F), and a source's **Flagged (n)** button retests them in
+  random order. See "Review flags" below.
 - **Out of scope so far:** any backend beyond Supabase reads, per-question attempt
-  tracking / scoring, contract-result scoring.
+  tracking / scoring (flags are per *problem*, not per attempt — no history),
+  contract-result scoring.
 
 ## Frontend architecture
 
 - `App.tsx` — fetches the catalogue from Supabase on mount (`fetchCatalog`), with
   loading / error+retry screens, then drives a `Nav` union (`sources` | `quizzes`
   | `quiz`): `SourceList`, `QuizList`, or the quiz runner (header + `ProblemView`).
-  The quiz header holds a left **Home** button (`‹` + the `QuizTitle #ordinal`
-  label, → sources) and a right Prev (`‹`) / Next (`›`) pair (disabled at the
-  ends). Nav is header-only so it works during the auction, play, and free study
-  alike.
-- `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`), no SDK;
-  config from `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
+  The quiz header holds a left **Back** button (`‹` + the `QuizTitle #ordinal`
+  label) and a right Prev (`‹`) / Next (`›`) pair (disabled at the ends). Nav is
+  header-only so it works during the auction, play, and free study alike. Back
+  goes **one level up**, to the quizzes of the source the run came from — a `run`
+  nav carries that `source` slug for the purpose (a source-less quiz falls back to
+  the sources list). The label is deliberately smaller than the surrounding UI
+  (`.qbtn-label`, 0.85rem): real quiz titles are long and wrapped at the old size.
+- `lib/supabase.ts` — tiny PostgREST client over `fetch` (`sbSelect`, plus
+  `sbUpsert`/`sbDelete` for the flags table), no SDK; config from
+  `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY`.
 - `data/repo.ts` — `fetchCatalog()`: reads sources/problems/quizzes and maps the
-  PostgREST rows → app types. **The app's only runtime data source.**
+  PostgREST rows → app types. **The app's only runtime content source.**
+- `data/flags.ts` + `useFlags.ts` — the review list: `fetchFlags`/`setFlag`/
+  `clearFlag` over `problem_flags`, and the hook App holds it in. Fetched
+  *separately* from the catalogue on purpose — a flags failure logs and moves on
+  rather than costing us the problems.
 - `types.ts` — mirrors `schema.v1.json` / tables (Seat, Suit, Deal, Hand, Problem,
   Source, Quiz, BidQuestion, CardQuestion, Trick, …).
 - `data/problems.ts` + `data/catalog.ts` — the **initial seed + test fixtures**
@@ -148,12 +167,20 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   - `PlayView.tsx` — the play state machine (see below).
   - `PlayCenter.tsx` — center during play: contract + current trick (placed to
     match the hand positions) + the wrong-answer popup.
-  - `Hand.tsx` — overlapping card faces. Horizontal fan for N/S and the dummy;
+  - `Hand.tsx` — the 13 cards of a hand. Horizontal fan for N/S and the dummy;
     rotated rails for E/W (`west`/`east`; East mirrors via `column-reverse`).
     `onPlay` makes cards clickable.
-  - `Card.tsx` / `SuitGlyph.tsx` — a card face / the Wikimedia suit pips (public
-    domain) as an inline SVG for HTML.
-  - `suitText.tsx` — `withSuits(text)` colors suit symbols in explanations.
+  - `Card.tsx` / `SuitGlyph.tsx` — one card, cropped to its rank-over-suit index
+    (not a full playing-card face) / the Wikimedia suit pips (public domain) as an
+    inline SVG for HTML.
+  - `suitText.tsx` — `withSuits(text)` swaps Unicode suit symbols for the SVG
+    `SuitGlyph` pips. Used by the explanation popup **and by question prompts**
+    (`.mc-prompt` in the auction, `.play-msg` during play) — the pips' white
+    outline is what lets ♠/♣ stay truly black on the felt, where Unicode text had
+    to be washed-out grey to read at all.
+  - `FlagButton.tsx` — the ⚑ review toggle (`FlagButton`) and its drawn pennant
+    (`FlagIcon`, also used by QuizList's Flagged button). Drawn, not typed: the
+    Unicode flags render as un-recolorable emoji on iOS.
   - `SourceList.tsx` / `QuizList.tsx` — the sources and quizzes list levels
     (both reuse the `.problem-list` / `.problem-row` styling).
 - `index.css` — all styling (no CSS framework). Global, plus component classes.
@@ -174,6 +201,39 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   player input, pause for a click (`review`); else auto-clear. When the recorded
   moves run out, `allRevealed` reveals every hand for free play.
 
+### Review flags (`problem_flags`)
+
+- **What flags a problem:** answering with anything that isn't the preferred
+  answer. A wrong answer records `reason = 'wrong'`; an **`accept` alternative
+  records `'alternate'`** — it's graded correct ("Alternate", orange) but is *not*
+  what the problem teaches, so it still comes back for review. Manual flags are
+  `'manual'`. `useFlags.flagAnswer` never downgrades ('wrong' is the strongest)
+  and skips a write when the reason is unchanged, so retrying a wrong answer
+  doesn't re-POST. **Grading is untouched by all this** — an alternative still
+  advances the auction/play with the canonical `answer`.
+- **UI:** the ⚑ toggle sits next to the problem id in the auction and on the
+  contract line during play (the play phase shows no id). **Shift+F** does the
+  same from the keyboard — Shift because plain `f` is a live multiple-choice
+  option letter (`OPT_LETTERS = 'abcdef'`). With the answer popup open, Shift+F
+  only closes it: the wrong answer has just auto-flagged the problem, and
+  toggling there would silently undo that. Both key handlers therefore ignore a
+  bare `Shift`/`CapsLock` keydown, which would otherwise trip the
+  any-key-dismisses rule and let the `F` through as a toggle.
+- **Reviewing:** a source's **Flagged (n)** button (in the source header, under
+  Random) starts a *random* run over just that source's flagged problems, titled
+  `<Source> · flagged`. The order is snapshotted at the start, so unflagging as
+  you go doesn't reshuffle the run.
+- **Writes are optimistic:** the UI flips immediately, the row is written behind
+  it, and a failed write *reverts* the flag rather than leaving the UI claiming
+  something was saved. Row presence is the flag — unflagging DELETEs the row (so
+  a future per-problem `note` means switching to a `flagged boolean`, one small
+  migration).
+- **`player` is a constant** (`data/flags.ts` `PLAYER`, matching the column
+  default). There's no auth, so it isn't verified — its job is that flags follow
+  the *person*: flag on the phone, review on the desktop. A localStorage id or
+  Supabase anonymous auth would both have been per-browser, which is exactly what
+  this must not be. Real users later = fill `player` from a session.
+
 ## Conventions & non-obvious decisions
 
 - **Data:** prefer JSON fields over deep normalization; one row per whole problem.
@@ -184,8 +244,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 - **Layout:** the detail view is a fixed-height (`100dvh`) full-bleed table that
   **never scrolls** — tall E/W rails clip (`grid-template-rows: auto minmax(0,1fr) auto`)
   instead of pushing the page. N/S fans are edge-to-edge and auto-fill their width
-  via a percentage-margin formula, so card size (`--card-w`, set per rail) is the
-  only knob. E/W rails are pushed mostly off-screen, showing only an inner sliver.
+  via a percentage-margin formula (`min(0px, …)`, so cards close up or overlap but
+  never spread apart). **One card size for all four hands:** `--card-w` is set once
+  on `.table` — `min(100vw, 30rem, 100dvh − 11rem) / 13` — so 13 cards fit across a
+  N/S fan and 13 stack down an E/W rail, every card shown in full.
 - **Scaling (desktop = phone, larger):** everything is sized in **rem**; the root
   font-size steps 16→20→24px via `(min-width) and (min-height)` media queries, and
   `.app { max-width: 30rem }` keeps a centered portrait column on desktop.
@@ -197,9 +259,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   resolves the same cyclic percentage at the app width, so it hides the bug. Rule:
   the percentage-overlap fan must never sit in a container whose size content can
   dictate.
-- **Card size vs. legibility:** with 13 cards across the width, each visible sliver
-  = `(width − cardW)/12`. Bigger cards ⇒ thinner slivers. `--card-w` on
-  `.rail-south`/`.rail-north` is tuned so the "10" index stays readable.
+- **Card size vs. legibility:** the `--card-w` formula on `.table` is what keeps the
+  "10" index readable — it's derived from fitting 13 cards, so a hand only overlaps
+  if the viewport can't hold them all. The trick sets its own larger `--card-w`
+  (3rem) so the played cards read as the focus.
 - **Suit pips / colors:**
   - Card faces: pips are nested SVGs of the Wikimedia paths, solid fill via `.red`/`.black`.
   - On the dark baize (`--felt: #14532d`): UI pips (`SuitGlyph`) get a **white
@@ -217,8 +280,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   `accept`) and opens the popup ("Correct!" / "Not quite" + explanation).
   - **Keyboard:** `1`–`7` = level, `c/d/h/s/n` = strain (n=NT), `p` = pass,
     `x` = double/redouble (redouble only when the last live call was an opponent's
-    double). Handled keys flash the button (`.pressed`). **Any key closes the
-    answer popup.**
+    double), `a`–`f` = multiple-choice options, **`Shift+F` = flag/unflag for
+    review** (in the auction and the play phase alike). Handled keys flash the
+    button (`.pressed`). **Any key closes the answer popup** — except a bare
+    modifier (see "Review flags").
   - The popup covers only the center (cards stay visible), is scrollable, and
     dismisses on any click outside (transparent full-screen catcher).
 
@@ -234,8 +299,11 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   purpose — that's the size where the play options were pushed off-screen.
 - **E2E needs the local stack up** (`supabase start`, repo root). `e2e/global-setup.ts`
   runs `supabase db reset` before the suite so tests see a known seed; a run resets
-  the local DB, so don't keep local-only data you care about. The app is read-only,
-  so tests never mutate anything. (No test-CI — e2e is run locally.)
+  the local DB, so don't keep local-only data you care about. Content is read-only,
+  but the suite **does write `problem_flags`** — any spec that answers wrongly
+  flags that problem, so `flags.spec.ts` runs serially, uses QuizC (which no other
+  spec touches), and never asserts an exact flagged count. (No test-CI — e2e is run
+  locally.)
 - For quick visual checks, use `@playwright/test`'s `chromium` in a throwaway
   script and screenshot; **always screenshot at a short height (~680), not just
   844** — the 844 height hid the off-screen-options bug.

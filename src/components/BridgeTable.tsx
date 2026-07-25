@@ -12,17 +12,15 @@ export function BridgeTable({
   left,
   right,
   center,
-  className = '',
 }: {
   top: ReactNode
   bottom: ReactNode
   left: ReactNode
   right: ReactNode
   center: ReactNode
-  className?: string
 }) {
   return (
-    <div className={`table ${className}`}>
+    <div className="table">
       <div className="rail rail-north">{top}</div>
       <div className="middle">
         <div className="rail rail-west">{left}</div>

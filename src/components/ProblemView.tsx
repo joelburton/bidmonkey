@@ -14,15 +14,24 @@ const ALL_SEATS: Seat[] = ['N', 'E', 'S', 'W']
  * phase (if all four hands are known). Quiz navigation (Home / Next) lives in
  * the app header; `onNext`/`hasNext` are also passed to the auction panel so a
  * "Next ▸" sits beside "Play" on a playable problem.
+ *
+ * The review flag is owned by App (it's persisted per player, not per problem
+ * view) and threaded through to whichever phase is on screen.
  */
 export function ProblemView({
   problem,
   onNext,
   hasNext,
+  flagged,
+  onToggleFlag,
+  onFlagAnswer,
 }: {
   problem: Problem
   onNext: () => void
   hasNext: boolean
+  flagged: boolean
+  onToggleFlag: () => void
+  onFlagAnswer: (reason: 'wrong' | 'alternate') => void
 }) {
   const [answers, setAnswers] = useState<string[]>([])
   const isPhone = useIsPhone()
@@ -52,6 +61,9 @@ export function ProblemView({
         answers={answers}
         onNext={onNext}
         hasNext={hasNext}
+        flagged={flagged}
+        onToggleFlag={onToggleFlag}
+        onFlagAnswer={onFlagAnswer}
       />
     )
   }
@@ -77,6 +89,9 @@ export function ProblemView({
           onNext={onNext}
           hasNext={hasNext}
           canPlay={canPlay}
+          flagged={flagged}
+          onToggleFlag={onToggleFlag}
+          onFlagAnswer={onFlagAnswer}
         />
       }
     />

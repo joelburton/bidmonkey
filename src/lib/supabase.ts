@@ -53,3 +53,39 @@ export async function sbSelect<T extends unknown[]>(query: string): Promise<T> {
     if (page.length === 0 || !(rows.length < total)) return rows as T
   }
 }
+
+// Writes. Content is read-only; the only writable table is problem_flags (the
+// review list), so these two are all the write surface there is. Both throw on
+// failure, which is what lets the caller undo its optimistic UI update.
+
+/**
+ * Insert `rows`, updating instead of failing when they collide on `onConflict`
+ * (a comma-separated column list, which must be a unique key). Only the columns
+ * present in the payload are overwritten.
+ */
+export async function sbUpsert(table: string, rows: unknown[], onConflict: string): Promise<void> {
+  ensureConfigured()
+  const res = await fetch(`${URL}/rest/v1/${table}?on_conflict=${onConflict}`, {
+    method: 'POST',
+    headers: {
+      ...authHeaders(),
+      'Content-Type': 'application/json',
+      // merge-duplicates = upsert; return=minimal keeps the response empty.
+      Prefer: 'resolution=merge-duplicates,return=minimal',
+    },
+    body: JSON.stringify(rows),
+    signal: AbortSignal.timeout(10_000),
+  })
+  if (!res.ok) throw new Error(`Supabase POST ${table} → ${res.status}: ${await res.text()}`)
+}
+
+/** DELETE the rows a filtered query selects, e.g. `sbDelete('problem_flags?player=eq.joel')`. */
+export async function sbDelete(query: string): Promise<void> {
+  ensureConfigured()
+  const res = await fetch(`${URL}/rest/v1/${query}`, {
+    method: 'DELETE',
+    headers: { ...authHeaders(), Prefer: 'return=minimal' },
+    signal: AbortSignal.timeout(10_000),
+  })
+  if (!res.ok) throw new Error(`Supabase DELETE ${query} → ${res.status}: ${await res.text()}`)
+}

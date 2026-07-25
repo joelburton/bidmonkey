@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { Problem, Seat } from '../types'
@@ -98,6 +98,74 @@ describe('free play enforces legal turn order and following suit', () => {
     // The legal follow does respond.
     await playCard(user, '2 of clubs')
     expect(screen.getByLabelText('2 of clubs').closest('.trick-l')).not.toBeNull()
+  })
+})
+
+// South (hero) is on lead and asked for a club: ♣Q is the answer, ♣5 accepted.
+const leadProblem: Problem = {
+  ...problem('S'),
+  play: [
+    {
+      cards: [
+        {
+          seat: 'S',
+          question: {
+            id: 'q1',
+            answerKind: 'card',
+            choiceType: 'free',
+            prompt: 'Your lead',
+            answer: 'CQ',
+            accept: ['C5'],
+          },
+        },
+      ],
+    },
+  ],
+}
+
+describe('flagging for review during play', () => {
+  it('a wrong card flags; an accepted alternative flags as alternate', async () => {
+    const onFlagAnswer = vi.fn()
+    const { unmount } = render(
+      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onFlagAnswer={onFlagAnswer} />,
+    )
+    const user = userEvent.setup()
+    await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
+
+    await playCard(user, '7 of spades') // not a club at all
+    await waitFor(() => expect(screen.getByText('Not quite')).toBeInTheDocument())
+    expect(onFlagAnswer).toHaveBeenCalledWith('wrong')
+    unmount()
+
+    // Fresh view: the accepted ♣5 is correct, but not the preferred lead.
+    const onFlagAlt = vi.fn()
+    render(
+      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onFlagAnswer={onFlagAlt} />,
+    )
+    await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
+    await playCard(user, '5 of clubs')
+    await waitFor(() => expect(screen.getByText('Alternate')).toBeInTheDocument())
+    expect(onFlagAlt).toHaveBeenCalledWith('alternate')
+  })
+
+  it('Shift+F toggles the flag mid-play, and only closes an open answer popup', async () => {
+    const onToggleFlag = vi.fn()
+    render(
+      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onToggleFlag={onToggleFlag} />,
+    )
+    const user = userEvent.setup()
+    await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
+
+    await user.keyboard('{Shift>}F{/Shift}')
+    expect(onToggleFlag).toHaveBeenCalledTimes(1)
+
+    // With the popup up, Shift+F dismisses it (like any key) and must not undo
+    // the flag the wrong card just set.
+    await playCard(user, '7 of spades')
+    await waitFor(() => expect(screen.getByText('Not quite')).toBeInTheDocument())
+    await user.keyboard('{Shift>}F{/Shift}')
+    await waitFor(() => expect(screen.queryByText('Not quite')).toBeNull())
+    expect(onToggleFlag).toHaveBeenCalledTimes(1)
   })
 })
 

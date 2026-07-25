@@ -13,10 +13,14 @@ import {
 import { SuitGlyph } from './SuitGlyph'
 import { AuctionTable, CallText } from './AuctionTable'
 import { Explanation } from './Explanation'
+import { FlagButton } from './FlagButton'
+import { withSuits } from './suitText'
 import { useTapDismiss } from '../tapDismiss'
 
 const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
 const KEY_STRAIN: Record<string, Strain> = { c: 'C', d: 'D', h: 'H', s: 'S', n: 'NT' }
+// Option hotkeys. Plain `f` stays an option letter — the flag toggle is Shift+F
+// precisely so a six-option question can't collide with it.
 const OPT_LETTERS = 'abcdef'
 
 // Answer buttons must not take focus: otherwise a key pressed to dismiss the
@@ -31,6 +35,9 @@ const preventFocus = (e: MouseEvent) => e.preventDefault()
  * a free-form multiple-choice — options are plain words, not calls. Every answer
  * shows the explanation popup; dismissing a correct answer advances the auction,
  * a wrong one lets you retry.
+ *
+ * Answering with anything but the preferred call also flags the problem for
+ * review (`onFlagAnswer`), and the ⚑ button / `f` key flag it by hand.
  */
 export function AuctionPanel({
   problem,
@@ -40,6 +47,9 @@ export function AuctionPanel({
   onNext,
   hasNext,
   canPlay,
+  flagged = false,
+  onToggleFlag = () => {},
+  onFlagAnswer = () => {},
 }: {
   problem: Problem
   answers: string[]
@@ -48,6 +58,11 @@ export function AuctionPanel({
   onNext: () => void
   hasNext: boolean
   canPlay: boolean
+  // The flag props default to inert so tests can render the panel on its own;
+  // ProblemView always passes them.
+  flagged?: boolean
+  onToggleFlag?: () => void
+  onFlagAnswer?: (reason: 'wrong' | 'alternate') => void
 }) {
   const model = buildAuction(problem, answers)
   const q = model.question
@@ -69,11 +84,17 @@ export function AuctionPanel({
     const isCanonical = entered === norm(cur.answer)
     const isAccepted = cur.accept?.some((a) => norm(a) === entered) ?? false
     const correct = isCanonical || isAccepted
-    // An accepted alternative is correct but not the canonical answer — flagged
+    // An accepted alternative is correct but not the canonical answer — marked
     // so the popup reads "Alternate" (orange) rather than "Correct!" (green).
     const alternate = correct && !isCanonical
     setResult({ correct, alternate, call, answer: cur.answer })
     setLevel(null)
+    // Anything but the preferred answer goes on the review list. An accepted
+    // alternative counts: it isn't wrong, but it isn't what this problem is
+    // teaching either, so it's worth seeing again (recorded as 'alternate', so a
+    // later pass can tell the two apart). Grading itself is unaffected.
+    if (!correct) ref.current.onFlagAnswer('wrong')
+    else if (alternate) ref.current.onFlagAnswer('alternate')
   }, [])
   const dismiss = useCallback(() => {
     const r = ref.current.result
@@ -106,14 +127,31 @@ export function AuctionPanel({
   // registered once (deps below are the stable callbacks only) and reads fresh
   // state/props through ref.current instead of re-subscribing every render.
   // (PlayView takes the other route — a plain re-subscribing effect.)
-  const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay })
-  ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay }
+  const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay, onToggleFlag, onFlagAnswer })
+  ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay, onToggleFlag, onFlagAnswer }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const st = ref.current
       // Leave browser shortcuts alone — Cmd+C on the explanation text must not
       // dismiss the popup (checked before every branch on purpose).
       if (e.metaKey || e.ctrlKey || e.altKey) return
+      // A bare modifier isn't "a key" for the any-key-dismisses rule below —
+      // otherwise the Shift held for Shift+F would close the popup, and the F
+      // would then land as a flag toggle.
+      if (e.key === 'Shift' || e.key === 'CapsLock') return
+      // Shift+F flags/unflags this problem, in every auction state — but with the
+      // answer popup up it only closes it, like any other key: a wrong answer has
+      // just flagged the problem, so toggling here would silently undo that.
+      // (Shift, not plain `f`, so a six-option question keeps its `f` letter.)
+      if (e.shiftKey && e.key.toLowerCase() === 'f') {
+        if (st.result) dismiss()
+        else {
+          st.onToggleFlag()
+          flash('FLAG')
+        }
+        e.preventDefault()
+        return
+      }
       if (!st.model.actingSeat) {
         // Auction over: Space/Enter presses the primary button (Play if the hand
         // is playable, otherwise Next).
@@ -179,7 +217,10 @@ export function AuctionPanel({
   return (
     <div className="auction-panel">
       <div className="auction-head">
-        <span className="problem-id">#{problem.slug}</span>
+        <span className="head-left">
+          <span className="problem-id">#{problem.slug}</span>
+          <FlagButton flagged={flagged} onToggle={onToggleFlag} pressed={pressed === 'FLAG'} />
+        </span>
         {problem.vulnerability && <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>}
       </div>
 
@@ -211,7 +252,10 @@ export function AuctionPanel({
         </div>
       ) : isMC ? (
         <div className="bidpad">
-          {q!.prompt && <div className="mc-prompt">{q!.prompt}</div>}
+          {/* Suit symbols in the prompt become SVG pips (withSuits), like the
+              explanation text — Unicode ♠/♣ on the felt need a washed-out grey
+              to stay readable, the outlined pips can be truly black. */}
+          {q!.prompt && <div className="mc-prompt">{withSuits(q!.prompt)}</div>}
           <div className={`opt-grid${isText ? ' opt-grid-text' : ''}`}>
             {q!.options!.map((opt, i) => (
               <button

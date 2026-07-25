@@ -203,6 +203,129 @@ describe('AuctionPanel accepted alternative answers', () => {
   })
 })
 
+describe('AuctionPanel flagging for review', () => {
+  const withAccept: Problem = {
+    ...problem,
+    auction: [
+      { call: '1H' },
+      { call: 'P' },
+      {
+        question: {
+          id: 'q1',
+          answerKind: 'bid',
+          choiceType: 'multiple_choice',
+          answer: '3H', // option b
+          accept: ['4H'], // option c
+          options: ['2H', '3H', '4H'],
+        },
+      },
+    ],
+  }
+  const renderPanel = (p: Problem, extra: Partial<Parameters<typeof AuctionPanel>[0]> = {}) => {
+    const onFlagAnswer = vi.fn()
+    const onToggleFlag = vi.fn()
+    const view = render(
+      <AuctionPanel
+        problem={p}
+        answers={[]}
+        onAnswer={vi.fn()}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+        onFlagAnswer={onFlagAnswer}
+        onToggleFlag={onToggleFlag}
+        {...extra}
+      />,
+    )
+    return { ...view, onFlagAnswer, onToggleFlag, user: userEvent.setup() }
+  }
+
+  it('a wrong answer flags the problem; the right one does not', async () => {
+    const { onFlagAnswer, user } = renderPanel(problem)
+    await user.keyboard('a') // 2H — wrong
+    expect(onFlagAnswer).toHaveBeenCalledWith('wrong')
+    await user.keyboard('{Escape}')
+
+    onFlagAnswer.mockClear()
+    await user.keyboard('b') // 3H — the answer
+    expect(onFlagAnswer).not.toHaveBeenCalled()
+  })
+
+  it("an accepted alternative flags as 'alternate' — correct, but not the preferred call", async () => {
+    const { onFlagAnswer, user } = renderPanel(withAccept)
+    await user.keyboard('c') // 4H — accepted, not canonical
+    expect(screen.getByText('Alternate')).toBeInTheDocument()
+    expect(onFlagAnswer).toHaveBeenCalledWith('alternate')
+  })
+
+  it('the ⚑ button toggles, and reflects the flagged state', async () => {
+    const { onToggleFlag, user, rerender } = renderPanel(problem, { flagged: false })
+    const flag = screen.getByRole('button', { name: 'Flag this problem for review' })
+    expect(flag).toHaveAttribute('aria-pressed', 'false')
+
+    await user.click(flag)
+    expect(onToggleFlag).toHaveBeenCalledTimes(1)
+    // The button must not hold focus, or the next keypress would re-press it.
+    expect(document.activeElement).not.toBe(flag)
+
+    rerender(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={vi.fn()}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+        flagged
+        onToggleFlag={onToggleFlag}
+      />,
+    )
+    expect(
+      screen.getByRole('button', { name: 'Unflag this problem' }),
+    ).toHaveAttribute('aria-pressed', 'true')
+  })
+
+  it('Shift+F toggles the flag; plain f stays an option letter', async () => {
+    // Six options, so `f` is a live answer key — the reason the flag is Shift+F.
+    const sixOptions: Problem = {
+      ...problem,
+      auction: [
+        {
+          question: {
+            id: 'q1',
+            answerKind: 'bid',
+            choiceType: 'multiple_choice',
+            answer: '1S',
+            options: ['1C', '1D', '1H', '1S', '1NT', '2C'], // f = 2C
+          },
+        },
+      ],
+    }
+    const { onToggleFlag, onFlagAnswer, user } = renderPanel(sixOptions)
+
+    await user.keyboard('{Shift>}F{/Shift}')
+    expect(onToggleFlag).toHaveBeenCalledTimes(1)
+    expect(screen.queryByText('Not quite')).toBeNull() // no answer was submitted
+
+    await user.keyboard('f') // option f = 2C — wrong, and NOT a flag toggle
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+    expect(onFlagAnswer).toHaveBeenCalledWith('wrong')
+    expect(onToggleFlag).toHaveBeenCalledTimes(1)
+  })
+
+  it('Shift+F with the answer popup up only closes it (it must not undo the auto-flag)', async () => {
+    const { onToggleFlag, user } = renderPanel(problem)
+    await user.keyboard('a') // wrong → popup, auto-flagged
+    expect(screen.getByText('Not quite')).toBeInTheDocument()
+
+    await user.keyboard('{Shift>}F{/Shift}')
+    expect(screen.queryByText('Not quite')).toBeNull() // dismissed, like any key
+    expect(onToggleFlag).not.toHaveBeenCalled()
+  })
+})
+
 describe('AuctionPanel answer popup dismissal', () => {
   it('a tap on the popup dismisses it; a drag (scroll) does not', async () => {
     const onAnswer = vi.fn()
@@ -259,7 +382,7 @@ describe('AuctionPanel free-form (text) question', () => {
 
   it('renders the prompt and phrase options, and grades the text answer', async () => {
     const onAnswer = vi.fn()
-    render(
+    const { container } = render(
       <AuctionPanel
         problem={textProblem}
         answers={[]}
@@ -272,8 +395,12 @@ describe('AuctionPanel free-form (text) question', () => {
     )
     const user = userEvent.setup()
 
-    // The prompt shows and the options are the literal phrases (not bids).
-    expect(screen.getByText('At what vulnerability would you preempt 4♠?')).toBeInTheDocument()
+    // The prompt shows, with its ♠ rendered as the SVG pip (black, outlined)
+    // rather than the Unicode character — so the text around it is what's left.
+    const prompt = container.querySelector('.mc-prompt')!
+    expect(prompt.textContent).toBe('At what vulnerability would you preempt 4?')
+    expect(prompt.querySelectorAll('svg.suit-glyph.suit-black')).toHaveLength(1)
+    // The options are the literal phrases (not bids).
     expect(screen.getByText('Any vulnerability')).toBeInTheDocument()
 
     // Wrong phrase (a) → retry.

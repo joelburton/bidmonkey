@@ -6,6 +6,8 @@ import type { Pos } from '../play'
 import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
 import { Explanation } from './Explanation'
+import { FlagButton } from './FlagButton'
+import { withSuits } from './suitText'
 import { useTapDismiss } from '../tapDismiss'
 
 const OPT_LETTERS = 'abcdef'
@@ -35,7 +37,8 @@ const POS_CLASS: Record<Pos, string> = { top: 't', left: 'l', right: 'r', bottom
 
 /** Center during play: contract (a button that opens the auction), the current
  * trick (cards placed by the same seat→position map as the hands), a prompt +
- * option buttons, and the wrong-answer popup. */
+ * option buttons, and the wrong-answer popup. The ⚑ toggle rides the contract
+ * line — the play phase shows no problem id, and this is its info row. */
 export function PlayCenter({
   problem,
   contract,
@@ -50,6 +53,8 @@ export function PlayCenter({
   showNext,
   onNext,
   hasNext,
+  flagged = false,
+  onToggleFlag = () => {},
 }: {
   problem: Problem
   contract: Contract | null
@@ -64,6 +69,10 @@ export function PlayCenter({
   showNext?: boolean
   onNext?: () => void
   hasNext?: boolean
+  // Inert by default so tests can render the center alone; PlayView always passes
+  // them.
+  flagged?: boolean
+  onToggleFlag?: () => void
 }) {
   // Position → card plus its place in the trick, so the cards stack in play
   // order: the lead sits under everything, the latest card on top.
@@ -97,6 +106,7 @@ export function PlayCenter({
         {problem.vulnerability && (
           <span className="vul-tag">Vul: {VUL_SHORT[problem.vulnerability]}</span>
         )}
+        <FlagButton flagged={flagged} onToggle={onToggleFlag} />
       </div>
 
       <div className="trick-area">
@@ -114,7 +124,9 @@ export function PlayCenter({
             Next ▸
           </button>
         )}
-        {message && <div className="play-msg">{message}</div>}
+        {/* Suit symbols become SVG pips, as in the auction prompt and the
+            explanation popup. */}
+        {message && <div className="play-msg">{withSuits(message)}</div>}
         {options && onOption && (
           <div className="opt-grid center-opts">
             {options.map((c, i) => (
