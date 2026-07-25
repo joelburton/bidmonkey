@@ -1,0 +1,156 @@
+quiz: 25C Reverse Drury
+problems:
+
+# LHO / Partner / RHO / You = W / N / E / S. Every auction opens with a pass by
+# the side that later bids — that's the point of Drury (a passed hand showing a
+# real raise) — so the dealer is South in #1-#5 and #9-#10 (you pass, partner
+# opens third-in-hand) and North in #6-#8 (partner passes, you open and partner
+# answers with the Drury 2♣).
+#
+# The book's standing note is "2♣ is Reverse Drury"; no prompt carries it because
+# the quiz title in the header already says Reverse Drury, and the auctions show
+# the 2♣ themselves.
+
+  #1
+  - hand: sk83 hj8753 dk73 c92
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You have a fairly poor hand with spade support; make your normal bid.
+        answer: 2s
+
+  #2
+  - hand: saj8 hq4 dkj74 c9764
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♣, Drury. You are maximum with three-card spade support. Perfect.
+        answer: 2c
+
+  #3
+  - hand: skq84 h7 daj95 c9765
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♣, Drury. Even better — now you have an excellent hand. If partner shows a sound opening bid you intend to go to game and may even show some slam interest.
+        answer: 2c
+
+  #4
+  - hand: sj10863 hk4 d32 c9764
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. This is a preemptive raise. Partner will know you have a poor hand with good spade support. Not vulnerable against vulnerable, you might well bid 4♠ with this hand.
+        answer: 3s
+
+  #5
+  - hand: s8 hk97 dj986 ckq1085
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. Of course, you cannot even consider bidding 2♣ on this hand since it shows support for spades. Not that that's any great loss, since venturing to the two-level with a poor hand and no fit for partner is seldom a good idea anyway.
+        answer: 1nt
+
+  #6
+  - hand: skqj7 h98 da1085 c542
+    dealer: n
+    auction:
+      - n: p
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. Sometimes, in third seat, you can open a strong four-card major suit, as in this example. Here, you have a sub-minimum opening bid, so just rebid your spades over Drury. Partner will almost certainly pass 2♠ and, as he will have at least three-card (and often four-card) support, this will be a sensible contract.
+        answer: 2s
+
+  #7
+  - hand: saq873 hkq107 d42 ca8
+    dealer: n
+    auction:
+      - n: p
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. This confirms that you have a sound opening bid and at least four hearts. With a weak hand you always rebid your major.
+        answer: 2h
+
+  #8
+  - hand: sakj8 hkq986 daq2 c8
+    dealer: n
+    auction:
+      - n: p
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. This shows a normal reverse (i.e. a strong hand with at least five hearts and at least four spades). This is easy to remember — with a weak hand you never go beyond two of the major for which partner has shown support. With this hand you are too good to bid a simple 4♥ over a Drury 2♣ as you might easily have a slam even opposite a passed partner.
+        answer: 2s
+
+  #9
+  - hand: skq84 h72 daj95 cj75
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Partner has shown a sound opening bid; opposite that, you can re-evaluate your hand to an opening bid in support of spades, so raise to game.
+        answer: 4s
+
+  #10
+  - hand: saj8 hkq84 dj743 c64
+    dealer: s
+    auction:
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Partner's 2♥ bid shows a full opening bid. Your 2♣ bid told partner that you had three spades, so now show that you have four hearts and a super-maximum for your initial pass. If you have a choice, it is almost always better to play in a 4-4 major-suit fit rather than a 5-3, since the five-card suit can often be used for discards.
+        answer: 4h

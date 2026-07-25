@@ -1,0 +1,125 @@
+quiz: 25C Splinter Bids
+problems:
+
+# One group. Partner opens 1♥ and you respond in #1-#5 (dealer N); you open 1♦
+# and partner responds 1♠ in #6-#10 (dealer S), so these are opener's splinters.
+
+  #1
+  - hand: saj4 hkj92 d3 cq10853
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          4♦. This hand is a minimum for a splinter in terms of both points and distribution, but 4♦ is clearly the most descriptive bid you can make.
+        answer: 4d
+
+  #2
+  - hand: s4 haq932 dk73 ck962
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. You shouldn't be much better than this for a splinter — a 15-count including distribution. Note that this splinter is easy to miss because splinters usually occur at the four-level.
+        answer: 3s
+
+  #3
+  - hand: s4 haq93 daj3 ckqj73
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. You are too strong for a splinter bid of 3♠, but Jacoby 2NT tells partner that you have 13 or more points and at least four-card support for hearts.
+        answer: 2nt
+
+  #4
+  - hand: skq93 hakj2 d8 ca852
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. This time, start with a Jacoby forcing raise. This hand is too strong for a splinter (showing 13-15 points) whereas Jacoby 2NT is unlimited. Besides, if partner shows a singleton club you will be off to the races, but opposite a singleton spade you will tread more warily.
+        answer: 2nt
+
+  #5
+  - hand: sa32 hq108532 d- ck1094
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          4♦. Although you have only 9 HCP, this hand is plenty good enough for a splinter. You could reach a good slam if partner has as little as ♠K4 ♥K9764 ♦J632 ♣A2 (11 HCP to go with your 9!).
+        answer: 4d
+
+  #6
+  - hand: skq105 haq4 dak986 c4
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Once you add your distributional points to your HCP your hand is quite strong enough to insist on game facing even a minimum response. Rather than just bidding 4♠, let partner know about your club shortness in case that is just the information he needs to bid a slam.
+        answer: 4c
+
+  #7
+  - hand: sak94 ha93 dqj864 c3
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. This shows 16-18 points and four trumps. You are not good enough for a splinter.
+        answer: 3s
+
+  #8
+  - hand: saj10 hk63 dak10873 c3
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. Your hand looks strong enough to bid 4♣, but you do not have four-card support for spades. Don't splinter as opener without at least four-card support. Your 3♦ rebid shows 16-18 and six good diamonds.
+        answer: 3d
+
+  #9
+  - hand: sk942 hakq4 daqj95 c-
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. Bidding 4♣ does not do justice to this monster — it's too good! Start with 2♥ (a reverse and thus forcing). You always intend to play in spades, but there is no rush to get the bidding to the four-level on this hand.
+        answer: 2h
+
+  #10
+  - hand: saq104 hk4 dakq104 c92
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. The jump raise to game carries the information that you have a strong hand with four-card spade support but no singleton or void.
+        answer: 4s

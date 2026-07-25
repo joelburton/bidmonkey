@@ -1,0 +1,129 @@
+quiz: 25C Jacoby 2NT
+problems:
+
+# One group. Partner opens 1♠ and you respond in #1-#5 (dealer N); you open the
+# 1♠ and partner makes the Jacoby 2NT raise in #6-#10 (dealer S).
+
+  #1
+  - hand: skj63 ha8 daj94 c853
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. You have enough points to insist on game as well as four-card spade support. Be aware, however, that having made this bid you are completely minimum.
+        answer: 2nt
+
+  #2
+  - hand: saq94 ha6 da954 cakj
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. This time you have lots of extra values, but the best way to start is with 2NT and see whether partner can tell you anything useful. For example, if partner bids 3♦ next (showing a singleton or void in diamonds) then you will be well on your way to bidding a grand slam.
+        answer: 2nt
+
+  # #3 and #4 are the same choice seen from both sides, and the book offers both
+  # bids in both answers, so each accepts the other's.
+  #3
+  - hand: sa7 hkq7 dj1083 ckj107
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. This can be a partnership agreement showing a balanced hand and two of the major. However, some partnerships agree that it shows three of the major. If you have no agreement, then you can bid 2♣ now, intending to bid 3NT next round.
+        answer: 3nt
+        accept: [2c]
+
+  #4
+  - hand: skq7 hq108 dkj3 cqj84
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. There is a conventional alternative here, if you and your partner wish to play it. You can use 3NT to show exactly this hand: three-card spade support, values for game, 4-3-3-3 shape, and no real slam interest.
+        answer: 2c
+        accept: [3nt]
+
+  #5
+  - hand: sa87532 h4 d53 cj642
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. This is not the time for Jacoby 2NT, which shows a good hand. Here you have lots of trumps, a singleton, and few high cards (this type of hand is sometimes called a 'weak freak'), and you should just jump straight to game in spades, where you have an eleven-card fit. The opponents may be able to make game or slam in a red suit. Bidding 4♠ makes it much harder for them to get into the auction.
+        answer: 4s
+
+  #6
+  - hand: skqj95 ha5 dkq4 cq53
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. Balanced, extra values, and good trumps. Perfect!
+        answer: 3s
+
+  #7
+  - hand: skj742 h3 da532 ckq5
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. This says nothing about your hand other than telling partner you have a singleton or void in hearts. You can tell him you are minimum later by failing to co-operate with any slam tries he makes.
+        answer: 3h
+
+  #8
+  - hand: skq763 hq32 dkj4 cq3
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You are not really sorry you opened this hand, especially now you've found a spade fit. However, it's not really suitable for slam (no singleton or void) unless partner has a super hand. Tell him you are minimum and balanced by jumping to game immediately, and leave any further moves to him.
+        answer: 4s
+
+  #9
+  - hand: sj9763 hak4 da4 cq75
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. You are balanced, and it is important that partner knows you have bad trumps. Even though responder may have plenty of high card points, you certainly don't want to reach 6♠ if partner's trumps are ♠Q542 or even ♠K542.
+        answer: 3nt
+
+  #10
+  - hand: skq7532 h- daq1084 ck4
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♦. Anything from 4♠ to 7♦ or 7♠ are possible contracts, so tell partner you have a good two-suited hand and leave him to judge how well the hands fit together.
+        answer: 4d
