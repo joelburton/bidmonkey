@@ -5,7 +5,14 @@ import type { Source, Quiz } from '../types'
 // which loads everything from Supabase. New quizzes are authored in the DB.
 
 export const sources: Source[] = [
-  { slug: 'fakebook', title: 'FakeBook' },
+  // No real book cover exists for the fixture source, so it points at the shared
+  // monkey-in-a-frame placeholder in the book-covers bucket.
+  {
+    slug: 'fakebook',
+    title: 'FakeBook',
+    coverUrl:
+      'https://drczvcgytwmmyzesohwm.supabase.co/storage/v1/object/public/book-covers/placeholder.png',
+  },
 ]
 
 export const quizzes: Quiz[] = [

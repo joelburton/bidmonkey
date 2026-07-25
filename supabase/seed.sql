@@ -3,7 +3,7 @@
 begin;
 
 -- sources
-insert into sources (slug, title) values ('fakebook', 'FakeBook');
+insert into sources (slug, title, cover_url) values ('fakebook', 'FakeBook', 'https://drczvcgytwmmyzesohwm.supabase.co/storage/v1/object/public/book-covers/placeholder.png');
 
 -- problems
 insert into problems

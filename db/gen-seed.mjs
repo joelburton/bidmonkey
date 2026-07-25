@@ -26,7 +26,10 @@ lines.push('begin;')
 
 lines.push('\n-- sources')
 for (const src of sources) {
-  lines.push(`insert into sources (slug, title) values (${s(src.slug)}, ${s(src.title)});`)
+  lines.push(
+    'insert into sources (slug, title, cover_url) values ' +
+      `(${s(src.slug)}, ${s(src.title)}, ${s(src.coverUrl)});`,
+  )
 }
 
 lines.push('\n-- problems')
