@@ -151,6 +151,7 @@ problems:
 #13
 - hand: sk1087542 h93 dq87 cj
   dealer: n
+  vuln: none
   auction:
     - n: p
     - e: p
@@ -176,6 +177,7 @@ problems:
 #15
 - hand: s1082 hj3 dkqj762 c94
   dealer: n
+  vuln: none
   auction:
     - n: p
     - e: p
