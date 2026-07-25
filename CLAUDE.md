@@ -52,6 +52,11 @@ After that, **new problems are authored directly in the DB** (`insert into
 problems …` — no redeploy); `src/data/*` is only the initial seed + test
 fixtures, not read at runtime.
 
+**Remote DB connection:** the direct `psql` command (with the postgres password) for
+the remote is in the gitignored **`db-conn`** file at the repo root — e.g.
+`CONN=$(sed -E 's/^psql +//' db-conn); psql "$CONN" -X …`. Use `-X` (Joel's `.psqlrc`
+prints border-style noise that corrupts scripted output). Don't print the password.
+
 ## Running
 
 ```
