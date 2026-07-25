@@ -1,0 +1,133 @@
+quiz: 25C Responsive Dbls
+problems:
+
+# LHO / Partner / RHO / You = W / N / E / S. LHO opens, partner acts, RHO raises
+# and you decide — dealer W for #1-#9. Partner's action is a takeout double in
+# #1-#7 and an overcall in #8-#9; #10 is the odd one out (RHO opens, you overcall
+# and partner makes the responsive double, so dealer E).
+
+  #1
+  - hand: sk973 hkq42 d54 cj73
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: 2d
+      - s: "?"
+        explain: |
+          Double. You want to compete, so ask partner to choose a major.
+        answer: x
+
+  # #1's hand, but RHO's raise is a level higher.
+  #2
+  - hand: sk973 hkq42 d54 cj73
+    dealer: w
+    auction:
+      - w: 1c
+      - n: x
+      - e: 3c
+      - s: "?"
+        explain: |
+          Pass. You are not quite strong enough to force partner to bid at the three-level.
+        answer: p
+
+  #3
+  - hand: sk973 hj10842 d5 cq73
+    dealer: w
+    auction:
+      - w: 1d
+      - n: x
+      - e: 2d
+      - s: "?"
+        explain: |
+          2♥. Partner will have at least three card support for both majors so 2♥ will be at least an eight-card fit. Even if he has four cards in each major, 2♥ will be a better contract than 2♠, but if you double, partner might well choose spades. Don't ask him to choose when you have a strong preference.
+        answer: 2h
+
+  #4
+  - hand: skj973 h842 d8 cq863
+    dealer: w
+    auction:
+      - w: 1h
+      - n: x
+      - e: 2h
+      - s: "?"
+        explain: |
+          2♠. You don't have very much, but since partner is likely to have four spades and short hearts you do not want to sell out to 2♥.
+        answer: 2s
+
+  # #4's shape with 9 HCP instead of 6.
+  #5
+  - hand: skq843 h842 d8 ckj63
+    dealer: w
+    auction:
+      - w: 1h
+      - n: x
+      - e: 2h
+      - s: "?"
+        explain: |
+          3♠. Good enough to invite game.
+        answer: 3s
+
+  #6
+  - hand: s843 h63 daq87 ckj63
+    dealer: w
+    auction:
+      - w: 1s
+      - n: x
+      - e: 2s
+      - s: "?"
+        explain: |
+          Double. This asks partner to choose a minor. If you had four or more hearts, you would have bid hearts. Your double here shows at least 4-4 in the minors.
+        answer: x
+
+  # Same auction and the same black suits as #6, but with five hearts instead of
+  # the second minor — so you name the suit rather than asking.
+  #7
+  - hand: s843 hkq863 d8 ckj63
+    dealer: w
+    auction:
+      - w: 1s
+      - n: x
+      - e: 2s
+      - s: "?"
+        explain: |
+          3♥. Invitational.
+        answer: 3h
+
+  #8
+  - hand: sj73 hk863 d83 ck1086
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1s
+      - e: 2d
+      - s: "?"
+        explain: |
+          2♠. You have three-card support for partner's overcall and a weak hand. Why not tell him exactly that?
+        answer: 2s
+
+  #9
+  - hand: sk4 haq73 d863 ckq83
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1s
+      - e: 2d
+      - s: "?"
+        explain: |
+          Double. You might well want to bid a game, but even if you do, you don't yet know which one. See what partner says after your responsive double.
+        answer: x
+
+  #10
+  - hand: saj1083 hkj96 da63 c4
+    dealer: e
+    auction:
+      - e: 1d
+      - s: 1s
+      - w: 2d
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. You have an excellent hand for your overcall and four-card support for the heart suit partner has promised. Because you have three diamonds (and the opponents have at least eight) you know partner has at most two and perhaps a singleton. The hands should fit well and although you may not have the high-card requirements for game, you would expect it to make most of the time.
+        answer: 4h

@@ -1,0 +1,169 @@
+quiz: 25C NMF
+problems:
+
+# Two halves. In #1-#6 partner opens a suit, you respond, partner rebids 1NT and
+# you decide whether to use New Minor Forcing (dealer N). In #7-#10 you are the
+# one who rebid 1NT and partner has bid the new minor at you, so these are the
+# answers to NMF (dealer S).
+
+  #1
+  - hand: skj853 ha864 d8 ckq5
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You have game-going values but you cannot yet tell which is the best game. Ask partner to tell you more about his hand.
+        answer: 2d
+
+  #2
+  - hand: skq10753 ha7 dj8 c975
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. This time you can describe your hand by making an invitational jump rebid of your own suit. If you use NMF and partner rebids 2NT to show a minimum without three spades, you can no longer stop in 3♠ as that would now be a forcing bid. You will only have two choices, both poor — pass 2NT or force to game.
+        answer: 3s
+
+  #3
+  - hand: skq953 haj85 dj6 ck5
+    dealer: n
+    auction:
+      - n: 1d
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. 3NT, 4♥ and 4♠ are all possible contracts at this point. You need more information. By using NMF you will find out whether partner has a fit with your second suit — he will bid hearts if he has four of them. If he does not, he will support spades if he has three of those. Whatever partner does next, you will be well placed to select the correct game contract.
+        answer: 2c
+
+  # Nearly #3's hand, but you responded 1♥ rather than 1♠ — which is what makes
+  # NMF pointless here.
+  #4
+  - hand: skq96 haj85 dj6 ckq5
+    dealer: n
+    auction:
+      - n: 1d
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. Where else are you going on this hand? Partner cannot have four spades as he did not bid 1♠ at his second turn. You do not really care whether or not he has three hearts, nor does it matter whether he is minimum or maximum. Bidding NMF on this hand will just give free information about partner's hand to the defenders.
+        answer: 3nt
+
+  #5
+  - hand: skj853 hj7 daq5 c963
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You want to find out whether partner has three-card spade support and whether he is maximum or minimum. As there are two unbid minors, choose the one in which you have more strength.
+        answer: 2d
+
+  #6
+  - hand: sk964 h7 dqj9642 c95
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. You do not want to pass 1NT, but you cannot bid 2♦ as that would be NMF. Jumping to 3♦ tells partner to pass. This should be at least as good a spot as 1NT and will frequently be much better.
+        answer: 3d
+
+  #7
+  - hand: skj6 hj974 da5 ckq72
+    dealer: s
+    auction:
+      - s: 1c
+      - w: p
+      - n: 1s
+      - e: p
+      - s: 1nt
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. Your first priority is to show four hearts. Since you have a maximum for your 12-14 point 1NT rebid, you must also jump.
+        answer: 3h
+
+  #8
+  - hand: s864 hak7 dqj74 ck105
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You do not have four hearts to show, but you do have three-card support for partner's spades. With a minimum opening bid, you therefore support spades at the cheapest available level.
+        answer: 2s
+
+  #9
+  - hand: skq4 ha7 dqj1083 c963
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1h
+      - e: p
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You have no unbid major to show, and you do not have support for partner's suit. You also have a minimum opening bid. You would bid 2NT if you had stoppers in both unbid suits (spades and clubs) but with no club stopper you simply rebid your suit.
+        answer: 2d
+
+  # #9's hand with ♦QJ1083 upgraded to ♦AJ1085 — 12 HCP becomes 14, a maximum for
+  # the 1NT rebid, and that alone changes the answer.
+  #10
+  - hand: skq4 ha7 daj1085 c963
+    dealer: s
+    auction:
+      - s: 1d
+      - w: p
+      - n: 1h
+      - e: p
+      - s: 1nt
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. The same type of hand as in the previous problem but this time a maximum. With stoppers in both black suits, you would jump to 3NT, but lacking a club stopper you show all of the features of your hand by bidding your spade stopper now. Note that this impossible spade bid cannot show a four-card suit as you did not bid 1♠ over partner's 1♥ response.
+        answer: 2s

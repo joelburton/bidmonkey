@@ -1,0 +1,144 @@
+quiz: 25C Help Suit Tries
+problems:
+
+# One group. You open 1♠ and partner raises to 2♠ in #1-#6 (dealer S), so these
+# are the game-try decisions. In #7-#10 partner opens 1♠, you raise to 2♠ and
+# partner makes the try (dealer N), so these are the answers to one.
+
+  #1
+  - hand: skj963 ha8 da1094 cq5
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. You do not have a good enough hand to make a game try.
+        answer: p
+
+  #2
+  - hand: saj943 hk6 dq654 cak
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. You will not make 4♠ if partner has three small diamonds, but game should be a good bet if he has some help in the suit.
+        answer: 3d
+
+  #3
+  - hand: saq853 haq dq952 caj
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You could bid 3♦ to ask for help in diamonds, but this hand is so good you really should insist on game.
+        answer: 4s
+
+  #4
+  - hand: sakq742 h8 dkj2 ck53
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You could ask for help in diamonds or clubs, and if you were a little weaker you would have to guess which to choose. However, with this hand you are good enough to bid game and hope partner has some useful bits and pieces.
+        answer: 4s
+
+  #5
+  - hand: saqj52 ha52 d6 ck974
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          3♣. You could bid 3♥, but you might easily make game even if partner has no help there. The club suit is the place you could really use assistance.
+        answer: 3c
+
+  #6
+  - hand: skqj95 haj dj743 ca3
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2s
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. If partner has help in diamonds, you want to play in game. If not, then 3♠ is probably high enough.
+        answer: 3d
+
+  #7
+  - hand: sk742 h3 dq6532 c853
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. A fourth trump and a singleton heart. Even with only 5 HCP this is a very good hand and partner should make at least ten tricks.
+        answer: 4s
+
+  #8
+  - hand: sk63 hq32 dqj4 cj963
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Partner is not inviting you to raise, despite your maximum. He has made his 3♠ bid purely to make it difficult for the opponents in case they can make something.
+        answer: p
+
+  #9
+  - hand: s763 hak74 dq4 c8765
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. There is one thing you're allowed to do other than bidding 3♠ or 4♠. Bidding 3♥ here says 'I don't have the club help you want, but I do have a good hand and some goodies in hearts'. Partner may be able to bid a reasonable game now on ♠AKQ84 ♥Q6 ♦K5 ♣K932. Notice that you can only do this in a new suit below the level of three of the agreed major.
+        answer: 3h
+
+  #10
+  - hand: sk32 hj53 da8752 c43
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2s
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. Even though you are maximum for your 2♠ bid, you have no help in hearts.
+        answer: 3s

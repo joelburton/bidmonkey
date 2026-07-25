@@ -1,0 +1,254 @@
+quiz: 25C Bergen Raises
+problems:
+
+# Book question 1 (hands a-h): what do you respond to partner's 1♠? Dealer N.
+#
+# Book questions 2 and 3 each give two hands and ask for the rebid after EACH of
+# three possible Bergen responses, so every hand becomes three problems here —
+# one per continuation (#9-#14 open 1♠, #15-#20 open 1♥, all dealer S). The book
+# answers all three continuations in one paragraph; each problem below keeps only
+# the sentence for its own auction, so nothing gives away the other two.
+
+  #1 — book 1a
+  - hand: sa963 hq72 d105 cq1073
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♣. You have four spades and are within the 7-9 point range for a Bergen 3♣ response. (Playing standard responses, you would bid just 2♠.)
+        answer: 3c
+
+  #2 — book 1b
+  - hand: saj982 hj643 d83 c95
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. With five-card support make the preemptive response of 4♠. The next player, who is likely to hold an excellent hand, will not enjoy this at all!
+        answer: 4s
+
+  #3 — book 1c
+  - hand: saq102 hk965 dq732 c3
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. You are too strong for a Bergen 3♦ raise, which shows 10-12 points. Instead, you should make a splinter bid of 4♣, showing a hand with 13-15 points and a singleton or void in clubs.
+        answer: 4c
+
+  #4 — book 1d
+  - hand: skj7 hj93 daq107 c1094
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. With 11 points and three-card support you should start with 2♦, intending to support spades on the next round. (If you play a two-over-one system, respond with a forcing 1NT instead.)
+        answer: 2d
+
+  #5 — book 1e
+  - hand: sqj83 h65 dq92 caq83
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. You are worth a Bergen response of 3♦. If partner rebids only 3♠, you will pass. You have already described your hand.
+        answer: 3d
+
+  #6 — book 1f
+  - hand: sk1084 h3 d109872 c943
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. You should bid a preemptive 3♠, showing four-card support and 2-6 points.
+        answer: 3s
+
+  #7 — book 1g
+  - hand: sj83 h965 dkj92 cq83
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. This response shows 6-9 points and three-card support. Perfect!
+        answer: 2s
+
+  #8 — book 1h
+  - hand: sj84 hq92 da54 cak72
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. Respond 2♣ to find out more about partner's hand. You will probably just raise to 4♠ at your next turn.
+        answer: 2c
+
+  #9 — book 2a (i), partner responds 3♣
+  - hand: sak1072 h73 dk2 ca643
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. Opposite the constructive 3♣ raise you should sign off in 3♠.
+        answer: 3s
+
+  #10 — book 2a (ii), partner responds 3♦
+  - hand: sak1072 h73 dk2 ca643
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Opposite a 3♦ response you are worth 4♠.
+        answer: 4s
+
+  #11 — book 2a (iii), partner responds 3♠
+  - hand: sak1072 h73 dk2 ca643
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Partner has made the preemptive response of 3♠, so you will pass, of course.
+        answer: p
+
+  #12 — book 2b (i), partner responds 3♣
+  - hand: skqj962 ha86 d4 cak9
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You should bid 4♠ opposite the constructive 3♣ raise.
+        answer: 4s
+
+  #13 — book 2b (ii), partner responds 3♦
+  - hand: skqj962 ha86 d4 cak9
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Opposite a 3♦ response, a slam is possible and you should announce this with a control bid of 4♣. (In this auction, 3♥ is normally used as a game try.)
+        answer: 4c
+
+  #14 — book 2b (iii), partner responds 3♠
+  - hand: skqj962 ha86 d4 cak9
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You should bid 4♠ opposite the preemptive 3♠ raise.
+        answer: 4s
+
+  #15 — book 3a (i), partner responds 3♣
+  - hand: sk8 hakj62 dq932 ck7
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. Opposite a 3♣ response, allow partner to make the final decision by making the in-between bid of 3♦.
+        answer: 3d
+
+  #16 — book 3a (ii), partner responds 3♦
+  - hand: sk8 hakj62 dq932 ck7
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Bid 4♥ opposite the limit raise of 3♦.
+        answer: 4h
+
+  #17 — book 3a (iii), partner responds 3♥
+  - hand: sk8 hakj62 dq932 ck7
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Opposite a preemptive raise to 3♥, you should pass.
+        answer: p
+
+  #18 — book 3b (i), partner responds 3♣
+  - hand: s82 hak10753 d8 ckqj3
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. This hand is worth game opposite any of partner's three Bergen raises.
+        answer: 4h
+
+  #19 — book 3b (ii), partner responds 3♦
+  - hand: s82 hak10753 d8 ckqj3
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. This hand is worth game opposite any of partner's three Bergen raises.
+        answer: 4h
+
+  #20 — book 3b (iii), partner responds 3♥
+  - hand: s82 hak10753 d8 ckqj3
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. You will probably go down facing the preemptive raise, but the opponents are favorites to have a game their way and (even though they have both passed at their first turn) you must ensure that they are kept quiet.
+        answer: 4h

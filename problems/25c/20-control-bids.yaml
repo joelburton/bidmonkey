@@ -1,0 +1,174 @@
+quiz: 25C Control Bids
+problems:
+
+# One group, but the auctions vary in length and in who opens — the You/Partner
+# columns show which. You are the opener in #1, #2, #5-#9 (dealer S) and the
+# responder in #3, #4 and #10 (dealer N). #9 is #8's auction carried two calls
+# further, on the same hand.
+
+  #1
+  - hand: saj853 h5 dkj84 ca83
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. You are not interested in a slam if all partner can do is invite game, so simply raise to 4♠.
+        answer: 4s
+
+  #2
+  - hand: skqj6 haq9842 dk74 c-
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 3h
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Start with bidding your lowest first-round control. Do not be tempted to bid 3♠ just because you have a nice suit — that's not what 3♠ tells partner.
+        answer: 4c
+
+  #3
+  - hand: sq1085 ha3 dkj94 c853
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 3s
+      - w: p
+      - n: 4c
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Show your first-round control, not your diamond length.
+        answer: 4h
+
+  #4
+  - hand: s8 hak8 dkj4 caq9753
+    dealer: n
+    auction:
+      - n: 1d
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. No need to get complicated here. Find out about partner's keycards and you will have all the information you need to place the final contract.
+        answer: 4nt
+
+  #5
+  - hand: sak8642 hkj8 dkq63 c-
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: 4c
+      - w: p
+      - n: 4s
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Partner has denied first-round control of diamonds and hearts. Why risk the five-level when you already know there are two quick losers?
+        answer: p
+
+  # Same auction as #5 until partner bids 4♥ instead of 4♠.
+  #6
+  - hand: skq10642 h- dkqj3 cak8
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: 4c
+      - w: p
+      - n: 4h
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. Blackwood! We have said that you should not use Blackwood when you have a void, but in this case you already know that partner has the ace of hearts and does not have the ace of diamonds. If he shows one ace, you will know the opponents have two aces to take and sign off in 5♠. If he shows two aces, then you can confidently bid 6♠.
+        answer: 4nt
+
+  #7
+  - hand: saq10974 ha3 da63 cq7
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 4d
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Partner has spade support and at most a singleton diamond. This suggests that he will have honors in the other three suits, all of which will fit nicely opposite your ♥Ax and ♣Qx.
+        answer: 4h
+
+  #8
+  - hand: sqj963 hq95 dk8 caj8
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2h
+      - e: p
+      - s: 3h
+      - w: p
+      - n: 4d
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. With such a minimum opening, you cannot proceed beyond the safety of game despite having an ace. Note that you know partner does not have the ♠A, so there is at least one loser there, and the five-level might easily be too high.
+        answer: 4h
+
+  # #8's hand and auction, two calls further on: you signed off in 4♥ and partner
+  # bid on to 4♠.
+  #9
+  - hand: sqj963 hq95 dk8 caj8
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2h
+      - e: p
+      - s: 3h
+      - w: p
+      - n: 4d
+      - e: p
+      - s: 4h
+      - w: p
+      - n: 4s
+      - e: p
+      - s: "?"
+        explain: |
+          5♣. Now that partner has continued past game, you can show your club ace. It sounds as though that may be all partner needs to hear to bid a slam.
+        answer: 5c
+
+  #10
+  - hand: sq1054 h864 d7 c97532
+    dealer: n
+    auction:
+      - n: 2c
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 2s
+      - e: p
+      - s: 3s
+      - w: p
+      - n: 4c
+      - e: p
+      - s: 4s
+      - w: p
+      - n: 5c
+      - e: p
+      - s: "?"
+        explain: |
+          5♦. You don't have a very good hand, but opposite partner's strong bidding you could be much worse. You have already denied first-round diamond control by bidding 4♠, so it's safe to show your singleton now. Partner will know this is a second-round control.
+        answer: 5d

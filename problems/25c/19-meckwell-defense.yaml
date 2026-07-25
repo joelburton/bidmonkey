@@ -1,0 +1,142 @@
+quiz: 25C Meckwell Defense
+problems:
+
+# Book question 1 (hands a-f): RHO opens 1NT and you bid the Meckwell defense
+# yourself (dealer E).
+#
+# Questions 2-4 say only "partner has overcalled 1NT with 2♣ / 2♥ / 2NT" and
+# print no auction grid. Encoded the way the previous chapter (DONT) spells the
+# identical situation out: LHO opens 1NT, partner overcalls, RHO passes, you
+# respond — dealer W.
+
+  #1 — book 1a
+  - hand: sj1073 ha9 d54 caq872
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♣. This shows clubs and a major. If partner responds 2♥, to play in your major, you will correct to 2♠.
+        answer: 2c
+
+  #2 — book 1b
+  - hand: sa42 hj75 daj10652 c3
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Double. A single-suiter with diamonds is one of the three types where you start with a double. When partner bids 2♣, you rebid 2♦.
+        answer: x
+
+  #3 — book 1c
+  - hand: sj76 haq652 dkj96 c8
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♦. This bid may be used with a five-card major and only four diamonds.
+        answer: 2d
+
+  #4 — book 1d
+  - hand: s85 h3 dkq1054 caq973
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2NT. With only 5-5 shape, you should not be much weaker than this for a 2NT bid. Bear in mind that partner must play at the three-level.
+        answer: 2nt
+
+  #5 — book 1e
+  - hand: saj75 hkj982 d6 ca82
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Double. With both majors, you start with a double. Over partner's 2♣, you rebid 2♥. Partner will then usually pass or give preference to 2♠.
+        answer: x
+
+  #6 — book 1f
+  - hand: sak9763 h1032 da8 cj6
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♠. You have six spades and 12 HCP: just bid your suit.
+        answer: 2s
+
+  #7 — book 2a
+  - hand: saq8 h75 dj1086 ca964
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          3♣. With a good fit for partner's clubs, you should give a single raise. If the opponents have a reasonable fit in the major that partner does not hold, you may shut them out.
+        answer: 3c
+
+  #8 — book 2b
+  - hand: sk10763 ha1094 d984 c3
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You don't want to play in clubs. You respond 2♦ and will then play in partner's major suit.
+        answer: 2d
+
+  #9 — book 3a
+  - hand: sj7 hq84 dak872 ck102
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. Although you have only three-card trump support, you are entitled to invite a game with a single raise.
+        answer: 3h
+
+  #10 — book 3b
+  - hand: saq1092 h5 dk1086 c953
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. A change of suit facing an overcall is constructive, often played as forcing. You should therefore pass.
+        answer: p
+
+  #11 — book 4a
+  - hand: sqj8732 hk964 d102 c4
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. Try not to wince. Bid 3♦ with a passive expression and hope that you will not be doubled.
+        answer: 3d
+
+  #12 — book 4b
+  - hand: saj104 hkqj8 d976 c102
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2nt
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. Although all your strength is in the majors, do not be tempted to pass 2NT. The two hands will play well in diamonds.
+        answer: 3d

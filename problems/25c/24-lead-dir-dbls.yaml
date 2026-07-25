@@ -1,0 +1,209 @@
+quiz: 25C Lead-Dir Doubles
+problems:
+
+# This chapter splits into two kinds of question, and the second kind is new to
+# this source:
+#   #1-#5  "do you double, and if so, why?" — ordinary auction questions.
+#   #6-#10 "what do you lead?" — the auction is complete and the answer is a
+#          CARD, so these are opening-lead problems (`plays:` with one `?`).
+#          Declarer is East in all five, which puts South (the hero) on lead.
+#
+# LHO / Partner / RHO / You = W / N / E / S throughout.
+
+  #1
+  - hand: s974 h- dj76543 cq984
+    dealer: w
+    auction:
+      - w: 1s
+      - n: p
+      - e: 2h
+      - s: p
+      - w: 3s
+      - n: p
+      - e: 4nt
+      - s: p
+      - w: 5h
+      - n: p
+      - e: 6s
+      - s: "?"
+        explain: |
+          Double. This specifically asks partner to lead dummy's first bid suit — hearts. Even a heart lead will not always beat the contract, but you can be fairly sure that no other lead will and it is worth the risk.
+        answer: x
+
+  #2
+  - hand: sj754 ha104 d8753 c86
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1h
+      - e: 3d
+      - s: p
+      - w: 3nt
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          Double. Partner probably will not lead his broken heart suit unless you tell him to do so. 3NT may still make even on a heart lead, but it will almost certainly do so on any other lead.
+        answer: x
+
+  #3
+  - hand: sqj10864 h- d974 ca976
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: 1h
+      - s: 1s
+      - w: 3d
+      - n: p
+      - e: 4nt
+      - s: p
+      - w: 5d
+      - n: p
+      - e: 6d
+      - s: "?"
+        explain: |
+          Double. The opponents are ready for a spade lead, and looking at your hand you can see why. You want a heart lead, to score your ruff, but partner is sure to lead a spade unless you tell him not to do so.
+        answer: x
+
+  #4
+  - hand: skqj1074 ha4 dqj6 c73
+    dealer: s
+    auction:
+      - s: 1s
+      - w: 1nt
+      - n: p
+      - e: 3nt
+      - s: "?"
+        explain: |
+          Double. You must make sure that partner leads a spade. Yes, he might lead one anyway, but if he has a singleton spade and something like ♣QJ9xxx in clubs he is likely to lead a club if you do not double.
+        answer: x
+
+  #5
+  - hand: sqj109 hkj4 dqj7 c963
+    dealer: w
+    auction:
+      - w: 1s
+      - n: p
+      - e: 3s
+      - s: p
+      - w: 6s
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          Double. You do not care what partner leads. 6♠ is going down and you have enough bits and pieces outside not to fear that opponents will run to 6NT and make that.
+        answer: x
+
+  #6
+  - hand: s974 ha9 d976543 c53
+    dealer: n
+    auction:
+      - n: p
+      - e: 4s
+      - s: p
+      - w: 6s
+      - n: x
+      - e: p
+      - s: p
+      - w: p
+    plays:
+      - s: "?"
+        explain: |
+          ♦9. Partner wants a ruff, and looking at your hand you can be fairly sure that it is diamonds in which he is void. Lead the highest diamond (suggesting the higher-ranking suit) as a suit-preference signal so that he will know to return a heart rather than a club to put you back in to get a second ruff. If you had the ♣A, you would lead a small diamond.
+        answer: 9d
+
+  #7
+  - hand: s864 hqj10753 d5 cj107
+    dealer: n
+    auction:
+      - n: 1d
+      - e: 2s
+      - s: p
+      - w: 3c
+      - n: p
+      - e: 3nt
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: p
+      - w: p
+    plays:
+      - s: "?"
+        explain: |
+          ♦5. Partner has doubled to make sure you lead his suit. Even the nice heart suit should not dissuade you from doing so. Note that if partner had not doubled, you would have preferred a heart lead rather than a singleton in his minor.
+        answer: 5d
+
+  #8
+  - hand: s974 hj8 d96 cqj9743
+    dealer: w
+    auction:
+      - w: 1h
+      - n: p
+      - e: 1s
+      - s: p
+      - w: 3s
+      - n: p
+      - e: 4nt
+      - s: p
+      - w: 5d
+      - n: x
+      - e: 6s
+      - s: p
+      - w: p
+      - n: p
+    plays:
+      - s: "?"
+        explain: |
+          ♦9. Without partner's lead-directing double of 5♦ you would have led a club, but there is no reason to ignore partner's suggestion.
+        answer: 9d
+
+  #9
+  - hand: sq1075 hj87 d10985 c97
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: p
+      - w: 2c
+      - n: x
+      - e: 2s
+      - s: p
+      - w: 3nt
+      - n: p
+      - e: p
+      - s: p
+    plays:
+      - s: "?"
+        explain: |
+          ♣9. Without partner's lead-directing double of 2♣ you would probably have led a diamond. If partner thinks a club lead is best, you certainly have no reason to argue with that.
+        answer: 9c
+
+  #10
+  - hand: s87 hj10975 d9 ck10753
+    dealer: e
+    auction:
+      - e: 1s
+      - s: p
+      - w: 1nt
+      - n: p
+      - e: 3c
+      - s: p
+      - w: 3s
+      - n: p
+      - e: 4nt
+      - s: p
+      - w: 5d
+      - n: p
+      - e: 6s
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: p
+      - w: p
+    plays:
+      - s: "?"
+        explain: |
+          ♣5. Without partner's lead-directing double you would have chosen between the safe ♥J and the attacking singleton diamond. Since dummy has not bid a suit, partner's double asks you to lead declarer's second suit — remember, the Lightner Double calls for an unusual lead. Partner will surely ruff the club lead, and you will still come to your ♣K later.
+        answer: 5c

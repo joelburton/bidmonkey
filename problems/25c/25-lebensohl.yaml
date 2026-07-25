@@ -1,0 +1,126 @@
+quiz: 25C Lebensohl
+problems:
+
+# Group 1 (#1-#8): partner opens 1NT, RHO overcalls 2♥, and you bid (dealer N).
+# The book asks a second question with it — "if you bid 2NT (Lebensohl), what are
+# you going to do next when partner bids 3♣?" — and that plan stays in the
+# explanation, since partner's forced 3♣ isn't part of the recorded auction.
+#
+# Group 2 (#9-#10): you open 1NT, LHO overcalls, partner answers with Lebensohl
+# and you place the contract (dealer S).
+
+  #1
+  - hand: s8 hq84 d973 ckj8632
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          2NT. You intend to pass partner's 3♣.
+        answer: 2nt
+
+  #2
+  - hand: sqj10863 h7 dk8 c9874
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          2NT. You intend to invite game by bidding 3♠ over partner's 3♣.
+        answer: 2nt
+
+  #3
+  - hand: saj84 h8 daq9732 ck4
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          3♥. You want to reach game and even a slam is not impossible. You start by showing game values and four spades but denying a heart stopper. If partner bids 3NT you can bid 4♦ (which shows slam interest) as you expect 4NT or 5♦ will be safe havens.
+        answer: 3h
+
+  # #4 and #5 are the chapter's fast-vs-slow pair: 3NT at once denies a heart
+  # stopper, 2NT first promises one.
+  #4
+  - hand: skq7 h85 dkj43 caj82
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          3NT. This is the hardest one for new Lebensohl players to understand, but when you bid 3NT immediately, partner knows that you do not have a heart stopper. As you also do not have four spades, you almost certainly have support for both minors (or a strong minor suit of your own). If partner has no heart stopper either, he will bid his better minor suit and you will reach a minor-suit game, which is very likely to make.
+        answer: 3nt
+
+  #5
+  - hand: skq3 haq4 dj842 c853
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          2NT. You must be careful not to bid 3NT without thinking. Yes, you almost certainly want to play in 3NT, but if you bid it without first bidding 2NT to show a heart stopper, then partner will remove it when he has no heart stopper. Of course, you will bid 3NT over opener's forced 3♣.
+        answer: 2nt
+
+  #6
+  - hand: skj63 h4 daj63 cj984
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          3♥. This promises four spades and tells partner that you have nothing in hearts. Perfect!
+        answer: 3h
+
+  #7
+  - hand: skj74 hk53 d98 caq84
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          2NT. Over partner's forced 3♣, you plan on bidding 3♥. Now partner will know that you have both four spades and a heart stopper and he will choose the right game.
+        answer: 2nt
+
+  #8
+  - hand: saj8 hj743 dk85 c976
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: 2h
+      - s: "?"
+        explain: |
+          Double. This is a penalty double. If RHO had passed, then you would have invited game by bidding 2NT. Now you can go for an even bigger score defending 2♥ doubled. Partner will have at least two hearts and you will collect a juicy penalty even when you cannot make game.
+        answer: x
+
+  #9
+  - hand: saj73 h97 dkq4 caq83
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: 2h
+      - n: 3nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. Partner doesn't have a heart stopper, so clearly 3NT is not the right contract. He also doesn't have four spades (he would have bid 3♥, not 3NT). Fortunately, you have a nice club suit, for which partner is virtually sure to have decent support.
+        answer: 4c
+
+  #10
+  - hand: sakj3 hq974 dq7 ca93
+    dealer: s
+    auction:
+      - s: 1nt
+      - w: 2d
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          3♥. Partner has no diamond stopper, so 3NT is unlikely to be the right place to play. However, partner has at least one four-card major, so you know you have an eight-card fit somewhere.
+        answer: 3h

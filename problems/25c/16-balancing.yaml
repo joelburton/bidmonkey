@@ -1,0 +1,141 @@
+quiz: 25C Balancing
+problems:
+
+# LHO / Partner / RHO / You = W / N / E / S.
+#   #1-#4   LHO opens 1♦ and it is passed round to you — the balancing seat
+#           itself (dealer W).
+#   #5-#8   RHO opens (1♥ in #5-#6, 1♦ in #7-#8), you pass, and partner balances
+#           with a double; you answer it (dealer E).
+#   #9-#10  RHO opens 1♥, you pass, partner balances with 1♠ (dealer E).
+
+  #1
+  - hand: s864 ha7 dkj96 ca1084
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. If the 1♦ opening bid were on your right, and you had the ♠K instead of one of the small spades, you would overcall 1NT and consider that a minimum. In balancing seat, bid 1NT with this hand, showing 12-14 HCP and a diamond stopper.
+        answer: 1nt
+
+  #2
+  - hand: sk42 hk8652 d8 cj952
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          1♥. You wouldn't overcall 1♥ with a poor hand and such a weak suit if the 1♦ opening were on your right, but in the balancing seat it is clear to do so. Pretend one of your small hearts is the queen, and now you would have a normal direct-seat overcall.
+        answer: 1h
+
+  #3
+  - hand: s10873 haj83 d82 ckq8
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          Double. Mentally give yourself the ♠K and you can see that you would have a normal takeout double of a 1♦ opening on your right.
+        answer: x
+
+  #4
+  - hand: skq8 ha8 dkq84 ck1073
+    dealer: w
+    auction:
+      - w: 1d
+      - n: p
+      - e: p
+      - s: "?"
+        explain: |
+          Double. Why not 1NT, you might think? Even though you have a good hand, you must still mentally add 3 points for being in the passout seat. Having done so, you have a 20-count! With that much in the direct seat you would have to double first, intending to bid notrump next, and you should follow the same plan here. Remember that in balancing seat you can bid 1NT with 12 points, so you cannot make the same bid with 17 HCP.
+        answer: x
+
+  #5
+  - hand: sj3 hkj83 da74 cq983
+    dealer: e
+    auction:
+      - e: 1h
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. You have a good hand, but pretend the ♦A is the jack and it does not look quite as strong. Partner has already overbid by three points, so 1NT is plenty. In other words, as partner is expected to overbid in balancing seat, you must underbid to compensate.
+        answer: 1nt
+
+  #6
+  - hand: sj3 h82 dk862 caj973
+    dealer: e
+    auction:
+      - e: 1h
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          2♣. If partner had doubled in direct seat, you would have jumped to 3♣, but opposite a balancing double you need a much better hand to take such action. This one is not close to good enough.
+        answer: 2c
+
+  #7
+  - hand: sj8632 ha42 dkq43 c4
+    dealer: e
+    auction:
+      - e: 1d
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. This hand is worth a jump, but only to 2♠. Opposite a direct-seat double you would jump to 3♠, but as you realize by now, you have to underbid by a king in a balancing auction.
+        answer: 2s
+
+  #8
+  - hand: sk83 hq1073 dq8653 c5
+    dealer: e
+    auction:
+      - e: 1d
+      - s: p
+      - w: p
+      - n: x
+      - e: p
+      - s: "?"
+        explain: |
+          1♥. If partner had made a direct-seat takeout double you might have considered bidding 1NT. After the balancing double you have a much weaker hand than partner is expecting and 1NT would be a significant overbid (it suggests 11-13 points and you have only 7). Just bid your best suit and hope it all works out. You didn't even think about passing for penalties, did you?
+        answer: 1h
+
+  #9
+  - hand: skj5 hj63 da972 cj73
+    dealer: e
+    auction:
+      - e: 1h
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. With 10 points and a nice fit for partner's suit, you would have been more enthusiastic opposite a direct-seat overcall, but this is facing a balancing bid. You may be too high already — remember that your ♥J is useless.
+        answer: 2s
+
+  #10
+  - hand: s8 haj84 dkq853 cq105
+    dealer: e
+    auction:
+      - e: 1h
+      - s: p
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          1NT. You have a nice hand, but it is not certain that your side has even half of the points and with no fit you should be very wary.
+        answer: 1nt

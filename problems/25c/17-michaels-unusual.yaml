@@ -1,0 +1,124 @@
+quiz: 25C Michaels/Unusual
+problems:
+
+# LHO / Partner / RHO / You = W / N / E / S.
+#   #1-#4  RHO opens and you are the two-suited hand (dealer E).
+#   #5-#10 LHO opens, partner makes the Michaels cuebid, and you answer it
+#          (dealer W; in #8 RHO competes to 3♦ before you bid).
+#
+# #3 mentions vulnerability in its answer, but the book states none for these
+# hands, so `vuln` stays null — the discussion is hypothetical.
+
+  #1
+  - hand: saqj82 hkq1083 da5 c4
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          2♦. This shows both majors. As you have the very strong hand type, you intend to bid again even if partner only gives you a simple major-suit preference.
+        answer: 2d
+
+  #2
+  - hand: saqj82 h4 da4 ckq1083
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          2♥. Ideal. A very good hand with five spades and a five-card minor.
+        answer: 2h
+
+  #3
+  - hand: s5 h3 dq108753 ckqj83
+    dealer: e
+    auction:
+      - e: 1h
+      - s: "?"
+        explain: |
+          2NT. Whether you bid on this hand will depend on the vulnerability. Despite only having 8 HCP, your excellent shape gives you good playing strength if partner can fit either or both of your suits. We recommend that you bid 2NT with this hand, but if you're vulnerable against not, discretion should probably persuade you to pass.
+        answer: 2nt
+
+  # #2's hand with ♠AQJ82 downgraded to ♠AJ1082, and RHO opening 1♦ instead of
+  # 1♥ — now neither two-suited bid describes it.
+  #4
+  - hand: saj1082 h4 da4 ckq1083
+    dealer: e
+    auction:
+      - e: 1d
+      - s: "?"
+        explain: |
+          1♠. You don't have both majors and you don't have the two lowest unbid suits, so you cannot show this two-suited hand with one bid. Overcall 1♠ for now. Perhaps you will have a chance to bid your clubs later.
+        answer: 1s
+
+  #5
+  - hand: skq85 hj3 da43 c8763
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. If partner has a strong hand you expect to make game. If he is weak, then perhaps the opponents can make game. Either way, a jump will get across the message that you have a good fit for one of partner's suits and some values.
+        answer: 3s
+
+  #6
+  - hand: sk8542 hkj3 d9743 c8
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Because of the fit for both of partner's suits, you expect to make this contract if he is strong. If he is weak then you know the opponents can make game and this will be a profitable sacrifice. By bidding confidently you hope the opponents will allow you to steal the hand in 4♠ even when partner is weak.
+        answer: 4s
+
+  #7
+  - hand: s6 hj853 d97532 cq83
+    dealer: w
+    auction:
+      - w: 1h
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. You don't like spades at all, and expect partner's second suit to be clubs. It cannot hurt to bid 2NT to find out, though. On a good day partner will bid diamonds next.
+        answer: 2nt
+
+  #8
+  - hand: skj8 haq7 da4 c97532
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 2d
+      - e: 3d
+      - s: "?"
+        explain: |
+          4♦. This cuebid asks partner to tell you which major he prefers and shows enough values for game. Neat, huh?
+        answer: 4d
+
+  #9
+  - hand: sk2 hkq dkq105 caj1083
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. This may not make if partner is very weak, but if you are going to make game it's likely to be in notrump. Partner's not going to bid notrump, so you have to; if partner is 6-6 in the majors, he'll bid again.
+        answer: 3nt
+
+  #10
+  - hand: s3 h42 dkj8532 c10642
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. You don't like either of partner's suits and you expect to go minus. The objective is to escape undoubled on what is clearly a misfit. Bid a confident 2♥ and hope partner doesn't raise. One thing is certain, and that is that passing now will give LHO an easy double as he is already known to have diamonds.
+        answer: 2h

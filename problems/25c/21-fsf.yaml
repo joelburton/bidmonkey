@@ -1,0 +1,160 @@
+quiz: 25C FSF
+problems:
+
+# One group, one auction shape throughout: partner opens, you respond, partner
+# rebids a second suit, and you decide (dealer N every time). Five answers are
+# the fourth-suit bid itself; the other five are the hands where FSF is the wrong
+# tool — you already know the contract (#6, #8), you'd rather use RKCB (#4), or
+# the jump is natural (#10).
+
+  #1
+  - hand: sa5 h953 dk84 caq864
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. It seems likely that 3NT will be the best contract if partner has a heart stopper. If he does not, then you will have to look for an alternative spot. FSF should uncover this information.
+        answer: 2h
+
+  #2
+  - hand: sk4 hq75 dj83 cakj85
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. You have no way to guess the right final contract. Consult partner by using FSF. Partner could be 6-4 in the majors, or 5-5.
+        answer: 3d
+
+  #3
+  - hand: sk3 ha4 d87 caqj8543
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2c
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. This time, you have a heart stopper, but it is far from clear that 3NT is the best spot. Indeed, even 7♣ could be cold, but you would rather not commit to bypassing the notrump game yet. You cannot bid 3♣ now as that would be non-forcing and you certainly want to make sure of reaching game. Use FSF now and you should be able to make a forcing 3♣ bid next time.
+        answer: 2h
+
+  #4
+  - hand: saq85 hk7 daqj85 ca7
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1d
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. Yes, you can get very technical here and start a delicate sequence with 2♥ (FSF) but why bother? Roman Keycard Blackwood is going to give you all the information you need to decide whether to play 6♠ or 7♠. Remember that if no suit has been explicitly agreed, a jump to 4NT sets the last-bid suit as trumps — in this case, spades.
+        answer: 4nt
+
+  #5
+  - hand: skq986 hk5 da84 cq74
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You could jump to 3NT, and that may well be the final contract, but you should use FSF first in case partner has three-card spade support.
+        answer: 2d
+
+  #6
+  - hand: skq86 hk7 d863 caj108
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3NT. You could bid 3♣ FSF, but why do that? What would you hope to achieve? You already know that you want to play in game, you have no fit, and you have no worries about the unbid suit.
+        answer: 3nt
+
+  #7
+  - hand: s963 hk74 dkq85 caq7
+    dealer: n
+    auction:
+      - n: 1c
+      - e: p
+      - s: 1d
+      - w: p
+      - n: 1h
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. 'I have the values for game but I am not sure which game…' — the perfect message to send!
+        answer: 2s
+
+  #8
+  - hand: saqj97 hkj6 dq7 c963
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. You have already found your eight-card (or better) major-suit fit, so why bother with FSF? Show both the values for game and the heart fit now and leave any further move to partner.
+        answer: 4h
+
+  #9
+  - hand: saj642 ha63 d75 caqj
+    dealer: n
+    auction:
+      - n: 1h
+      - e: p
+      - s: 1s
+      - w: p
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. Similar to the previous hand in that you know which suit you want to be trumps (hearts in this case), but this time you are too strong to make a limited bid. You need to conserve space on this hand. Start with 2♦, intending to set hearts as trumps on the next round, and leaving lots of room to explore the right level.
+        answer: 2d
+
+  # The fourth suit here is clubs, but 2♣ would be the cheap (FSF) bid — 3♣ is a
+  # jump, and so natural.
+  #10
+  - hand: s7 haqj86 d32 cak643
+    dealer: n
+    auction:
+      - n: 1d
+      - e: p
+      - s: 1h
+      - w: p
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          3♣. A strong two-suiter in hearts and clubs. Perfect!
+        answer: 3c

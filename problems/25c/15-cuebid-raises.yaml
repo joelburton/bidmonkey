@@ -1,0 +1,132 @@
+quiz: 25C Cuebid Raises
+problems:
+
+# LHO / Partner / RHO / You = W / N / E / S, and this chapter uses all four
+# dealers — the auction starts in whichever column comes first:
+#   #1-#3  LHO opens 1♦, partner overcalls 1♠        (dealer W)
+#   #4-#6  partner opens 1♠, RHO overcalls 2♦        (dealer N)
+#   #7-#8  RHO opens 1♦, you overcall 1♠, partner cuebids 2♦ (dealer E)
+#   #9-#10 you open 1♠, LHO overcalls 2♣, partner cuebids 3♣ (dealer S)
+
+  #1
+  - hand: sk63 hj7532 d63 ck63
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. Raise now, as you may not get another chance.
+        answer: 2s
+
+  #2
+  - hand: saj7 hkj74 d64 ca743
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. Tell partner you have 10+ points with spade support. If partner can only rebid 2♠, then you will pass.
+        answer: 2d
+
+  #3
+  - hand: skq84 hak63 d75 caq5
+    dealer: w
+    auction:
+      - w: 1d
+      - n: 1s
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. You know you are going to bid at least 4♠, but bid 2♦ for now and see whether partner is better than minimum.
+        answer: 2d
+
+  #4
+  - hand: sj1084 h3 d953 ck8542
+    dealer: n
+    auction:
+      - n: 1s
+      - e: 2d
+      - s: "?"
+        explain: |
+          3♠. You have a bad hand but a nice fit for partner's spades. Bid as much as you dare (perhaps even 4♠ not vulnerable against vulnerable opponents). The objective is to try to stop LHO bidding hearts, where they almost certainly have a good fit.
+        answer: 3s
+
+  #5
+  - hand: saq3 hak4 d54 ckj643
+    dealer: n
+    auction:
+      - n: 1s
+      - e: 2d
+      - s: "?"
+        explain: |
+          3♦. Start by telling partner that you have a nice hand with spade support. You are going to raise to game even if partner shows a minimum by rebidding 3♠, and if he does more than that then a slam is quite possible.
+        answer: 3d
+
+  #6
+  - hand: saq74 hakj74 d5 ck64
+    dealer: n
+    auction:
+      - n: 1s
+      - e: 2d
+      - s: "?"
+        explain: |
+          2♥. You could bid 3♦ to show spade support, but there is no rush. Start by showing your hearts. 2♥ is forcing, just as it would be if RHO had passed. There will be plenty of time to support spades later. Always try to choose the sequence that provides partner with the maximum amount of information.
+        answer: 2h
+
+  #7
+  - hand: saq853 hj64 d5 cq642
+    dealer: e
+    auction:
+      - e: 1d
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. You are not proud of your overcall. Better tell partner that you have a minimum.
+        answer: 2s
+
+  #8
+  - hand: sak642 haj6 d74 ck53
+    dealer: e
+    auction:
+      - e: 1d
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4♠. Even if partner has a minimum cuebid (about 10-12 points and three-card support) you want to play in game.
+        answer: 4s
+
+  #9
+  - hand: skq963 h853 da95 ck3
+    dealer: s
+    auction:
+      - s: 1s
+      - w: 2c
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          3♠. You have a minimum opening. What bidding 3♠ now says to partner is 'If the auction had gone 1♠-3♠ (limit raise), I would have passed'.
+        answer: 3s
+
+  #10
+  - hand: skqj864 hkq107 dak c3
+    dealer: s
+    auction:
+      - s: 1s
+      - w: 2c
+      - n: 3c
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. As partner has enough for a limit raise, you expect to make lots of tricks. Just check how many aces (if any) are missing, then bid 5♠, 6♠ or 7♠.
+        answer: 4nt

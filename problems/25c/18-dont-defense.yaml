@@ -1,0 +1,163 @@
+quiz: 25C DONT Defense
+problems:
+
+# Book question 1 (hands a-f): RHO opens a strong 1NT and you bid the DONT
+# defense yourself (dealer E). Questions 2 and 3 give one auction each — LHO
+# opens 1NT, partner bids DONT 2♣ (#7-#10) or 2♦ (#11-#14) and RHO passes — so
+# those are dealer W and you are answering partner's two-suiter.
+
+  #1 — book 1a
+  - hand: sa9764 h1073 d5 caq87
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♣. Perfect for clubs and another suit. If partner responds 2♦, you will rebid 2♠. Remember you can be 5-4 or 4-5 in your two suits.
+        answer: 2c
+
+  #2 — book 1b
+  - hand: sj3 hk93 dqj9753 c95
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Double. You indicate a single-suiter with a double, thereby achieving your objective of dislodging the opponent from 1NT. Your extra nines give this weak-looking hand some solidity; even if you get doubled in 2♦, it won't be the end of the world.
+        answer: x
+
+  #3 — book 1c
+  - hand: sk975 hk10763 d72 c63
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♥. If you were vulnerable, you would need to be 'courageous' or 'foolhardy' (choose your adjective) to make this bid!
+        answer: 2h
+
+  #4 — book 1d
+  - hand: s85 h3 dkj1054 caj973
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2NT. With 5-5 shape and reasonable playing strength, you can bid as high as 2NT. With only 5-4 or 4-5 in the minors, you would prefer 2♣.
+        answer: 2nt
+
+  #5 — book 1e
+  - hand: sqj982 h63 da10982 c9
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          2♦. Diamonds and a higher suit. Easy!
+        answer: 2d
+
+  #6 — book 1f
+  - hand: sak9763 h983 da8 cj6
+    dealer: e
+    auction:
+      - e: 1nt
+      - s: "?"
+        explain: |
+          Double. A robust single-suiter in spades, so you start with a double. A 2♠ bid would show a weaker hand with spades.
+        answer: x
+
+  #7 — book 2a
+  - hand: sa5 h87 dk108752 c964
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. Remember that 2♦ would ask partner to show his other suit.
+        answer: p
+
+  #8 — book 2b
+  - hand: sq97 ha10963 dk94 c108
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♦. The hearts are not good enough for 2♥, so you will play in partner's second suit.
+        answer: 2d
+
+  #9 — book 2c
+  - hand: skq10964 h93 da4 c1076
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          2♠. Your spades are good enough to insist on them as a trump suit. Partner does not guarantee five clubs, remember, so you are not guaranteed a good fit if you pass instead.
+        answer: 2s
+
+  #10 — book 2d
+  - hand: s95 hk10872 dq962 c83
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2c
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. RHO's failure to bid spades suggests that partner has the black suits. Keep the bidding low, particularly when you are weak and fear a double.
+        answer: p
+
+  #11 — book 3a
+  - hand: skq73 h93 dj93 ck1094
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          Pass. If you bid 2♠, you may switch a 5-3 fit for a 4-2 (or worse!) one.
+        answer: p
+
+  #12 — book 3b
+  - hand: sk10862 h974 d102 cak3
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2♥. If partner corrects to 2♠, you can suggest a game with 3♠.
+        answer: 2h
+
+  #13 — book 3c
+  - hand: s86 h74 daq10543 c1086
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          3♦. With your fit in diamonds, the opponents must have a good fit somewhere. Raise partner's diamonds to remove bidding space.
+        answer: 3d
+
+  #14 — book 3d
+  - hand: saq94 ha1063 da3 c982
+    dealer: w
+    auction:
+      - w: 1nt
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          2NT. You are willing to play in game, so ask partner which major he holds.
+        answer: 2nt
