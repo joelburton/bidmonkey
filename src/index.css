@@ -116,7 +116,9 @@ body {
        60 here — so Home/Prev/Next stay tappable while a popup is open or a
      trick-review pause is active. Safe because the header doesn't dismiss
      anything (popups dismiss on their own tap) and Home/Next remount
-     ProblemView, discarding any popup/pending state. */
+     ProblemView, discarding any popup/pending state.
+       70 .info-panel — the one thing that covers the header, deliberately: it
+     is a reading surface whose only exit is its own Close button. */
   z-index: 60;
   display: flex;
   align-items: center;
@@ -795,7 +797,8 @@ body {
   width: 0.95rem;
   height: 0.95rem;
 }
-/* The "?" is type, not an icon: size it to sit optically like the pennant. */
+/* The "?" and the "i" are type, not icons: sized to sit optically like the
+   pennant beside them. */
 .id-btn {
   font: inherit;
   font-size: 0.95rem;
@@ -814,6 +817,56 @@ body {
 /* Flash for the Shift+F keypress, like the bid pad's .pressed. */
 .flag-btn.pressed {
   background: rgba(255, 255, 255, 0.28);
+}
+/* A lowercase "i" is narrow and sits high; nudge it so it reads centred in the
+   circle next to the "?", which fills its box. */
+.info-btn {
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ---- Problem details (paste-into-Claude panel) -------------------------- */
+
+/* Above the header (60), unlike every other overlay — see the z registry. A
+   reading surface with one way out: leaving Prev/Next reachable behind it would
+   only let you change the problem the text is describing. */
+.info-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  color: var(--ink);
+}
+/* The text itself: monospace so the auction table's columns line up, wrapping
+   rather than scrolling sideways, and selectable for a manual copy when the
+   Copy button can't reach the clipboard. */
+.info-text {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  margin: 0;
+  padding: 16px;
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  user-select: text;
+  -webkit-user-select: text;
+}
+/* Pinned below the text, clear of the phone's home indicator. */
+.info-actions {
+  flex: none;
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--control-border);
+  background: var(--surface);
+}
+.info-close {
+  border-color: var(--accent);
 }
 
 .flag-icon {
