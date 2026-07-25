@@ -53,15 +53,15 @@ export function ProblemView({
   // A problem given as contract + play with no auction opens straight on the
   // play page; its contract is the stored one (there's no auction to derive it).
   const noAuction = problem.auction.length === 0
-  const [phase, setPhase] = useState<'auction' | 'play'>(
-    noAuction && canPlay ? 'play' : 'auction',
-  )
+  const [phase, setPhase] = useState<'auction' | 'play'>(noAuction && canPlay ? 'play' : 'auction')
 
   if (phase === 'play') {
     return (
       <PlayView
         problem={problem}
-        contract={noAuction ? parseContract(problem.contract ?? '') : finalContract(problem, answers)}
+        contract={
+          noAuction ? parseContract(problem.contract ?? '') : finalContract(problem, answers)
+        }
         answers={answers}
         onNext={onNext}
         hasNext={hasNext}
@@ -83,7 +83,9 @@ export function ProblemView({
       top={<Hand faceDown orientation="horizontal" />}
       left={<Hand faceDown orientation="west" />}
       right={<Hand faceDown orientation="east" />}
-      bottom={<Hand hand={problem.deal[problem.hero]} orientation="horizontal" bottomPad={isPhone} />}
+      bottom={
+        <Hand hand={problem.deal[problem.hero]} orientation="horizontal" bottomPad={isPhone} />
+      }
       center={
         <AuctionPanel
           // Load-bearing, not a list key: a correct answer advances via

@@ -9,7 +9,11 @@ const SUIT_NAME: Record<Suit, string> = {
 }
 
 const RANK_NAME: Record<string, string> = {
-  A: 'ace', K: 'king', Q: 'queen', J: 'jack', T: 'ten',
+  A: 'ace',
+  K: 'king',
+  Q: 'queen',
+  J: 'jack',
+  T: 'ten',
 }
 
 /** "T" displays as "10"; everything else is itself. */
@@ -53,10 +57,15 @@ export function Card({
       <line className="card-divider" x1="2.5" y1="9" x2="2.5" y2="57" />
       {/* Rank over suit, each centered horizontally (text-anchor middle / the
           nested SVG centered), with room below the suit so it isn't clipped. */}
-      <text className={`card-idx ${color}`} x="22" y="30" textAnchor="middle">{rankLabel(rank)}</text>
+      <text className={`card-idx ${color}`} x="22" y="30" textAnchor="middle">
+        {rankLabel(rank)}
+      </text>
       <svg
         className={color}
-        x="9" y="33" width="26" height="26"
+        x="9"
+        y="33"
+        width="26"
+        height="26"
         viewBox={shape.box}
         preserveAspectRatio="xMidYMid meet"
       >

@@ -121,14 +121,17 @@ export function PlayView({
   const [pending, setPending] = useState<{ seat: Seat; question: CardQuestion } | null>(null)
   const [review, setReview] = useState<Seat | null>(null)
   const [selected, setSelected] = useState<{ seat: Seat; card: string } | null>(null)
-  const [playResult, setPlayResult] = useState<
-    { correct: boolean; alternate: boolean; question: CardQuestion; card: string; seat: Seat } | null
-  >(null)
+  const [playResult, setPlayResult] = useState<{
+    correct: boolean
+    alternate: boolean
+    question: CardQuestion
+    card: string
+    seat: Seat
+  } | null>(null)
   const [showAuction, setShowAuction] = useState(false)
   const lastHuman = useRef(false)
 
-  const playedBy = (seat: Seat) =>
-    plays.filter((p) => p.seat === seat).map((p) => p.card)
+  const playedBy = (seat: Seat) => plays.filter((p) => p.seat === seat).map((p) => p.card)
 
   const playCard = (seat: Seat, card: string, byHuman: boolean) => {
     lastHuman.current = byHuman
@@ -278,9 +281,7 @@ export function PlayView({
     (allRevealed && tableTrick.length < 4 && seat === toAct) ||
     (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')
   const faceUp = (seat: Seat) =>
-    seat === hero ||
-    allRevealed ||
-    (seat === dummy && dummyRevealed && problem.deal[dummy] != null)
+    seat === hero || allRevealed || (seat === dummy && dummyRevealed && problem.deal[dummy] != null)
   const commitCard = (seat: Seat, card: string) => {
     if (allRevealed) playCard(seat, card, true)
     else if (pending?.seat === seat) answerPlay(card)
@@ -307,15 +308,12 @@ export function PlayView({
   const sel = (seat: Seat) => (selected?.seat === seat ? selected.card : undefined)
   // Follow-suit rule: of the clickable hand, only cards legal against the
   // current trick respond. Applies to free play and enter-card questions alike.
-  const canPlay = (seat: Seat) => (card: string) =>
-    isLegalPlay(hand(seat), tableTrick, card)
+  const canPlay = (seat: Seat) => (card: string) => isLegalPlay(hand(seat), tableTrick, card)
 
   const slot = (pos: Pos) => {
     const seat = seatAt[pos]
     if (!faceUp(seat))
-      return (
-        <Hand faceDown count={faceDownCount(seat)} orientation={POS_ORIENT[pos]} />
-      )
+      return <Hand faceDown count={faceDownCount(seat)} orientation={POS_ORIENT[pos]} />
     const playable = clickable(seat)
     return (
       <>

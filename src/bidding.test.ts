@@ -47,7 +47,13 @@ describe('doubleState', () => {
     expect(doubleState([{ seat: 'E', call: '3NT' }], 'S')).toBe('double')
     expect(doubleState([{ seat: 'N', call: '1H' }], 'S')).toBe(null)
     expect(
-      doubleState([{ seat: 'N', call: '1H' }, { seat: 'E', call: 'X' }], 'S'),
+      doubleState(
+        [
+          { seat: 'N', call: '1H' },
+          { seat: 'E', call: 'X' },
+        ],
+        'S',
+      ),
     ).toBe('redouble')
     expect(doubleState([{ seat: 'E', call: 'P' }], 'S')).toBe(null)
   })
@@ -63,11 +69,27 @@ const twoQ: Problem = {
   auction: [
     { call: '1H' },
     { call: 'P' },
-    { question: { id: 'q1', answerKind: 'bid', choiceType: 'multiple_choice', answer: '1S', options: ['1S', '1NT'] } },
+    {
+      question: {
+        id: 'q1',
+        answerKind: 'bid',
+        choiceType: 'multiple_choice',
+        answer: '1S',
+        options: ['1S', '1NT'],
+      },
+    },
     { call: 'P' },
     { call: '2C' },
     { call: 'P' },
-    { question: { id: 'q2', answerKind: 'bid', choiceType: 'multiple_choice', answer: '2NT', options: ['2NT', '3C'] } },
+    {
+      question: {
+        id: 'q2',
+        answerKind: 'bid',
+        choiceType: 'multiple_choice',
+        answer: '2NT',
+        options: ['2NT', '3C'],
+      },
+    },
   ],
 }
 
@@ -166,7 +188,10 @@ describe('finalContract', () => {
     })
   })
   it('is null when passed out', () => {
-    const passed: Problem = { ...p4, auction: [{ call: 'P' }, { call: 'P' }, { call: 'P' }, { call: 'P' }] }
+    const passed: Problem = {
+      ...p4,
+      auction: [{ call: 'P' }, { call: 'P' }, { call: 'P' }, { call: 'P' }],
+    }
     expect(finalContract(passed, [])).toBeNull()
   })
 })

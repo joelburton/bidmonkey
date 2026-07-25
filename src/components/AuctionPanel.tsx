@@ -77,7 +77,12 @@ export function AuctionPanel({
   const dbl = doubleState(model.prior, model.actingSeat)
 
   const [level, setLevel] = useState<number | null>(null)
-  const [result, setResult] = useState<{ correct: boolean; alternate: boolean; call: string; answer: string } | null>(null)
+  const [result, setResult] = useState<{
+    correct: boolean
+    alternate: boolean
+    call: string
+    answer: string
+  } | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
 
   const doSubmit = useCallback((call: string) => {
@@ -133,8 +138,34 @@ export function AuctionPanel({
   // registered once (deps below are the stable callbacks only) and reads fresh
   // state/props through ref.current instead of re-subscribing every render.
   // (PlayView takes the other route — a plain re-subscribing effect.)
-  const ref = useRef({ level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay, onToggleFlag, onFlagAnswer })
-  ref.current = { level, result, dbl, model, isMC, onAnswer, onPlay, onNext, hasNext, canPlay, onToggleFlag, onFlagAnswer }
+  const ref = useRef({
+    level,
+    result,
+    dbl,
+    model,
+    isMC,
+    onAnswer,
+    onPlay,
+    onNext,
+    hasNext,
+    canPlay,
+    onToggleFlag,
+    onFlagAnswer,
+  })
+  ref.current = {
+    level,
+    result,
+    dbl,
+    model,
+    isMC,
+    onAnswer,
+    onPlay,
+    onNext,
+    hasNext,
+    canPlay,
+    onToggleFlag,
+    onFlagAnswer,
+  }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const st = ref.current
@@ -247,7 +278,11 @@ export function AuctionPanel({
       <div className="auction-scroll">
         {/* A text answer is a phrase, not a call — don't render it into the
             auction grid's "?" cell while the popup is up. */}
-        <AuctionTable cols={model.cols} grid={model.grid} entered={isText ? undefined : result?.call} />
+        <AuctionTable
+          cols={model.cols}
+          grid={model.grid}
+          entered={isText ? undefined : result?.call}
+        />
       </div>
 
       {!model.actingSeat ? (

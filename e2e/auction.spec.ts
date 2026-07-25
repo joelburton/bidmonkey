@@ -36,9 +36,7 @@ test.describe('auction', () => {
     await expect(page.locator('.ask')).toBeVisible()
   })
 
-  test('bidding-only problem: no play offered when there are not four hands', async ({
-    page,
-  }) => {
+  test('bidding-only problem: no play offered when there are not four hands', async ({ page }) => {
     await gotoTwoDecisions(page)
 
     await page.locator('.opt-btn').first().click() // q1: 1S

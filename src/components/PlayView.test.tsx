@@ -13,7 +13,16 @@ const deal = {
   W: { S: 'J932', H: 'K84', D: 'A65', C: '872' }, // 2 of clubs is West's only
 }
 function problem(hero: Seat): Problem {
-  return { slug: 'test-problem', tags: [], hero, dealer: 'E', vulnerability: 'none', deal, auction: [], play: [] }
+  return {
+    slug: 'test-problem',
+    tags: [],
+    hero,
+    dealer: 'E',
+    vulnerability: 'none',
+    deal,
+    auction: [],
+    play: [],
+  }
 }
 // declarer East → dummy West; with no recorded play the table reveals immediately.
 const contract: Contract = { level: 4, strain: 'S', declarer: 'E', doubled: '' }
@@ -28,7 +37,15 @@ async function playCard(user: ReturnType<typeof userEvent.setup>, label: string)
 // trick goes South → West → North → East (clockwise), each following clubs.
 describe('a played card lands in the trick slot under the hand that played it', () => {
   it('hero South: South → bottom, West → left, North → top, East → right', async () => {
-    render(<PlayView problem={problem('S')} contract={contract} answers={[]} onNext={() => {}} hasNext={false}/>)
+    render(
+      <PlayView
+        problem={problem('S')}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+      />,
+    )
     await waitFor(() =>
       expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
     )
@@ -49,7 +66,15 @@ describe('a played card lands in the trick slot under the hand that played it', 
   })
 
   it('hero West: South → right (orientation follows the hero)', async () => {
-    render(<PlayView problem={problem('W')} contract={contract} answers={[]} onNext={() => {}} hasNext={false}/>)
+    render(
+      <PlayView
+        problem={problem('W')}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+      />,
+    )
     await waitFor(() =>
       expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
     )
@@ -65,7 +90,15 @@ describe('a played card lands in the trick slot under the hand that played it', 
 // out of turn, and you can't break suit while you can follow.
 describe('free play enforces legal turn order and following suit', () => {
   it('only the seat on lead can be clicked first (out-of-turn hands are inert)', async () => {
-    render(<PlayView problem={problem('S')} contract={contract} answers={[]} onNext={() => {}} hasNext={false}/>)
+    render(
+      <PlayView
+        problem={problem('S')}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+      />,
+    )
     await waitFor(() =>
       expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
     )
@@ -85,7 +118,15 @@ describe('free play enforces legal turn order and following suit', () => {
   })
 
   it('a card that breaks suit while able to follow is inert', async () => {
-    render(<PlayView problem={problem('S')} contract={contract} answers={[]} onNext={() => {}} hasNext={false}/>)
+    render(
+      <PlayView
+        problem={problem('S')}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+      />,
+    )
     await waitFor(() =>
       expect(screen.getByRole('img', { name: 'play from this hand' })).toBeInTheDocument(),
     )
@@ -127,7 +168,14 @@ describe('flagging for review during play', () => {
   it('a wrong card flags; an accepted alternative flags as alternate', async () => {
     const onFlagAnswer = vi.fn()
     const { unmount } = render(
-      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onFlagAnswer={onFlagAnswer} />,
+      <PlayView
+        problem={leadProblem}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+        onFlagAnswer={onFlagAnswer}
+      />,
     )
     const user = userEvent.setup()
     await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
@@ -140,7 +188,14 @@ describe('flagging for review during play', () => {
     // Fresh view: the accepted ♣5 is correct, but not the preferred lead.
     const onFlagAlt = vi.fn()
     render(
-      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onFlagAnswer={onFlagAlt} />,
+      <PlayView
+        problem={leadProblem}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+        onFlagAnswer={onFlagAlt}
+      />,
     )
     await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
     await playCard(user, '5 of clubs')
@@ -151,7 +206,14 @@ describe('flagging for review during play', () => {
   it('Shift+F toggles the flag mid-play, and only closes an open answer popup', async () => {
     const onToggleFlag = vi.fn()
     render(
-      <PlayView problem={leadProblem} contract={contract} answers={[]} onNext={() => {}} hasNext={false} onToggleFlag={onToggleFlag} />,
+      <PlayView
+        problem={leadProblem}
+        contract={contract}
+        answers={[]}
+        onNext={() => {}}
+        hasNext={false}
+        onToggleFlag={onToggleFlag}
+      />,
     )
     const user = userEvent.setup()
     await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
@@ -183,13 +245,22 @@ describe('accepted alternative answers continue with the canonical card', () => 
           cards: [
             {
               seat: 'S',
-              question: { id: 'q1', answerKind: 'card', choiceType: 'free', prompt: 'Your lead', answer: 'CQ', accept: ['C5'] },
+              question: {
+                id: 'q1',
+                answerKind: 'card',
+                choiceType: 'free',
+                prompt: 'Your lead',
+                answer: 'CQ',
+                accept: ['C5'],
+              },
             },
           ],
         },
       ],
     }
-    render(<PlayView problem={p} contract={contract} answers={[]} onNext={() => {}} hasNext={false} />)
+    render(
+      <PlayView problem={p} contract={contract} answers={[]} onNext={() => {}} hasNext={false} />,
+    )
     const user = userEvent.setup()
     await waitFor(() => expect(screen.getByText('Your lead')).toBeInTheDocument())
 

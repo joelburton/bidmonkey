@@ -155,9 +155,7 @@ export function PlayCenter({
             >
               {result.alternate ? 'Alternate' : result.correct ? 'Correct!' : 'Not quite'}
             </div>
-            {result.question.explanation && (
-              <Explanation text={result.question.explanation} />
-            )}
+            {result.question.explanation && <Explanation text={result.question.explanation} />}
             <p className="explain-answer">
               Answer: <CardText card={result.question.answer} />
               {!!result.question.accept?.length && (

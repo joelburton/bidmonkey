@@ -26,12 +26,7 @@ function toSlots(hand: HandType): Slot[] {
   return slots
 }
 
-function slotClass(
-  i: number,
-  suitStart: boolean,
-  playable: boolean,
-  selected: boolean,
-): string {
+function slotClass(i: number, suitStart: boolean, playable: boolean, selected: boolean): string {
   return (
     'slot' +
     (i === 0 ? ' first' : suitStart ? ' suit-start' : '') +
@@ -82,8 +77,7 @@ export function Hand({
 }) {
   const vertical = orientation !== 'horizontal'
   const cls = `hand ${HAND_CLASS[orientation]}${raise ? ` raise-${raise}` : ''}`
-  const wrap = (node: React.ReactNode) =>
-    vertical ? <span className="rot">{node}</span> : node
+  const wrap = (node: React.ReactNode) => (vertical ? <span className="rot">{node}</span> : node)
 
   if (!hand || faceDown) {
     return (

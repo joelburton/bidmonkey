@@ -74,10 +74,7 @@ export function seatToAct(leader: Seat, trick: { card: string }[]): Seat {
 }
 
 /** Winning seat of a completed trick, given the trump strain ('NT' = no trump). */
-export function trickWinner(
-  cards: { seat: Seat; card: string }[],
-  trump: Strain,
-): Seat {
+export function trickWinner(cards: { seat: Seat; card: string }[], trump: Strain): Seat {
   const led = cardSuit(cards[0].card)
   let best = cards[0]
   for (const c of cards.slice(1)) {
@@ -86,7 +83,13 @@ export function trickWinner(
     const cTrump = trump !== 'NT' && s === trump
     const bTrump = trump !== 'NT' && bs === trump
     if (cTrump && !bTrump) best = c
-    else if (cTrump === bTrump && s === led && bs === led && cardRankValue(c.card) > cardRankValue(best.card)) best = c
+    else if (
+      cTrump === bTrump &&
+      s === led &&
+      bs === led &&
+      cardRankValue(c.card) > cardRankValue(best.card)
+    )
+      best = c
     else if (cTrump && bTrump && cardRankValue(c.card) > cardRankValue(best.card)) best = c
   }
   return best.seat
@@ -101,7 +104,9 @@ export interface Move {
 }
 
 /** Flatten the recorded play into a single ordered list of moves. */
-export function flattenPlay(play: { cards: { seat: Seat; card?: string; question?: CardQuestion }[] }[]): Move[] {
+export function flattenPlay(
+  play: { cards: { seat: Seat; card?: string; question?: CardQuestion }[] }[],
+): Move[] {
   const out: Move[] = []
   play.forEach((trick, trickIndex) => {
     trick.cards.forEach((entry, pi) => {

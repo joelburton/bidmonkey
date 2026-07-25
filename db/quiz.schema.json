@@ -114,12 +114,27 @@
       },
       "properties": {
         "explain": { "type": "string" },
-        "prompt": { "type": "string", "description": "The question text. Required for a `text_choices` step; optional otherwise." },
-        "answer": { "type": "string", "minLength": 1, "description": "A call (bid step) or a phrase (text_choices step). Call legality / choice membership is checked by the normalizer." },
-        "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/call" },
-                     "description": "Multiple-choice bid options (in display order). Omit for free entry; mutually exclusive with `text_choices`." },
-        "text_choices": { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 },
-                     "description": "Free-form (phrase) options for a non-continuing question. Mutually exclusive with `choices`." },
+        "prompt": {
+          "type": "string",
+          "description": "The question text. Required for a `text_choices` step; optional otherwise."
+        },
+        "answer": {
+          "type": "string",
+          "minLength": 1,
+          "description": "A call (bid step) or a phrase (text_choices step). Call legality / choice membership is checked by the normalizer."
+        },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/call" },
+          "description": "Multiple-choice bid options (in display order). Omit for free entry; mutually exclusive with `text_choices`."
+        },
+        "text_choices": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Free-form (phrase) options for a non-continuing question. Mutually exclusive with `choices`."
+        },
         "accept": { "type": "array", "items": { "type": "string", "minLength": 1 } }
       }
     },
@@ -135,8 +150,12 @@
       "properties": {
         "explain": { "type": "string" },
         "answer": { "$ref": "#/$defs/card" },
-        "choices": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" },
-                     "description": "Multiple-choice options (in display order). Omit for free entry." },
+        "choices": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/card" },
+          "description": "Multiple-choice options (in display order). Omit for free entry."
+        },
         "accept": { "type": "array", "items": { "$ref": "#/$defs/card" } }
       }
     },

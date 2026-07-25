@@ -2,7 +2,7 @@
 # so only the order check trips.
 source: T [t]
 quiz: Q [q]
-titles: "Q #"
+titles: 'Q #'
 problems:
-- hand: sa65 dkq2 h53 caqj97
-  dealer: S
+  - hand: sa65 dkq2 h53 caqj97
+    dealer: S

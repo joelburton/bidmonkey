@@ -269,7 +269,9 @@ function tableHeader(
   draw: boolean,
 ): void {
   if (!draw) return
-  headers.forEach((h, j) => drawSegsCentered(doc, centers[j], yTop + 7, [{ text: h, bold: true }], 8))
+  headers.forEach((h, j) =>
+    drawSegsCentered(doc, centers[j], yTop + 7, [{ text: h, bold: true }], 8),
+  )
   // A subtle hairline under the column headers.
   doc.setDrawColor(150, 150, 150)
   doc.setLineWidth(0.3)
@@ -277,7 +279,13 @@ function tableHeader(
 }
 
 /** Draw the auction up to the first "?"; returns the height used. */
-function renderAuction(doc: jsPDF, problem: Problem, x: number, yTop: number, draw: boolean): number {
+function renderAuction(
+  doc: jsPDF,
+  problem: Problem,
+  x: number,
+  yTop: number,
+  draw: boolean,
+): number {
   if (problem.auction.length === 0) return 0
   const model = buildAuction(problem, [])
   const centers = AUCTION_HEADERS.map((_, j) => x + j * AUC_COL_W + AUC_COL_W / 2)
@@ -318,9 +326,7 @@ function renderPlay(doc: jsPDF, problem: Problem, x: number, yTop: number, draw:
   if (rows.length === 0) return 0
 
   const trickCx = x + PLAY_TRICK_W / 2
-  const centers = AUCTION_HEADERS.map(
-    (_, j) => x + PLAY_TRICK_W + j * PLAY_COL_W + PLAY_COL_W / 2,
-  )
+  const centers = AUCTION_HEADERS.map((_, j) => x + PLAY_TRICK_W + j * PLAY_COL_W + PLAY_COL_W / 2)
   const right = x + PLAY_TRICK_W + 4 * PLAY_COL_W
   if (draw) drawSegsCentered(doc, trickCx, yTop + 7, [{ text: 'Trick', bold: true }], 8)
   tableHeader(doc, AUCTION_HEADERS, centers, x, right, yTop, draw)

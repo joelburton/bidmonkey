@@ -8,22 +8,31 @@
   "required": ["deal", "auction"],
   "additionalProperties": false,
   "properties": {
-    "deal":    { "$ref": "#/$defs/deal" },
+    "deal": { "$ref": "#/$defs/deal" },
     "auction": { "$ref": "#/$defs/auction" },
-    "play":    { "$ref": "#/$defs/play" }
+    "play": { "$ref": "#/$defs/play" }
   },
 
   "$defs": {
-    "seat":    { "type": "string", "enum": ["N", "E", "S", "W"] },
+    "seat": { "type": "string", "enum": ["N", "E", "S", "W"] },
 
-    "bid":     { "type": "string", "pattern": "^(?:[1-7](?:C|D|H|S|N|NT)|P|X|XX)\\*?$",
-                 "description": "A call: a bid (level+strain, NT as N or NT), P, X, or XX. A trailing * marks an alertable call (display-only; ignored by ranking/matching)." },
+    "bid": {
+      "type": "string",
+      "pattern": "^(?:[1-7](?:C|D|H|S|N|NT)|P|X|XX)\\*?$",
+      "description": "A call: a bid (level+strain, NT as N or NT), P, X, or XX. A trailing * marks an alertable call (display-only; ignored by ranking/matching)."
+    },
 
-    "card":    { "type": "string", "pattern": "^[SHDC][AKQJT2-9]$",
-                 "description": "Suit letter + rank; T = ten." },
+    "card": {
+      "type": "string",
+      "pattern": "^[SHDC][AKQJT2-9]$",
+      "description": "Suit letter + rank; T = ten."
+    },
 
-    "holding": { "type": "string", "pattern": "^[AKQJT2-9]*$",
-                 "description": "Ranks in one suit, high to low; empty string = void." },
+    "holding": {
+      "type": "string",
+      "pattern": "^[AKQJT2-9]*$",
+      "description": "Ranks in one suit, high to low; empty string = void."
+    },
 
     "hand": {
       "type": "object",
@@ -54,29 +63,52 @@
       "required": ["id", "answerKind", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
-        "id":          { "type": "string", "minLength": 1 },
-        "answerKind":  { "enum": ["bid", "text"] },
-        "choiceType":  { "enum": ["multiple_choice", "free"] },
-        "prompt":      { "type": "string" },
-        "answer":      { "type": "string", "minLength": 1 },
-        "options":     { "type": "array", "minItems": 2, "items": { "type": "string", "minLength": 1 } },
-        "accept":      { "type": "array", "items": { "type": "string", "minLength": 1 },
-                         "description": "Extra acceptable answers beyond `answer` (⊆ options for multiple_choice)." },
+        "id": { "type": "string", "minLength": 1 },
+        "answerKind": { "enum": ["bid", "text"] },
+        "choiceType": { "enum": ["multiple_choice", "free"] },
+        "prompt": { "type": "string" },
+        "answer": { "type": "string", "minLength": 1 },
+        "options": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "accept": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 },
+          "description": "Extra acceptable answers beyond `answer` (⊆ options for multiple_choice)."
+        },
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "multiple_choice" } } },
-          "then": { "required": ["options"] } },
-        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
-          "then": { "not": { "required": ["options"] } } },
-        { "if":   { "required": ["answerKind"], "properties": { "answerKind": { "const": "bid" } } },
-          "then": { "properties": {
-            "answer":  { "$ref": "#/$defs/bid" },
-            "options": { "items": { "$ref": "#/$defs/bid" } },
-            "accept":  { "items": { "$ref": "#/$defs/bid" } }
-          } } },
-        { "if":   { "required": ["answerKind"], "properties": { "answerKind": { "const": "text" } } },
-          "then": { "required": ["prompt"], "properties": { "choiceType": { "const": "multiple_choice" } } } }
+        {
+          "if": {
+            "required": ["choiceType"],
+            "properties": { "choiceType": { "const": "multiple_choice" } }
+          },
+          "then": { "required": ["options"] }
+        },
+        {
+          "if": { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
+          "then": { "not": { "required": ["options"] } }
+        },
+        {
+          "if": { "required": ["answerKind"], "properties": { "answerKind": { "const": "bid" } } },
+          "then": {
+            "properties": {
+              "answer": { "$ref": "#/$defs/bid" },
+              "options": { "items": { "$ref": "#/$defs/bid" } },
+              "accept": { "items": { "$ref": "#/$defs/bid" } }
+            }
+          }
+        },
+        {
+          "if": { "required": ["answerKind"], "properties": { "answerKind": { "const": "text" } } },
+          "then": {
+            "required": ["prompt"],
+            "properties": { "choiceType": { "const": "multiple_choice" } }
+          }
+        }
       ]
     },
 
@@ -86,20 +118,27 @@
       "required": ["id", "answerKind", "choiceType", "answer"],
       "additionalProperties": false,
       "properties": {
-        "id":          { "type": "string", "minLength": 1 },
-        "answerKind":  { "const": "card" },
-        "choiceType":  { "enum": ["multiple_choice", "free"] },
-        "prompt":      { "type": "string" },
-        "answer":      { "$ref": "#/$defs/card" },
-        "options":     { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" } },
-        "accept":      { "type": "array", "items": { "$ref": "#/$defs/card" } },
+        "id": { "type": "string", "minLength": 1 },
+        "answerKind": { "const": "card" },
+        "choiceType": { "enum": ["multiple_choice", "free"] },
+        "prompt": { "type": "string" },
+        "answer": { "$ref": "#/$defs/card" },
+        "options": { "type": "array", "minItems": 2, "items": { "$ref": "#/$defs/card" } },
+        "accept": { "type": "array", "items": { "$ref": "#/$defs/card" } },
         "explanation": { "type": "string" }
       },
       "allOf": [
-        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "multiple_choice" } } },
-          "then": { "required": ["options"] } },
-        { "if":   { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
-          "then": { "not": { "required": ["options"] } } }
+        {
+          "if": {
+            "required": ["choiceType"],
+            "properties": { "choiceType": { "const": "multiple_choice" } }
+          },
+          "then": { "required": ["options"] }
+        },
+        {
+          "if": { "required": ["choiceType"], "properties": { "choiceType": { "const": "free" } } },
+          "then": { "not": { "required": ["options"] } }
+        }
       ]
     },
 
@@ -110,13 +149,10 @@
         "type": "object",
         "additionalProperties": false,
         "properties": {
-          "call":     { "$ref": "#/$defs/bid" },
+          "call": { "$ref": "#/$defs/bid" },
           "question": { "$ref": "#/$defs/bidQuestion" }
         },
-        "oneOf": [
-          { "required": ["call"] },
-          { "required": ["question"] }
-        ]
+        "oneOf": [{ "required": ["call"] }, { "required": ["question"] }]
       }
     },
 
@@ -137,14 +173,11 @@
               "additionalProperties": false,
               "required": ["seat"],
               "properties": {
-                "seat":     { "$ref": "#/$defs/seat" },
-                "card":     { "$ref": "#/$defs/card" },
+                "seat": { "$ref": "#/$defs/seat" },
+                "card": { "$ref": "#/$defs/card" },
                 "question": { "$ref": "#/$defs/cardQuestion" }
               },
-              "oneOf": [
-                { "required": ["card"] },
-                { "required": ["question"] }
-              ]
+              "oneOf": [{ "required": ["card"] }, { "required": ["question"] }]
             }
           }
         }

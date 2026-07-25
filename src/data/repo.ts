@@ -93,7 +93,13 @@ export async function fetchCatalog(): Promise<Catalog> {
     sbSelect<ProblemRow[]>(
       'problems?select=slug,title,source,difficulty,tags,hero,dealer,vulnerability,deal,auction,play,contract,commentary&order=slug',
     ),
-    sbSelect<QuizRow[]>('quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=slug'),
+    sbSelect<QuizRow[]>(
+      'quizzes?select=slug,title,source,quizzes_problems(problem_slug,ordinal)&order=slug',
+    ),
   ])
-  return { sources: sources.map(mapSource), problems: problems.map(mapProblem), quizzes: quizzes.map(mapQuiz) }
+  return {
+    sources: sources.map(mapSource),
+    problems: problems.map(mapProblem),
+    quizzes: quizzes.map(mapQuiz),
+  }
 }

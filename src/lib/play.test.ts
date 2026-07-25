@@ -1,19 +1,18 @@
 import { describe, it, expect } from 'vitest'
 import type { Seat } from '../types'
-import {
-  handToCards,
-  ledSuit,
-  legalCards,
-  isLegalPlay,
-  seatToAct,
-} from './play'
+import { handToCards, ledSuit, legalCards, isLegalPlay, seatToAct } from './play'
 
 const trick = (...cards: string[]) => cards.map((card) => ({ card }))
 
 describe('handToCards', () => {
   it('lists every card in display order (S, H, C, D)', () => {
     expect(handToCards({ S: 'AK', H: '2', C: '9', D: 'QJ' })).toEqual([
-      'SA', 'SK', 'H2', 'C9', 'DQ', 'DJ',
+      'SA',
+      'SK',
+      'H2',
+      'C9',
+      'DQ',
+      'DJ',
     ])
   })
   it('skips absent and empty suits', () => {

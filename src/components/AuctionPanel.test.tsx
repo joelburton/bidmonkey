@@ -282,9 +282,10 @@ describe('AuctionPanel flagging for review', () => {
         onToggleFlag={onToggleFlag}
       />,
     )
-    expect(
-      screen.getByRole('button', { name: 'Unflag this problem' }),
-    ).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByRole('button', { name: 'Unflag this problem' })).toHaveAttribute(
+      'aria-pressed',
+      'true',
+    )
   })
 
   it('Shift+F toggles the flag; plain f stays an option letter', async () => {

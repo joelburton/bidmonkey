@@ -45,7 +45,9 @@ for (const p of problems) {
 
 lines.push('\n-- quizzes')
 for (const q of quizzes) {
-  lines.push(`insert into quizzes (slug, title, source) values (${s(q.slug)}, ${s(q.title)}, ${s(q.source)});`)
+  lines.push(
+    `insert into quizzes (slug, title, source) values (${s(q.slug)}, ${s(q.title)}, ${s(q.source)});`,
+  )
 }
 
 lines.push('\n-- quizzes_problems (ordinal = 1-based position within the quiz)')

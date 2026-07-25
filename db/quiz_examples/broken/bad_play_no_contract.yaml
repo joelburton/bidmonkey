@@ -2,10 +2,10 @@
 # trump/declarer/leader, so this errors.
 source: T [t]
 quiz: Q [q]
-titles: "Q #"
+titles: 'Q #'
 problems:
-- hand: s743 hkqj9 d952 cq83
-  dealer: E
-  plays:
-  - s: "?"
-    answer: KH
+  - hand: s743 hkqj9 d952 cq83
+    dealer: E
+    plays:
+      - s: '?'
+        answer: KH

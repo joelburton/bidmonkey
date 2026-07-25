@@ -2,9 +2,7 @@ import { test, expect } from '@playwright/test'
 
 // Content is fetched from Supabase, so a failed/paused backend must degrade to a
 // clear error + retry rather than a blank or broken page.
-test('shows an error with retry when content fails to load, then recovers', async ({
-  page,
-}) => {
+test('shows an error with retry when content fails to load, then recovers', async ({ page }) => {
   // Force the content fetch to fail (simulate a down / paused backend).
   await page.route(/\/rest\/v1\//, (r) => r.fulfill({ status: 500, body: 'boom' }))
   await page.goto('/')

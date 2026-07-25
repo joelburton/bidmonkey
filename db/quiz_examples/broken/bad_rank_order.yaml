@@ -3,7 +3,7 @@
 # suits in S H D C order, so only the rank-order check trips.
 source: T [t]
 quiz: Q [q]
-titles: "Q #"
+titles: 'Q #'
 problems:
-- hand: s9108 hkq2 d53 caqj97
-  dealer: S
+  - hand: s9108 hkq2 d53 caqj97
+    dealer: S
