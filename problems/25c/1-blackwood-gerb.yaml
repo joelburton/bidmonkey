@@ -1,0 +1,112 @@
+quiz: 25C Blackwood & Gerber
+problems:
+
+  #1
+  - hand: sak108653 h4 dkqj7 c5
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. If partner has two aces you will bid 6♠. If he has only one ace you will sign off in 5♠. It is possible that partner has no aces, so using Blackwood even on this huge hand is not without risk.
+        answer: 4nt
+
+  #2
+  - hand: sak754 h6 dkq852 ckq
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 2d
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. All you really need to know is how many aces partner has. If he has two aces, bid 6♦. If he has all three missing aces, bid the grand slam.
+        answer: 4nt
+
+  #3
+  - hand: sk6 ha dkq10853 ckq63
+    dealer: n
+    auction:
+      - n: 1s
+      - e: p
+      - s: 2d
+      - w: p
+      - n: 3d
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. As with Problem 2, knowing how many aces partner has will tell you how high to bid. No other information is relevant.
+        answer: 4nt
+
+  #4
+  - hand: skqj9763 h6 dakj ck4
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          4♣. This is the Gerber convention, used opposite a strong notrump opening. If partner shows zero or one ace, sign off in 4♠. If he has two, bid 6♠, and if he has all three missing aces, bid 7♠.
+        answer: 4c
+
+  #5
+  - hand: sakq ha9752 dkq84 c6
+    dealer: s
+    auction:
+      - s: 1h
+      - w: p
+      - n: 2h
+      - e: p
+      - s: "?"
+        explain: |
+          4♥. Partner might easily have an ace, but if he does then he is very unlikely to have both the king and queen of hearts. Your trump suit is not good enough to look for slam.
+        answer: 4h
+
+  # The book answers #6 and #7 with "??" — the point is that Blackwood is the
+  # wrong tool, and the bid itself waits for the cuebid chapter. So they ask
+  # whether to use Blackwood rather than for a call.
+  #6
+  - hand: skqj964 hak84 d- ck63
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        prompt: "Is Blackwood (4NT) the right tool here?"
+        text_choices: ["Yes", "No"]
+        answer: "No"
+        explain: |
+          You cannot use Blackwood here, since the response will not help you. If partner shows an ace, it may be the ♦A or it may be one of the two useful aces: you can never find out. Exactly what you should bid now is the subject of control-showing cuebids.
+      # (Chapter 20 — control-showing cuebids.)
+
+  #7
+  - hand: sak10753 h84 dkqj5 ca
+    dealer: s
+    auction:
+      - s: 1s
+      - w: p
+      - n: 3s
+      - e: p
+      - s: "?"
+        prompt: "Is Blackwood (4NT) the right tool here?"
+        text_choices: ["Yes", "No"]
+        answer: "No"
+        explain: |
+          This is the other type of hand on which players frequently misuse Blackwood. As with Problem 6, knowing how many aces partner has doesn't solve your problem, and therefore Blackwood is the wrong tool. Say partner shows one ace: you still do not know whether the opponents have the ♥AK to cash. This problem is another that can be solved using control bids.
+
+  #8
+  - hand: skj4 ha74 dkq105 ck83
+    dealer: n
+    auction:
+      - n: 1nt
+      - e: p
+      - s: "?"
+        explain: |
+          4NT. No, this is not Blackwood. Partner has opened 1NT and therefore 4♣ would ask for aces. This is a quantitative notrump raise, inviting partner to bid 6NT with a maximum or pass if he is minimum.
+        answer: 4nt
