@@ -1,9 +1,45 @@
+import type { ReactNode } from 'react'
 import type { Source } from '../types'
+import type { Settings } from '../settings'
 import { FlagIcon } from './FlagButton'
+import { SuitGlyph } from './SuitGlyph'
+
+/** One display setting: a switch, a name, and a line saying what it does. The
+ * checkbox is the real control (label-wrapped, so the whole row is a hit
+ * target); `.switch` is only its skin. */
+function Toggle({
+  checked,
+  onChange,
+  name,
+  hint,
+}: {
+  checked: boolean
+  onChange: (v: boolean) => void
+  name: ReactNode
+  hint: ReactNode
+}) {
+  return (
+    <label className="setting">
+      <input
+        type="checkbox"
+        role="switch"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+      />
+      <span className="switch" aria-hidden />
+      <span className="setting-text">
+        <span className="setting-name">{name}</span>
+        <span className="setting-hint">{hint}</span>
+      </span>
+    </label>
+  )
+}
 
 /** Top-level list: the sources (books, etc.) to pick a quiz from, over the two
  * library-wide runs — **Random** across every problem there is, and **Flagged**
- * across every problem on the review list, whatever source it came from. */
+ * across every problem on the review list, whatever source it came from. The
+ * display settings sit at the foot, below the list they don't belong to but
+ * above nothing else — this is the only screen you always pass through. */
 export function SourceList({
   sources,
   problemCount,
@@ -12,6 +48,8 @@ export function SourceList({
   onSelect,
   onRandomAll,
   onFlaggedAll,
+  settings,
+  onSetting,
 }: {
   sources: Source[]
   /** Every problem in the library, across all sources. */
@@ -24,6 +62,8 @@ export function SourceList({
   onSelect: (slug: string) => void
   onRandomAll: () => void
   onFlaggedAll: () => void
+  settings: Settings
+  onSetting: <K extends keyof Settings>(k: K, v: Settings[K]) => void
 }) {
   return (
     <>
@@ -76,6 +116,30 @@ export function SourceList({
           )
         })}
       </ul>
+
+      <section className="settings-panel">
+        <h2 className="settings-title">Display</h2>
+        <Toggle
+          checked={settings.fourColor}
+          onChange={(v) => onSetting('fourColor', v)}
+          name={
+            <>
+              Four-colour suits
+              <span className="setting-swatch" aria-hidden>
+                <SuitGlyph suit="D" />
+                <SuitGlyph suit="C" />
+              </span>
+            </>
+          }
+          hint="Diamonds orange and clubs green, so no two suits share a colour."
+        />
+        <Toggle
+          checked={settings.freeEntry}
+          onChange={(v) => onSetting('freeEntry', v)}
+          name="Enter answers, don’t choose"
+          hint="Bid on the pad and play by tapping a card, even where the problem offers a list. Questions whose answer isn’t a call or a card stay multiple choice."
+        />
+      </section>
     </>
   )
 }

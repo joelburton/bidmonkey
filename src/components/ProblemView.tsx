@@ -25,6 +25,7 @@ export function ProblemView({
   flagged,
   onToggleFlag,
   onFlagAnswer,
+  freeEntry = false,
 }: {
   problem: Problem
   onNext: () => void
@@ -32,6 +33,9 @@ export function ProblemView({
   flagged: boolean
   onToggleFlag: () => void
   onFlagAnswer: (reason: 'wrong' | 'alternate') => void
+  /** The "enter answers, don't choose" setting — see AuctionPanel/PlayView for
+   * what it turns into. Off by default so a test can render a problem alone. */
+  freeEntry?: boolean
 }) {
   const [answers, setAnswers] = useState<string[]>([])
   // Held here, not in AuctionPanel: that panel is remounted on every answer (see
@@ -68,6 +72,7 @@ export function ProblemView({
         flagged={flagged}
         onToggleFlag={onToggleFlag}
         onFlagAnswer={onFlagAnswer}
+        freeEntry={freeEntry}
       />
     )
   }
@@ -103,6 +108,7 @@ export function ProblemView({
           flagged={flagged}
           onToggleFlag={onToggleFlag}
           onFlagAnswer={onFlagAnswer}
+          freeEntry={freeEntry}
           showId={showId}
           onToggleShowId={() => setShowId((v) => !v)}
         />

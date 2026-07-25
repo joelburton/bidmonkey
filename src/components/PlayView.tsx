@@ -84,6 +84,7 @@ export function PlayView({
   flagged = false,
   onToggleFlag = () => {},
   onFlagAnswer = () => {},
+  freeEntry = false,
 }: {
   problem: Problem
   contract: Contract | null
@@ -95,6 +96,9 @@ export function PlayView({
   flagged?: boolean
   onToggleFlag?: () => void
   onFlagAnswer?: (reason: 'wrong' | 'alternate') => void
+  /** "Enter answers, don't choose": answer a multiple-choice card question by
+   * clicking a card in the asked hand instead of picking from a list. */
+  freeEntry?: boolean
 }) {
   const hero = problem.hero
   const isPhone = useIsPhone()
@@ -216,10 +220,25 @@ export function PlayView({
     }
   }
 
-  const pendingMC =
-    pending && pending.question.choiceType === 'multiple_choice'
-      ? pending.question.options
-      : undefined
+  // Which hands are on the table. Defined up here (rather than beside the other
+  // render helpers) because `asFree` below needs it, and that in turn feeds the
+  // keyboard effect.
+  const faceUp = (seat: Seat) =>
+    seat === hero || allRevealed || (seat === dummy && dummyRevealed && problem.deal[dummy] != null)
+
+  // Is this question answered by clicking a card rather than from a list?
+  // Authored 'free' ones always are. A multiple-choice one is too when the
+  // free-entry setting is on — but only if the asked hand is actually face up
+  // to click, since a defender's question posed to a concealed seat would
+  // otherwise offer no way to answer at all. And a 'multiple_choice' question
+  // that carries no options has no buttons to render, so it falls back to
+  // clicking as well (the auction makes the same allowance).
+  const asFree = (p: { seat: Seat; question: CardQuestion }) =>
+    p.question.choiceType !== 'multiple_choice' ||
+    !p.question.options?.length ||
+    (freeEntry && faceUp(p.seat) && problem.deal[p.seat] != null)
+
+  const pendingMC = pending && !asFree(pending) ? pending.question.options : undefined
 
   // Shift+F flags/unflags this problem for review. Its own always-on listener,
   // unlike the conditional one below, so it works while cards are auto-playing
@@ -275,13 +294,12 @@ export function PlayView({
   const toAct = seatToAct(leader, tableTrick)
 
   // A hand is clickable when it's that seat's turn in free play (and the trick
-  // isn't already full), or when it's the seat to act on a *free* card question.
-  // Multiple-choice questions are answered with the option buttons.
+  // isn't already full), or when it's the seat to act on a card question being
+  // entered rather than chosen (see `asFree`). Questions still showing option
+  // buttons are answered there instead.
   const clickable = (seat: Seat) =>
     (allRevealed && tableTrick.length < 4 && seat === toAct) ||
-    (pending?.seat === seat && pending.question.choiceType !== 'multiple_choice')
-  const faceUp = (seat: Seat) =>
-    seat === hero || allRevealed || (seat === dummy && dummyRevealed && problem.deal[dummy] != null)
+    (pending?.seat === seat && asFree(pending))
   const commitCard = (seat: Seat, card: string) => {
     if (allRevealed) playCard(seat, card, true)
     else if (pending?.seat === seat) answerPlay(card)
@@ -338,8 +356,7 @@ export function PlayView({
   // reserved vertical space.
   const message =
     !playResult && pending
-      ? (pending.question.prompt ??
-        (pending.question.choiceType === 'multiple_choice' ? 'Your turn' : undefined))
+      ? (pending.question.prompt ?? (pendingMC ? 'Your turn' : undefined))
       : undefined
 
   const am = buildAuction(problem, answers)
@@ -359,6 +376,7 @@ export function PlayView({
             trick={tableTrick}
             seatPos={layout}
             message={message}
+            bottomArrow={clickable(seatAt.bottom)}
             options={playResult ? undefined : pendingMC}
             onOption={(c) => answerPlay(c)}
             onContractClick={() => setShowAuction(true)}

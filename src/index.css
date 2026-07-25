@@ -10,6 +10,16 @@
   --accent: #1f7a4d;
   --red: #d21f3c;
   --black: #1a2230;
+  /* Four-colour deck (the "4-colour suits" setting). ♠/♥ keep --black/--red and
+     only ♦/♣ move, which is the convention bridge software uses — change these
+     two pairs and nothing else to swap in e.g. a blue diamond. Each suit needs
+     two values because the card face and the baize want different weights: on
+     white the pip must be dark enough to read as ink, on the dark felt it must
+     be bright enough to carry (helped there by the pip's white outline). */
+  --card-d: #c2410c; /* orange, on the white card face */
+  --card-c: #15803d; /* green, ditto */
+  --felt-d: #f97316; /* the same two, lifted for the green baize */
+  --felt-c: #22c55e;
   /* Count-pill colours (.chip): dark enough to read as text on white, not as
      decoration. --chip-red is a darker sibling of --red, which is tuned for
      suit symbols rather than small type. */
@@ -393,6 +403,118 @@ body {
   cursor: default;
 }
 
+/* ---- Display settings (foot of the sources list) ------------------------ */
+
+/* Two switches, below the sources rather than above them: they're set once and
+   then forgotten, so they must not push the thing you actually came for down
+   the screen. The list is short enough that they stay in view anyway. */
+.settings-panel {
+  margin-top: 22px;
+  padding-top: 14px;
+  border-top: 1px solid var(--control-border);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.settings-title {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.setting {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+}
+/* The real checkbox stays in the DOM (focus, keyboard, screen readers) but is
+   drawn as the track+knob below. Not display:none, which would take it out of
+   the tab order along with the pixels. */
+.setting input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.switch {
+  flex: 0 0 auto;
+  position: relative;
+  width: 2.5rem;
+  height: 1.45rem;
+  margin-top: 1px;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--bg);
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+/* The knob. A solid dark grey when off — a pale one on a pale track would be
+   exactly the faint-grey affordance the rest of this app refuses. */
+.switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  background: var(--control-border);
+  transition:
+    transform 0.15s,
+    background 0.15s;
+}
+.setting input:checked + .switch {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.setting input:checked + .switch::after {
+  background: #fff;
+  transform: translateX(1.05rem);
+}
+.setting input:focus-visible + .switch {
+  outline: 2px solid var(--chip-blue);
+  outline-offset: 2px;
+}
+.setting-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.setting-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.setting-hint {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+/* The ♦/♣ preview beside the four-colour label always shows what the setting
+   *would* look like, so it reads as a sample and not as the current state. */
+.setting-swatch {
+  display: inline-flex;
+  gap: 3px;
+  margin-left: 5px;
+  vertical-align: -0.1em;
+}
+.setting-swatch .suit-glyph {
+  width: 0.85em;
+  height: 0.85em;
+}
+/* On white, so no white outline (it's there for the felt) and the card-face
+   weights, not the felt ones. */
+.setting-swatch .suit-glyph path {
+  stroke: none;
+}
+/* Its ♦/♣ colours live with the other four-colour rules further down, where
+   they can out-order the `[data-deck='4color']` ones — the swatch must keep
+   showing the sample even once the setting it previews is on. */
+
 /* ---- Bridge table (full-bleed portrait) --------------------------------- */
 
 .table {
@@ -573,6 +695,16 @@ body {
 .black {
   fill: var(--black);
 }
+/* Four-colour deck, card faces. `data-deck` is set on <html> by App from the
+   settings, so the whole app repaints from one attribute and no component has
+   to thread the preference down. The extra class beats the bare .red/.black
+   above on specificity, which is the whole trick. */
+[data-deck='4color'] .card .pip-d {
+  fill: var(--card-d);
+}
+[data-deck='4color'] .card .pip-c {
+  fill: var(--card-c);
+}
 .card-back-fill {
   fill: #2b4a7a;
   stroke: #6f8fc0;
@@ -735,6 +867,24 @@ body {
 }
 .suit-black {
   color: #10161d;
+}
+/* Four-colour deck, inline pips. These set `color`, not `fill`, because
+   `.suit-glyph` fills from currentColor — that also keeps the white outline
+   stroke intact, which is what lets a green club sit on the green felt. */
+[data-deck='4color'] .suit-glyph.pip-d {
+  color: var(--felt-d);
+}
+[data-deck='4color'] .suit-glyph.pip-c {
+  color: var(--felt-c);
+}
+/* The sources-page preview swatch: same specificity as the two rules above but
+   later in the file, so it wins and shows the four-colour sample on white
+   whether or not the deck is currently switched on. */
+.setting-swatch .suit-glyph.pip-d {
+  color: var(--card-d);
+}
+.setting-swatch .suit-glyph.pip-c {
+  color: var(--card-c);
 }
 .suit-glyph {
   display: inline-block;
@@ -972,6 +1122,13 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+/* The South turn arrow (.play-arrow-bottom) sits above the fan, which puts it
+   in this strip — right on top of a centered prompt. Reserve its height, but
+   only while it's up: a question aimed at the bottom seat is the one case, and
+   every other play screen keeps the felt. */
+.play-bottom.clear-arrow {
+  padding-bottom: 1.9rem;
 }
 
 /* Current trick: cards placed by the seat that played them. Compact tracks

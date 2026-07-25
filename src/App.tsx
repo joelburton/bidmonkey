@@ -7,6 +7,7 @@ import { QuizView } from './components/QuizView'
 import { ProblemView } from './components/ProblemView'
 import { downloadQuizPdf } from './lib/quizPdf'
 import { useFlags } from './useFlags'
+import { useSettings } from './settings'
 
 // Navigation: sources → quizzes (of a source) → quiz → run. Each level is a
 // plain list; the buttons that *start* something live on the level below it (a
@@ -51,6 +52,18 @@ export default function App() {
   // The review list (problem_flags). Loaded independently of the catalogue: a
   // flags failure must not cost us the problems.
   const { flags, toggle: toggleFlag, flagAnswer } = useFlags()
+  // Display preferences (the two switches at the foot of the sources list).
+  const [settings, setSetting] = useSettings()
+
+  // The four-colour deck is pure CSS: one attribute on <html> repaints every
+  // pip on a card face and on the felt, so nothing between here and Card has to
+  // know the setting exists. (Free entry can't work that way — it changes which
+  // control is rendered — so that one is threaded down as a prop.)
+  useEffect(() => {
+    const root = document.documentElement
+    if (settings.fourColor) root.setAttribute('data-deck', '4color')
+    else root.removeAttribute('data-deck')
+  }, [settings.fourColor])
 
   // Content lives in Supabase; load it on mount and on each retry.
   useEffect(() => {
@@ -250,6 +263,7 @@ export default function App() {
             flagged={flags.has(problem.slug)}
             onToggleFlag={() => toggleFlag(problem.slug)}
             onFlagAnswer={(reason) => flagAnswer(problem.slug, reason)}
+            freeEntry={settings.freeEntry}
           />
         </main>
         {/* Shown (via CSS) instead of the table on landscape phones, where the
@@ -323,6 +337,8 @@ export default function App() {
             onSelect={(source) => setNav({ view: 'quizzes', source })}
             onRandomAll={startAllRandom}
             onFlaggedAll={startAllFlagged}
+            settings={settings}
+            onSetting={setSetting}
           />
         ) : (
           <QuizList

@@ -45,6 +45,7 @@ export function PlayCenter({
   trick,
   seatPos,
   message,
+  bottomArrow = false,
   options,
   onOption,
   onContractClick,
@@ -61,6 +62,11 @@ export function PlayCenter({
   trick: { seat: Seat; card: string }[]
   seatPos: Record<Seat, Pos>
   message?: string
+  /** Whether a turn arrow is drawn over the South hand. That arrow reaches up
+   * out of the bottom rail into the strip this panel's last line sits in, so
+   * when it's up we lift the content clear of it — and only then, since felt
+   * height is scarce. */
+  bottomArrow?: boolean
   options?: string[]
   onOption?: (card: string) => void
   onContractClick: () => void
@@ -118,7 +124,7 @@ export function PlayCenter({
         </div>
       </div>
 
-      <div className="play-bottom">
+      <div className={`play-bottom${bottomArrow ? ' clear-arrow' : ''}`}>
         {showNext && onNext && (
           <button className="play-btn" onClick={onNext} disabled={!hasNext}>
             Next ▸

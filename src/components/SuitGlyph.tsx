@@ -32,13 +32,21 @@ export const SUIT_SHAPE: Record<Suit, SuitShape> = {
   },
 }
 
+/** Per-suit class carried by every pip, on a card face and on the felt alike.
+ * The red/black class still decides the colour; this one only *identifies* the
+ * suit, so the four-colour deck (`[data-deck='4color']` in the CSS) can repaint
+ * ♦ and ♣ without either component knowing the setting exists. */
+export function pipClass(suit: Suit): string {
+  return `pip-${suit.toLowerCase()}`
+}
+
 /** Inline suit pip for use in HTML (bid buttons, auction cells). Sized by
  * font-size / the `.suit-glyph` rule; white outline applied via CSS. */
 export function SuitGlyph({ suit }: { suit: Suit }) {
   const s = SUIT_SHAPE[suit]
   return (
     <svg
-      className={`suit-glyph ${s.red ? 'suit-red' : 'suit-black'}`}
+      className={`suit-glyph ${s.red ? 'suit-red' : 'suit-black'} ${pipClass(suit)}`}
       viewBox={s.box}
       preserveAspectRatio="xMidYMid meet"
       aria-hidden="true"

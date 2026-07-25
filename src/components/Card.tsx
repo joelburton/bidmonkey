@@ -1,5 +1,5 @@
 import type { Suit } from '../types'
-import { SUIT_SHAPE } from './SuitGlyph'
+import { SUIT_SHAPE, pipClass } from './SuitGlyph'
 
 const SUIT_NAME: Record<Suit, string> = {
   S: 'spades',
@@ -40,7 +40,10 @@ export function Card({
   bottomPad?: boolean
 }) {
   const shape = SUIT_SHAPE[suit]
-  const color = shape.red ? 'red' : 'black'
+  // Two classes: the red/black one that colours the card by default, and the
+  // per-suit one the four-colour deck overrides (see `pipClass`). Both the rank
+  // and the pip carry them, so a suit changes colour as a unit.
+  const color = `${shape.red ? 'red' : 'black'} ${pipClass(suit)}`
   const label = `${RANK_NAME[rank] ?? rank} of ${SUIT_NAME[suit]}`
   // The bottom (South) hand grows a little taller — extra blank white BELOW the
   // rank/suit — so on a real phone the rounded bottom screen corner clips only

@@ -50,6 +50,7 @@ export function AuctionPanel({
   flagged = false,
   onToggleFlag = () => {},
   onFlagAnswer = () => {},
+  freeEntry = false,
   showId = false,
   onToggleShowId = () => {},
 }: {
@@ -65,6 +66,10 @@ export function AuctionPanel({
   flagged?: boolean
   onToggleFlag?: () => void
   onFlagAnswer?: (reason: 'wrong' | 'alternate') => void
+  /** "Enter answers, don't choose": a multiple-choice question whose answer is
+   * a *call* is shown on the bid pad instead, hiding the options that give the
+   * game away. A 'text' question has no call to enter, so it ignores this. */
+  freeEntry?: boolean
   /** Whether the problem id is revealed. Owned by ProblemView, because this
    * panel is remounted on every answer and the reveal must outlive that. */
   showId?: boolean
@@ -72,8 +77,18 @@ export function AuctionPanel({
 }) {
   const model = buildAuction(problem, answers)
   const q = model.question
-  const isMC = !!(q && q.choiceType === 'multiple_choice' && q.options?.length)
   const isText = q?.answerKind === 'text'
+  // Show the option buttons only for a question that has some *and* isn't being
+  // demoted to free entry. Grading is untouched either way: doSubmit checks
+  // whatever was entered against answer/accept exactly as before, and a typed
+  // bid was already accepted on a bid MC (see the key handler), so this only
+  // takes the list of options off the screen.
+  const isMC = !!(
+    q &&
+    q.choiceType === 'multiple_choice' &&
+    q.options?.length &&
+    !(freeEntry && q.answerKind === 'bid')
+  )
   const dbl = doubleState(model.prior, model.actingSeat)
 
   const [level, setLevel] = useState<number | null>(null)
