@@ -13,6 +13,7 @@ import {
 import { SuitGlyph } from './SuitGlyph'
 import { AuctionTable, CallText } from './AuctionTable'
 import { Explanation } from './Explanation'
+import { AnswerStatus } from './AnswerStatus'
 import { FlagButton } from './FlagButton'
 import { CopyProblem } from './CopyProblem'
 import { withSuits } from './suitText'
@@ -406,13 +407,15 @@ export function AuctionPanel({
         <>
           <div className="explain-backdrop" {...tapDismiss} />
           <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
-            <div
-              className={`explain-status ${
-                result.alternate ? 'alt' : result.correct ? 'ok' : 'no'
-              }`}
-            >
-              {result.alternate ? 'Alternate' : result.correct ? 'Correct!' : 'Not quite'}
-            </div>
+            <AnswerStatus
+              correct={result.correct}
+              alternate={result.alternate}
+              // Only when the options were on screen: with free entry on, the
+              // question still carries options but none were shown, so citing a
+              // letter would point at a list that was never offered.
+              letter={isMC ? OPT_LETTERS[q.options?.indexOf(result.call) ?? -1] : undefined}
+              choice={isText ? result.call : <CallText call={result.call} />}
+            />
             {q.explanation && <Explanation text={q.explanation} />}
             <p className="explain-answer">
               Answer: {isText ? q.answer : <CallText call={q.answer} />}

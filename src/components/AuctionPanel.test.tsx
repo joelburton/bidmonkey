@@ -416,3 +416,43 @@ describe('AuctionPanel free-form (text) question', () => {
     expect(onAnswer).toHaveBeenCalledWith('Only non-vulnerable')
   })
 })
+
+describe('AuctionPanel answer status line', () => {
+  const panel = (props: Partial<Parameters<typeof AuctionPanel>[0]> = {}) =>
+    render(
+      <AuctionPanel
+        problem={problem}
+        answers={[]}
+        onAnswer={() => {}}
+        onPlay={() => {}}
+        onNext={() => {}}
+        hasNext={false}
+        canPlay={false}
+        {...props}
+      />,
+    )
+
+  it('restates the choice, with its option letter, before the verdict', async () => {
+    const { container } = panel()
+    await userEvent.setup().keyboard('a') // 2H — wrong
+    const status = container.querySelector('.explain-status')!
+    expect(status.querySelector('.explain-choice-letter')!.textContent).toBe('(a)')
+    // The choice is a rendered call: "2" as text, the ♥ as a pip.
+    expect(status.querySelector('.explain-choice')!.textContent).toBe('(a)2')
+    expect(status.querySelectorAll('.explain-choice svg.suit-glyph')).toHaveLength(1)
+    expect(status.textContent).toContain('Not quite')
+  })
+
+  it('cites no letter when the options were never shown', async () => {
+    // Free entry hides the option list but the question still carries one, so
+    // a letter here would point at a list that was never offered.
+    const { container } = panel({ freeEntry: true })
+    const user = userEvent.setup()
+    await user.keyboard('2')
+    await user.keyboard('h')
+    const status = container.querySelector('.explain-status')!
+    expect(status.querySelector('.explain-choice-letter')).toBeNull()
+    expect(status.querySelector('.explain-choice')!.textContent).toBe('2')
+    expect(status.textContent).toContain('Not quite')
+  })
+})

@@ -382,6 +382,12 @@ export function PlayView({
             onOption={(c) => answerPlay(c)}
             onContractClick={() => setShowAuction(true)}
             result={playResult}
+            // `pendingMC` is still set while the popup is up (the options are
+            // only withheld from the center below), so it still says whether
+            // the card was picked from a list and which letter it wore.
+            resultLetter={
+              playResult && pendingMC ? OPT_LETTERS[pendingMC.indexOf(playResult.card)] : undefined
+            }
             onDismissResult={dismissPlayResult}
             showNext={done}
             onNext={onNext}

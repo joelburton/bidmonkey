@@ -6,6 +6,7 @@ import type { Pos } from '../play'
 import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
 import { Explanation } from './Explanation'
+import { AnswerStatus } from './AnswerStatus'
 import { FlagButton } from './FlagButton'
 import { CopyProblem } from './CopyProblem'
 import { withSuits } from './suitText'
@@ -52,6 +53,7 @@ export function PlayCenter({
   onOption,
   onContractClick,
   result,
+  resultLetter,
   onDismissResult,
   showNext,
   onNext,
@@ -75,7 +77,10 @@ export function PlayCenter({
   options?: string[]
   onOption?: (card: string) => void
   onContractClick: () => void
-  result?: { correct: boolean; alternate: boolean; question: CardQuestion } | null
+  result?: { correct: boolean; alternate: boolean; question: CardQuestion; card: string } | null
+  /** The option letter of the card in `result`, when it was picked from the
+   * on-screen list rather than played out of the hand. */
+  resultLetter?: string
   onDismissResult?: () => void
   showNext?: boolean
   onNext?: () => void
@@ -160,13 +165,12 @@ export function PlayCenter({
         <>
           <div className="explain-backdrop" {...tapDismiss} />
           <div className="explain-popup" role="dialog" aria-label="Answer" {...tapDismiss}>
-            <div
-              className={`explain-status ${
-                result.alternate ? 'alt' : result.correct ? 'ok' : 'no'
-              }`}
-            >
-              {result.alternate ? 'Alternate' : result.correct ? 'Correct!' : 'Not quite'}
-            </div>
+            <AnswerStatus
+              correct={result.correct}
+              alternate={result.alternate}
+              letter={resultLetter}
+              choice={<CardText card={result.card} />}
+            />
             {result.question.explanation && <Explanation text={result.question.explanation} />}
             <p className="explain-answer">
               Answer: <CardText card={result.question.answer} />

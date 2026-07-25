@@ -1023,6 +1023,22 @@ body {
   font-weight: 700;
   margin-bottom: 8px;
 }
+/* The choice restated ahead of the verdict. White, not the status colour: the
+   green/orange/red is the judgement, and tinting the answer itself would also
+   recolour a bid's level against its own (differently coloured) suit pip. */
+.explain-choice {
+  color: #fff;
+}
+.explain-choice::after {
+  content: ' — ';
+}
+/* Matches the option buttons' letter — same accent, same uppercasing — so the
+   line points back at the button that was pressed. */
+.explain-choice-letter {
+  color: var(--hint);
+  text-transform: uppercase;
+  margin-right: 0.3em;
+}
 .explain-status.ok {
   color: #7ee0a3;
 }
