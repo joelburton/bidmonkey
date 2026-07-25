@@ -115,17 +115,21 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   known, the problem is bidding-only; otherwise play the hand — deal out the recorded play,
   reveal the dummy after the opening lead, auto-play with pauses, stop at
   questions for the hero, then reveal all hands for free study.
-- **Phase 5 (done):** sources/quizzes + navigation. sources → quizzes → a quiz
-  started **In Order** or **Random** (per-quiz buttons, plus a **PDF** export).
-  Quiz nav lives in the app header, available in every phase: a left **Back**
-  button labelled `QuizTitle #ordinal` (→ the quizzes of the source the run came
-  from) and a right Prev `‹` / Next `›` pair.
+- **Phase 5 (done):** sources/quizzes + navigation, four levels deep:
+  **sources → quizzes → one quiz → a run**. Each list level is *only* a list —
+  tapping a row opens the level below — and the buttons that start something live
+  on the level they describe: a quiz's **In Order / Random / Flagged / PDF** are on
+  its own screen, while the wider runs (**Random** and **Flagged** over a whole
+  source, or over the whole library) sit at the top of the list they cover. Quiz
+  nav lives in the app header, available in every phase: a left **Back** button
+  labelled `QuizTitle #ordinal` (→ one level up, wherever the run started) and a
+  right Prev `‹` / Next `›` pair.
 - **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
   catalogue on load (async, with loading/error/retry).
 - **Phase 7 (done):** **review flags** (`problem_flags`) — a problem is flagged
   automatically when answered with anything but the preferred answer, or by hand
-  (the ⚑ button / Shift+F), and a source's **Flagged (n)** button retests them in
-  random order. See "Review flags" below.
+  (the ⚑ button / Shift+F), and a **Flagged (n)** button — on a quiz, a source, or
+  the whole library — retests them in random order. See "Review flags" below.
 - **Out of scope so far:** any backend beyond Supabase reads, per-question attempt
   tracking / scoring (flags are per *problem*, not per attempt — no history),
   contract-result scoring.
@@ -134,7 +138,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
 - `App.tsx` — fetches the catalogue from Supabase on mount (`fetchCatalog`), with
   loading / error+retry screens, then drives a `Nav` union (`sources` | `quizzes`
-  | `quiz`): `SourceList`, `QuizList`, or the quiz runner (header + `ProblemView`).
+  | `quiz` | `run`): `SourceList`, `QuizList`, `QuizView`, or the runner (header +
+  `ProblemView`). Every start funnels through one `startRun(title, order, from)`;
+  `from` records the level that launched it (`quiz`, else `source`, else neither
+  for a library-wide run), which is what makes Back go exactly one level up.
   The quiz header holds a left **Back** button (`‹` + the `QuizTitle #ordinal`
   label) and a right Prev (`‹`) / Next (`›`) pair (disabled at the ends). Nav is
   header-only so it works during the auction, play, and free study alike. Back
@@ -197,8 +204,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   - `FlagButton.tsx` — the ⚑ review toggle (`FlagButton`) and its drawn pennant
     (`FlagIcon`, also used by QuizList's Flagged button). Drawn, not typed: the
     Unicode flags render as un-recolorable emoji on iOS.
-  - `SourceList.tsx` / `QuizList.tsx` — the sources and quizzes list levels
-    (both reuse the `.problem-list` / `.problem-row` styling).
+  - `SourceList.tsx` / `QuizList.tsx` / `QuizView.tsx` — the three list levels
+    (the first two reuse the `.problem-list` / `.problem-row` row styling; the
+    lists carry a `.source-head` with their scope's Random + Flagged buttons, and
+    `QuizView` is one quiz's start screen: title, source, and the four runs).
 - `index.css` — all styling (no CSS framework). Global, plus component classes.
 
 ### Play phase (`PlayView`)

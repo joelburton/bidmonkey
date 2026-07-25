@@ -5,7 +5,8 @@ import type { Page } from '@playwright/test'
 async function gotoTwoDecisions(page: Page) {
   await page.goto('/')
   await page.getByText('FakeBook').click()
-  await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
+  await page.getByRole('button', { name: /^QuizB/ }).click()
+  await page.getByRole('button', { name: 'In Order' }).click()
   await page.getByRole('button', { name: 'Next problem' }).click()
   await page.getByRole('button', { name: 'Next problem' }).click()
   await expect(page.locator('.qbtn-label')).toHaveText('QuizB #3')

@@ -6,7 +6,8 @@ import { test, expect } from '@playwright/test'
 test('quiz prev/next navigation; nav buttons never retain focus', async ({ page }) => {
   await page.goto('/')
   await page.getByText('FakeBook').click()
-  await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
+  await page.getByRole('button', { name: /^QuizB/ }).click()
+  await page.getByRole('button', { name: 'In Order' }).click()
 
   const prev = page.getByRole('button', { name: 'Previous problem' })
   const next = page.getByRole('button', { name: 'Next problem' })
@@ -35,23 +36,45 @@ test('quiz prev/next navigation; nav buttons never retain focus', async ({ page 
   await expect(prev).toBeEnabled()
 })
 
-// The header's back button goes one level up — to the quizzes of the source the
-// run came from, not all the way to the sources list.
-test('back from a run returns to the source, not the sources list', async ({ page }) => {
+// sources → quizzes → one quiz → a run, and back down the same steps: every back
+// button goes exactly one level up, to wherever the run was started.
+test('the four levels, and back one step at a time', async ({ page }) => {
   await page.goto('/')
   await page.getByText('FakeBook').click()
-  await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
+  // The quizzes list is just a list — no start buttons on the rows.
+  await expect(page.locator('.problem-row')).toHaveCount(3)
+  await expect(page.getByRole('button', { name: 'In Order' })).toHaveCount(0)
+
+  // A quiz's own screen: its title, its source, and the four ways to run it.
+  await page.getByRole('button', { name: /^QuizB/ }).click()
+  await expect(page.locator('.source-head-title')).toHaveText('QuizB')
+  await expect(page.locator('.quiz-view-sub')).toContainText('FakeBook')
+  for (const name of ['In Order', 'Random', 'PDF']) {
+    await expect(page.getByRole('button', { name, exact: true })).toBeEnabled()
+  }
+
+  await page.getByRole('button', { name: 'In Order' }).click()
   await expect(page.locator('.qbtn-label')).toHaveText('QuizB #1')
 
-  await page.getByRole('button', { name: 'Back to quizzes' }).click()
-  // The source's quiz list, not the sources list.
+  // Back → the quiz screen it was launched from (not the quizzes list).
+  await page.getByRole('button', { name: 'Back to quiz' }).click()
+  await expect(page.locator('.source-head-title')).toHaveText('QuizB')
+  // Back again → the source's quizzes.
+  await page.getByRole('button', { name: '‹ FakeBook' }).click()
   await expect(page.locator('.source-head-title')).toHaveText('FakeBook')
-  await expect(page.locator('.quiz-row')).toHaveCount(3)
 
-  // A source-wide random run comes back to the same place.
+  // A source-wide run was launched here, so it comes back here.
   await page.locator('.source-random').click()
   await page.getByRole('button', { name: 'Back to quizzes' }).click()
   await expect(page.locator('.source-head-title')).toHaveText('FakeBook')
+
+  // A library-wide run was launched from the sources list, so it returns there.
+  await page.getByRole('button', { name: '‹ Sources' }).click()
+  await page.locator('.source-random').click()
+  await expect(page.locator('.qbtn-label')).toHaveText('All · random #1')
+  await page.getByRole('button', { name: 'Home' }).click()
+  await expect(page.getByText('FakeBook')).toBeVisible()
+  await expect(page.locator('.source-head-title')).toHaveCount(0) // sources list
 })
 
 // A Random run across the whole source draws from every problem in it (FakeBook

@@ -11,10 +11,8 @@ test.describe.configure({ mode: 'serial' })
 async function gotoQuizC(page: Page) {
   await page.goto('/')
   await page.getByText('FakeBook').click()
-  await page
-    .locator('.quiz-row', { hasText: 'QuizC' })
-    .getByRole('button', { name: 'In Order' })
-    .click()
+  await page.getByRole('button', { name: /^QuizC/ }).click()
+  await page.getByRole('button', { name: 'In Order' }).click()
   await expect(page.locator('.qbtn-label')).toHaveText('QuizC #1')
 }
 
@@ -50,6 +48,20 @@ test('the ⚑ button unflags, Shift+F flags again', async ({ page }) => {
   await expect(page.locator('.flag-btn')).toHaveAttribute('aria-pressed', 'true')
 })
 
+test("a quiz's own screen runs just its flagged problems", async ({ page }) => {
+  await page.goto('/')
+  await page.getByText('FakeBook').click()
+  await page.getByRole('button', { name: /^QuizC/ }).click()
+
+  // QuizC holds one problem, flagged by the tests above.
+  const flagged = page.getByRole('button', { name: 'Flagged (1)' })
+  await expect(flagged).toBeEnabled()
+  await flagged.click()
+  await expect(page.locator('.qbtn-label')).toHaveText('QuizC · flagged #1')
+  // One problem, so it's the only stop in the run.
+  await expect(page.getByRole('button', { name: 'Next problem' })).toBeDisabled()
+})
+
 test('the source header runs the flagged problems', async ({ page }) => {
   await page.goto('/')
   await page.getByText('FakeBook').click()
@@ -63,4 +75,14 @@ test('the source header runs the flagged problems', async ({ page }) => {
   await flagged.click()
   await expect(page.locator('.qbtn-label')).toHaveText(/^FakeBook · flagged #1$/)
   await expect(page.getByRole('button', { name: 'Previous problem' })).toBeDisabled()
+})
+
+test('the sources list runs every flagged problem, any source', async ({ page }) => {
+  await page.goto('/')
+  const flagged = page.locator('.source-flagged')
+  await expect(flagged).toBeEnabled()
+  await expect(flagged).toHaveText(/Flagged \([1-9]\d*\)/)
+
+  await flagged.click()
+  await expect(page.locator('.qbtn-label')).toHaveText(/^All · flagged #1$/)
 })

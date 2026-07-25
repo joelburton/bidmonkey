@@ -7,7 +7,8 @@ test.describe('play phase', () => {
     await page.goto('/')
     // Sources → quizzes → QuizB #2 is "Choose your opening lead".
     await page.getByText('FakeBook').click()
-    await page.locator('.quiz-row', { hasText: 'QuizB' }).getByRole('button', { name: 'In Order' }).click()
+    await page.getByRole('button', { name: /^QuizB/ }).click()
+    await page.getByRole('button', { name: 'In Order' }).click()
     await page.getByRole('button', { name: 'Next problem' }).click()
     await page.getByRole('button', { name: 'Play', exact: true }).click()
 
