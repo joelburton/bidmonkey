@@ -5,7 +5,7 @@ import { withSuits } from './suitText'
  * Render an explanation body. Lines (split on the preserved newlines) become
  * paragraphs — the first flush-left, the rest first-line-indented and run
  * together with no blank space between — and any run of lines starting with "-"
- * becomes a bulleted list. Suit symbols are colored via withSuits.
+ * becomes a bulleted list. Suit symbols become SVG pips via withSuits.
  */
 export function Explanation({ text }: { text: string }) {
   const out: ReactNode[] = []

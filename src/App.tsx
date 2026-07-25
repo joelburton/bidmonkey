@@ -6,13 +6,15 @@ import { QuizList } from './components/QuizList'
 import { ProblemView } from './components/ProblemView'
 import { downloadQuizPdf } from './lib/quizPdf'
 
-// Navigation: sources → quizzes (of a source) → quiz. `order` is the sequence of
-// problem slugs to present — the quiz's ordinal order, or a shuffle (random mode);
-// `index` walks it, so Prev/Next follow the chosen order, not the real ordinals.
+// Navigation: sources → quizzes (of a source) → run. A `run` is a sequence of
+// problems presented one at a time — a quiz (in order or shuffled) or a random
+// draw across a whole source. `order` is the slug sequence, `title` labels the
+// run in the header, and `index` walks it, so Prev/Next follow the chosen order,
+// not the real ordinals.
 type Nav =
   | { view: 'sources' }
   | { view: 'quizzes'; source: string }
-  | { view: 'quiz'; quiz: string; index: number; order: string[] }
+  | { view: 'run'; title: string; index: number; order: string[] }
 
 /** Fisher–Yates shuffle into a fresh array. */
 function shuffle<T>(items: T[]): T[] {
@@ -89,22 +91,30 @@ export default function App() {
 
   const goHome = () => setNav({ view: 'sources' })
   const startQuiz = (slug: string, mode: 'order' | 'random') => {
-    const slugs = catalog.quizzes.find((q) => q.slug === slug)?.problemSlugs ?? []
-    setNav({ view: 'quiz', quiz: slug, index: 0, order: mode === 'random' ? shuffle(slugs) : slugs })
+    const quiz = catalog.quizzes.find((q) => q.slug === slug)
+    if (!quiz) return
+    const order = mode === 'random' ? shuffle(quiz.problemSlugs) : quiz.problemSlugs
+    setNav({ view: 'run', title: quiz.title, index: 0, order })
+  }
+  // A random draw over every problem in a source (not just one of its quizzes) —
+  // problems carry a source FK, so filter by it rather than unioning the quizzes.
+  const startSourceRandom = (sourceSlug: string) => {
+    const source = catalog.sources.find((s) => s.slug === sourceSlug)
+    const slugs = catalog.problems.filter((p) => p.source === sourceSlug).map((p) => p.slug)
+    if (!source || slugs.length === 0) return
+    setNav({ view: 'run', title: `${source.title} · random`, index: 0, order: shuffle(slugs) })
   }
   const exportPdf = (slug: string) => {
     const quiz = catalog.quizzes.find((q) => q.slug === slug)
     if (quiz) downloadQuizPdf(quiz, catalog.problems)
   }
 
-  // Running a quiz: one problem at a time, in `order`, with Home + Prev/Next.
-  if (nav.view === 'quiz') {
-    const quiz = catalog.quizzes.find((q) => q.slug === nav.quiz)
-    const problem =
-      quiz && catalog.problems.find((p) => p.slug === nav.order[nav.index])
-    // A quiz can exist with no problems linked yet (content is authored by hand
-    // in the DB) — show a note instead of crashing on the missing problem.
-    if (!quiz || !problem) {
+  // Running a set of problems: one at a time, in `order`, with Home + Prev/Next.
+  if (nav.view === 'run') {
+    const problem = catalog.problems.find((p) => p.slug === nav.order[nav.index])
+    // A run can point at a slug with no matching problem (e.g. an empty quiz, or
+    // stale content) — show a note instead of crashing on the missing problem.
+    if (!problem) {
       return (
         <div className="app list">
           <header className="app-header">
@@ -113,7 +123,7 @@ export default function App() {
             </button>
           </header>
           <main className="app-main list">
-            <div className="screen-msg">This quiz has no problems yet.</div>
+            <div className="screen-msg">No problems to show.</div>
           </main>
         </div>
       )
@@ -129,7 +139,7 @@ export default function App() {
           <button className="qbtn" onClick={goHome} aria-label="Home">
             <span className="chev">‹</span>
             <span className="qbtn-label">
-              {quiz.title} #{nav.index + 1}
+              {nav.title} #{nav.index + 1}
             </span>
           </button>
           <div className="qnav">
@@ -186,9 +196,17 @@ export default function App() {
           />
         ) : (
           <QuizList
+            source={
+              catalog.sources.find((s) => s.slug === nav.source) ?? {
+                slug: nav.source,
+                title: nav.source,
+              }
+            }
+            problemCount={catalog.problems.filter((p) => p.source === nav.source).length}
             quizzes={catalog.quizzes.filter((q) => q.source === nav.source)}
             onStart={startQuiz}
             onPdf={exportPdf}
+            onRandomSource={() => startSourceRandom(nav.source)}
           />
         )}
       </main>

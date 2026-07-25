@@ -34,3 +34,26 @@ test('quiz prev/next navigation; nav buttons never retain focus', async ({ page 
   await expect(next).toBeDisabled()
   await expect(prev).toBeEnabled()
 })
+
+// A Random run across the whole source draws from every problem in it (FakeBook
+// has 7), independent of the quizzes — the header labels it "<Source> · random".
+test('random run across a whole source', async ({ page }) => {
+  await page.goto('/')
+  await page.getByText('FakeBook').click()
+
+  await expect(page.locator('.source-random')).toHaveText('🎲 Random — all 7 problems')
+  await page.locator('.source-random').click()
+
+  const prev = page.getByRole('button', { name: 'Previous problem' })
+  const next = page.getByRole('button', { name: 'Next problem' })
+
+  await expect(page.locator('.qbtn-label')).toHaveText('FakeBook · random #1')
+  await expect(prev).toBeDisabled()
+  await expect(next).toBeEnabled()
+
+  // Walk to the last of the 7; next then disabled.
+  for (let i = 0; i < 6; i++) await next.click()
+  await expect(page.locator('.qbtn-label')).toHaveText('FakeBook · random #7')
+  await expect(next).toBeDisabled()
+  await expect(prev).toBeEnabled()
+})

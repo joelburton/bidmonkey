@@ -1,21 +1,16 @@
-/** Render explanation text, coloring red suits (♥ ♦) red and black suits (♠ ♣)
- * light so both read on the dark popup. U+FE0E forces text (non-emoji)
- * presentation so the color reliably applies. */
+import type { Suit } from '../types'
+import { SuitGlyph } from './SuitGlyph'
+
+const CHAR_TO_SUIT: Record<string, Suit> = { '♠': 'S', '♥': 'H', '♦': 'D', '♣': 'C' }
+
+/** Render explanation text with the same SVG suit pips used everywhere else
+ * (SuitGlyph) instead of Unicode glyphs. The pips carry a white outline, so on
+ * the dark popup the black suits (♠ ♣) render truly black — not the washed-out
+ * light grey the Unicode text needed to stay visible. */
 export function withSuits(text: string) {
-  const TP = '︎'
   return text.split(/([♥♦♠♣])/).map((part, i) => {
-    if (part === '♥' || part === '♦')
-      return (
-        <span key={i} className="suit-red-text">
-          {part + TP}
-        </span>
-      )
-    if (part === '♠' || part === '♣')
-      return (
-        <span key={i} className="suit-black-text">
-          {part + TP}
-        </span>
-      )
+    const suit = CHAR_TO_SUIT[part]
+    if (suit) return <SuitGlyph key={i} suit={suit} />
     return <span key={i}>{part}</span>
   })
 }

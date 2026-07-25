@@ -280,6 +280,24 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
+/* Source header above the quiz list: the source title + a Random run across
+   every problem in the whole source. */
+.source-head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.source-head-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.source-random {
+  width: 100%;
+  border-color: var(--accent);
+}
+
 /* A quiz row: title + meta over two start buttons (In Order / Random). */
 .quiz-row {
   display: flex;
@@ -325,6 +343,12 @@ body {
 .table {
   flex: 1;
   min-height: 0;
+  /* ONE card size for all four hands, sized so every hand shows all 13 cards IN
+     FULL (no overlap): the smaller of the fan width (N/S lay 13 across) and the
+     middle-band height (E/W stack 13), divided by 13. Inherited by every rail so
+     the four hands are always identical. The 11rem reserves the header + the two
+     N/S fans, so the E/W column can't outgrow the band on a short viewport. */
+  --card-w: calc(min(100vw, 30rem, 100dvh - 11rem) / 13);
   display: grid;
   /* minmax(0, …) lets the middle row shrink below its content so tall rails
      clip instead of pushing the page taller and causing a scroll. */
@@ -348,15 +372,12 @@ body {
   z-index: 2;
 }
 
-/* North & South: edge-to-edge horizontal fans, same card size — the condensed
-   Roboto Flex keeps even "10" readable in the sliver, so the hero hand needn't
-   be bigger. Sliver = (fullWidth − cardW) / 12. */
+/* North & South: horizontal fans. Card size (--card-w) is inherited from .table
+   so all four hands match. */
 .rail-north {
-  --card-w: 4rem;
   align-self: start;
 }
 .rail-south {
-  --card-w: 4rem;
   align-self: end;
 }
 
@@ -383,27 +404,16 @@ body {
   padding: 8px 12px;
 }
 
-/* East & West: rotated rails, an inner sliver showing. The 13-card vertical fan
-   is 7·cardW tall, so size cardW to the available middle band — grow with a
-   taller viewport up to the N/S card size, shrink to fit a short phone (with
-   Safari chrome) so it never clips. The 15rem subtracts the header + the N & S
-   fans (~14rem) plus a safety margin; 100dvh tracks the live viewport so the
-   cards re-fit as mobile chrome shows/hides. */
+/* East & West: vertical columns of rotated cards, shown IN FULL — no off-screen
+   shift and no overlap, so E/W read exactly like N/S (same card, turned 90°) and
+   fill their side of the table. Card size (--card-w) is inherited from .table,
+   identical for all four hands; the column is 13·cardW tall, which .table's
+   --card-w formula guarantees fits the middle band. */
 .rail-west,
 .rail-east {
-  --card-w: min(4rem, calc((100dvh - 15rem) / 7));
   flex: none;
   display: flex;
   align-items: center;
-}
-/* Shift each rail outward so only an inner sliver shows. The rotated card is
-   1.4·cardW wide, so a shift of ~0.72·cardW leaves ~0.68·cardW visible — enough
-   for the rank AND the suit below it. */
-.rail-west {
-  margin-left: calc(var(--card-w) * -0.72);
-}
-.rail-east {
-  margin-right: calc(var(--card-w) * -0.72);
 }
 
 /* ---- Hand + cards ------------------------------------------------------- */
@@ -412,41 +422,37 @@ body {
   display: flex;
 }
 
-/* Horizontal fan (N/S): all 13 cards distributed to exactly fill the parent
-   width, whatever --card-w is. Percentage margins resolve against parent width,
-   so margin = (fullWidth − 13·cardW) / 12 spreads or overlaps them to fit. */
+/* Horizontal fan (N/S): 13 cards that TOUCH (borders differentiate them), and
+   only overlap when the width can't hold them all. Percentage margins resolve
+   against parent width: (fullWidth − 13·cardW)/12 is the per-gap slack — clamp it
+   at 0 with min() so cards never spread apart (narrow chips no longer fill a wide
+   container), only close up or overlap. The fan is then centered. */
 .hand-h {
   width: 100%;
   align-items: flex-end;
-  /* Center the fan once fewer than 13 cards remain (full hand already fills the
-     width, so this is a no-op then). */
   justify-content: center;
 }
 .hand-h .slot {
   flex: none;
-  margin-left: calc((100% - 13 * var(--card-w)) / 12);
+  margin-left: min(0px, calc((100% - 13 * var(--card-w)) / 12));
 }
 .hand-h .slot.first {
   margin-left: 0;
 }
 
-/* Vertical fan (E/W): each card rotated 90°, stacked top→bottom. The .slot
-   reserves the rotated footprint (long side wide, short side tall); the inner
-   .rot holds the natural-size card and spins it into place. The 1.4 is the
-   card aspect ratio (viewBox 100×140 in Card.tsx) — the rail-shift math above
-   and .trick-slot lean on the same factor, so change them together. */
+/* Vertical column (E/W): each card rotated 90°, stacked top→bottom with NO
+   overlap so every card shows in full. The .slot reserves the rotated footprint
+   (long side wide, short side tall); the inner .rot holds the natural-size card
+   and spins it into place. The 1.5 is the card aspect ratio (viewBox 44×66 in
+   Card.tsx) — .trick-slot leans on the same factor, so change them together. */
 .hand-v {
   flex-direction: column;
   align-items: center;
 }
 .hand-v .slot {
   position: relative;
-  width: calc(var(--card-w) * 1.4);
+  width: calc(var(--card-w) * 1.5);
   height: var(--card-w);
-  margin-top: calc(var(--card-w) * -0.5);
-}
-.hand-v .slot.first {
-  margin-top: 0;
 }
 .hand-v .rot {
   position: absolute;
@@ -461,20 +467,9 @@ body {
 }
 
 /* East: mirror of West — column-reverse puts spades at the bottom, and the
-   opposite rotation lands the index/suit/pip on the inner (left) edge, with the
-   stack revealing each card's bottom strip. */
+   opposite rotation lands the index/suit/pip on the inner (left) edge. */
 .hand-v-east {
   flex-direction: column-reverse;
-}
-/* In a column-reverse stack the overlap comes from the bottom margin (the
-   leading edge), so each card slides up onto the one below it and reveals its
-   bottom strip — where the rotated index sits. */
-.hand-v-east .slot {
-  margin-top: 0;
-  margin-bottom: calc(var(--card-w) * -0.5);
-}
-.hand-v-east .slot.first {
-  margin-bottom: 0;
 }
 .hand-v-east .rot {
   transform: translate(-50%, -50%) rotate(-90deg);
@@ -508,7 +503,7 @@ body {
   font-weight: 400;
   font-stretch: 75%;
   /* Not a rem-rule violation: these are SVG user units inside the card's
-     100×140 viewBox, so the text scales with --card-w like everything else. */
+     44×66 viewBox, so the text scales with --card-w like everything else. */
   font-size: 30px;
 }
 .red {
@@ -695,7 +690,7 @@ body {
   inset: 0;
   z-index: 41;
   overflow-y: auto;
-  padding: 14px 14px 16px;
+  padding: 18px 18px 20px;
   border-radius: 12px;
   background: #0c3b22;
   border: 1px solid rgba(255, 255, 255, 0.28);
@@ -720,7 +715,7 @@ body {
    line of every paragraph after the first indented — book style. */
 .explain-para {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   line-height: 1.5;
 }
 .explain-para.indent {
@@ -730,7 +725,7 @@ body {
 .explain-list {
   margin: 0.35rem 0 0;
   padding-left: 1.3em;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   line-height: 1.5;
 }
 .explain-list li {
@@ -742,19 +737,16 @@ body {
   margin: 10px 0 0;
   padding-top: 8px;
   border-top: 1px solid rgba(255, 255, 255, 0.28);
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 600;
 }
-.explain-answer .suit-glyph {
+/* Suit pips in the popup (explanation body + answer): the SVG SuitGlyph, sized
+   to the surrounding text. Its white outline lets black suits stay truly black
+   on the dark popup. */
+.explain-popup .suit-glyph {
   width: 0.9em;
   height: 0.9em;
   vertical-align: -0.1em;
-}
-.suit-red-text {
-  color: #ff5d6c;
-}
-.suit-black-text {
-  color: #eef2f7;
 }
 
 /* ---- Play / continue buttons ------------------------------------------- */
@@ -850,10 +842,12 @@ body {
 /* Current trick: cards placed by the seat that played them. Compact tracks
    (narrower than a card) so the four cards sit close together in a tight
    diamond; the grid is centered and only as wide as its tracks. The 0.62/0.72
-   track factors are visual tuning: a card is 1×1.4 card-widths, so tracks at
+   track factors are visual tuning: a card is 1×1.5 card-widths, so tracks at
    ~⅔ of that overlap neighbouring cards without hiding their indices. */
 .trick {
-  --card-w: 4rem;
+  /* A touch larger than the hand cards (which shrink to fit 13 across) so the
+     just-played cards read as the focus, but no longer the full real-card size. */
+  --card-w: 3rem;
   width: fit-content;
   margin-inline: auto;
   display: grid;
@@ -880,7 +874,7 @@ body {
 }
 .trick-slot {
   min-width: var(--card-w);
-  min-height: calc(var(--card-w) * 1.4);
+  min-height: calc(var(--card-w) * 1.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1107,14 +1101,6 @@ body {
   text-align: center;
   font-size: 0.95rem;
   opacity: 0.85;
-}
-
-/* When all hands are revealed, pull the side rails in so more of them shows. */
-.table.revealed .rail-west {
-  margin-left: calc(var(--card-w) * -0.4);
-}
-.table.revealed .rail-east {
-  margin-right: calc(var(--card-w) * -0.4);
 }
 
 /* Transparent catcher: click to advance past a completed (all-auto) trick. */
