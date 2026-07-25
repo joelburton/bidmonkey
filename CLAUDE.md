@@ -142,8 +142,11 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
   `ProblemView`). Every start funnels through one `startRun(title, order, from)`;
   `from` records the level that launched it (`quiz`, else `source`, else neither
   for a library-wide run), which is what makes Back go exactly one level up.
-  The quiz header holds a left **Back** button (`‹` + the `QuizTitle #ordinal`
-  label) and a right Prev (`‹`) / Next (`›`) pair (disabled at the ends). Nav is
+  **Every screen wears the same header:** one `.app-header` (fixed `min-height`,
+  one padding) whose navigation is always a bordered `.qbtn` — `‹` + a label — so
+  the list levels and the table match. On a run it also carries a right Prev (`‹`)
+  / Next (`›`) pair (disabled at the ends); the sources screen carries the brand
+  instead of a back button, since there's nowhere above it. Nav is
   header-only so it works during the auction, play, and free study alike. Back
   goes **one level up**, to the quizzes of the source the run came from — a `run`
   nav carries that `source` slug for the purpose (a source-less quiz falls back to

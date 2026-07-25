@@ -197,8 +197,9 @@ export default function App() {
       return (
         <div className="app list">
           <header className="app-header">
-            <button className="back" onClick={goBack}>
-              ‹ Back
+            <button className="qbtn" onClick={goBack}>
+              <span className="chev">‹</span>
+              <span className="qbtn-label">Back</span>
             </button>
           </header>
           <main className="app-main list">
@@ -214,7 +215,7 @@ export default function App() {
 
     return (
       <div className="app detail">
-        <header className="app-header quiz-header">
+        <header className="app-header">
           <button className="qbtn" onClick={goBack} aria-label={backLabel}>
             <span className="chev">‹</span>
             <span className="qbtn-label">
@@ -269,12 +270,13 @@ export default function App() {
       <div className="app list">
         <header className="app-header">
           <button
-            className="back"
+            className="qbtn"
             onClick={() =>
               setNav(quizSource ? { view: 'quizzes', source: quizSource } : { view: 'sources' })
             }
           >
-            ‹ {source?.title ?? 'Sources'}
+            <span className="chev">‹</span>
+            <span className="qbtn-label">{source?.title ?? 'Sources'}</span>
           </button>
         </header>
         <main className="app-main list">
@@ -300,8 +302,9 @@ export default function App() {
     <div className="app list">
       <header className="app-header">
         {nav.view === 'quizzes' ? (
-          <button className="back" onClick={goHome}>
-            ‹ Sources
+          <button className="qbtn" onClick={goHome}>
+            <span className="chev">‹</span>
+            <span className="qbtn-label">Sources</span>
           </button>
         ) : (
           <span className="brand">🐵 bidmonkey</span>
