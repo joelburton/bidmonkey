@@ -841,18 +841,22 @@ body {
 
 /* Current trick: cards placed by the seat that played them. Compact tracks
    (narrower than a card) so the four cards sit close together in a tight
-   diamond; the grid is centered and only as wide as its tracks. The 0.62/0.72
-   track factors are visual tuning: a card is 1×1.5 card-widths, so tracks at
-   ~⅔ of that overlap neighbouring cards without hiding their indices. */
+   diamond; the grid is centered and only as wide as its tracks. The 0.78/0.86
+   track factors are visual tuning: a card is 1×1.5 card-widths, so tracks a bit
+   over ¾ of that leave only a light overlap between neighbouring cards.
+   Slots carry a z-index set from the play order (PlayCenter.tsx) so the lead
+   stays under the cards played after it; `isolation` keeps those 1..4 values
+   local so they can't climb past the rails/arrows in the z registry. */
 .trick {
   /* A touch larger than the hand cards (which shrink to fit 13 across) so the
      just-played cards read as the focus, but no longer the full real-card size. */
   --card-w: 3rem;
   width: fit-content;
   margin-inline: auto;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: repeat(3, calc(var(--card-w) * 0.62));
-  grid-template-rows: repeat(3, calc(var(--card-w) * 0.72));
+  grid-template-columns: repeat(3, calc(var(--card-w) * 0.78));
+  grid-template-rows: repeat(3, calc(var(--card-w) * 0.86));
   grid-template-areas:
     '.   t   .'
     'l   .   r'

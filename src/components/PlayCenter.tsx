@@ -65,8 +65,12 @@ export function PlayCenter({
   onNext?: () => void
   hasNext?: boolean
 }) {
-  const byPos: Partial<Record<Pos, string>> = {}
-  for (const t of trick) byPos[seatPos[t.seat]] = t.card
+  // Position → card plus its place in the trick, so the cards stack in play
+  // order: the lead sits under everything, the latest card on top.
+  const byPos: Partial<Record<Pos, { card: string; order: number }>> = {}
+  trick.forEach((t, i) => {
+    byPos[seatPos[t.seat]] = { card: t.card, order: i }
+  })
 
   // Tap anywhere on the popup or the backdrop dismisses it; a drag to scroll the
   // explanation does not (see useTapDismiss).
@@ -75,8 +79,11 @@ export function PlayCenter({
   const slot = (pos: Pos) => {
     const c = byPos[pos]
     return (
-      <div className={`trick-slot trick-${POS_CLASS[pos]}`}>
-        {c ? <Card suit={c[0] as Suit} rank={c[1]} /> : null}
+      <div
+        className={`trick-slot trick-${POS_CLASS[pos]}`}
+        style={c ? { zIndex: c.order + 1 } : undefined}
+      >
+        {c ? <Card suit={c.card[0] as Suit} rank={c.card[1]} /> : null}
       </div>
     )
   }
