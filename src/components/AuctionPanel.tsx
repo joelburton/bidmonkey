@@ -14,9 +14,8 @@ import { SuitGlyph } from './SuitGlyph'
 import { AuctionTable, CallText } from './AuctionTable'
 import { Explanation } from './Explanation'
 import { FlagButton } from './FlagButton'
-import { ProblemInfo } from './ProblemInfo'
+import { CopyProblem } from './CopyProblem'
 import { withSuits } from './suitText'
-import { problemToText } from '../lib/problemText'
 import { useTapDismiss } from '../tapDismiss'
 
 const SUIT_ORDER: Strain[] = ['C', 'D', 'H', 'S']
@@ -101,9 +100,6 @@ export function AuctionPanel({
     answer: string
   } | null>(null)
   const [pressed, setPressed] = useState<string | null>(null)
-  // Local, unlike showId: opening this can't advance the auction, so it never
-  // has to survive the remount that answering causes.
-  const [showInfo, setShowInfo] = useState(false)
 
   const doSubmit = useCallback((call: string) => {
     const cur = ref.current.model.question
@@ -164,7 +160,6 @@ export function AuctionPanel({
     dbl,
     model,
     isMC,
-    showInfo,
     onAnswer,
     onPlay,
     onNext,
@@ -179,7 +174,6 @@ export function AuctionPanel({
     dbl,
     model,
     isMC,
-    showInfo,
     onAnswer,
     onPlay,
     onNext,
@@ -198,16 +192,6 @@ export function AuctionPanel({
       // otherwise the Shift held for Shift+F would close the popup, and the F
       // would then land as a flag toggle.
       if (e.key === 'Shift' || e.key === 'CapsLock') return
-      // The details panel swallows everything: it covers the auction, so a key
-      // that fell through would enter a bid against a question the player can't
-      // see. Escape closes it, as the Close button does.
-      if (st.showInfo) {
-        if (e.key === 'Escape') {
-          setShowInfo(false)
-          e.preventDefault()
-        }
-        return
-      }
       // Shift+F flags/unflags this problem, in every auction state — but with the
       // answer popup up it only closes it, like any other key: a wrong answer has
       // just flagged the problem, so toggling here would silently undo that.
@@ -288,18 +272,7 @@ export function AuctionPanel({
       <div className="auction-head">
         <span className="head-left">
           <FlagButton flagged={flagged} onToggle={onToggleFlag} pressed={pressed === 'FLAG'} />
-          {/* Writes the whole problem out as text to paste into Claude. Sits
-              between the two existing circles and matches them; like them it
-              must not take focus, or the next keypress would re-open it. */}
-          <button
-            className="id-btn info-btn"
-            aria-label="Show problem details"
-            title="Problem details, to paste into Claude"
-            onMouseDown={(e) => e.preventDefault()}
-            onClick={() => setShowInfo(true)}
-          >
-            i
-          </button>
+          <CopyProblem problem={problem} answers={answers} />
           {/* The id names the convention ("…-drury.3"), which hands over the
               answer, so it hides behind this toggle instead of sitting on the
               felt. Like every button here it must not take focus, or the next
@@ -427,10 +400,6 @@ export function AuctionPanel({
             </button>
           </div>
         </div>
-      )}
-
-      {showInfo && (
-        <ProblemInfo text={problemToText(problem, answers)} onClose={() => setShowInfo(false)} />
       )}
 
       {result && q && (

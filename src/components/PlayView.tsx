@@ -372,6 +372,7 @@ export function PlayView({
         center={
           <PlayCenter
             problem={problem}
+            answers={answers}
             contract={contract}
             trick={tableTrick}
             seatPos={layout}

@@ -7,6 +7,7 @@ import { Card, rankLabel } from './Card'
 import { SuitGlyph } from './SuitGlyph'
 import { Explanation } from './Explanation'
 import { FlagButton } from './FlagButton'
+import { CopyProblem } from './CopyProblem'
 import { withSuits } from './suitText'
 import { useTapDismiss } from '../tapDismiss'
 
@@ -41,6 +42,7 @@ const POS_CLASS: Record<Pos, string> = { top: 't', left: 'l', right: 'r', bottom
  * line — the play phase shows no problem id, and this is its info row. */
 export function PlayCenter({
   problem,
+  answers,
   contract,
   trick,
   seatPos,
@@ -58,6 +60,9 @@ export function PlayCenter({
   onToggleFlag = () => {},
 }: {
   problem: Problem
+  /** The auction answers, so the copy button can write the problem out with the
+   * auction resolved the way this run resolved it. */
+  answers: string[]
   contract: Contract | null
   trick: { seat: Seat; card: string }[]
   seatPos: Record<Seat, Pos>
@@ -113,6 +118,7 @@ export function PlayCenter({
           <span className="vul-tag">Vul: {VUL_SHORT[problem.vulnerability]}</span>
         )}
         <FlagButton flagged={flagged} onToggle={onToggleFlag} />
+        <CopyProblem problem={problem} answers={answers} />
       </div>
 
       <div className="trick-area">

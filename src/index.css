@@ -116,9 +116,7 @@ body {
        60 here — so Home/Prev/Next stay tappable while a popup is open or a
      trick-review pause is active. Safe because the header doesn't dismiss
      anything (popups dismiss on their own tap) and Home/Next remount
-     ProblemView, discarding any popup/pending state.
-       70 .info-panel — the one thing that covers the header, deliberately: it
-     is a reading surface whose only exit is its own Close button. */
+     ProblemView, discarding any popup/pending state. */
   z-index: 60;
   display: flex;
   align-items: center;
@@ -791,7 +789,8 @@ body {
   transition:
     color 0.12s,
     border-color 0.12s,
-    background 0.12s;
+    background 0.12s,
+    box-shadow 0.12s;
 }
 .flag-btn .flag-icon {
   width: 0.95rem;
@@ -818,55 +817,30 @@ body {
 .flag-btn.pressed {
   background: rgba(255, 255, 255, 0.28);
 }
-/* A lowercase "i" is narrow and sits high; nudge it so it reads centred in the
-   circle next to the "?", which fills its box. */
+/* The copy-for-Claude button. A lowercase "i" is narrow and sits high, so it's
+   italicised to read centred in the circle beside the "?", which fills its box. */
 .info-btn {
   font-style: italic;
   font-size: 0.9rem;
 }
-
-/* ---- Problem details (paste-into-Claude panel) -------------------------- */
-
-/* Above the header (60), unlike every other overlay — see the z registry. A
-   reading surface with one way out: leaving Prev/Next reachable behind it would
-   only let you change the problem the text is describing. */
-.info-panel {
-  position: fixed;
-  inset: 0;
-  z-index: 70;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
-  color: var(--ink);
+/* Copy feedback. Nothing appears on screen when this button works — the text
+   goes to the clipboard — so the button itself has to say so: it fills for
+   1.4s with a ring around it. Borrows the flag's on-state colours rather than
+   inventing a third look for the same three circles. */
+.info-btn.copied {
+  background: var(--hint);
+  border-color: var(--black);
+  color: var(--black);
+  font-style: normal;
+  box-shadow: 0 0 0 0.3rem rgba(255, 224, 138, 0.4);
 }
-/* The text itself: monospace so the auction table's columns line up, wrapping
-   rather than scrolling sideways, and selectable for a manual copy when the
-   Copy button can't reach the clipboard. */
-.info-text {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  margin: 0;
-  padding: 16px;
-  font-family: ui-monospace, 'SF Mono', Menlo, monospace;
-  font-size: 0.72rem;
-  line-height: 1.45;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  user-select: text;
-  -webkit-user-select: text;
-}
-/* Pinned below the text, clear of the phone's home indicator. */
-.info-actions {
-  flex: none;
-  display: flex;
-  gap: 8px;
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--control-border);
-  background: var(--surface);
-}
-.info-close {
-  border-color: var(--accent);
+/* A failed write has to be distinguishable from a successful one, not silent:
+   there's no panel to fall back to and select the text by hand. */
+.info-btn.failed {
+  background: var(--chip-red);
+  border-color: #fff;
+  color: #fff;
+  font-style: normal;
 }
 
 .flag-icon {
@@ -1151,16 +1125,27 @@ body {
   display: flex;
   justify-content: center;
   align-items: baseline;
-  gap: 12px;
+  /* Four things share this line on a phone — contract, vulnerability, ⚑ and the
+     copy button — and they only just fit, so: no wrapping (a two-line contract
+     line would shove the trick down), a tight gap, and the two text pieces held
+     on one line each. */
+  flex-wrap: nowrap;
+  gap: 6px;
   /* One size for the whole line (contract + vulnerability), baseline-aligned. */
   font-size: 1.1rem;
   font-weight: 700;
 }
 .vul-tag {
   font-weight: 600; /* white (inherits #fff) — no opacity dimming */
+  white-space: nowrap;
 }
+/* "by East" is secondary to the contract itself, and shrinking it is what buys
+   the room for the fourth thing on this line: "7♠×× by South" alongside
+   "Vul: Both" and two circles overflows a 390px phone at the full size, and
+   most problems with a recorded play are doubled, so that isn't a corner. */
 .contract-by {
   font-weight: 600;
+  font-size: 0.85em;
   margin-left: 5px;
 }
 
@@ -1411,13 +1396,14 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 1px;
-  padding: 2px 10px;
+  padding: 2px 4px;
   border: 0;
   border-radius: 8px;
   background: transparent;
   color: #fff;
   font-size: inherit; /* match the contract-line (same size as "Vul: …") */
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
 }
 @media (hover: hover) {
