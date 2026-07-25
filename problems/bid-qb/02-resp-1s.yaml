@@ -108,6 +108,7 @@ problems:
       explain: |
         Partner opens 1♦. It would not be a mistake to respond 2♣, since you do hold 11 points. However, on hands with no major-suit fit the target game contract is usually 3NT. The bid that gives the best description of your hand is 2NT, showing 11-12 points. You hope that partner can raise to 3NT.
       answer: 2nt
+      accept: [2c]
 
 #10
 - hand: sa1076 hj94 dk973 c103
