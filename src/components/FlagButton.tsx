@@ -25,7 +25,8 @@ export function FlagIcon({ filled }: { filled: boolean }) {
 
 /**
  * Puts this problem on (or off) the review list — the same effect a wrong answer
- * has automatically. Filled + yellow when flagged, outlined when not.
+ * has automatically. A solid orange chip with a black pennant when flagged, an
+ * outlined circle when not.
  *
  * Like every other button in the app it must not take focus (preventing
  * mousedown's default), or the next keypress would re-activate it.

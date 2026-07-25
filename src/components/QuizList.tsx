@@ -51,13 +51,20 @@ export function QuizList({
         </div>
       </div>
       <ul className="problem-list">
-        {quizzes.map((q) => {
+        {quizzes.map((q, i) => {
           const flagged = flaggedIn(q.problemSlugs)
           return (
             <li key={q.slug}>
               <button className="problem-row" onClick={() => onSelect(q.slug)}>
                 <div className="problem-row-main">
-                  <span className="problem-title">{q.title}</span>
+                  {/* Numbered by position, which *is* the chapter order: quizzes
+                      come back ordered by slug (repo.ts) and the importer names
+                      them with a zero-padded chapter number, so row 3 is
+                      chapter 3. Titles are clipped to ~22 chars on import, so a
+                      number in front of one is what makes it findable. */}
+                  <span className="problem-title">
+                    {i + 1}: {q.title}
+                  </span>
                   <div className="problem-meta">
                     <span className="chip">
                       {q.problemSlugs.length} problem{q.problemSlugs.length === 1 ? '' : 's'}

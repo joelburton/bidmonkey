@@ -802,9 +802,14 @@ body {
   font-weight: 700;
   line-height: 1;
 }
+/* Flagged: the accent fills the button instead of outlining it, with a black
+   edge and pennant. An outline in --hint was too close to the white edge every
+   other on-felt button already wears — a solid orange chip can't be mistaken
+   for one of them. */
 .flag-btn.on {
-  color: var(--hint);
-  border-color: var(--hint);
+  background: var(--hint);
+  border-color: var(--black);
+  color: var(--black);
 }
 /* Flash for the Shift+F keypress, like the bid pad's .pressed. */
 .flag-btn.pressed {
