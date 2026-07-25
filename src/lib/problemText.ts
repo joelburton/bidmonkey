@@ -160,7 +160,10 @@ export function problemToText(problem: Problem, answers: string[]): string {
     }
     if (q.explanation) out.push(`The book's reasoning: ${q.explanation}`)
     out.push('')
-  } else {
+  } else if (problem.auction.length) {
+    // Only meaningful when there *was* an auction: a problem given as contract
+    // + play has none, and "passed out" would both be false and contradict the
+    // stored contract printed just below.
     const c = finalContract(problem, answers)
     out.push(
       c
@@ -173,7 +176,7 @@ export function problemToText(problem: Problem, answers: string[]): string {
   }
 
   if (problem.contract && !problem.auction.length) {
-    out.push(`Contract: ${problem.contract}`)
+    out.push(`Contract: ${problem.contract} (no auction given).`)
     out.push('')
   }
 
