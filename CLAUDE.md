@@ -172,6 +172,10 @@ Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
     is in the app header, not here.
   - `BridgeTable.tsx` — layout shell: `top`/`bottom`/`left`/`right`/`center`
     slots (N/S span top+bottom, E/W are the rails). Content chosen per phase.
+    `done` swaps the felt for neutral grey (`--felt-done`) once a problem is over
+    — the play record has run out, or a bidding-only auction is complete — so a
+    screen with nothing but "Next ▸" reads as non-actionable at a glance. A
+    playable problem's finished auction still offers "Play", so it stays green.
   - `AuctionPanel.tsx` — center during the auction. Controlled by `answers` +
     `onAnswer`; correct bid advances, wrong bid shows the explanation popup;
     when done, "Play the hand ▸" (playable) or a "Bidding complete." note

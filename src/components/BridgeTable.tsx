@@ -12,15 +12,19 @@ export function BridgeTable({
   left,
   right,
   center,
+  done = false,
 }: {
   top: ReactNode
   bottom: ReactNode
   left: ReactNode
   right: ReactNode
   center: ReactNode
+  /** The problem is over — nothing left to answer, only "Next". Drops the felt
+   * for a neutral grey so it reads at a glance as a non-actionable screen. */
+  done?: boolean
 }) {
   return (
-    <div className="table">
+    <div className={`table${done ? ' table-done' : ''}`}>
       <div className="rail rail-north">{top}</div>
       <div className="middle">
         <div className="rail rail-west">{left}</div>

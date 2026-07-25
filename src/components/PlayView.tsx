@@ -349,6 +349,7 @@ export function PlayView({
   return (
     <div className="play-root" onClick={() => setSelected(null)}>
       <BridgeTable
+        done={done}
         top={slot('top')}
         left={slot('left')}
         right={slot('right')}

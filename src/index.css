@@ -14,6 +14,7 @@
   /* On-felt palette. The table and everything drawn over it (buttons, popups,
      prompts) use these rather than repeating the literals. */
   --felt: #14532d;
+  --felt-done: #333; /* the table once a problem is over — nothing to act on */
   --hint: #ffe08a; /* accent yellow: prompts, alert stars, turn arrow, a/b/c */
   --panel: #0c3b22; /* raised panel over the felt: popup + auction overlay */
   --panel-line: rgba(255, 255, 255, 0.28);
@@ -390,6 +391,12 @@ body {
   grid-template-columns: minmax(0, 1fr);
   background: var(--felt);
   overflow: hidden;
+}
+/* The problem is over (only "Next" left to press): swap the felt for a neutral
+   grey, so a glance tells you this screen isn't asking you for anything. Only
+   the table surface changes — the popups/overlay keep their own background. */
+.table-done {
+  background: var(--felt-done);
 }
 
 /* Let every fan overflow so a selected (raised) card isn't cut off. Anything
@@ -781,9 +788,7 @@ body {
 .explain-popup,
 .auction-overlay {
   border-radius: 12px;
-  background: var(--panel);
-  border: 1px solid var(--panel-line);
-  box-shadow: var(--panel-shadow);
+  background: var(--felt);
   color: #fff;
 }
 /* Covers the auction/bid-entry area only: inset:0 fills .center, the nearest

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Problem, Seat } from '../types'
-import { finalContract, parseContract } from '../bidding'
+import { buildAuction, finalContract, parseContract } from '../bidding'
 import { BridgeTable } from './BridgeTable'
 import { Hand } from './Hand'
 import { AuctionPanel } from './AuctionPanel'
@@ -68,9 +68,14 @@ export function ProblemView({
     )
   }
 
+  // A bidding-only problem is over once the auction is: the panel shows nothing
+  // but "Next ▸". (A playable one still offers "Play", so it stays on the felt.)
+  const biddingDone = !canPlay && !buildAuction(problem, answers).actingSeat
+
   // Auction: only the hero's hand is shown (at the bottom); the rest are face down.
   return (
     <BridgeTable
+      done={biddingDone}
       top={<Hand faceDown orientation="horizontal" />}
       left={<Hand faceDown orientation="west" />}
       right={<Hand faceDown orientation="east" />}
