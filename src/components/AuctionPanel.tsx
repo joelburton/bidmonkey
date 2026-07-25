@@ -50,6 +50,8 @@ export function AuctionPanel({
   flagged = false,
   onToggleFlag = () => {},
   onFlagAnswer = () => {},
+  showId = false,
+  onToggleShowId = () => {},
 }: {
   problem: Problem
   answers: string[]
@@ -63,6 +65,10 @@ export function AuctionPanel({
   flagged?: boolean
   onToggleFlag?: () => void
   onFlagAnswer?: (reason: 'wrong' | 'alternate') => void
+  /** Whether the problem id is revealed. Owned by ProblemView, because this
+   * panel is remounted on every answer and the reveal must outlive that. */
+  showId?: boolean
+  onToggleShowId?: () => void
 }) {
   const model = buildAuction(problem, answers)
   const q = model.question
@@ -218,8 +224,22 @@ export function AuctionPanel({
     <div className="auction-panel">
       <div className="auction-head">
         <span className="head-left">
-          <span className="problem-id">#{problem.slug}</span>
           <FlagButton flagged={flagged} onToggle={onToggleFlag} pressed={pressed === 'FLAG'} />
+          {/* The id names the convention ("…-drury.3"), which hands over the
+              answer, so it hides behind this toggle instead of sitting on the
+              felt. Like every button here it must not take focus, or the next
+              keypress would re-activate it instead of entering a bid. */}
+          <button
+            className="id-btn"
+            aria-expanded={showId}
+            aria-label={showId ? 'Hide problem id' : 'Show problem id'}
+            title={showId ? 'Hide problem id' : 'Show problem id'}
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={onToggleShowId}
+          >
+            ?
+          </button>
+          {showId && <span className="problem-id">#{problem.slug}</span>}
         </span>
         {problem.vulnerability && <span>Vul: {VUL_SHORT[problem.vulnerability]}</span>}
       </div>

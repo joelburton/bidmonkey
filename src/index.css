@@ -604,25 +604,26 @@ body {
   font-weight: 600;
   padding: 0 2px;
 }
-/* The id and its flag toggle sit together on the left of the auction head. */
+/* Left of the auction head: the flag toggle, the id toggle, then the id once
+   it's revealed. */
 .head-left {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-/* The problem id is a reference label, not part of the puzzle — mute it so it
-   recedes against the contract/vulnerability info on the felt. */
+/* Only shown after the ⓘ/? toggle, so it's ordinary white text — hiding it is
+   what keeps it from giving the answer away, not muting it. */
 .problem-id {
-  opacity: 0.55;
   font-weight: 400;
 }
 
-/* ---- Flag (review list) ------------------------------------------------- */
+/* ---- Circle buttons on the felt (flag, reveal-id) ----------------------- */
 
-/* The ⚑ toggle, on the felt in both phases: outlined when off, filled yellow
-   when on (--hint, the app's existing accent, not a new colour). A real tap
-   target without growing the info line it sits in. */
-.flag-btn {
+/* The ⚑ review toggle (both phases) and the "?" id toggle share one outlined
+   circle: a real tap target that doesn't grow the info line it sits in. The
+   flag adds a filled yellow on-state (--hint, an existing accent). */
+.flag-btn,
+.id-btn {
   flex: 0 0 auto;
   align-self: center; /* the contract line is baseline-aligned */
   display: inline-flex;
@@ -641,6 +642,13 @@ body {
 .flag-btn .flag-icon {
   width: 0.95rem;
   height: 0.95rem;
+}
+/* The "?" is type, not an icon: size it to sit optically like the pennant. */
+.id-btn {
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
 }
 .flag-btn.on {
   color: var(--hint);

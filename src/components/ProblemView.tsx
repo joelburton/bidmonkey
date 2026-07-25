@@ -34,6 +34,10 @@ export function ProblemView({
   onFlagAnswer: (reason: 'wrong' | 'alternate') => void
 }) {
   const [answers, setAnswers] = useState<string[]>([])
+  // Held here, not in AuctionPanel: that panel is remounted on every answer (see
+  // its `key` below), which would re-hide the id each time the auction advances.
+  // ProblemView is keyed per problem, so a reveal lasts the problem and no longer.
+  const [showId, setShowId] = useState(false)
   const isPhone = useIsPhone()
 
   // Playable in exactly two cases: every hand is known (full play / free study),
@@ -97,6 +101,8 @@ export function ProblemView({
           flagged={flagged}
           onToggleFlag={onToggleFlag}
           onFlagAnswer={onFlagAnswer}
+          showId={showId}
+          onToggleShowId={() => setShowId((v) => !v)}
         />
       }
     />
