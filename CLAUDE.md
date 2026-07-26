@@ -140,6 +140,12 @@ level they describe.
   `clearFlag` over `problem_flags`, and the hook App holds it in. Fetched
   *separately* from the catalogue on purpose — a flags failure logs and moves on
   rather than costing us the problems.
+- `settings.ts` — `useSettings()`, the two display toggles (see "Display settings"
+  below) over `localStorage`. Per-browser on purpose, unlike the flags.
+- `lib/problemText.ts` — `problemToText(problem, answers)`: the whole problem
+  written out as plain text to paste into a Claude conversation. Deliberately not
+  JSON — see the module header for why, and `problemText.test.ts` for the format
+  contract.
 - `types.ts` — mirrors `schema.v1.json` / tables (Seat, Suit, Deal, Hand, Problem,
   Source, Quiz, BidQuestion, CardQuestion, Trick, …).
 - `data/problems.ts` + `data/catalog.ts` — the **initial seed + test fixtures**
@@ -185,11 +191,33 @@ level they describe.
     to be washed-out grey to read at all.
   - `FlagButton.tsx` — the ⚑ review toggle (`FlagButton`) and its drawn pennant
     (`FlagIcon`, also used by QuizList's Flagged button). Drawn, not typed: the
-    Unicode flags render as un-recolorable emoji on iOS.
+    Unicode flags render as un-recolorable emoji on iOS. Flagged fills the button
+    with `--hint` and draws the border and pennant black — an outline in the
+    accent read as just another on-felt button edge.
+  - `AnswerStatus.tsx` — the verdict line both answer popups share: what was
+    entered, then how it graded ("(A) 1NT — Not quite"). Restating the choice
+    matters because the popup covers the buttons that made it, and a wrong answer
+    leaves the auction unmoved, so nothing else on screen records the attempt.
+    The choice stays white and only the verdict takes the status colour — the
+    colour is a judgement about the answer, not a property of it. The option
+    letter is passed only when the options were actually on screen (see "Display
+    settings": free entry hides them while the question still carries them).
+  - `CopyProblem.tsx` — the `i` circle beside ⚑, in the auction head and on the
+    play phase's contract line. Copies `problemToText()` to the clipboard; there
+    is no preview panel, so the button itself is the feedback (a 1.4s fill,
+    borrowing the flag's on-state look; a red `!` when the write fails, since
+    there's nothing left to select by hand). `writeText` is called straight out
+    of the click — Safari only allows a clipboard write inside its gesture.
   - `SourceList.tsx` / `QuizList.tsx` / `QuizView.tsx` — the three list levels
     (the first two reuse the `.problem-list` / `.problem-row` row styling; the
     lists carry a `.source-head` with their scope's Random + Flagged buttons, and
     `QuizView` is one quiz's start screen: title, source, and the four runs).
+    `SourceList` also carries the display settings at its foot — below the list,
+    so they don't push the sources you came for down the screen. `QuizList`
+    numbers its rows (`1: Doubles`): quizzes arrive ordered by slug and the
+    importer zero-pads the chapter into it, so row position *is* the chapter
+    number, and titles are clipped to ~22 chars on import — the number is what
+    makes one findable.
 - `index.css` — all styling (no CSS framework). Global, plus component classes.
 
 ### Play phase (`PlayView`)
@@ -241,6 +269,42 @@ level they describe.
   Supabase anonymous auth would both have been per-browser, which is exactly what
   this must not be. Real users later = fill `player` from a session.
 
+### Display settings (`settings.ts`)
+
+Two switches at the foot of the sources list, in `localStorage` under
+`bidmonkey.settings`. **Per-browser on purpose** — unlike the review flags, which
+live in Supabase so they follow the *person*; these are display preferences, so
+losing them costs nothing but a re-toggle. Anything unreadable (private mode,
+hand-edited junk, an older shape) falls back to both-off rather than throwing on
+the way to first render.
+
+The two are delivered by deliberately different mechanisms:
+
+- **Four-colour suits** is pure CSS. Every pip carries a per-suit class
+  (`pip-s/h/d/c`, from `pipClass()`) alongside its existing red/black one, and
+  `App` sets `data-deck="4color"` on `<html>` — so one attribute repaints card
+  faces and felt pips alike and nothing between `App` and `Card` knows the
+  setting exists. ♠/♥ never move; only ♦ and ♣ do, which is the convention bridge
+  software uses. Four variables, two pairs: `--card-d`/`--card-c` for the white
+  card face and `--felt-d`/`--felt-c` lifted for the baize (the same colour can't
+  serve both). The PDF export does **not** follow this — `quizPdf.ts` keeps its
+  own red/black table via `STRAIN_META`.
+- **Free entry** ("enter answers, don't choose") has to be a prop, since it
+  changes which control renders: threaded `App` → `ProblemView` →
+  `AuctionPanel`/`PlayView`, defaulting to `false` so tests can render a phase
+  alone. A multiple-choice question whose answer is a *call* drops to the bid pad;
+  one whose answer is a *card* becomes a tap on the hand — but only where that
+  hand is face up to click, so a question aimed at a concealed seat can't strand
+  you with no way to answer. An `answerKind: 'text'` question has nothing to
+  enter, so it stays multiple choice whatever this says. **Grading is untouched:**
+  the entered call/card is checked against `answer`/`accept` exactly as before,
+  and the run still continues with the canonical answer.
+
+Note the trap this creates: a question keeps its `options` while free entry hides
+them. Anything that reads `options` to mean "the player saw a list" is wrong —
+`AnswerStatus`'s option letter is gated on the options having actually rendered,
+not on their existing.
+
 ## Conventions & non-obvious decisions
 
 - **Data:** prefer JSON fields over deep normalization; one row per whole problem.
@@ -255,6 +319,14 @@ level they describe.
   never spread apart). **One card size for all four hands:** `--card-w` is set once
   on `.table` — `min(100vw, 30rem, 100dvh − 11rem) / 13` — so 13 cards fit across a
   N/S fan and 13 stack down an E/W rail, every card shown in full.
+- **The play phase's contract line is full.** Contract + vulnerability + ⚑ + the
+  copy button only just fit a 390px phone: `nowrap`, a 6px gap, and `.contract-by`
+  ("by East") at `0.85em` — shrinking that is what bought room for the fourth
+  item. Worst realistic case (`7♠×× by South`, `Vul: Both`) leaves ~11px, and
+  that's not a corner — most problems with a recorded play are doubled. Adding a
+  fifth thing means taking space from something, not squeezing. Measure the
+  content span (sum the children), not `scrollWidth`, which clamps to the
+  container once content fits and will tell you everything is fine.
 - **Scaling (desktop = phone, larger):** everything is sized in **rem**; the root
   font-size steps 16→20→24px via `(min-width) and (min-height)` media queries, and
   `.app { max-width: 30rem }` keeps a centered portrait column on desktop.
