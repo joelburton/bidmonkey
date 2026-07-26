@@ -102,34 +102,13 @@ Stack: **Vite 8, React 19, TypeScript 6**. No react-router, no Next (deliberate 
 routing is a single `Nav` union in `App.tsx`: `sources` → `quizzes` → `quiz`).
 Fonts come from **Google Fonts** (Roboto for UI, Roboto Flex for card text).
 
-## Status / phases
+## Scope
 
-- **Phase 1 (done):** database design — the Postgres schema + `schema.v1.json`
-  (now `supabase/migrations/` + `supabase/seed.sql`).
-- **Phase 2 (done):** problem list; portrait bridge table showing the 4 hands as
-  playing-card faces.
-- **Phase 3 (done):** auction (multi-question — the auction continues after each
-  correct bid, only stopping where the data poses a question), answer checking
-  with an explanation popup, mouse + keyboard entry.
-- **Phase 4 (done):** card play. After the auction: if not all four hands are
-  known, the problem is bidding-only; otherwise play the hand — deal out the recorded play,
-  reveal the dummy after the opening lead, auto-play with pauses, stop at
-  questions for the hero, then reveal all hands for free study.
-- **Phase 5 (done):** sources/quizzes + navigation, four levels deep:
-  **sources → quizzes → one quiz → a run**. Each list level is *only* a list —
-  tapping a row opens the level below — and the buttons that start something live
-  on the level they describe: a quiz's **In Order / Random / Flagged / PDF** are on
-  its own screen, while the wider runs (**Random** and **Flagged** over a whole
-  source, or over the whole library) sit at the top of the list they cover. Quiz
-  nav lives in the app header, available in every phase: a left **Back** button
-  labelled `QuizTitle #ordinal` (→ one level up, wherever the run started) and a
-  right Prev `‹` / Next `›` pair.
-- **Phase 6 (done):** content moved to **Supabase/Postgres**. The app fetches the
-  catalogue on load (async, with loading/error/retry).
-- **Phase 7 (done):** **review flags** (`problem_flags`) — a problem is flagged
-  automatically when answered with anything but the preferred answer, or by hand
-  (the ⚑ button / Shift+F), and a **Flagged (n)** button — on a quiz, a source, or
-  the whole library — retests them in random order. See "Review flags" below.
+Everything through review flags is built; the sections below describe it. One
+principle the layout depends on: **each list level is only a list** — tapping a
+row opens the level below — and the buttons that *start* something live on the
+level they describe.
+
 - **Out of scope so far:** any backend beyond Supabase reads, per-question attempt
   tracking / scoring (flags are per *problem*, not per attempt — no history),
   contract-result scoring.
